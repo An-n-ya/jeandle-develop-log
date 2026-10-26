@@ -1,0 +1,14 @@
+ninja: Entering directory `build/build-ninja-profiling'
+[1/13] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/Jeandle/JavaTypeAnalysisStats.cpp.o
+[2/13] Building CXX object lib/Transforms/Jeandle/CMakeFiles/LLVMJeandleTransforms.dir/TypeCheckElimination.cpp.o
+[3/13] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/Jeandle/JavaTypeAnalysis.cpp.o
+[4/13] Building CXX object lib/Transforms/Jeandle/CMakeFiles/LLVMJeandleTransforms.dir/CHADevirtualization.cpp.o
+[5/13] Linking CXX static library lib/libLLVMAnalysis.a
+[6/13] Building CXX object lib/Transforms/Jeandle/CMakeFiles/LLVMJeandleTransforms.dir/ConstantFieldFolding.cpp.o
+[7/13] Building CXX object lib/Transforms/Jeandle/CMakeFiles/LLVMJeandleTransforms.dir/RecoverTypeInfo.cpp.o
+[8/13] Linking CXX static library lib/libLLVMJeandleTransforms.a
+[9/13] Building CXX object unittests/IR/CMakeFiles/JavaTypeQueryTests.dir/JavaTypeQueryTest.cpp.o
+[10/13] Building CXX object lib/Passes/CMakeFiles/LLVMPasses.dir/PassBuilder.cpp.o
+[11/13] Linking CXX static library lib/libLLVMPasses.a
+[12/13] Linking CXX executable unittests/IR/JavaTypeQueryTests
+[13/13] Linking CXX executable bin/opt

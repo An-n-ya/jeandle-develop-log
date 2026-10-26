@@ -1,0 +1,29 @@
+JavaTypeAnalysis process summary after module: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-analysis/selective-invalidation.ll
+  queries: 3
+  path facts hits: 0
+  path facts misses: 1
+  final type hits: 0
+  final type misses: 3
+  base-only query hits: 0
+  base-only query misses: 0
+  base insertions: 4
+  clears: 0
+  invalidation requests: 5
+  selective invalidations: 5
+  CFG invalidations: 0
+  invalidation values visited: 7
+  invalidation uses visited: 2
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 1
+  invalidation final-type slots scanned: 3
+  base entries invalidated: 0
+  path facts entries invalidated: 1
+  final type entries invalidated: 3
+  base entries retained: 20
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 4380
+  total query time (ns): 118792
+  bypasses: 0
+  verifications: 0
+  verification skips: 0

@@ -1,0 +1,80 @@
+JavaTypeQuery function: tce_fold_recover ordinal: 1 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeQuery function: tce_fold_recover ordinal: 2 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 1 final_misses: 0 base_insertions: 0
+JavaTypeAnalysis for function: tce_fold_recover
+  queries: 2
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 1
+  final type misses: 1
+  final type hit rate: 50.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 1
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 0
+  peak final type entries: 1
+  clears: 0
+  invalidation requests: 1
+  selective invalidations: 1
+  CFG invalidations: 0
+  invalidation values visited: 2
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 1
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 1
+  base entries retained: 1
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 2268
+  bypasses: 0
+  verifications: 0
+  verification skips: 0
+  total query time (ns): 36743
+JavaTypeQuery function: tce_fold_recover ordinal: 3 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 0
+JavaTypeQuery function: tce_fold_recover ordinal: 4 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 1 final_misses: 0 base_insertions: 0
+JavaTypeAnalysis for function: tce_fold_recover
+  queries: 4
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 2
+  final type misses: 2
+  final type hit rate: 50.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 1
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 1
+  peak final type entries: 1
+  clears: 0
+  invalidation requests: 1
+  selective invalidations: 1
+  CFG invalidations: 0
+  invalidation values visited: 2
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 1
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 1
+  base entries retained: 1
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 2268
+  bypasses: 0
+  verifications: 0
+  verification skips: 0
+  total query time (ns): 39697

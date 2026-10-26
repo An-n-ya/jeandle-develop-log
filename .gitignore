@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+.cache/
+nvim.log
+
+# 生成产物
+perf-viewer/dist/
+
+# 独立仓库（jeandle-perf-observatory）
+perf-viewer-site/

@@ -1,0 +1,10 @@
+{
+  "libc_debuginfo": {
+    "build_id": "d8ceb52a8c6e1fefece4ca75f7396d1d5bffc565",
+    "url": "https://debuginfod.archlinux.org/buildid/d8ceb52a8c6e1fefece4ca75f7396d1d5bffc565/debuginfo",
+    "http_status": 404,
+    "impact": "libc internal symbols remain unresolved; coarse caller attribution retained; no packages installed"
+  },
+  "initial_lit": "build/Jeandle-JavaType-lit.failed-missing-tools.log",
+  "rss": "Original L1 maximum RSS is excluded; corrected opt wait4 RSS is reported."
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark_sha256": "ec29fc237c887230a9b08d997adc9e28c75788408c19e869a7eced8d8be9afb0",
+  "head": "357604c7724e49eace6fbfa42e4f671b12b5ff98",
+  "opt_sha256": "fcd3fd2fa57c5bef3f1aef5372c936e627b08bc332cc1adabcfb6e5f947e3079",
+  "profiler_sha256": "4890fe08d2d3fc177360b146f405d25e934cce657eaf8e2ec4a62ce581ee9f75",
+  "source_patch_sha256": "d17c2da23a1332ebdba7d9b3ab52fe5f914e0f684607c4ca78f6790e560d0a9d",
+  "status": [
+    " M llvm/benchmarks/CMakeLists.txt",
+    " M llvm/include/llvm/Analysis/Jeandle/CachedJavaType.h",
+    " M llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h",
+    " M llvm/lib/Analysis/Jeandle/CachedJavaType.cpp",
+    " M llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp",
+    " M llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp",
+    " M llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp",
+    " M llvm/unittests/IR/CMakeLists.txt",
+    " M llvm/unittests/IR/JavaTypeQueryTest.cpp",
+    "?? llvm/benchmarks/JeandleJavaTypeCacheInvalidation.cpp",
+    "?? llvm/utils/jeandle/benchmark-java-type-cache-design.py",
+    "?? llvm/utils/jeandle/profile-java-type-cache.py"
+  ]
+}

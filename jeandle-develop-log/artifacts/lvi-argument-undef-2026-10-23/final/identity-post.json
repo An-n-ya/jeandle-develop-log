@@ -1,0 +1,16 @@
+{
+  "base_commit": "8df28fa046fd59251be09a065a468c08628dd397",
+  "commit": "599e47ee8b8096695f6c723202573a5c12899520",
+  "branch": "perf/lvi-select-demand-undef",
+  "status": "",
+  "source_files": {
+    "llvm/lib/Analysis/LazyValueInfo.cpp": "211cc7b9ef51c27c1c14ec3007965ec17de624465d3830d4d49e6211ec2ae133",
+    "llvm/test/Transforms/CorrelatedValuePropagation/select-demand-undef.ll": "82bf7221868b49b8e885e69f1e03e843447d686976cfa45b1d60411e548c8022"
+  },
+  "binary_identity_verified": true,
+  "candidate_built_from": "base commit plus the exact implementation now committed; embedded revision predates the commit",
+  "report_frozen_opt": {
+    "path": "/home/annya/playground/jeandle/perf-results/2026-10-23-lvi-demand-undef/report-frozen-opt",
+    "sha256": "fcd3fd2fa57c5bef3f1aef5372c936e627b08bc332cc1adabcfb6e5f947e3079"
+  }
+}

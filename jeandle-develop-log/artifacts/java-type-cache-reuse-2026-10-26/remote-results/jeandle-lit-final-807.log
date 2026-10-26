@@ -1,0 +1,1201 @@
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llc_dwarf in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find split-file in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find dsymutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli-child-target in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ar in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-as in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-addr2line in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bcanalyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cas in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cgdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cov in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ctxprof-util in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cvtres in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfod-find in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfo-analyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-diff in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dis in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwp in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dlltool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-exegesis in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-extract in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ir2vec in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-isel-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ifs in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-jitlink in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-opt-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lib in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-link in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto2 in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mc in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mca in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-modextract in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-nm in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-otool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-pdbutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profgen in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ranlib in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rc in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readelf in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rtdyld in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-sim in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-size in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-split in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-stress in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strings in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readtapi in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-undname in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-windres in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-c-test in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxfilt in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-xray in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml2obj in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find obj2yaml in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml-bench in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find verify-uselistorder in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find bugpoint in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llc in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-symbolizer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sancov in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sanstats in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-remarkutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+-- Testing: 807 tests, 32 workers --
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll (1 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/xor-both-traced.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/xor-both-traced.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/xor-both-traced.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/xor-both-traced.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/xor-both-traced.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/xor-both-traced.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/xor-both-traced.ll:26:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: ret i1 true
+# |               ^
+# | <stdin>:13:6: note: scanning from here
+# | pass: ; preds = %entry
+# |      ^
+# | <stdin>:15:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/xor-both-traced.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |            .
+# |            .
+# |            .
+# |            8:  %a = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 20 to ptr), ptr addrspace(1) nonnull %obj) 
+# |            9:  %b = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 21 to ptr), ptr addrspace(1) nonnull %obj) 
+# |           10:  %x = xor i1 %a, %b 
+# |           11:  br i1 %x, label %pass, label %fail 
+# |           12:  
+# |           13: pass: ; preds = %entry 
+# | next:26'0          X~~~~~~~~~~~~~~~~~ error: no match found
+# |           14:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 20 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:26'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           15:  ret i1 %r 
+# | next:26'0     ~~~~~~~~~~~
+# | next:26'1      ?          possible intended match
+# |           16:  
+# | next:26'0     ~
+# |           17: fail: ; preds = %entry 
+# | next:26'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |           18:  ret i1 false 
+# | next:26'0     ~~~~~~~~~~~~~~
+# |           19: } 
+# | next:26'0     ~~
+# |           20:  
+# | next:26'0     ~
+# |           21: !java-method-compilation = !{} 
+# | next:26'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/copy-specialization/clone-expansion.ll (2 of 807)
+******************** TEST 'LLVM :: Jeandle/copy-specialization/clone-expansion.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="function(copy-specialization),java-operation-lower<phase=1>" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/Inputs/clone-instance.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/clone-expansion.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/clone-expansion.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S '-passes=function(copy-specialization),java-operation-lower<phase=1>' -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/Inputs/clone-instance.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/clone-expansion.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/clone-expansion.ll
+# RUN: at line 2 has no command after substitutions
+# RUN: at line 3
+sed 's/!"x28"/!"r15"/' /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/clone-expansion.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -verify-each -passes="function(copy-specialization),java-operation-lower<phase=1>" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/Inputs/clone-instance.cblog | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -mtriple=x86_64-linux-gnu -O2 -o - | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/clone-expansion.ll --check-prefix=X86
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -mtriple=x86_64-linux-gnu -O2 -o -
+# .---command stderr------------
+# | '/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll (3 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/condition-value-domain.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/condition-value-domain.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:198:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: %r = call i1 @jeandle.check_instanceof
+# |               ^
+# | <stdin>:45:3: note: scanning from here
+# | f: ; preds = %m
+# |   ^
+# | <stdin>:49:1: note: possible intended match here
+# | define i1 @phi_const2_ne1(ptr addrspace(1) %obj, i1 %s) gc "hotspotgc" {
+# | ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:202:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: %r = call i1 @jeandle.check_instanceof
+# |               ^
+# | <stdin>:66:3: note: scanning from here
+# | t: ; preds = %m
+# |   ^
+# | <stdin>:73:1: note: possible intended match here
+# | define i1 @sel_const2_eq1(ptr addrspace(1) %obj, i1 %w) gc "hotspotgc" {
+# | ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:206:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: %r = call i1 @jeandle.check_instanceof
+# |               ^
+# | <stdin>:84:3: note: scanning from here
+# | f: ; preds = %entry
+# |   ^
+# | <stdin>:88:1: note: possible intended match here
+# | define i1 @or_sel_const2_eq1(ptr addrspace(1) %obj, i1 %w) gc "hotspotgc" {
+# | ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:210:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: %r = call i1 @jeandle.check_instanceof
+# |               ^
+# | <stdin>:101:3: note: scanning from here
+# | f: ; preds = %entry
+# |   ^
+# | <stdin>:102:2: note: possible intended match here
+# |  ret i1 false
+# |  ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:214:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: %r = call i1 @jeandle.check_instanceof
+# |               ^
+# | <stdin>:112:3: note: scanning from here
+# | t: ; preds = %entry
+# |   ^
+# | <stdin>:113:2: note: possible intended match here
+# |  ret i1 false
+# |  ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:230:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: %r2 = call i1 @jeandle.check_instanceof
+# |               ^
+# | <stdin>:160:3: note: scanning from here
+# | f: ; preds = %entry
+# |   ^
+# | <stdin>:164:1: note: possible intended match here
+# | define i1 @sub_const_not(ptr addrspace(1) %obj) gc "hotspotgc" {
+# | ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll:235:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: ret i1 false
+# |               ^
+# | <stdin>:173:3: note: scanning from here
+# | f: ; preds = %entry
+# |   ^
+# | <stdin>:175:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/condition-value-domain.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |             .
+# |             .
+# |             .
+# |            40:  br i1 %c, label %t, label %f 
+# |            41:  
+# |            42: t: ; preds = %m 
+# |            43:  ret i1 true 
+# |            44:  
+# |            45: f: ; preds = %m 
+# | next:198'0       X~~~~~~~~~~~~~ error: no match found
+# |            46:  ret i1 false 
+# | next:198'0     ~~~~~~~~~~~~~~
+# |            47: } 
+# | next:198'0     ~~
+# |            48:  
+# | next:198'0     ~
+# |            49: define i1 @phi_const2_ne1(ptr addrspace(1) %obj, i1 %s) gc "hotspotgc" { 
+# | next:198'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:198'1     ?                                                                         possible intended match
+# |            50: entry: 
+# |            51:  %g = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |            52:  %z = zext i1 %g to i8 
+# |            53:  br i1 %s, label %pb, label %qb 
+# |            54:  
+# |             .
+# |             .
+# |             .
+# |            61: m: ; preds = %qb, %pb 
+# |            62:  %p = phi i8 [ %z, %pb ], [ 2, %qb ] 
+# |            63:  %c = icmp ne i8 %p, 1 
+# |            64:  br i1 %c, label %t, label %f 
+# |            65:  
+# |            66: t: ; preds = %m 
+# | next:202'0       X~~~~~~~~~~~~~ error: no match found
+# |            67:  ret i1 false 
+# | next:202'0     ~~~~~~~~~~~~~~
+# |            68:  
+# | next:202'0     ~
+# |            69: f: ; preds = %m 
+# | next:202'0     ~~~~~~~~~~~~~~~~
+# |            70:  ret i1 false 
+# | next:202'0     ~~~~~~~~~~~~~~
+# |            71: } 
+# | next:202'0     ~~
+# |            72:  
+# | next:202'0     ~
+# |            73: define i1 @sel_const2_eq1(ptr addrspace(1) %obj, i1 %w) gc "hotspotgc" { 
+# | next:202'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:202'1     ?                                                                         possible intended match
+# |            74: entry: 
+# |            75:  %g = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |            76:  %z = zext i1 %g to i8 
+# |            77:  %s = select i1 %w, i8 %z, i8 2 
+# |            78:  %c = icmp eq i8 %s, 1 
+# |            79:  br i1 %c, label %t, label %f 
+# |            80:  
+# |            81: t: ; preds = %entry 
+# |            82:  ret i1 true 
+# |            83:  
+# |            84: f: ; preds = %entry 
+# | next:206'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |            85:  ret i1 false 
+# | next:206'0     ~~~~~~~~~~~~~~
+# |            86: } 
+# | next:206'0     ~~
+# |            87:  
+# | next:206'0     ~
+# |            88: define i1 @or_sel_const2_eq1(ptr addrspace(1) %obj, i1 %w) gc "hotspotgc" { 
+# | next:206'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:206'1     ?                                                                            possible intended match
+# |            89: entry: 
+# |            90:  %g1 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |            91:  %g2 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 4 to ptr), ptr addrspace(1) nonnull %obj) 
+# |            92:  %z2 = zext i1 %g2 to i8 
+# |            93:  %sel = select i1 %w, i8 %z2, i8 2 
+# |            94:  %o = or i8 %z2, %sel 
+# |            95:  %c = icmp eq i8 %o, 1 
+# |            96:  br i1 %c, label %t, label %f 
+# |            97:  
+# |            98: t: ; preds = %entry 
+# |            99:  ret i1 true 
+# |           100:  
+# |           101: f: ; preds = %entry 
+# | next:210'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |           102:  ret i1 false 
+# | next:210'0     ~~~~~~~~~~~~~~
+# | next:210'1      ?             possible intended match
+# |           103: } 
+# | next:210'0     ~~
+# |           104:  
+# | next:210'0     ~
+# |           105: define i1 @sext_sle0(ptr addrspace(1) %obj) gc "hotspotgc" { 
+# | next:210'0     ~~~~~~~~~~~~~~~~~~~~~
+# |           106: entry: 
+# |           107:  %g = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |           108:  %s = sext i1 %g to i8 
+# |           109:  %c = icmp sle i8 %s, 0 
+# |           110:  br i1 %c, label %t, label %f 
+# |           111:  
+# |           112: t: ; preds = %entry 
+# | next:214'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |           113:  ret i1 false 
+# | next:214'0     ~~~~~~~~~~~~~~
+# | next:214'1      ?             possible intended match
+# |           114:  
+# | next:214'0     ~
+# |           115: f: ; preds = %entry 
+# | next:214'0     ~~~~~~~~~~~~~~~~~~~~
+# |           116:  ret i1 false 
+# | next:214'0     ~~~~~~~~~~~~~~
+# |           117: } 
+# | next:214'0     ~~
+# |           118:  
+# | next:214'0     ~
+# |             .
+# |             .
+# |             .
+# |           155:  
+# |           156: t: ; preds = %entry 
+# |           157:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |           158:  ret i1 %r 
+# |           159:  
+# |           160: f: ; preds = %entry 
+# | next:230'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |           161:  ret i1 false 
+# | next:230'0     ~~~~~~~~~~~~~~
+# |           162: } 
+# | next:230'0     ~~
+# |           163:  
+# | next:230'0     ~
+# |           164: define i1 @sub_const_not(ptr addrspace(1) %obj) gc "hotspotgc" { 
+# | next:230'0     ~~~~~~~~~~~~~~~~~~~~~~~~~
+# | next:230'1     ?                                                                 possible intended match
+# |           165: entry: 
+# |           166:  %g = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |           167:  %n = sub i1 false, %g 
+# |           168:  br i1 %n, label %t, label %f 
+# |           169:  
+# |           170: t: ; preds = %entry 
+# |           171:  ret i1 true 
+# |           172:  
+# |           173: f: ; preds = %entry 
+# | next:235'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |           174:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:235'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           175:  ret i1 %r 
+# | next:235'0     ~~~~~~~~~~~
+# | next:235'1      ?          possible intended match
+# |           176: } 
+# | next:235'0     ~~
+# |           177:  
+# | next:235'0     ~
+# |           178: !java-method-compilation = !{} 
+# | next:235'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll (4 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/switch-and-frozen-guards.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/switch-and-frozen-guards.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll:20:16: error: CHECK-NEXT: expected string not found in input
+# |  ; CHECK-NEXT: ret i1 true
+# |                ^
+# | <stdin>:14:3: note: scanning from here
+# | t: ; preds = %entry
+# |   ^
+# | <stdin>:16:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll:62:16: error: CHECK-NEXT: expected string not found in input
+# |  ; CHECK-NEXT: ret i1 false
+# |                ^
+# | <stdin>:49:3: note: scanning from here
+# | p: ; preds = %entry
+# |   ^
+# | <stdin>:51:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |            .
+# |            .
+# |            .
+# |            9:  %z = zext i1 %g to i8 
+# |           10:  switch i8 %z, label %d [ 
+# |           11:  i8 1, label %t 
+# |           12:  ] 
+# |           13:  
+# |           14: t: ; preds = %entry 
+# | next:20'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |           15:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:20'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           16:  ret i1 %r 
+# | next:20'0     ~~~~~~~~~~~
+# | next:20'1      ?          possible intended match
+# |           17:  
+# | next:20'0     ~
+# |           18: d: ; preds = %entry 
+# | next:20'0     ~~~~~~~~~~~~~~~~~~~~
+# |           19:  %r2 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:20'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           20:  ret i1 %r2 
+# | next:20'0     ~~~~~~~~~~~~
+# |           21: } 
+# | next:20'0     ~~
+# |            .
+# |            .
+# |            .
+# |           44:  br i1 %f, label %t, label %p 
+# |           45:  
+# |           46: t: ; preds = %entry 
+# |           47:  ret i1 true 
+# |           48:  
+# |           49: p: ; preds = %entry 
+# | next:62'0       X~~~~~~~~~~~~~~~~~ error: no match found
+# |           50:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:62'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           51:  ret i1 %r 
+# | next:62'0     ~~~~~~~~~~~
+# | next:62'1      ?          possible intended match
+# |           52: } 
+# | next:62'0     ~~
+# |           53:  
+# | next:62'0     ~
+# |           54: !java-method-compilation = !{} 
+# | next:62'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/X86/calling-conv.ll (5 of 807)
+******************** TEST 'LLVM :: Jeandle/X86/calling-conv.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -O0 -mtriple=x86_64-linux-gnu < /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/calling-conv.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/calling-conv.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -O0 -mtriple=x86_64-linux-gnu
+# .---command stderr------------
+# | '/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/X86/call-site-align.ll (6 of 807)
+******************** TEST 'LLVM :: Jeandle/X86/call-site-align.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -O0 -mtriple=x86_64-linux-gnu -o - /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/call-site-align.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/call-site-align.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -O0 -mtriple=x86_64-linux-gnu -o - /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/call-site-align.ll
+# .---command stderr------------
+# | '/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll (7 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/trunc-value-domain.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/trunc-value-domain.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/trunc-value-domain.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/trunc-value-domain.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/trunc-value-domain.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/trunc-value-domain.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/trunc-value-domain.ll:107:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: ret i1 true
+# |               ^
+# | <stdin>:75:5: note: scanning from here
+# | yes: ; preds = %entry
+# |     ^
+# | <stdin>:77:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/trunc-value-domain.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |             .
+# |             .
+# |             .
+# |            70:  %g = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# |            71:  %mapped = select i1 %g, i8 1, i8 0 
+# |            72:  %truncated = trunc i8 %mapped to i1 
+# |            73:  br i1 %truncated, label %yes, label %no 
+# |            74:  
+# |            75: yes: ; preds = %entry 
+# | next:107'0         X~~~~~~~~~~~~~~~~~ error: no match found
+# |            76:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 3 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:107'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            77:  ret i1 %r 
+# | next:107'0     ~~~~~~~~~~~
+# | next:107'1      ?          possible intended match
+# |            78:  
+# | next:107'0     ~
+# |            79: no: ; preds = %entry 
+# | next:107'0     ~~~~~~~~~~~~~~~~~~~~~
+# |            80:  ret i1 false 
+# | next:107'0     ~~~~~~~~~~~~~~
+# |            81: } 
+# | next:107'0     ~~
+# |            82:  
+# | next:107'0     ~
+# |            83: !java-method-compilation = !{} 
+# | next:107'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll (8 of 807)
+******************** TEST 'LLVM :: Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -passes='safepoint-poll-elimination<early>'    -jeandle-loop-strip-mining-iter=0 -S < /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll --check-prefix=ELIM
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt '-passes=safepoint-poll-elimination<early>' -jeandle-loop-strip-mining-iter=0 -S
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll --check-prefix=ELIM
+# RUN: at line 3
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llvm-extract -func=uncovered_callsite_leaf_loop -S < /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll    | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/not --crash /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -passes='verify<jeandle-safepoint-coverage>'      -jeandle-verify-safepoint-coverage=fatal -disable-output 2>&1    | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll --check-prefix=CALLSITE-ABORT
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llvm-extract -func=uncovered_callsite_leaf_loop -S
+# .---command stderr------------
+# | '/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llvm-extract': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/null-guard-forms.ll (9 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/null-guard-forms.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/null-guard-forms.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/null-guard-forms.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll:23:16: error: CHECK-NEXT: expected string not found in input
+# |  ; CHECK-NEXT: ret i1 true
+# |                ^
+# | <stdin>:19:6: note: scanning from here
+# | pass: ; preds = %check_subtype, %nullbb
+# |      ^
+# | <stdin>:21:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll:42:16: error: CHECK-NEXT: expected string not found in input
+# |  ; CHECK-NEXT: ret i1 true
+# |                ^
+# | <stdin>:39:6: note: scanning from here
+# | pass: ; preds = %check_subtype, %nullbb
+# |      ^
+# | <stdin>:41:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-guard-forms.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |            .
+# |            .
+# |            .
+# |           14:  
+# |           15: check_subtype: ; preds = %site 
+# |           16:  %is_sub = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 22 to ptr), ptr addrspace(1) nonnull %obj) 
+# |           17:  br i1 %is_sub, label %pass, label %fail 
+# |           18:  
+# |           19: pass: ; preds = %check_subtype, %nullbb 
+# | next:23'0          X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |           20:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 22 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:23'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           21:  ret i1 %r 
+# | next:23'0     ~~~~~~~~~~~
+# | next:23'1      ?          possible intended match
+# |           22:  
+# | next:23'0     ~
+# |           23: fail: ; preds = %check_subtype 
+# | next:23'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           24:  ret i1 false 
+# | next:23'0     ~~~~~~~~~~~~~~
+# |           25: } 
+# | next:23'0     ~~
+# |           26:  
+# | next:23'0     ~
+# |            .
+# |            .
+# |            .
+# |           34:  
+# |           35: check_subtype: ; preds = %site 
+# |           36:  %is_sub = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 22 to ptr), ptr addrspace(1) nonnull %obj) 
+# |           37:  br i1 %is_sub, label %pass, label %fail 
+# |           38:  
+# |           39: pass: ; preds = %check_subtype, %nullbb 
+# | next:42'0          X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |           40:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 22 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:42'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           41:  ret i1 %r 
+# | next:42'0     ~~~~~~~~~~~
+# | next:42'1      ?          possible intended match
+# |           42:  
+# | next:42'0     ~
+# |           43: fail: ; preds = %check_subtype 
+# | next:42'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           44:  ret i1 false 
+# | next:42'0     ~~~~~~~~~~~~~~
+# |           45: } 
+# | next:42'0     ~~
+# |           46:  
+# | next:42'0     ~
+# |           47: !java-method-compilation = !{} 
+# | next:42'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/SafepointElimination/strip-mine-exit-current-iv.ll (10 of 807)
+******************** TEST 'LLVM :: Jeandle/SafepointElimination/strip-mine-exit-current-iv.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+split-file /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/strip-mine-exit-current-iv.ll /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/SafepointElimination/Output/strip-mine-exit-current-iv.ll.tmp
+# executed command: split-file /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/SafepointElimination/strip-mine-exit-current-iv.ll /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/SafepointElimination/Output/strip-mine-exit-current-iv.ll.tmp
+# .---command stderr------------
+# | 'split-file': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/copy-specialization/invalid-copy.ll (11 of 807)
+******************** TEST 'LLVM :: Jeandle/copy-specialization/invalid-copy.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+split-file /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/invalid-copy.ll /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/copy-specialization/Output/invalid-copy.ll.tmp
+# executed command: split-file /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/copy-specialization/invalid-copy.ll /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/copy-specialization/Output/invalid-copy.ll.tmp
+# .---command stderr------------
+# | 'split-file': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/context-phi-select.ll (12 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/context-phi-select.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/context-phi-select.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/context-phi-select.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/context-phi-select.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/context-phi-select.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/context-phi-select.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/context-phi-select.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/context-phi-select.ll:20:10: error: CHECK: expected string not found in input
+# | ; CHECK: ret i1 true
+# |          ^
+# | <stdin>:14:7: note: scanning from here
+# | merge: ; preds = %pass
+# |       ^
+# | <stdin>:18:2: note: possible intended match here
+# |  ret i1 %again
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/context-phi-select.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |             .
+# |             .
+# |             .
+# |             9:  br i1 %check, label %pass, label %fail 
+# |            10:  
+# |            11: pass: ; preds = %entry 
+# |            12:  br label %merge 
+# |            13:  
+# |            14: merge: ; preds = %pass 
+# | check:20'0           X~~~~~~~~~~~~~~~~ error: no match found
+# |            15:  %p = phi ptr addrspace(1) [ %obj, %pass ] 
+# | check:20'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            16:  %s = select i1 %choose, ptr addrspace(1) %p, ptr addrspace(1) %known 
+# | check:20'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            17:  %again = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %s) 
+# | check:20'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            18:  ret i1 %again 
+# | check:20'0     ~~~~~~~~~~~~~~~
+# | check:20'1      ?              possible intended match
+# |            19:  
+# | check:20'0     ~
+# |            20: fail: ; preds = %entry 
+# | check:20'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |            21:  ret i1 false 
+# | check:20'0     ~~~~~~~~~~~~~~
+# |            22: } 
+# | check:20'0     ~~
+# |            23:  
+# | check:20'0     ~
+# |            24: !java-method-compilation = !{} 
+# | check:20'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing:  0
+FAIL: LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll (13 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/freeze-and-identity-patterns.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/freeze-and-identity-patterns.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll:6:10: error: CHECK: expected string not found in input
+# | ; CHECK: ret i1 true
+# |          ^
+# | <stdin>:6:28: note: scanning from here
+# | define i1 @nested_zero_gep(ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %a, i1 noundef %pick) {
+# |                            ^
+# | <stdin>:10:2: note: possible intended match here
+# |  ret i1 %check
+# |  ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll:16:10: error: CHECK: expected string not found in input
+# | ; CHECK: ret i1 true
+# |          ^
+# | <stdin>:13:34: note: scanning from here
+# | define i1 @constant_selected_arm(ptr addrspace(1) "java-klass"="9" "java-klass-exact" %a, ptr addrspace(1) %unknown) {
+# |                                  ^
+# | <stdin>:14:10: note: possible intended match here
+# |  %r = select i1 true, ptr addrspace(1) %a, ptr addrspace(1) %unknown
+# |          ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll:66:10: error: CHECK: expected string not found in input
+# | ; CHECK: %check = call i1 @jeandle.check_instanceof
+# |          ^
+# | <stdin>:47:37: note: scanning from here
+# | define i1 @root_freeze_maybe_poison(ptr addrspace(1) "java-klass"="9" "java-klass-exact" %a) {
+# |                                     ^
+# | <stdin>:48:2: note: possible intended match here
+# |  %f = freeze ptr addrspace(1) %a
+# |  ^
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll:75:10: error: CHECK: expected string not found in input
+# | ; CHECK: %check = call i1 @jeandle.check_instanceof
+# |          ^
+# | <stdin>:52:42: note: scanning from here
+# | define i1 @poison_generating_icmp_freeze(ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %a, ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %b, i32 noundef %x, i32 noundef %y) {
+# |                                          ^
+# | <stdin>:59:1: note: possible intended match here
+# | define i1 @nonzero_gep(ptr addrspace(1) "java-klass"="9" "java-klass-exact" %a) {
+# | ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |             1: ; ModuleID = '/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll' 
+# |             2: source_filename = "/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/freeze-and-identity-patterns.ll" 
+# |             3:  
+# |             4: declare i1 @jeandle.check_instanceof(ptr, ptr addrspace(1) nonnull) 
+# |             5:  
+# |             6: define i1 @nested_zero_gep(ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %a, i1 noundef %pick) { 
+# | check:6'0                                 X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |             7:  %g = getelementptr i8, ptr addrspace(1) %a, i64 0 
+# | check:6'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |             8:  %r = select i1 %pick, ptr addrspace(1) %g, ptr addrspace(1) %a 
+# | check:6'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |             9:  %check = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) %r) 
+# | check:6'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            10:  ret i1 %check 
+# | check:6'0      ~~~~~~~~~~~~~~~
+# | check:6'1       ?              possible intended match
+# |            11: } 
+# | check:6'0      ~~
+# |            12:  
+# | check:6'0      ~
+# |            13: define i1 @constant_selected_arm(ptr addrspace(1) "java-klass"="9" "java-klass-exact" %a, ptr addrspace(1) %unknown) { 
+# | check:6'0      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | check:16'0                                      X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |            14:  %r = select i1 true, ptr addrspace(1) %a, ptr addrspace(1) %unknown 
+# | check:16'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | check:16'1              ?                                                            possible intended match
+# |            15:  %check = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) %r) 
+# | check:16'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            16:  ret i1 %check 
+# | check:16'0     ~~~~~~~~~~~~~~~
+# |            17: } 
+# | check:16'0     ~~
+# |            18:  
+# | check:16'0     ~
+# |            19: define i1 @defined_icmp_select_freeze(ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %a, ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %b, i32 noundef %x, i1 noundef %pick) { 
+# | check:16'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |             .
+# |             .
+# |             .
+# |            42: exit: ; preds = %loop 
+# |            43:  %f = freeze ptr addrspace(1) %p 
+# |            44:  ret i1 true 
+# |            45: } 
+# |            46:  
+# |            47: define i1 @root_freeze_maybe_poison(ptr addrspace(1) "java-klass"="9" "java-klass-exact" %a) { 
+# | check:66'0                                         X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |            48:  %f = freeze ptr addrspace(1) %a 
+# | check:66'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | check:66'1      ?                                possible intended match
+# |            49:  ret i1 true 
+# | check:66'0     ~~~~~~~~~~~~~
+# |            50: } 
+# | check:66'0     ~~
+# |            51:  
+# | check:66'0     ~
+# |            52: define i1 @poison_generating_icmp_freeze(ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %a, ptr addrspace(1) noundef "java-klass"="9" "java-klass-exact" %b, i32 noundef %x, i32 noundef %y) { 
+# | check:66'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | check:75'0                                              X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |            53:  %c = icmp samesign eq i32 %x, %y 
+# | check:75'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            54:  %s = select i1 %c, ptr addrspace(1) %a, ptr addrspace(1) %b 
+# | check:75'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            55:  %f = freeze ptr addrspace(1) %s 
+# | check:75'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |            56:  ret i1 true 
+# | check:75'0     ~~~~~~~~~~~~~
+# |            57: } 
+# | check:75'0     ~~
+# |            58:  
+# | check:75'0     ~
+# |            59: define i1 @nonzero_gep(ptr addrspace(1) "java-klass"="9" "java-klass-exact" %a) { 
+# | check:75'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# | check:75'1     ?                                                                                  possible intended match
+# |            60:  %g = getelementptr i8, ptr addrspace(1) %a, i64 1 
+# |            61:  %check = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) %g) 
+# |            62:  ret i1 %check 
+# |            63: } 
+# |            64:  
+# |             .
+# |             .
+# |             .
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing:  0
+FAIL: LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll (14 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/frozen-obj-check.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/frozen-obj-check.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/frozen-obj-check.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/frozen-obj-check.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/frozen-obj-check.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/frozen-obj-check.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/frozen-obj-check.ll:25:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: ret i1 true
+# |               ^
+# | <stdin>:12:6: note: scanning from here
+# | pass: ; preds = %entry
+# |      ^
+# | <stdin>:14:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/frozen-obj-check.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |            .
+# |            .
+# |            .
+# |            7: entry: 
+# |            8:  %frz = freeze ptr addrspace(1) %obj 
+# |            9:  %c = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 20 to ptr), ptr addrspace(1) nonnull %frz) 
+# |           10:  br i1 %c, label %pass, label %fail 
+# |           11:  
+# |           12: pass: ; preds = %entry 
+# | next:25'0          X~~~~~~~~~~~~~~~~~ error: no match found
+# |           13:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 20 to ptr), ptr addrspace(1) nonnull %obj) 
+# | next:25'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           14:  ret i1 %r 
+# | next:25'0     ~~~~~~~~~~~
+# | next:25'1      ?          possible intended match
+# |           15:  
+# | next:25'0     ~
+# |           16: fail: ; preds = %entry 
+# | next:25'0     ~~~~~~~~~~~~~~~~~~~~~~~
+# |           17:  ret i1 false 
+# | next:25'0     ~~~~~~~~~~~~~~
+# |           18: } 
+# | next:25'0     ~~
+# |           19:  
+# | next:25'0     ~
+# |           20: !java-method-compilation = !{} 
+# | next:25'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing:  0
+FAIL: LLVM :: Jeandle/X86/frame-pointer.ll (15 of 807)
+******************** TEST 'LLVM :: Jeandle/X86/frame-pointer.ll' FAILED ********************
+Exit Code: 127
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -O3 -mtriple=x86_64-linux-gnu < /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/frame-pointer.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/X86/frame-pointer.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc -O3 -mtriple=x86_64-linux-gnu
+# .---command stderr------------
+# | '/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/llc': command not found
+# `-----------------------------
+# error: command failed with exit status: 127
+
+--
+
+********************
+Testing:  0
+FAIL: LLVM :: Jeandle/type-check-elimination/null-arm-type.ll (16 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/null-arm-type.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/null-arm-type.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-arm-type.ll 2>&1 | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-arm-type.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/null-arm-type.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-arm-type.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-arm-type.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-arm-type.ll:57:16: error: CHECK-NEXT: expected string not found in input
+# |  ; CHECK-NEXT: ret i1 true
+# |                ^
+# | <stdin>:42:19: note: scanning from here
+# |  %s = select i1 %c, ptr addrspace(1) %loaded, ptr addrspace(1) poison
+# |                   ^
+# | <stdin>:44:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/null-arm-type.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |            .
+# |            .
+# |            .
+# |           37: } 
+# |           38:  
+# |           39: define i1 @poison_select_arm(i1 %c) gc "hotspotgc" { 
+# |           40: entry: 
+# |           41:  %loaded = load ptr addrspace(1), ptr addrspace(1) null, align 8, !java-klass !1 
+# |           42:  %s = select i1 %c, ptr addrspace(1) %loaded, ptr addrspace(1) poison 
+# | next:57'0                       X~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ error: no match found
+# |           43:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 2 to ptr), ptr addrspace(1) nonnull %s) 
+# | next:57'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           44:  ret i1 %r 
+# | next:57'0     ~~~~~~~~~~~
+# | next:57'1      ?          possible intended match
+# |           45: } 
+# | next:57'0     ~~
+# |           46:  
+# | next:57'0     ~
+# |           47: define i1 @undef_select_arm_stays_unknown(i1 %c) gc "hotspotgc" { 
+# | next:57'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |           48: entry: 
+# |           49:  %loaded = load ptr addrspace(1), ptr addrspace(1) null, align 8, !java-klass !1 
+# |            .
+# |            .
+# |            .
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing:  0.. 10.. 20.. 30.
+FAIL: LLVM :: Jeandle/type-check-elimination/deep-condition.ll (116 of 807)
+******************** TEST 'LLVM :: Jeandle/type-check-elimination/deep-condition.ll' FAILED ********************
+Exit Code: 1
+
+Command Output (stdout):
+--
+# RUN: at line 1
+"/usr/bin/python3.14" /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/generate-deep-type-condition.py > /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/type-check-elimination/Output/deep-condition.ll.tmp.ll
+# executed command: /usr/bin/python3.14 /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/generate-deep-type-condition.py
+# RUN: at line 2
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -verify-each -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/deep-condition.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/type-check-elimination/Output/deep-condition.ll.tmp.ll | /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/deep-condition.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt -S -verify-each -passes=type-check-elimination -jeandle-vm-callback-log=/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/Inputs/deep-condition.cblog /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/test/Jeandle/type-check-elimination/Output/deep-condition.ll.tmp.ll
+# executed command: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/FileCheck /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/deep-condition.ll
+# .---command stderr------------
+# | /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/deep-condition.ll:11:15: error: CHECK-NEXT: expected string not found in input
+# | ; CHECK-NEXT: ret i1 true
+# |               ^
+# | <stdin>:40037:5: note: scanning from here
+# | yes: ; preds = %entry
+# |     ^
+# | <stdin>:40039:2: note: possible intended match here
+# |  ret i1 %r
+# |  ^
+# | 
+# | Input file: <stdin>
+# | Check file: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/type-check-elimination/deep-condition.ll
+# | 
+# | -dump-input=help explains the following input dump.
+# | 
+# | Input was:
+# | <<<<<<
+# |            .
+# |            .
+# |            .
+# |        40032: entry: 
+# |        40033:  %c0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) %a) 
+# |        40034:  %c1 = xor i1 %c0, false 
+# |        40035:  br i1 %c1, label %yes, label %no 
+# |        40036:  
+# |        40037: yes: ; preds = %entry 
+# | next:11'0         X~~~~~~~~~~~~~~~~~ error: no match found
+# |        40038:  %r = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) %a) 
+# | next:11'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# |        40039:  ret i1 %r 
+# | next:11'0     ~~~~~~~~~~~
+# | next:11'1      ?          possible intended match
+# |        40040:  
+# | next:11'0     ~
+# |        40041: no: ; preds = %entry 
+# | next:11'0     ~~~~~~~~~~~~~~~~~~~~~
+# |        40042:  ret i1 false 
+# | next:11'0     ~~~~~~~~~~~~~~
+# |        40043: } 
+# | next:11'0     ~~
+# |        40044:  
+# | next:11'0     ~
+# |        40045: !java-method-compilation = !{} 
+# | next:11'0     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# | >>>>>>
+# `-----------------------------
+# error: command failed with exit status: 1
+
+--
+
+********************
+Testing:  0.. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+********************
+Failed Tests (17):
+  LLVM :: Jeandle/SafepointElimination/gc-leaf-deopt-not-coverage.ll
+  LLVM :: Jeandle/SafepointElimination/strip-mine-exit-current-iv.ll
+  LLVM :: Jeandle/X86/call-site-align.ll
+  LLVM :: Jeandle/X86/calling-conv.ll
+  LLVM :: Jeandle/X86/frame-pointer.ll
+  LLVM :: Jeandle/copy-specialization/clone-expansion.ll
+  LLVM :: Jeandle/copy-specialization/invalid-copy.ll
+  LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll
+  LLVM :: Jeandle/type-check-elimination/context-phi-select.ll
+  LLVM :: Jeandle/type-check-elimination/deep-condition.ll
+  LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+  LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll
+  LLVM :: Jeandle/type-check-elimination/null-arm-type.ll
+  LLVM :: Jeandle/type-check-elimination/null-guard-forms.ll
+  LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+  LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll
+  LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll
+
+
+Testing Time: 0.58s
+
+Total Discovered Tests: 807
+  Unsupported:  25 (3.10%)
+  Passed     : 765 (94.80%)
+  Failed     :  17 (2.11%)

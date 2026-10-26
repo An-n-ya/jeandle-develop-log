@@ -1,0 +1,53 @@
+JavaTypeAnalysis for function: cff_nonexact
+  queries: 2
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 1
+  final type misses: 1
+  final type hit rate: 50.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 1
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 1
+  peak final type entries: 1
+  clears: 0
+  invalidation requests: 0
+  selective invalidations: 0
+  CFG invalidations: 0
+  invalidation values visited: 0
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 0
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 0
+  base entries retained: 0
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 0
+  bypasses: 0
+  verifications: 2
+  verification skips: 0
+  total query time (ns): 62626
+; ModuleID = '/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/cff-nonexact.ll'
+source_filename = "/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/cff-nonexact.ll"
+
+declare ptr @jeandle.load_klass(ptr addrspace(1))
+
+define void @cff_nonexact(ptr addrspace(1) nonnull "java-klass"="123" %obj) #0 gc "hotspotgc" {
+entry:
+  %k0 = call ptr @jeandle.load_klass(ptr addrspace(1) %obj)
+  %k1 = call ptr @jeandle.load_klass(ptr addrspace(1) %obj)
+  ret void
+}
+
+attributes #0 = { "java-method"="0" }
+
+!java-method-compilation = !{}

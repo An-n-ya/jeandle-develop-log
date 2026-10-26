@@ -1,0 +1,80 @@
+captured_at=2026-10-26T13:10:30+08:00
+hostname=archlinux
+uname=Linux archlinux 7.1.3-arch2-2 #1 SMP PREEMPT_DYNAMIC Thu, 16 Jul 2026 17:41:28 +0000 x86_64 GNU/Linux
+repo=/home/annya/playground/jeandle/jeandle/jeandle-llvm
+branch=test/javatype-cache-design
+head=7857d0e33777bcaea8012d3e4bf17c93eccafca3
+head_tree=6ec5ca7ea073a3112304705c89315272b9f1dd9c
+head_commit_date=2026-10-25T11:43:37+08:00
+origin_url=https://github.com/Atm2086/jeandle-llvm.git
+status_begin
+## test/javatype-cache-design
+ M llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+ M llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+ M llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+ M llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+ M llvm/lib/Passes/PassRegistry.def
+?? llvm/test/Jeandle/java-type-cache-reuse/
+status_end
+recent_log_begin
+7857d0e33777bcaea8012d3e4bf17c93eccafca3 2026-10-25T11:43:37+08:00  (HEAD -> test/javatype-cache-design, origin/feat/javatype-selective-invalidation, feat/javatype-selective-invalidation) 直观版？
+b2406a6847588879cc8bb87945eff195ec8c9b04 2026-10-25T11:41:04+08:00  初步梳理
+b3a64cb749a3e898bdb53d60b954ce233b105378 2026-10-25T10:53:51+08:00  new interface discription
+1190b32804540c60dc0950aa8c0e1f0d4848cb36 2026-10-25T00:12:11+08:00  refactor(jeandle): reconnect four passes to JavaTypeAnalysis
+766cf5e73eab13e4eeecf66a42f9e0f09b93ebdf 2026-10-25T00:08:57+08:00  merge(jeandle): sync main; Cached needs new-version adaptation
+ea2953f61a852e322848b03354eb97c98ac87bf5 2026-10-23T21:31:16+08:00  test(jeandle): cover expensive context cache reuse
+8df28fa046fd59251be09a065a468c08628dd397 2026-10-23T16:45:19+08:00  perf(jeandle): optimize Java type cache invalidation
+86be908ea05d18fd8fd0c289735b9f20da09d868 2026-10-23T14:18:42+08:00  fix: soundness, precision, and performance of Java type queries through cycles, identity patterns, and condition tracing (#123)
+recent_log_end
+tracked_diff_sha256=b457f239ae6cc53736561196afdc7174f05b28017445f1257e8e87b96abc8556
+tracked_diff_no_ext_sha256=b457f239ae6cc53736561196afdc7174f05b28017445f1257e8e87b96abc8556
+tracked_diff_stat_begin
+ .../llvm/Analysis/Jeandle/JavaTypeAnalysis.h       |  4 +++
+ .../llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h  | 11 +++++++
+ llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp     |  2 ++
+ .../lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp | 37 +++++++++++++++++++++-
+ llvm/lib/Passes/PassRegistry.def                   |  2 ++
+ 5 files changed, 55 insertions(+), 1 deletion(-)
+tracked_diff_stat_end
+tracked_worktree_sha256_begin
+dbc6c8dc843678943bb35ab8c12db18fdcf007180bd57bba94dba93e38b6f991  llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+ce8222605e5d256f1f619c4a2e77d717fcc38508a5e9724d947ca379a1015438  llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+efc6e7db7be4069d0820900697306315c5c1e964c6cc768853acd17f14f4675c  llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+72fa1871f3f0418d309f44c24d944f2e30482b5495b18cc6e613ceb790323818  llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+393bd13bcac96306f606dd7e836dc5cd7dbfde38cf2b9be0200af39562ea0cb0  llvm/lib/Passes/PassRegistry.def
+tracked_worktree_sha256_end
+untracked_sha256_begin
+3f3e01d2aca135baeeca284e568c8ef686656153075eeff3db9524c9d93edb7b  llvm/test/Jeandle/java-type-cache-reuse/Inputs/cff-modify-tce.cblog
+704112a04b26a97b81d9f7286670330738eb61c7d4c4578b1349cbe2f23d3fe5  llvm/test/Jeandle/java-type-cache-reuse/Inputs/cff-nonexact.cblog
+fc9f6e8ef8e38d14c2c1ffb0e01ab2f6e8295aecbc166bdb46fdf94ef67ed927  llvm/test/Jeandle/java-type-cache-reuse/Inputs/cha-reuse.cblog
+0800660e90adcda43266be0abfceb2f8fd142b38d55113157122b6ddd8374ab4  llvm/test/Jeandle/java-type-cache-reuse/Inputs/pipeline-tce-cff.cblog
+35f15880d8b6ba1f4e0493ec462cbe4c9bea877a8acc40aead3bb36d9fc51f92  llvm/test/Jeandle/java-type-cache-reuse/Inputs/recover-cha.cblog
+7ddc3097d5c15a83968c7f57700aabac31f57978f7f715fa0b24f56dc51d5059  llvm/test/Jeandle/java-type-cache-reuse/Inputs/recover.cblog
+01bcec1b9fcd4427ca7afe5adaaa20301552f706dc2d2f58b486c5c8f34cd38e  llvm/test/Jeandle/java-type-cache-reuse/Inputs/tce-recover.cblog
+fd3fbeb4a12012d6f7632b0f4c54ef149e247faf9fcb6f549cecd5ead6518a92  llvm/test/Jeandle/java-type-cache-reuse/Inputs/tce.cblog
+d0a19a6c919c7fc3f658cf28b9677b9efa1e4c4a655cc81aee6fb216565a16f3  llvm/test/Jeandle/java-type-cache-reuse/cff-modify-tce.ll
+4b56b9563bd6f8b4c4f1f77296f34c671fe14c44f08518ef78dc0228c057bfbf  llvm/test/Jeandle/java-type-cache-reuse/cff-nonexact.ll
+db5e8c6eaa8a931270c7eb36ef4e6cf2b76b2733d8dcbae1eae32d4e5f852239  llvm/test/Jeandle/java-type-cache-reuse/cha-deep.ll
+a72fa40a5754b0f284c6ebab6b6ea65fc8a46b362826c1fd788748f37673de54  llvm/test/Jeandle/java-type-cache-reuse/cha-shallow.ll
+2b1c53a3216ba11f38d0f6244b87bdb58901e1b37bc474c4e4399171858ec90d  llvm/test/Jeandle/java-type-cache-reuse/recover-cha-boundary.ll
+c9a9b358326ea367322c798ed65c4178bfa378ade4b6c5b36e98769164e18596  llvm/test/Jeandle/java-type-cache-reuse/recover-shallow.ll
+eb3d2bc62b8c1b96f0c27fff04f9c646813eea368f462f355a5cd8675771e813  llvm/test/Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll
+0892fcd6eb87c73a59078fe04c109ddd9f843fe139897a6d7bf910e3585aaa13  llvm/test/Jeandle/java-type-cache-reuse/tce-deep.ll
+4b49ba97e8c765d916738c04ea530435d6241eb31746fe97fadfa0d03b07dcbc  llvm/test/Jeandle/java-type-cache-reuse/tce-fold-recover.ll
+c2811667b0b016ecc1289e81ef26108849682987fce576720e35ab13cabf276d  llvm/test/Jeandle/java-type-cache-reuse/tce-recover-cross-pass.ll
+218cf69541f4180b5df0c6fd4cd2cb3f69bf395ed6d89395a2ce8304e0d2e443  llvm/test/Jeandle/java-type-cache-reuse/tce-same-block.ll
+fa0164fc200d1dd6aa5965d8eadc00e1cf719df907fa49f1108e0c8e584ec6dd  llvm/test/Jeandle/java-type-cache-reuse/tce-shallow.ll
+27b667a8e3d410f673a3cc39bc08500ede018196a4e8799280d79958dd5f8e2c  llvm/test/Jeandle/java-type-cache-reuse/tce-zero-overlap.ll
+51ddeb4b1be784dcb353998f78cd637439898d74f326583bc48e04cec8186f99  llvm/test/Jeandle/java-type-cache-reuse/x07-production-pipeline.ll
+untracked_sha256_end
+source_blobs_begin
+f4ffffc1209a50268fc3e305865a3ad9242bcadb  llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+58b67e37e501125fb24c65295b7f20fd2cd0cd69  llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+8a79e346606bebaf1c1b4d500a1f404b1b23ead4  llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+8d1f31241e8d890d7feee337aa9163454c640950  llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+f1be4301c6975cd494aad5cf9ac9ae7343d7060a  llvm/lib/Passes/PassRegistry.def
+0b6120840c0c9b3ab8f441b16e7b01b1e4903d06  llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
+c48282404d8341ba5c8bd3157c62a29271f97f2e  llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
+f608dd164e9e8cd917031c41b37490dd9be6d20f  llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
+3470618d4c7e02ea65c5d04a0622d8e64cd5d89a  llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
+source_blobs_end

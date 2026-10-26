@@ -1,0 +1,105 @@
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llc_dwarf in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find split-file in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find dsymutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli-child-target in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ar in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-as in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-addr2line in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bcanalyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cas in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cgdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cov in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ctxprof-util in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cvtres in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfod-find in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfo-analyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-diff in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dis in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwp in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dlltool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-exegesis in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-extract in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ir2vec in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-isel-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ifs in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-jitlink in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-opt-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lib in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-link in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto2 in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mc in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mca in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-modextract in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-nm in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-otool in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-pdbutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profgen in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ranlib in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rc in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readelf in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rtdyld in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-sim in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-size in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-split in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-stress in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strings in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readtapi in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-undname in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-windres in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-c-test in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxfilt in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-xray in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml2obj in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find obj2yaml in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml-bench in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find verify-uselistorder in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find bugpoint in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llc in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-symbolizer in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sancov in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sanstats in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-remarkutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin
+-- Testing: 465 tests, 32 workers --
+Testing:  0.. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90..
+********************
+Unsupported Tests (17):
+  LLVM :: Transforms/Attributor/AMDGPU/do-not-replace-addrspacecast-with-constantpointernull.ll
+  LLVM :: Transforms/Attributor/AMDGPU/nofpclass-amdgcn-rsq.ll
+  LLVM :: Transforms/Attributor/AMDGPU/tag-invariant-loads.ll
+  LLVM :: Transforms/Attributor/address_space_info.ll
+  LLVM :: Transforms/Attributor/allow_list.ll
+  LLVM :: Transforms/Attributor/phi_bug_pointer_info.ll
+  LLVM :: Transforms/CorrelatedValuePropagation/alloca.ll
+  LLVM :: Transforms/JumpThreading/divergent-target-test.ll
+  LLVM :: Transforms/JumpThreading/domtree-updates.ll
+  LLVM :: Transforms/JumpThreading/select.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-1.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-2.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-3.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-4.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-5.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-6.ll
+  LLVM :: Transforms/JumpThreading/thread-prob-8.ll
+
+
+Testing Time: 0.45s
+
+Total Discovered Tests: 465
+  Unsupported:  17 (3.66%)
+  Passed     : 448 (96.34%)

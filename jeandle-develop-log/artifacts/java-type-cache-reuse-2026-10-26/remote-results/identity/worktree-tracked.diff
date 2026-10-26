@@ -1,0 +1,127 @@
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+index 1194b072f83f..f4ffffc1209a 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+@@ -32,6 +32,10 @@ namespace jeandle {
+ /// the net number of newly inserted base entries.
+ struct JavaTypeQueryEvent {
+   CachedJavaTypeQueryInfo Info;
++  /// Top-level query keys. These pointers are valid while the observer runs;
++  /// diagnostic consumers must not retain them across IR mutation.
++  Value *QueryValue = nullptr;
++  BasicBlock *Context = nullptr;
+   uint64_t BaseInsertions = 0;
+   uint64_t ElapsedNanoseconds = 0;
+   size_t BaseEntries = 0;
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+index 787ac3a6a4a1..58b67e37e501 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+@@ -128,6 +128,17 @@ public:
+   static bool isRequired() { return true; }
+ };
+ 
++/// Diagnostic-only cache boundary hook for PASS-LOCAL/CROSS-PASS experiments.
++/// It clears a JavaTypeAnalysis result only if one already exists, so it does
++/// not create JavaTypeAnalysis, DT, or LVI and does not change IR or analysis
++/// lifetimes. CROSS-PASS pipelines omit this pass.
++class JavaTypeCacheClearPass
++    : public PassInfoMixin<JavaTypeCacheClearPass> {
++public:
++  LLVM_ABI PreservedAnalyses run(Function &F, FunctionAnalysisManager &FAM);
++  static bool isRequired() { return true; }
++};
++
+ /// Module-level statistics printer: prints the process-wide cumulative counters
+ /// at the current module processing position. The numbers may include functions
+ /// and modules processed earlier; it queries no type, resets no counter and
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+index a1ea64c4a868..8a79e346606b 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+@@ -161,6 +161,8 @@ JavaType JavaTypeAnalysisResult::getJavaType(Value *V, Instruction *Context) {
+   if (Observer) {
+     JavaTypeQueryEvent Event;
+     Event.Info = Info;
++    Event.QueryValue = V;
++    Event.Context = ContextBB;
+     Event.BaseInsertions = Cache.baseSize() - OldBaseEntries;
+     Event.ElapsedNanoseconds = elapsedNanoseconds(Start);
+     Event.BaseEntries = Cache.baseSize();
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+index cbae1330cc79..8d1f31241e8d 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+@@ -28,6 +28,11 @@ cl::opt<bool> CollectJavaTypeStats(
+     cl::desc("Collect Java type query and cache statistics"),
+     cl::Hidden, cl::init(false));
+ 
++cl::opt<bool> TraceJavaTypeQueries(
++    "jeandle-java-type-query-trace",
++    cl::desc("Print one diagnostic line per Java type query"),
++    cl::Hidden, cl::init(false));
++
+ ALWAYS_ENABLED_STATISTIC(TotalInvalidations, "Java type invalidation requests");
+ ALWAYS_ENABLED_STATISTIC(TotalSelectiveInvalidations, "Java type selective invalidations");
+ ALWAYS_ENABLED_STATISTIC(TotalCFGInvalidations, "Java type CFG invalidations");
+@@ -92,9 +97,27 @@ bool jeandle::javaTypeStatsEnabled() { return CollectJavaTypeStats; }
+ void JavaTypeStatsAnalysis::Result::onQuery(const JavaTypeQueryEvent &Event) {
+   const CachedJavaTypeQueryInfo &Info = Event.Info;
+ 
+-  ++Stats.Queries;
++  const uint64_t QueryOrdinal = ++Stats.Queries;
+   ++TotalQueries;
+ 
++  if (TraceJavaTypeQueries) {
++    errs() << "JavaTypeQuery function: " << F.getName()
++           << " ordinal: " << QueryOrdinal << " value: ";
++    Event.QueryValue->printAsOperand(errs(), false);
++    errs() << " context: ";
++    if (Event.Context)
++      Event.Context->printAsOperand(errs(), false);
++    else
++      errs() << "<base>";
++    errs() << " base_hits: " << Info.BaseHits
++           << " base_misses: " << Info.BaseMisses
++           << " facts_hits: " << Info.FactsHits
++           << " facts_misses: " << Info.FactsMisses
++           << " final_hits: " << Info.FinalHits
++           << " final_misses: " << Info.FinalMisses
++           << " base_insertions: " << Event.BaseInsertions << '\n';
++  }
++
+   Stats.BaseHits += Info.BaseHits;
+   Stats.BaseMisses += Info.BaseMisses;
+   TotalBaseHits += Info.BaseHits;
+@@ -261,6 +284,18 @@ JavaTypeAnalysisPrinterPass::run(Function &F, FunctionAnalysisManager &FAM) {
+ /// Prints the process-wide cumulative counters at the module processing
+ /// position; the numbers include functions and modules processed earlier. It
+ /// resets no counter, modifies no IR and triggers no Java type query.
++PreservedAnalyses
++JavaTypeCacheClearPass::run(Function &F, FunctionAnalysisManager &FAM) {
++  auto *Result = FAM.getCachedResult<JavaTypeAnalysis>(F);
++  if (CollectJavaTypeStats)
++    errs() << "JavaTypeCacheBoundary function: " << F.getName()
++           << " existing_analysis=" << (Result ? 1 : 0)
++           << " action=" << (Result ? "clear" : "none") << '\n';
++  if (Result)
++    Result->clear();
++  return PreservedAnalyses::all();
++}
++
+ PreservedAnalyses
+ JavaTypeAnalysisSummaryPrinterPass::run(Module &M, ModuleAnalysisManager &) {
+   OS << "JavaTypeAnalysis process summary after module: " << M.getName() << '\n';
+diff --git a/llvm/lib/Passes/PassRegistry.def b/llvm/lib/Passes/PassRegistry.def
+index 41b812be4f74..f1be4301c697 100644
+--- a/llvm/lib/Passes/PassRegistry.def
++++ b/llvm/lib/Passes/PassRegistry.def
+@@ -553,6 +553,8 @@ FUNCTION_PASS("print<domtree>", DominatorTreePrinterPass(errs()))
+ FUNCTION_PASS("print<func-properties>", FunctionPropertiesPrinterPass(errs()))
+ FUNCTION_PASS("print<java-type-analysis>",
+               jeandle::JavaTypeAnalysisPrinterPass(errs()))
++FUNCTION_PASS("jeandle-java-type-cache-boundary",
++              jeandle::JavaTypeCacheClearPass())
+ FUNCTION_PASS("print<inline-cost>", InlineCostAnnotationPrinterPass(errs()))
+ FUNCTION_PASS("print<lazy-value-info>", LazyValueInfoPrinterPass(errs()))
+ FUNCTION_PASS("print<loops>", LoopPrinterPass(errs()))

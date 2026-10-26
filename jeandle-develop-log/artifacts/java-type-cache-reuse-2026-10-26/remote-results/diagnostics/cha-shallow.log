@@ -1,0 +1,145 @@
+JavaTypeQuery function: caller.root ordinal: 1 value: %recv context: %b0 base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 1 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeQuery function: caller.root ordinal: 2 value: %recv context: %b1 base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 1 final_hits: 0 final_misses: 1 base_insertions: 0
+JavaTypeQuery function: caller.root ordinal: 3 value: %recv context: %b2 base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 1 final_hits: 0 final_misses: 1 base_insertions: 0
+JavaTypeQuery function: caller.root ordinal: 4 value: %recv context: %b3 base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 1 final_hits: 0 final_misses: 1 base_insertions: 0
+JavaTypeAnalysis for function: caller.root
+  queries: 4
+  path facts hits: 0
+  path facts misses: 4
+  path facts hit rate: 0.00%
+  final type hits: 0
+  final type misses: 4
+  final type hit rate: 0.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 1
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 1
+  current final type entries: 0
+  peak final type entries: 1
+  clears: 0
+  invalidation requests: 4
+  selective invalidations: 4
+  CFG invalidations: 4
+  invalidation values visited: 4
+  invalidation uses visited: 0
+  invalidation base slots scanned: 4
+  invalidation path-facts slots scanned: 4
+  invalidation final-type slots scanned: 4
+  base entries invalidated: 0
+  path facts entries invalidated: 4
+  final type entries invalidated: 4
+  base entries retained: 4
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 7386
+  bypasses: 0
+  verifications: 0
+  verification skips: 0
+  total query time (ns): 123108
+; ModuleID = '/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/cha-shallow.ll'
+source_filename = "/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/cha-shallow.ll"
+
+@jeandle.personality = global ptr null
+
+declare hotspotcc i1 @jeandle.check_instanceof(ptr, ptr addrspace(1))
+
+declare hotspotcc i32 @Virtual_target(ptr addrspace(1)) #0 gc "hotspotgc"
+
+define hotspotcc i32 @caller.root(ptr addrspace(1) "java-klass"="500" %recv, i32 %sel) #1 gc "hotspotgc" personality ptr @jeandle.personality {
+entry:
+  switch i32 %sel, label %join [
+    i32 0, label %b0
+    i32 1, label %b1
+    i32 2, label %b2
+    i32 3, label %b3
+  ]
+
+b0:                                               ; preds = %entry
+  %0 = call hotspotcc i1 @jeandle.check_instanceof(ptr inttoptr (i64 600 to ptr), ptr addrspace(1) %recv)
+  br i1 %0, label %cha_bci_7_check_receiver_pass, label %cha_bci_7_check_receiver_fail
+
+cha_bci_7_check_receiver_fail:                    ; preds = %b0
+  %1 = call hotspotcc i32 (...) @llvm.experimental.deoptimize.i32(i32 -97) [ "deopt"(i64 0, i32 7, i32 7, i64 65548, ptr addrspace(1) %recv) ]
+  ret i32 %1
+
+cha_bci_7_check_receiver_pass:                    ; preds = %b0
+  %r0 = invoke hotspotcc i32 @caller(ptr addrspace(1) noundef %recv) #3 [ "deopt"(i64 0, i32 7, i32 7) ]
+          to label %n0 unwind label %unwind
+
+n0:                                               ; preds = %cha_bci_7_check_receiver_pass
+  br label %join
+
+b1:                                               ; preds = %entry
+  %2 = call hotspotcc i1 @jeandle.check_instanceof(ptr inttoptr (i64 600 to ptr), ptr addrspace(1) %recv)
+  br i1 %2, label %cha_bci_7_check_receiver_pass1, label %cha_bci_7_check_receiver_fail2
+
+cha_bci_7_check_receiver_fail2:                   ; preds = %b1
+  %3 = call hotspotcc i32 (...) @llvm.experimental.deoptimize.i32(i32 -97) [ "deopt"(i64 0, i32 7, i32 7, i64 65548, ptr addrspace(1) %recv) ]
+  ret i32 %3
+
+cha_bci_7_check_receiver_pass1:                   ; preds = %b1
+  %r1 = invoke hotspotcc i32 @caller(ptr addrspace(1) noundef %recv) #4 [ "deopt"(i64 0, i32 7, i32 7) ]
+          to label %n1 unwind label %unwind
+
+n1:                                               ; preds = %cha_bci_7_check_receiver_pass1
+  br label %join
+
+b2:                                               ; preds = %entry
+  %4 = call hotspotcc i1 @jeandle.check_instanceof(ptr inttoptr (i64 600 to ptr), ptr addrspace(1) %recv)
+  br i1 %4, label %cha_bci_7_check_receiver_pass3, label %cha_bci_7_check_receiver_fail4
+
+cha_bci_7_check_receiver_fail4:                   ; preds = %b2
+  %5 = call hotspotcc i32 (...) @llvm.experimental.deoptimize.i32(i32 -97) [ "deopt"(i64 0, i32 7, i32 7, i64 65548, ptr addrspace(1) %recv) ]
+  ret i32 %5
+
+cha_bci_7_check_receiver_pass3:                   ; preds = %b2
+  %r2 = invoke hotspotcc i32 @caller(ptr addrspace(1) noundef %recv) #5 [ "deopt"(i64 0, i32 7, i32 7) ]
+          to label %n2 unwind label %unwind
+
+n2:                                               ; preds = %cha_bci_7_check_receiver_pass3
+  br label %join
+
+b3:                                               ; preds = %entry
+  %6 = call hotspotcc i1 @jeandle.check_instanceof(ptr inttoptr (i64 600 to ptr), ptr addrspace(1) %recv)
+  br i1 %6, label %cha_bci_7_check_receiver_pass5, label %cha_bci_7_check_receiver_fail6
+
+cha_bci_7_check_receiver_fail6:                   ; preds = %b3
+  %7 = call hotspotcc i32 (...) @llvm.experimental.deoptimize.i32(i32 -97) [ "deopt"(i64 0, i32 7, i32 7, i64 65548, ptr addrspace(1) %recv) ]
+  ret i32 %7
+
+cha_bci_7_check_receiver_pass5:                   ; preds = %b3
+  %r3 = invoke hotspotcc i32 @caller(ptr addrspace(1) noundef %recv) #6 [ "deopt"(i64 0, i32 7, i32 7) ]
+          to label %n3 unwind label %unwind
+
+n3:                                               ; preds = %cha_bci_7_check_receiver_pass5
+  br label %join
+
+join:                                             ; preds = %n3, %n2, %n1, %n0, %entry
+  ret i32 0
+
+unwind:                                           ; preds = %cha_bci_7_check_receiver_pass5, %cha_bci_7_check_receiver_pass3, %cha_bci_7_check_receiver_pass1, %cha_bci_7_check_receiver_pass
+  %lp = landingpad i64
+          cleanup
+  ret i32 -1
+}
+
+declare hotspotcc i32 @llvm.experimental.deoptimize.i32(...)
+
+declare hotspotcc i32 @caller(ptr addrspace(1)) #2 gc "hotspotgc"
+
+attributes #0 = { "java-method"="200" }
+attributes #1 = { "java-method"="100" }
+attributes #2 = { "java-accessor-method" "java-method"="100" }
+attributes #3 = { "bytecode"="invokevirtual" "call-site"="900" "declared-holder"="300" "monomorphic-target" "statepoint-id"="42" "statepoint-num-patch-bytes"="5" }
+attributes #4 = { "bytecode"="invokevirtual" "call-site"="901" "declared-holder"="300" "monomorphic-target" "statepoint-id"="43" "statepoint-num-patch-bytes"="5" }
+attributes #5 = { "bytecode"="invokevirtual" "call-site"="902" "declared-holder"="300" "monomorphic-target" "statepoint-id"="44" "statepoint-num-patch-bytes"="5" }
+attributes #6 = { "bytecode"="invokevirtual" "call-site"="903" "declared-holder"="300" "monomorphic-target" "statepoint-id"="45" "statepoint-num-patch-bytes"="5" }
+
+!java-method-compilation = !{}
+!static-call-patch-size = !{!0}
+
+!0 = !{i32 5}

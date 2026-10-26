@@ -1,0 +1,5 @@
+ninja: Entering directory `build/build-ninja-profiling'
+[1/4] Building CXX object unittests/IR/CMakeFiles/JavaTypeCacheReuseReplay.dir/JavaTypeCacheReuseReplay.cpp.o
+[2/4] Building CXX object unittests/IR/CMakeFiles/JavaTypeQueryTests.dir/JavaTypeCacheReuseTest.cpp.o
+[3/4] Linking CXX executable bin/JavaTypeCacheReuseReplay
+[4/4] Linking CXX executable unittests/IR/JavaTypeQueryTests

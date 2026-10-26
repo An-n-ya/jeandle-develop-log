@@ -1,0 +1,93 @@
+{
+  "affinity": {
+    "command": [
+      "taskset",
+      "-pc",
+      "621807"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "pid 621807's current affinity list: 0-31\n"
+  },
+  "governor": {
+    "command": [
+      "cat",
+      "/sys/devices/system/cpu/cpu16/cpufreq/scaling_governor"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "powersave\n"
+  },
+  "load": {
+    "command": [
+      "cat",
+      "/proc/loadavg"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "1.49 1.61 1.54 1/3503 633760\n"
+  },
+  "lscpu": {
+    "command": [
+      "lscpu"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               GenuineIntel\nModel name:                              Genuine Intel(R) 0000\nCPU family:                              6\nModel:                                   183\nThread(s) per core:                      2\nCore(s) per socket:                      24\nSocket(s):                               1\nStepping:                                0\nMicrocode version:                       0xe\nCPU(s) scaling MHz:                      20%\nCPU max MHz:                             4800.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                1612.80\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l2 cdp_l2 ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               896 KiB (24 instances)\nL1i cache:                               1.3 MiB (24 instances)\nL2 cache:                                32 MiB (12 instances)\nL3 cache:                                36 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Vulnerable: No microcode\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n"
+  },
+  "paranoid": {
+    "command": [
+      "cat",
+      "/proc/sys/kernel/perf_event_paranoid"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "2\n"
+  },
+  "perf-build-options": {
+    "command": [
+      "perf",
+      "version",
+      "--build-options"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "perf version 7.1.3-1\n                   aio: [ on  ]  # HAVE_AIO_SUPPORT\n                   bpf: [ on  ]  # HAVE_LIBBPF_SUPPORT\n         bpf_skeletons: [ on  ]  # HAVE_BPF_SKEL\n            debuginfod: [ on  ]  # HAVE_DEBUGINFOD_SUPPORT\n                 dwarf: [ on  ]  # HAVE_LIBDW_SUPPORT\n    dwarf_getlocations: [ on  ]  # HAVE_LIBDW_SUPPORT\n          dwarf-unwind: [ on  ]  # HAVE_DWARF_UNWIND_SUPPORT\n                libbfd: [ OFF ]  # HAVE_LIBBFD_SUPPORT ( tip: Deprecated, license incompatibility, use BUILD_NONDISTRO=1 and install binutils-dev[el] )\n         libbabeltrace: [ OFF ]  # HAVE_LIBBABELTRACE_SUPPORT\n        libbpf-strings: [ on  ]  # HAVE_LIBBPF_STRINGS_SUPPORT\n           libcapstone: [ OFF ]  # HAVE_LIBCAPSTONE_SUPPORT\n    libdw-dwarf-unwind: [ on  ]  # HAVE_LIBDW_SUPPORT\n                libelf: [ on  ]  # HAVE_LIBELF_SUPPORT\n               libLLVM: [ OFF ]  # HAVE_LIBLLVM_SUPPORT\n               libnuma: [ on  ]  # HAVE_LIBNUMA_SUPPORT\n            libopencsd: [ OFF ]  # HAVE_CSTRACE_SUPPORT\n               libperl: [ OFF ]  # HAVE_LIBPERL_SUPPORT ( tip: Deprecated, use LIBPERL=1 and install perl-ExtUtils-Embed/libperl-dev to build with it )\n               libpfm4: [ on  ]  # HAVE_LIBPFM\n             libpython: [ on  ]  # HAVE_LIBPYTHON_SUPPORT\n              libslang: [ on  ]  # HAVE_SLANG_SUPPORT\n         libtraceevent: [ on  ]  # HAVE_LIBTRACEEVENT\n             libunwind: [ OFF ]  # HAVE_LIBUNWIND_SUPPORT ( tip: Deprecated, use LIBUNWIND=1 and install libunwind-dev[el] to build with it )\n                  lzma: [ on  ]  # HAVE_LZMA_SUPPORT\nnuma_num_possible_cpus: [ on  ]  # HAVE_LIBNUMA_SUPPORT\n                  zlib: [ on  ]  # HAVE_ZLIB_SUPPORT\n                  zstd: [ on  ]  # HAVE_ZSTD_SUPPORT\n                  rust: [ OFF ]  # HAVE_RUST_SUPPORT\n"
+  },
+  "perf-version": {
+    "command": [
+      "perf",
+      "--version"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "perf version 7.1.3-1\n"
+  },
+  "siblings": {
+    "command": [
+      "cat",
+      "/sys/devices/system/cpu/cpu16/topology/thread_siblings_list"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "16\n"
+  },
+  "topology": {
+    "command": [
+      "lscpu",
+      "-e=CPU,NODE,SOCKET,CORE,ONLINE"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "CPU NODE SOCKET CORE ONLINE\n  0    0      0    0    yes\n  1    0      0    0    yes\n  2    0      0    1    yes\n  3    0      0    1    yes\n  4    0      0    2    yes\n  5    0      0    2    yes\n  6    0      0    3    yes\n  7    0      0    3    yes\n  8    0      0    4    yes\n  9    0      0    4    yes\n 10    0      0    5    yes\n 11    0      0    5    yes\n 12    0      0    6    yes\n 13    0      0    6    yes\n 14    0      0    7    yes\n 15    0      0    7    yes\n 16    0      0    8    yes\n 17    0      0    9    yes\n 18    0      0   10    yes\n 19    0      0   11    yes\n 20    0      0   12    yes\n 21    0      0   13    yes\n 22    0      0   14    yes\n 23    0      0   15    yes\n 24    0      0   16    yes\n 25    0      0   17    yes\n 26    0      0   18    yes\n 27    0      0   19    yes\n 28    0      0   20    yes\n 29    0      0   21    yes\n 30    0      0   22    yes\n 31    0      0   23    yes\n"
+  },
+  "uname": {
+    "command": [
+      "uname",
+      "-a"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "Linux archlinux 7.1.3-arch2-2 #1 SMP PREEMPT_DYNAMIC Thu, 16 Jul 2026 17:41:28 +0000 x86_64 GNU/Linux\n"
+  }
+}

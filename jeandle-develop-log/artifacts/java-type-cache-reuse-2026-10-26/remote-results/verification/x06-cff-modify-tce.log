@@ -1,0 +1,39 @@
+JavaTypeCacheBoundary function: cff_modify_tce existing_analysis=0 action=none
+JavaTypeAnalysis for function: cff_modify_tce
+  queries: 2
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 0
+  final type misses: 2
+  final type hit rate: 0.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 2
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 0
+  peak final type entries: 1
+  clears: 0
+  invalidation requests: 2
+  selective invalidations: 2
+  CFG invalidations: 0
+  invalidation values visited: 2
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 2
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 2
+  base entries retained: 2
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 785
+  bypasses: 0
+  verifications: 2
+  verification skips: 0
+  total query time (ns): 17760

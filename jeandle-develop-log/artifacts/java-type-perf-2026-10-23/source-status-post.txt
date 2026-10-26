@@ -1,0 +1,13 @@
+## test/javatype-cache-design
+ M llvm/benchmarks/CMakeLists.txt
+ M llvm/include/llvm/Analysis/Jeandle/CachedJavaType.h
+ M llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+ M llvm/lib/Analysis/Jeandle/CachedJavaType.cpp
+ M llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+ M llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+ M llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
+ M llvm/unittests/IR/CMakeLists.txt
+ M llvm/unittests/IR/JavaTypeQueryTest.cpp
+?? llvm/benchmarks/JeandleJavaTypeCacheInvalidation.cpp
+?? llvm/utils/jeandle/benchmark-java-type-cache-design.py
+?? llvm/utils/jeandle/profile-java-type-cache.py

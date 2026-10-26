@@ -1,0 +1,5 @@
+ninja: Entering directory `build/build-ninja-profiling'
+[1/4] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/LazyValueInfo.cpp.o
+[2/4] Linking CXX static library lib/libLLVMAnalysis.a
+[3/4] Linking CXX executable unittests/IR/JavaTypeQueryTests
+[4/4] Linking CXX executable bin/opt

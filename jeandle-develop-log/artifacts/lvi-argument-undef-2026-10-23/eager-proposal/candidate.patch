@@ -1,0 +1,39 @@
+diff --git a/llvm/lib/Analysis/LazyValueInfo.cpp b/llvm/lib/Analysis/LazyValueInfo.cpp
+index df75999eb..8ed232873 100644
+--- a/llvm/lib/Analysis/LazyValueInfo.cpp
++++ b/llvm/lib/Analysis/LazyValueInfo.cpp
+@@ -934,17 +934,23 @@ LazyValueInfoImpl::solveBlockValueSelect(SelectInst *SI, BasicBlock *BB) {
+   // condition itself?  This shows up with idioms like e.g. select(a > 5, a, 5).
+   // TODO: We could potentially refine an overdefined true value above.
+   Value *Cond = SI->getCondition();
+-  // If the value is undef, a different value may be chosen in
+-  // the select condition.
+-  if (isGuaranteedNotToBeUndef(Cond, AC)) {
+-    TrueVal =
+-        TrueVal.intersect(*getValueFromCondition(SI->getTrueValue(), Cond,
+-                                                 /*IsTrueDest*/ true,
+-                                                 /*UseBlockValue*/ false));
+-    FalseVal =
+-        FalseVal.intersect(*getValueFromCondition(SI->getFalseValue(), Cond,
+-                                                  /*IsTrueDest*/ false,
+-                                                  /*UseBlockValue*/ false));
++  auto TrueConstraint =
++      getValueFromCondition(SI->getTrueValue(), Cond, /*IsTrueDest=*/true,
++                            /*UseBlockValue=*/false);
++  auto FalseConstraint =
++      getValueFromCondition(SI->getFalseValue(), Cond, /*IsTrueDest=*/false,
++                            /*UseBlockValue=*/false);
++  assert(TrueConstraint && FalseConstraint &&
++         "Condition constraints must be available without block values");
++
++  // An overdefined constraint cannot refine either arm. Only prove that the
++  // condition is not undef if at least one arm has a useful constraint.
++  // Otherwise, a different undef choice in the condition could make applying
++  // the constraint unsound.
++  if ((!TrueConstraint->isOverdefined() || !FalseConstraint->isOverdefined()) &&
++      isGuaranteedNotToBeUndef(Cond, AC)) {
++    TrueVal = TrueVal.intersect(*TrueConstraint);
++    FalseVal = FalseVal.intersect(*FalseConstraint);
+   }
+ 
+   TrueVal.mergeIn(FalseVal);

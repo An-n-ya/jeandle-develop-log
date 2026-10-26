@@ -1,0 +1,24 @@
+command: git branch -vv; git reflog --date=iso-strict -12
+
+  feat/javatype-selective-invalidation 7857d0e33777 [origin/feat/javatype-selective-invalidation] 直观版？
+  perf/lvi-select-demand-undef         599e47ee8b80 perf(lvi): skip select undef proofs for argument conditions
+* test/javatype-cache-design           7857d0e33777 直观版？
+
+reflog:
+7857d0e33777 HEAD@{2026-10-26T12:43:39+08:00}: merge feat/javatype-selective-invalidation: Fast-forward
+ea2953f61a85 HEAD@{2026-10-26T12:43:36+08:00}: checkout: moving from feat/javatype-selective-invalidation to test/javatype-cache-design
+7857d0e33777 HEAD@{2026-10-25T12:51:56+08:00}: pull: Fast-forward
+b3a64cb749a3 HEAD@{2026-10-25T12:10:08+08:00}: pull: Fast-forward
+357604c7724e HEAD@{2026-10-25T11:31:31+08:00}: checkout: moving from test/javatype-cache-design to feat/javatype-selective-invalidation
+ea2953f61a85 HEAD@{2026-10-23T21:31:16+08:00}: commit: test(jeandle): cover expensive context cache reuse
+8df28fa046fd HEAD@{2026-10-23T21:18:03+08:00}: checkout: moving from perf/lvi-select-demand-undef to test/javatype-cache-design
+599e47ee8b80 HEAD@{2026-10-23T20:59:29+08:00}: commit: perf(lvi): skip select undef proofs for argument conditions
+8df28fa046fd HEAD@{2026-10-23T20:01:24+08:00}: checkout: moving from test/javatype-cache-design to perf/lvi-select-demand-undef
+8df28fa046fd HEAD@{2026-10-23T16:45:19+08:00}: commit: perf(jeandle): optimize Java type cache invalidation
+357604c7724e HEAD@{2026-10-23T08:53:54+08:00}: checkout: moving from feat/javatype-selective-invalidation to test/javatype-cache-design
+357604c7724e HEAD@{2026-10-21T16:30:19+08:00}: commit: perf(jeandle): query Java types through the cached analysis in CFF
+
+compiler actual target:
+/usr/bin/g++-15
+g++ (GCC) 15.3.0
+7c1ff2182981fb185022a8cdd699abaab64b8ea0965e30855754dd95a6c09d15  /home/annya/playground/jeandle/jeandle/tools/bin/g++

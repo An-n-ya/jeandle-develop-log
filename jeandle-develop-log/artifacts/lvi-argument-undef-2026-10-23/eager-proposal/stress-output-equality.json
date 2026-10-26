@@ -1,0 +1,18 @@
+{
+  "related-may-undef": {
+    "baseline": "faa99415488966487b3905b035ce0fb36cad9bff6830b51ff86e527acb5bf05f",
+    "candidate": "faa99415488966487b3905b035ce0fb36cad9bff6830b51ff86e527acb5bf05f"
+  },
+  "related-noundef": {
+    "baseline": "d245c279e697d421a2f4b20bd08934bea74ac37f724ffe04d5d9e0aa11c7dda1",
+    "candidate": "d245c279e697d421a2f4b20bd08934bea74ac37f724ffe04d5d9e0aa11c7dda1"
+  },
+  "unrelated-may-undef": {
+    "baseline": "7649bf9242c72222b88af6d0737e5e99acc0f50ca40deb4bfe4b5fe5e2714bba",
+    "candidate": "7649bf9242c72222b88af6d0737e5e99acc0f50ca40deb4bfe4b5fe5e2714bba"
+  },
+  "shared-boolean-may-undef": {
+    "baseline": "f2e1866b5189437c09519ea9f0f066c8eafe2c25b479541d5bcc36966f371554",
+    "candidate": "f2e1866b5189437c09519ea9f0f066c8eafe2c25b479541d5bcc36966f371554"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "related-may-undef": {
+    "baseline": "991e498ce6286a996a12ea11841982995dbea6ee47a689d39499f2a5539898e5",
+    "candidate": "991e498ce6286a996a12ea11841982995dbea6ee47a689d39499f2a5539898e5"
+  },
+  "related-noundef": {
+    "baseline": "3dc273eb0638e9f58f135409af185518be82c803555b2ab919446fa519c14fe7",
+    "candidate": "3dc273eb0638e9f58f135409af185518be82c803555b2ab919446fa519c14fe7"
+  },
+  "unrelated-may-undef": {
+    "baseline": "0df37eba3e0ee199f32c45f37bb47f94e89d5ed53e51217b82c617f6f56f32e0",
+    "candidate": "0df37eba3e0ee199f32c45f37bb47f94e89d5ed53e51217b82c617f6f56f32e0"
+  },
+  "shared-boolean-may-undef": {
+    "baseline": "35eeafcad7514719a3a43aab1475d1a86e17dc1c9190318055c8af2a40e24ddf",
+    "candidate": "35eeafcad7514719a3a43aab1475d1a86e17dc1c9190318055c8af2a40e24ddf"
+  }
+}

@@ -1,0 +1,55 @@
+JavaTypeAnalysis for function: zero_overlap
+  queries: 4
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 0
+  final type misses: 4
+  final type hit rate: 0.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 4
+  current base entries: 4
+  peak base entries: 4
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 4
+  peak final type entries: 4
+  clears: 0
+  invalidation requests: 0
+  selective invalidations: 0
+  CFG invalidations: 0
+  invalidation values visited: 0
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 0
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 0
+  base entries retained: 0
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 0
+  bypasses: 0
+  verifications: 4
+  verification skips: 0
+  total query time (ns): 66023
+; ModuleID = '/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/tce-zero-overlap.ll'
+source_filename = "/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/tce-zero-overlap.ll"
+
+declare i1 @jeandle.check_instanceof(ptr, ptr addrspace(1) nonnull)
+
+define void @zero_overlap(ptr addrspace(1) nonnull %a, ptr addrspace(1) nonnull %b, ptr addrspace(1) nonnull %c, ptr addrspace(1) nonnull %d) #0 gc "hotspotgc" {
+entry:
+  %a0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %a)
+  %b0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %b)
+  %c0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %c)
+  %d0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %d)
+  ret void
+}
+
+attributes #0 = { "java-method"="0" }
+
+!java-method-compilation = !{}

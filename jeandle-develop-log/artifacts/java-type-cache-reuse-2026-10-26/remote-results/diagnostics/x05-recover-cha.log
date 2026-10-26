@@ -1,0 +1,88 @@
+JavaTypeQuery function: recover_cha ordinal: 1 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeCacheBoundary function: recover_cha existing_analysis=0 action=none
+JavaTypeQuery function: recover_cha ordinal: 2 value: %field context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeAnalysis for function: recover_cha
+  queries: 2
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 0
+  final type misses: 2
+  final type hit rate: 0.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 2
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 0
+  peak final type entries: 1
+  clears: 0
+  invalidation requests: 1
+  selective invalidations: 1
+  CFG invalidations: 1
+  invalidation values visited: 2
+  invalidation uses visited: 1
+  invalidation base slots scanned: 1
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 1
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 1
+  base entries retained: 1
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 2766
+  bypasses: 0
+  verifications: 0
+  verification skips: 0
+  total query time (ns): 35388
+; ModuleID = '/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/recover-cha-boundary.ll'
+source_filename = "/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/recover-cha-boundary.ll"
+
+@jeandle.personality = global ptr null
+
+declare hotspotcc i1 @jeandle.check_instanceof(ptr, ptr addrspace(1))
+
+declare hotspotcc i32 @Virtual_target(ptr addrspace(1)) #0 gc "hotspotgc"
+
+define hotspotcc i32 @recover_cha(ptr addrspace(1) "java-klass"="5" %obj) #1 gc "hotspotgc" personality ptr @jeandle.personality {
+entry:
+  %p = getelementptr i8, ptr addrspace(1) %obj, i64 16
+  %field = load ptr addrspace(1), ptr addrspace(1) %p, align 8, !java-klass !1
+  %0 = call hotspotcc i1 @jeandle.check_instanceof(ptr inttoptr (i64 600 to ptr), ptr addrspace(1) %field)
+  br i1 %0, label %cha_bci_7_check_receiver_pass, label %cha_bci_7_check_receiver_fail
+
+cha_bci_7_check_receiver_fail:                    ; preds = %entry
+  %1 = call hotspotcc i32 (...) @llvm.experimental.deoptimize.i32(i32 -97) [ "deopt"(i64 0, i32 7, i32 7, i64 65548, ptr addrspace(1) %field) ]
+  ret i32 %1
+
+cha_bci_7_check_receiver_pass:                    ; preds = %entry
+  %ret = invoke hotspotcc i32 @Optimized_target(ptr addrspace(1) noundef %field) #3 [ "deopt"(i64 0, i32 7, i32 7) ]
+          to label %normal unwind label %unwind
+
+normal:                                           ; preds = %cha_bci_7_check_receiver_pass
+  ret i32 %ret
+
+unwind:                                           ; preds = %cha_bci_7_check_receiver_pass
+  %lp = landingpad i64
+          cleanup
+  ret i32 -1
+}
+
+declare hotspotcc i32 @llvm.experimental.deoptimize.i32(...)
+
+declare hotspotcc i32 @Optimized_target(ptr addrspace(1)) #2 gc "hotspotgc"
+
+attributes #0 = { "java-method"="200" }
+attributes #1 = { "java-method"="100" }
+attributes #2 = { "java-accessor-method" "java-method"="700" }
+attributes #3 = { "bytecode"="invokevirtual" "call-site"="900" "declared-holder"="300" "monomorphic-target" "statepoint-id"="42" "statepoint-num-patch-bytes"="5" }
+
+!java-method-compilation = !{}
+!static-call-patch-size = !{!0}
+
+!0 = !{i32 5}
+!1 = !{i64 7}

@@ -1,0 +1,1557 @@
+{
+  "aggregates": {
+    "cff-cache-reuse": {
+      "full": {
+        "consumer_by_period_pct": [
+          {
+            "consumer": "cff",
+            "pct_of_javatype": 92.82853095793081,
+            "pct_of_process": 13.30665636922181,
+            "period": 9265404257
+          },
+          {
+            "consumer": "javatype_internal_or_other",
+            "pct_of_javatype": 7.171469042069195,
+            "pct_of_process": 1.0280058643670065,
+            "period": 715798894
+          }
+        ],
+        "invalidation_inclusive_period_pct": {
+          "max": 0.9326839045944871,
+          "mean": 0.8453237654961904,
+          "median": 0.8403437340395488,
+          "min": 0.7629436578545353,
+          "n": 3,
+          "p05": 0.7706836654730367,
+          "p95": 0.9234498875389933
+        },
+        "javatype_category_by_period_pct": [
+          {
+            "category": "other_javatype",
+            "pct_of_javatype": 60.16487051862431,
+            "pct_of_process": 8.624430972120852,
+            "period": 6005177952
+          },
+          {
+            "category": "unknown",
+            "pct_of_javatype": 12.521171466936712,
+            "pct_of_process": 1.7948676374738757,
+            "period": 1249763561
+          },
+          {
+            "category": "cache_container_access",
+            "pct_of_javatype": 12.091829409153762,
+            "pct_of_process": 1.7333229036639501,
+            "period": 1206910058
+          },
+          {
+            "category": "invalidation",
+            "pct_of_javatype": 5.896309674260431,
+            "pct_of_process": 0.8452160760516538,
+            "period": 588522647
+          },
+          {
+            "category": "analysis_lifecycle",
+            "pct_of_javatype": 4.84566874036166,
+            "pct_of_process": 0.6946102468894417,
+            "period": 483656041
+          },
+          {
+            "category": "copy_allocation_free",
+            "pct_of_javatype": 3.403817203800344,
+            "pct_of_process": 0.48792569921356677,
+            "period": 339741910
+          },
+          {
+            "category": "type_ops",
+            "pct_of_javatype": 1.0763329868627778,
+            "pct_of_process": 0.1542886981754771,
+            "period": 107430982
+          }
+        ],
+        "javatype_inclusive_period_pct": {
+          "max": 14.802313528597338,
+          "mean": 14.335764405235352,
+          "median": 14.180449982521703,
+          "min": 14.024529704587016,
+          "n": 3,
+          "p05": 14.040121732380484,
+          "p95": 14.740127173989773
+        },
+        "javatype_inclusive_sample_pct": {
+          "max": 14.415094339622641,
+          "mean": 14.002081566146908,
+          "median": 13.82899628252788,
+          "min": 13.762154076290201,
+          "n": 3,
+          "p05": 13.76883829691397,
+          "p95": 14.356484533913164
+        },
+        "runs": 3,
+        "sample_overhead_wall_s": {
+          "max": 6.959252056,
+          "mean": 6.922485814333333,
+          "median": 6.91525719,
+          "min": 6.892948197,
+          "n": 3,
+          "p05": 6.895179096300001,
+          "p95": 6.9548525694
+        },
+        "samples": {
+          "max": 1345,
+          "mean": 1335.6666666666667,
+          "median": 1337,
+          "min": 1325,
+          "n": 3,
+          "p05": 1326.2,
+          "p95": 1344.1999999999998
+        },
+        "top_self_leaf_by_period_pct": [
+          {
+            "pct": 13.985699969454682,
+            "period": 9738221266,
+            "symbol": "[unknown]"
+          },
+          {
+            "pct": 3.780871369314935,
+            "period": 2632614889,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::getResultImpl(llvm::AnalysisKey*, llvm::Function&)"
+          },
+          {
+            "pct": 3.0240061902843753,
+            "period": 2105610835,
+            "symbol": "llvm::LLLexer::LexIdentifier()"
+          },
+          {
+            "pct": 2.9955013345178707,
+            "period": 2085762948,
+            "symbol": "(anonymous namespace)::Verifier::visitGlobalValue(llvm::GlobalValue const&)"
+          },
+          {
+            "pct": 2.760065732051164,
+            "period": 1921829502,
+            "symbol": "std::map<llvm::Value*, std::vector<unsigned int, std::allocator<unsigned int> >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::operator[](llvm::Value*&&)"
+          },
+          {
+            "pct": 2.3408652062588837,
+            "period": 1629940824,
+            "symbol": "llvm::hashing::detail::hash_short(char const*, unsigned long, unsigned long)"
+          },
+          {
+            "pct": 2.18898668864679,
+            "period": 1524188047,
+            "symbol": "llvm::Value::setValueName(llvm::StringMapEntry<llvm::Value*>*)"
+          },
+          {
+            "pct": 1.6052409791740174,
+            "period": 1117726812,
+            "symbol": "isalnum"
+          },
+          {
+            "pct": 1.5857483823957261,
+            "period": 1104154147,
+            "symbol": "llvm::LLLexer::LexToken()"
+          },
+          {
+            "pct": 1.4420629104061227,
+            "period": 1004106175,
+            "symbol": "llvm::Instruction::getMetadata(unsigned int) const [clone .part.0]"
+          },
+          {
+            "pct": 1.4360208935436776,
+            "period": 999899128,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::invalidate(llvm::Function&, llvm::PreservedAnalyses const&)"
+          },
+          {
+            "pct": 1.407917707489948,
+            "period": 980330923,
+            "symbol": "llvm::Value::getValueName() const"
+          },
+          {
+            "pct": 1.4055179233305193,
+            "period": 978659957,
+            "symbol": "(anonymous namespace)::computeConstOops(llvm::Function&)"
+          },
+          {
+            "pct": 1.1682760724183607,
+            "period": 813468823,
+            "symbol": "cfree"
+          },
+          {
+            "pct": 1.1563909447792389,
+            "period": 805193227,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Module, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>::Result, llvm::AnalysisManager<llvm::Module>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 1.1025405193074755,
+            "period": 767697259,
+            "symbol": "llvm::SourceMgr::SrcBuffer::getLineNumber(char const*) const"
+          },
+          {
+            "pct": 1.015585708970905,
+            "period": 707150759,
+            "symbol": "malloc"
+          },
+          {
+            "pct": 0.996870306220459,
+            "period": 694119253,
+            "symbol": "llvm::ConstantFieldFolding::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&)"
+          },
+          {
+            "pct": 0.9799107784013472,
+            "period": 682310360,
+            "symbol": "llvm::Value::getName() const"
+          },
+          {
+            "pct": 0.9776294994598075,
+            "period": 680721909,
+            "symbol": "llvm::InstVisitor<(anonymous namespace)::Verifier, void>::visit(llvm::Function&) [clone .constprop.0]"
+          },
+          {
+            "pct": 0.862985734924207,
+            "period": 600895633,
+            "symbol": "llvm::StringMapImpl::FindKey(llvm::StringRef, unsigned int) const"
+          },
+          {
+            "pct": 0.8347620042972057,
+            "period": 581243493,
+            "symbol": "std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)"
+          },
+          {
+            "pct": 0.7745739861235919,
+            "period": 539334669,
+            "symbol": "(anonymous namespace)::Verifier::visitInstruction(llvm::Instruction&)"
+          },
+          {
+            "pct": 0.7565597783811733,
+            "period": 526791404,
+            "symbol": "llvm::LLParser::parseCall(llvm::Instruction*&, llvm::LLParser::PerFunctionState&, llvm::CallInst::TailCallKind)"
+          },
+          {
+            "pct": 0.7461945909257637,
+            "period": 519574140,
+            "symbol": "(anonymous namespace)::Verifier::visitCallBase(llvm::CallBase&)"
+          },
+          {
+            "pct": 0.725300556309318,
+            "period": 505025656,
+            "symbol": "llvm::xxh3_64bits(llvm::ArrayRef<unsigned char>)"
+          },
+          {
+            "pct": 0.7177592470183275,
+            "period": 499774654,
+            "symbol": "llvm::jeandle::JavaTypeAnalysisResult::invalidateImpl(llvm::ArrayRef<llvm::Value*>, bool, bool)"
+          },
+          {
+            "pct": 0.6946102468894417,
+            "period": 483656041,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Function, llvm::jeandle::JavaTypeAnalysis, llvm::jeandle::JavaTypeAnalysisResult, llvm::AnalysisManager<llvm::Function>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 0.6931122182867675,
+            "period": 482612966,
+            "symbol": "llvm::StringMapImpl::RemoveKey(llvm::StringMapEntryBase*)"
+          },
+          {
+            "pct": 0.6898151120142928,
+            "period": 480317196,
+            "symbol": "llvm::jeandle::getCachedJavaType(llvm::Value*, llvm::DominatorTree*, llvm::Instruction*, llvm::function_ref<bool (llvm::Value*, llvm::BasicBlock*, llvm::BasicBlock*)>, llvm::jeandle::JavaTypeCache&, llvm::jeandle::CachedJavaTypeQueryInfo&)"
+          },
+          {
+            "pct": 0.6890746148940099,
+            "period": 479801589,
+            "symbol": "llvm::SmallPtrSetImplBase::insert_imp_big(void const*)"
+          },
+          {
+            "pct": 0.6573488385763973,
+            "period": 457710980,
+            "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)"
+          },
+          {
+            "pct": 0.6433662727026563,
+            "period": 447974941,
+            "symbol": "std::vector<unsigned int, std::allocator<unsigned int> >& GetOrCreateOffsetCache<unsigned int>(void*&, llvm::MemoryBuffer*) [clone .part.0]"
+          },
+          {
+            "pct": 0.5887228625604896,
+            "period": 409926819,
+            "symbol": "llvm::LLLexer::ReadVarName()"
+          },
+          {
+            "pct": 0.5381996712465658,
+            "period": 374747599,
+            "symbol": "llvm::DenseMapBase<llvm::SmallDenseMap<unsigned long, llvm::detail::DenseSetEmpty, 2u, llvm::DenseMapInfo<unsigned long, void>, llvm::detail::DenseSetPair<unsigned long> >, unsigned long, llvm::detail::DenseSetEmpty, llvm::DenseMapInfo<unsigned long, void>, llvm::detail::DenseSetPair<unsigned long> >::copyFrom(llvm::SmallDenseMap<unsigned long, llvm::detail::DenseSetEmpty, 2u, llvm::DenseMapInfo<unsigned long, void>, llvm::detail::DenseSetPair<unsigned long> > const&)"
+          },
+          {
+            "pct": 0.5167708056278497,
+            "period": 359826713,
+            "symbol": "llvm::LLParser::parseBasicBlock(llvm::LLParser::PerFunctionState&)"
+          },
+          {
+            "pct": 0.5141556712846721,
+            "period": 358005799,
+            "symbol": "std::_Rb_tree<llvm::Value*, std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > >, std::_Select1st<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::_M_erase(std::_Rb_tree_node<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >*) [clone .isra.0]"
+          },
+          {
+            "pct": 0.5106789509411157,
+            "period": 355584964,
+            "symbol": "llvm::SmallPtrSetImplBase::Grow(unsigned int)"
+          },
+          {
+            "pct": 0.4903581245484447,
+            "period": 341435604,
+            "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)"
+          },
+          {
+            "pct": 0.4875022672809929,
+            "period": 339447075,
+            "symbol": "llvm::iterator_range<llvm::GraphTraits<llvm::BasicBlock*>::ChildIteratorType> llvm::children<llvm::BasicBlock*>(llvm::GraphTraits<llvm::BasicBlock*>::NodeRef const&) [clone .isra.0]"
+          }
+        ],
+        "unknown_leaf_period_pct": {
+          "max": 15.447909045778749,
+          "mean": 13.979902562465233,
+          "median": 14.193578988602312,
+          "min": 12.298219653014637,
+          "n": 3,
+          "p05": 12.487755586573407,
+          "p95": 15.322476040061105
+        }
+      },
+      "origin": {
+        "consumer_by_period_pct": [
+          {
+            "consumer": "cff",
+            "pct_of_javatype": 98.85377514278846,
+            "pct_of_process": 15.46645625039687,
+            "period": 10788064815
+          },
+          {
+            "consumer": "javatype_internal_or_other",
+            "pct_of_javatype": 1.146224857211537,
+            "pct_of_process": 0.17933595941654765,
+            "period": 125089285
+          }
+        ],
+        "invalidation_inclusive_period_pct": {
+          "max": 0.15242182351038597,
+          "mean": 0.05080727450346199,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 3,
+          "p05": 0.0,
+          "p95": 0.13717964115934736
+        },
+        "javatype_category_by_period_pct": [
+          {
+            "category": "other_javatype",
+            "pct_of_javatype": 62.66121829984972,
+            "pct_of_process": 9.803844011332068,
+            "period": 6838315314
+          },
+          {
+            "category": "cache_container_access",
+            "pct_of_javatype": 17.846363371703877,
+            "pct_of_process": 2.7922049301450405,
+            "period": 1947601136
+          },
+          {
+            "category": "unknown",
+            "pct_of_javatype": 11.633177735481624,
+            "pct_of_process": 1.820102815891733,
+            "period": 1269546613
+          },
+          {
+            "category": "copy_allocation_free",
+            "pct_of_javatype": 5.571156646638023,
+            "pct_of_process": 0.8716515926161944,
+            "period": 607988910
+          },
+          {
+            "category": "type_ops",
+            "pct_of_javatype": 1.1428478133558106,
+            "pct_of_process": 0.17880759415204642,
+            "period": 124720743
+          },
+          {
+            "category": "analysis_lifecycle",
+            "pct_of_javatype": 0.6522134696146186,
+            "pct_of_process": 0.10204396422031779,
+            "period": 71177061
+          },
+          {
+            "category": "invalidation",
+            "pct_of_javatype": 0.3282828105579486,
+            "pct_of_process": 0.05136244640043206,
+            "period": 35826009
+          },
+          {
+            "category": "lvi_edge_facts",
+            "pct_of_javatype": 0.1647398527983766,
+            "pct_of_process": 0.025774855055586497,
+            "period": 17978314
+          }
+        ],
+        "javatype_inclusive_period_pct": {
+          "max": 16.526184044088527,
+          "mean": 15.640934086391384,
+          "median": 15.531868372497154,
+          "min": 14.864749842588472,
+          "n": 3,
+          "p05": 14.93146169557934,
+          "p95": 16.42675247692939
+        },
+        "javatype_inclusive_sample_pct": {
+          "max": 16.088560885608857,
+          "mean": 15.248766731663618,
+          "median": 15.135542168674698,
+          "min": 14.522197140707299,
+          "n": 3,
+          "p05": 14.583531643504038,
+          "p95": 15.99325901391544
+        },
+        "runs": 3,
+        "sample_overhead_wall_s": {
+          "max": 7.007170693,
+          "mean": 6.920199331666667,
+          "median": 6.879005893,
+          "min": 6.874421409,
+          "n": 3,
+          "p05": 6.8748798574,
+          "p95": 6.994354213
+        },
+        "samples": {
+          "max": 1355,
+          "mean": 1337.3333333333333,
+          "median": 1329,
+          "min": 1328,
+          "n": 3,
+          "p05": 1328.1000000000001,
+          "p95": 1352.3999999999999
+        },
+        "top_self_leaf_by_period_pct": [
+          {
+            "pct": 13.964719146007624,
+            "period": 9740582641,
+            "symbol": "[unknown]"
+          },
+          {
+            "pct": 4.013402597638902,
+            "period": 2799403215,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::getResultImpl(llvm::AnalysisKey*, llvm::Function&)"
+          },
+          {
+            "pct": 3.167227531879176,
+            "period": 2209184531,
+            "symbol": "std::map<llvm::Value*, std::vector<unsigned int, std::allocator<unsigned int> >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::operator[](llvm::Value*&&)"
+          },
+          {
+            "pct": 2.83300828041344,
+            "period": 1976062031,
+            "symbol": "(anonymous namespace)::Verifier::visitGlobalValue(llvm::GlobalValue const&)"
+          },
+          {
+            "pct": 2.8253492492667203,
+            "period": 1970719752,
+            "symbol": "llvm::LLLexer::LexIdentifier()"
+          },
+          {
+            "pct": 2.6973922463210607,
+            "period": 1881467992,
+            "symbol": "llvm::hashing::detail::hash_short(char const*, unsigned long, unsigned long)"
+          },
+          {
+            "pct": 1.7323305086813732,
+            "period": 1208324228,
+            "symbol": "llvm::LLLexer::LexToken()"
+          },
+          {
+            "pct": 1.660114512855154,
+            "period": 1157952583,
+            "symbol": "llvm::Value::getValueName() const"
+          },
+          {
+            "pct": 1.6500317586351878,
+            "period": 1150919724,
+            "symbol": "llvm::Value::setValueName(llvm::StringMapEntry<llvm::Value*>*)"
+          },
+          {
+            "pct": 1.5612393811087146,
+            "period": 1088985826,
+            "symbol": "(anonymous namespace)::computeConstOops(llvm::Function&)"
+          },
+          {
+            "pct": 1.4316811565209504,
+            "period": 998617192,
+            "symbol": "llvm::jeandle::getJavaType(llvm::Value*, llvm::DominatorTree*, llvm::Instruction*, llvm::function_ref<bool (llvm::Value*, llvm::BasicBlock*, llvm::BasicBlock*)>)"
+          },
+          {
+            "pct": 1.366129117450867,
+            "period": 952893748,
+            "symbol": "cfree"
+          },
+          {
+            "pct": 1.3644966548444253,
+            "period": 951755083,
+            "symbol": "llvm::Instruction::getMetadata(unsigned int) const [clone .part.0]"
+          },
+          {
+            "pct": 1.272590494660448,
+            "period": 887649279,
+            "symbol": "llvm::SourceMgr::SrcBuffer::getLineNumber(char const*) const"
+          },
+          {
+            "pct": 1.1786915362849006,
+            "period": 822153471,
+            "symbol": "llvm::ConstantFieldFolding::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&)"
+          },
+          {
+            "pct": 1.1490591439833164,
+            "period": 801484472,
+            "symbol": "isalnum"
+          },
+          {
+            "pct": 1.103841015785084,
+            "period": 769944209,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Module, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>::Result, llvm::AnalysisManager<llvm::Module>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 1.08641005586345,
+            "period": 757785876,
+            "symbol": "llvm::Value::getName() const"
+          },
+          {
+            "pct": 0.9987471744639294,
+            "period": 696639817,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::invalidate(llvm::Function&, llvm::PreservedAnalyses const&)"
+          },
+          {
+            "pct": 0.9531682605101859,
+            "period": 664847901,
+            "symbol": "(anonymous namespace)::Verifier::visitInstruction(llvm::Instruction&)"
+          },
+          {
+            "pct": 0.89739046844912,
+            "period": 625942128,
+            "symbol": "llvm::DenseMapBase<llvm::SmallDenseMap<unsigned long, llvm::detail::DenseSetEmpty, 2u, llvm::DenseMapInfo<unsigned long, void>, llvm::detail::DenseSetPair<unsigned long> >, unsigned long, llvm::detail::DenseSetEmpty, llvm::DenseMapInfo<unsigned long, void>, llvm::detail::DenseSetPair<unsigned long> >::copyFrom(llvm::SmallDenseMap<unsigned long, llvm::detail::DenseSetEmpty, 2u, llvm::DenseMapInfo<unsigned long, void>, llvm::detail::DenseSetPair<unsigned long> > const&)"
+          },
+          {
+            "pct": 0.8521945261956866,
+            "period": 594417340,
+            "symbol": "llvm::LLLexer::ReadVarName()"
+          },
+          {
+            "pct": 0.8494601153090976,
+            "period": 592510051,
+            "symbol": "malloc"
+          },
+          {
+            "pct": 0.7713839362097804,
+            "period": 538050848,
+            "symbol": "llvm::InstVisitor<(anonymous namespace)::Verifier, void>::visit(llvm::Function&) [clone .constprop.0]"
+          },
+          {
+            "pct": 0.7626445334206667,
+            "period": 531954995,
+            "symbol": "llvm::SmallPtrSetImplBase::insert_imp_big(void const*)"
+          },
+          {
+            "pct": 0.7564416228192429,
+            "period": 527628380,
+            "symbol": "llvm::LLParser::parseCall(llvm::Instruction*&, llvm::LLParser::PerFunctionState&, llvm::CallInst::TailCallKind)"
+          },
+          {
+            "pct": 0.6956531161292531,
+            "period": 485227565,
+            "symbol": "std::vector<unsigned int, std::allocator<unsigned int> >& GetOrCreateOffsetCache<unsigned int>(void*&, llvm::MemoryBuffer*) [clone .part.0]"
+          },
+          {
+            "pct": 0.6816053414666796,
+            "period": 475429050,
+            "symbol": "std::_Rb_tree_increment(std::_Rb_tree_node_base*)"
+          },
+          {
+            "pct": 0.6120182116436783,
+            "period": 426891075,
+            "symbol": "std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)"
+          },
+          {
+            "pct": 0.6102036436482653,
+            "period": 425625389,
+            "symbol": "llvm::SmallPtrSetImplBase::Grow(unsigned int)"
+          },
+          {
+            "pct": 0.6080800293843757,
+            "period": 424144139,
+            "symbol": "llvm::LLVMContext::setGC(llvm::Function const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)"
+          },
+          {
+            "pct": 0.6036364376827446,
+            "period": 421044673,
+            "symbol": "llvm::xxh3_64bits(llvm::ArrayRef<unsigned char>)"
+          },
+          {
+            "pct": 0.583346213409273,
+            "period": 406891964,
+            "symbol": "llvm::StringMapImpl::FindKey(llvm::StringRef, unsigned int) const"
+          },
+          {
+            "pct": 0.5590249198093882,
+            "period": 389927529,
+            "symbol": "std::_Rb_tree<llvm::Value*, std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > >, std::_Select1st<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::_M_erase(std::_Rb_tree_node<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >*) [clone .isra.0]"
+          },
+          {
+            "pct": 0.5397950933765052,
+            "period": 376514462,
+            "symbol": "llvm::CallBase::paramHasAttr(unsigned int, llvm::Attribute::AttrKind) const"
+          },
+          {
+            "pct": 0.5113545601364661,
+            "period": 356676801,
+            "symbol": "(anonymous namespace)::Verifier::visitCallBase(llvm::CallBase&)"
+          },
+          {
+            "pct": 0.5098662939850775,
+            "period": 355638715,
+            "symbol": "llvm::StringRef::find_last_of(llvm::StringRef, unsigned long) const"
+          },
+          {
+            "pct": 0.4982438896752709,
+            "period": 347531929,
+            "symbol": "posix_memalign"
+          },
+          {
+            "pct": 0.48781804254275113,
+            "period": 340259758,
+            "symbol": "isalpha"
+          },
+          {
+            "pct": 0.487345952877035,
+            "period": 339930469,
+            "symbol": "llvm::DenseMapBase<llvm::DenseMap<llvm::Value*, llvm::jeandle::JavaType, llvm::DenseMapInfo<llvm::Value*, void>, llvm::detail::DenseMapPair<llvm::Value*, llvm::jeandle::JavaType> >, llvm::Value*, llvm::jeandle::JavaType, llvm::DenseMapInfo<llvm::Value*, void>, llvm::detail::DenseMapPair<llvm::Value*, llvm::jeandle::JavaType> >::grow(unsigned int)"
+          }
+        ],
+        "unknown_leaf_period_pct": {
+          "max": 15.157429864153206,
+          "mean": 13.964634605923294,
+          "median": 13.965993191326342,
+          "min": 12.770480762290331,
+          "n": 3,
+          "p05": 12.890032005193934,
+          "p95": 15.03828619687052
+        }
+      },
+      "s0": {
+        "consumer_by_period_pct": [
+          {
+            "consumer": "cff",
+            "pct_of_javatype": 93.34612371386427,
+            "pct_of_process": 12.449092660549551,
+            "period": 8520820021
+          },
+          {
+            "consumer": "javatype_internal_or_other",
+            "pct_of_javatype": 6.653876286135729,
+            "pct_of_process": 0.8873932750743023,
+            "period": 607379075
+          }
+        ],
+        "invalidation_inclusive_period_pct": {
+          "max": 1.8174959105944846,
+          "mean": 1.4124772277547442,
+          "median": 1.2609047951744787,
+          "min": 1.1590309774952692,
+          "n": 3,
+          "p05": 1.1692183592631902,
+          "p95": 1.761836799052484
+        },
+        "javatype_category_by_period_pct": [
+          {
+            "category": "other_javatype",
+            "pct_of_javatype": 56.11000815313505,
+            "pct_of_process": 7.483103345820253,
+            "period": 5121833257
+          },
+          {
+            "category": "cache_container_access",
+            "pct_of_javatype": 15.908818308272359,
+            "pct_of_process": 2.121677316206696,
+            "period": 1452188609
+          },
+          {
+            "category": "unknown",
+            "pct_of_javatype": 12.55013028256587,
+            "pct_of_process": 1.6737463600368674,
+            "period": 1145600879
+          },
+          {
+            "category": "invalidation",
+            "pct_of_javatype": 5.671684530050045,
+            "pct_of_process": 0.756403409663078,
+            "period": 517722656
+          },
+          {
+            "category": "analysis_lifecycle",
+            "pct_of_javatype": 4.487639080741628,
+            "pct_of_process": 0.5984933548446668,
+            "period": 409640630
+          },
+          {
+            "category": "copy_allocation_free",
+            "pct_of_javatype": 3.501021862461796,
+            "pct_of_process": 0.4669132882903337,
+            "period": 319580246
+          },
+          {
+            "category": "type_ops",
+            "pct_of_javatype": 1.5736341581653863,
+            "pct_of_process": 0.20986749818189956,
+            "period": 143644459
+          },
+          {
+            "category": "lvi_edge_facts",
+            "pct_of_javatype": 0.19706362460786536,
+            "pct_of_process": 0.026281362580058552,
+            "period": 17988360
+          }
+        ],
+        "javatype_inclusive_period_pct": {
+          "max": 14.140553552193328,
+          "mean": 13.337815931473868,
+          "median": 13.285487920525464,
+          "min": 12.58740632170281,
+          "n": 3,
+          "p05": 12.657214481585076,
+          "p95": 14.055046989026541
+        },
+        "javatype_inclusive_sample_pct": {
+          "max": 13.795731707317072,
+          "mean": 12.996940412460656,
+          "median": 12.950191570881225,
+          "min": 12.244897959183673,
+          "n": 3,
+          "p05": 12.315427320353427,
+          "p95": 13.711177693673488
+        },
+        "runs": 3,
+        "sample_overhead_wall_s": {
+          "max": 6.840583358,
+          "mean": 6.794542660333334,
+          "median": 6.787557498,
+          "min": 6.755487125,
+          "n": 3,
+          "p05": 6.758694162300001,
+          "p95": 6.835280772
+        },
+        "samples": {
+          "max": 1323,
+          "mean": 1313.3333333333333,
+          "median": 1312,
+          "min": 1305,
+          "n": 3,
+          "p05": 1305.7,
+          "p95": 1321.8999999999999
+        },
+        "top_self_leaf_by_period_pct": [
+          {
+            "pct": 13.441181870756745,
+            "period": 9199858553,
+            "symbol": "[unknown]"
+          },
+          {
+            "pct": 3.2898802347221294,
+            "period": 2251768714,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::getResultImpl(llvm::AnalysisKey*, llvm::Function&)"
+          },
+          {
+            "pct": 2.99586478061947,
+            "period": 2050528926,
+            "symbol": "(anonymous namespace)::Verifier::visitGlobalValue(llvm::GlobalValue const&)"
+          },
+          {
+            "pct": 2.894186942724142,
+            "period": 1980935215,
+            "symbol": "llvm::LLLexer::LexIdentifier()"
+          },
+          {
+            "pct": 2.609708432836815,
+            "period": 1786223018,
+            "symbol": "std::map<llvm::Value*, std::vector<unsigned int, std::allocator<unsigned int> >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::operator[](llvm::Value*&&)"
+          },
+          {
+            "pct": 2.0663083768448676,
+            "period": 1414291167,
+            "symbol": "llvm::hashing::detail::hash_short(char const*, unsigned long, unsigned long)"
+          },
+          {
+            "pct": 2.0281505189421396,
+            "period": 1388173903,
+            "symbol": "llvm::Value::setValueName(llvm::StringMapEntry<llvm::Value*>*)"
+          },
+          {
+            "pct": 1.8017685115021993,
+            "period": 1233226037,
+            "symbol": "llvm::Value::getValueName() const"
+          },
+          {
+            "pct": 1.6606650911451513,
+            "period": 1136647364,
+            "symbol": "llvm::LLLexer::LexToken()"
+          },
+          {
+            "pct": 1.6198101543494343,
+            "period": 1108684076,
+            "symbol": "isalnum"
+          },
+          {
+            "pct": 1.569582870446009,
+            "period": 1074305856,
+            "symbol": "(anonymous namespace)::computeConstOops(llvm::Function&)"
+          },
+          {
+            "pct": 1.3860564555178048,
+            "period": 948690633,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Module, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>::Result, llvm::AnalysisManager<llvm::Module>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 1.1512617342938878,
+            "period": 787984659,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::invalidate(llvm::Function&, llvm::PreservedAnalyses const&)"
+          },
+          {
+            "pct": 1.052946731648388,
+            "period": 720692651,
+            "symbol": "llvm::Value::getName() const"
+          },
+          {
+            "pct": 1.0428971854713454,
+            "period": 713814208,
+            "symbol": "llvm::ConstantFieldFolding::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&)"
+          },
+          {
+            "pct": 1.0365615519243117,
+            "period": 709477764,
+            "symbol": "cfree"
+          },
+          {
+            "pct": 1.0103479091050844,
+            "period": 691535755,
+            "symbol": "malloc"
+          },
+          {
+            "pct": 0.9964321316066246,
+            "period": 682011058,
+            "symbol": "llvm::Instruction::getMetadata(unsigned int) const [clone .part.0]"
+          },
+          {
+            "pct": 0.9895585006396869,
+            "period": 677306380,
+            "symbol": "llvm::SourceMgr::SrcBuffer::getLineNumber(char const*) const"
+          },
+          {
+            "pct": 0.9689813331601624,
+            "period": 663222274,
+            "symbol": "llvm::InstVisitor<(anonymous namespace)::Verifier, void>::visit(llvm::Function&) [clone .constprop.0]"
+          },
+          {
+            "pct": 0.8891781073822018,
+            "period": 608600709,
+            "symbol": "llvm::LLParser::parseCall(llvm::Instruction*&, llvm::LLParser::PerFunctionState&, llvm::CallInst::TailCallKind)"
+          },
+          {
+            "pct": 0.8245434184287922,
+            "period": 564361296,
+            "symbol": "llvm::StringMapImpl::FindKey(llvm::StringRef, unsigned int) const"
+          },
+          {
+            "pct": 0.7936792582608214,
+            "period": 543236226,
+            "symbol": "std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)"
+          },
+          {
+            "pct": 0.7861684178164401,
+            "period": 538095408,
+            "symbol": "(anonymous namespace)::Verifier::visitInstruction(llvm::Instruction&)"
+          },
+          {
+            "pct": 0.7050879986056778,
+            "period": 482599664,
+            "symbol": "std::vector<unsigned int, std::allocator<unsigned int> >& GetOrCreateOffsetCache<unsigned int>(void*&, llvm::MemoryBuffer*) [clone .part.0]"
+          },
+          {
+            "pct": 0.699277276118,
+            "period": 478622497,
+            "symbol": "llvm::SmallPtrSetImplBase::insert_imp_big(void const*)"
+          },
+          {
+            "pct": 0.6553788407824428,
+            "period": 448576077,
+            "symbol": "std::_Rb_tree<llvm::Value*, std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > >, std::_Select1st<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::_M_erase(std::_Rb_tree_node<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >*) [clone .isra.0]"
+          },
+          {
+            "pct": 0.6548790621975927,
+            "period": 448234002,
+            "symbol": "llvm::DenseMapBase<llvm::DenseMap<std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType, llvm::DenseMapInfo<std::pair<llvm::Value*, llvm::BasicBlock*>, void>, llvm::detail::DenseMapPair<std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType> >, std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType, llvm::DenseMapInfo<std::pair<llvm::Value*, llvm::BasicBlock*>, void>, llvm::detail::DenseMapPair<std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType> >::clear()"
+          },
+          {
+            "pct": 0.6522659364641232,
+            "period": 446445440,
+            "symbol": "llvm::xxh3_64bits(llvm::ArrayRef<unsigned char>)"
+          },
+          {
+            "pct": 0.6289644376763697,
+            "period": 430496657,
+            "symbol": "llvm::jeandle::getCachedJavaType(llvm::Value*, llvm::DominatorTree*, llvm::Instruction*, llvm::function_ref<bool (llvm::Value*, llvm::BasicBlock*, llvm::BasicBlock*)>, llvm::jeandle::JavaTypeCache&, llvm::jeandle::CachedJavaTypeQueryInfo&)"
+          },
+          {
+            "pct": 0.5764877943826292,
+            "period": 394578856,
+            "symbol": "llvm::AttributeSet::hasAttribute(llvm::Attribute::AttrKind) const"
+          },
+          {
+            "pct": 0.5738956562085292,
+            "period": 392804659,
+            "symbol": "llvm::SmallPtrSetImplBase::Grow(unsigned int)"
+          },
+          {
+            "pct": 0.5736731121061455,
+            "period": 392652338,
+            "symbol": "llvm::jeandle::JavaTypeCache::invalidate(llvm::ArrayRef<llvm::Value*>, bool, llvm::jeandle::JavaTypeBaseInvalidationMode)"
+          },
+          {
+            "pct": 0.5724341345863567,
+            "period": 391804316,
+            "symbol": "isalpha"
+          },
+          {
+            "pct": 0.572217899170458,
+            "period": 391656313,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Function, llvm::jeandle::JavaTypeAnalysis, llvm::jeandle::JavaTypeAnalysisResult, llvm::AnalysisManager<llvm::Function>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 0.5694021620371789,
+            "period": 389729073,
+            "symbol": "llvm::LLLexer::ReadVarName()"
+          },
+          {
+            "pct": 0.5445001196833434,
+            "period": 372684793,
+            "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)"
+          },
+          {
+            "pct": 0.5280316734793788,
+            "period": 361412914,
+            "symbol": "posix_memalign"
+          },
+          {
+            "pct": 0.5200465624069198,
+            "period": 355947480,
+            "symbol": "llvm::LLParser::parseFunctionHeader(llvm::Function*&, bool, unsigned int&, llvm::SmallVectorImpl<unsigned int>&)"
+          },
+          {
+            "pct": 0.4969171469957924,
+            "period": 340116480,
+            "symbol": "llvm::AttributeList::hasFnAttr(llvm::StringRef) const"
+          }
+        ],
+        "unknown_leaf_period_pct": {
+          "max": 13.648287626346113,
+          "mean": 13.44183179574413,
+          "median": 13.386150554130976,
+          "min": 13.291057206755305,
+          "n": 3,
+          "p05": 13.300566541492872,
+          "p95": 13.622073919124599
+        }
+      },
+      "s1": {
+        "consumer_by_period_pct": [
+          {
+            "consumer": "cff",
+            "pct_of_javatype": 91.54631684423094,
+            "pct_of_process": 11.377124266936901,
+            "period": 7726581585
+          },
+          {
+            "consumer": "javatype_internal_or_other",
+            "pct_of_javatype": 8.453683155769056,
+            "pct_of_process": 1.0506004729840404,
+            "period": 713497548
+          }
+        ],
+        "invalidation_inclusive_period_pct": {
+          "max": 1.3569578636323583,
+          "mean": 0.9248964522749911,
+          "median": 0.78433515078695,
+          "min": 0.6333963424056648,
+          "n": 3,
+          "p05": 0.6484902232437934,
+          "p95": 1.2996955923478173
+        },
+        "javatype_category_by_period_pct": [
+          {
+            "category": "other_javatype",
+            "pct_of_javatype": 55.6965092260824,
+            "pct_of_process": 6.921808856362192,
+            "period": 4700829453
+          },
+          {
+            "category": "cache_container_access",
+            "pct_of_javatype": 16.083627565675336,
+            "pct_of_process": 1.9988289620561783,
+            "period": 1357470894
+          },
+          {
+            "category": "unknown",
+            "pct_of_javatype": 12.531889101187176,
+            "pct_of_process": 1.5574286822076948,
+            "period": 1057701357
+          },
+          {
+            "category": "analysis_lifecycle",
+            "pct_of_javatype": 6.545068538991861,
+            "pct_of_process": 0.8134031020650736,
+            "period": 552408964
+          },
+          {
+            "category": "copy_allocation_free",
+            "pct_of_javatype": 5.104570149295069,
+            "pct_of_process": 0.6343819273105625,
+            "period": 430829760
+          },
+          {
+            "category": "invalidation",
+            "pct_of_javatype": 2.9727796866143437,
+            "pct_of_process": 0.36944887657671505,
+            "period": 250904958
+          },
+          {
+            "category": "type_ops",
+            "pct_of_javatype": 1.0655557321538207,
+            "pct_of_process": 0.13242433334252612,
+            "period": 89933747
+          }
+        ],
+        "javatype_inclusive_period_pct": {
+          "max": 12.613356327854582,
+          "mean": 12.426826537360348,
+          "median": 12.443069929182537,
+          "min": 12.224053355043926,
+          "n": 3,
+          "p05": 12.245955012457788,
+          "p95": 12.596327687987378
+        },
+        "javatype_inclusive_sample_pct": {
+          "max": 12.243346007604563,
+          "mean": 12.071604975384437,
+          "median": 12.08875286916603,
+          "min": 11.882716049382717,
+          "n": 3,
+          "p05": 11.903319731361048,
+          "p95": 12.22788669376071
+        },
+        "runs": 3,
+        "sample_overhead_wall_s": {
+          "max": 6.80072946,
+          "mean": 6.772677828333333,
+          "median": 6.796443259,
+          "min": 6.720860766,
+          "n": 3,
+          "p05": 6.7284190153,
+          "p95": 6.8003008399
+        },
+        "samples": {
+          "max": 1315,
+          "mean": 1306,
+          "median": 1307,
+          "min": 1296,
+          "n": 3,
+          "p05": 1297.1000000000001,
+          "p95": 1314.1999999999998
+        },
+        "top_self_leaf_by_period_pct": [
+          {
+            "pct": 13.888463125714653,
+            "period": 9432114910,
+            "symbol": "[unknown]"
+          },
+          {
+            "pct": 3.5582174206539072,
+            "period": 2416503200,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::getResultImpl(llvm::AnalysisKey*, llvm::Function&)"
+          },
+          {
+            "pct": 3.421207854997921,
+            "period": 2323455470,
+            "symbol": "std::map<llvm::Value*, std::vector<unsigned int, std::allocator<unsigned int> >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::operator[](llvm::Value*&&)"
+          },
+          {
+            "pct": 3.040868566683437,
+            "period": 2065154473,
+            "symbol": "(anonymous namespace)::Verifier::visitGlobalValue(llvm::GlobalValue const&)"
+          },
+          {
+            "pct": 2.9742769949987564,
+            "period": 2019929933,
+            "symbol": "llvm::LLLexer::LexIdentifier()"
+          },
+          {
+            "pct": 2.2019451119860864,
+            "period": 1495413793,
+            "symbol": "llvm::hashing::detail::hash_short(char const*, unsigned long, unsigned long)"
+          },
+          {
+            "pct": 1.9724999181581995,
+            "period": 1339589969,
+            "symbol": "llvm::Value::getValueName() const"
+          },
+          {
+            "pct": 1.6549704685675355,
+            "period": 1123945212,
+            "symbol": "llvm::Value::setValueName(llvm::StringMapEntry<llvm::Value*>*)"
+          },
+          {
+            "pct": 1.5186630347990973,
+            "period": 1031374323,
+            "symbol": "isalnum"
+          },
+          {
+            "pct": 1.3721979823280628,
+            "period": 931905059,
+            "symbol": "llvm::LLLexer::LexToken()"
+          },
+          {
+            "pct": 1.3131229446744908,
+            "period": 891785246,
+            "symbol": "llvm::AnalysisManager<llvm::Function>::invalidate(llvm::Function&, llvm::PreservedAnalyses const&)"
+          },
+          {
+            "pct": 1.3064926713878746,
+            "period": 887282408,
+            "symbol": "llvm::Instruction::getMetadata(unsigned int) const [clone .part.0]"
+          },
+          {
+            "pct": 1.2647692767825272,
+            "period": 858946670,
+            "symbol": "(anonymous namespace)::computeConstOops(llvm::Function&)"
+          },
+          {
+            "pct": 1.211340057369027,
+            "period": 822661119,
+            "symbol": "llvm::ConstantFieldFolding::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&)"
+          },
+          {
+            "pct": 1.1830336101973655,
+            "period": 803437274,
+            "symbol": "malloc"
+          },
+          {
+            "pct": 1.1667017819804935,
+            "period": 792345789,
+            "symbol": "llvm::Value::getName() const"
+          },
+          {
+            "pct": 1.1578844263431296,
+            "period": 786357631,
+            "symbol": "llvm::xxh3_64bits(llvm::ArrayRef<unsigned char>)"
+          },
+          {
+            "pct": 1.1258748950065576,
+            "period": 764618899,
+            "symbol": "llvm::LLParser::parseCall(llvm::Instruction*&, llvm::LLParser::PerFunctionState&, llvm::CallInst::TailCallKind)"
+          },
+          {
+            "pct": 1.0913374320768416,
+            "period": 741163365,
+            "symbol": "llvm::InstVisitor<(anonymous namespace)::Verifier, void>::visit(llvm::Function&) [clone .constprop.0]"
+          },
+          {
+            "pct": 1.0379929368516505,
+            "period": 704935353,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Module, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>, llvm::InnerAnalysisManagerProxy<llvm::AnalysisManager<llvm::Function>, llvm::Module>::Result, llvm::AnalysisManager<llvm::Module>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 1.0189172856329252,
+            "period": 691980447,
+            "symbol": "llvm::SourceMgr::SrcBuffer::getLineNumber(char const*) const"
+          },
+          {
+            "pct": 0.989309527996486,
+            "period": 671872839,
+            "symbol": "cfree"
+          },
+          {
+            "pct": 0.8134031020650736,
+            "period": 552408964,
+            "symbol": "llvm::detail::AnalysisResultModel<llvm::Function, llvm::jeandle::JavaTypeAnalysis, llvm::jeandle::JavaTypeAnalysisResult, llvm::AnalysisManager<llvm::Function>::Invalidator, true>::~AnalysisResultModel()"
+          },
+          {
+            "pct": 0.8092225503703492,
+            "period": 549569813,
+            "symbol": "(anonymous namespace)::Verifier::visitInstruction(llvm::Instruction&)"
+          },
+          {
+            "pct": 0.736885839707492,
+            "period": 500443559,
+            "symbol": "llvm::jeandle::getCachedJavaType(llvm::Value*, llvm::DominatorTree*, llvm::Instruction*, llvm::function_ref<bool (llvm::Value*, llvm::BasicBlock*, llvm::BasicBlock*)>, llvm::jeandle::JavaTypeCache&, llvm::jeandle::CachedJavaTypeQueryInfo&)"
+          },
+          {
+            "pct": 0.7123128963640355,
+            "period": 483755260,
+            "symbol": "std::_Rb_tree<llvm::Value*, std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > >, std::_Select1st<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >, std::less<llvm::Value*>, std::allocator<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > > >::_M_erase(std::_Rb_tree_node<std::pair<llvm::Value* const, std::vector<unsigned int, std::allocator<unsigned int> > > >*) [clone .isra.0]"
+          },
+          {
+            "pct": 0.6974719452837143,
+            "period": 473676279,
+            "symbol": "llvm::LLVMContext::setGC(llvm::Function const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)"
+          },
+          {
+            "pct": 0.6973344950533295,
+            "period": 473582932,
+            "symbol": "std::vector<unsigned int, std::allocator<unsigned int> >& GetOrCreateOffsetCache<unsigned int>(void*&, llvm::MemoryBuffer*) [clone .part.0]"
+          },
+          {
+            "pct": 0.6850698755047977,
+            "period": 465253623,
+            "symbol": "llvm::StringMapImpl::FindKey(llvm::StringRef, unsigned int) const"
+          },
+          {
+            "pct": 0.6754659082208375,
+            "period": 458731251,
+            "symbol": "(anonymous namespace)::Verifier::visitCallBase(llvm::CallBase&)"
+          },
+          {
+            "pct": 0.65053839814705,
+            "period": 441802154,
+            "symbol": "llvm::LLParser::parseFunctionHeader(llvm::Function*&, bool, unsigned int&, llvm::SmallVectorImpl<unsigned int>&)"
+          },
+          {
+            "pct": 0.6285400105420759,
+            "period": 426862321,
+            "symbol": "std::_Rb_tree_increment(std::_Rb_tree_node_base*)"
+          },
+          {
+            "pct": 0.5881497537417505,
+            "period": 399431961,
+            "symbol": "posix_memalign"
+          },
+          {
+            "pct": 0.577510366437823,
+            "period": 392206401,
+            "symbol": "llvm::LLLexer::ReadVarName()"
+          },
+          {
+            "pct": 0.5540690981794163,
+            "period": 376286660,
+            "symbol": "llvm::DenseMapBase<llvm::DenseMap<std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType, llvm::DenseMapInfo<std::pair<llvm::Value*, llvm::BasicBlock*>, void>, llvm::detail::DenseMapPair<std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType> >, std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType, llvm::DenseMapInfo<std::pair<llvm::Value*, llvm::BasicBlock*>, void>, llvm::detail::DenseMapPair<std::pair<llvm::Value*, llvm::BasicBlock*>, llvm::jeandle::JavaType> >::clear()"
+          },
+          {
+            "pct": 0.5508922142601519,
+            "period": 374129133,
+            "symbol": "llvm::LLParser::parseBasicBlock(llvm::LLParser::PerFunctionState&)"
+          },
+          {
+            "pct": 0.5472319125782757,
+            "period": 371643301,
+            "symbol": "llvm::StringRef::find_last_of(llvm::StringRef, unsigned long) const"
+          },
+          {
+            "pct": 0.5277586809691123,
+            "period": 358418385,
+            "symbol": "llvm::StringMapImpl::RemoveKey(llvm::StringMapEntryBase*)"
+          },
+          {
+            "pct": 0.5257710131389254,
+            "period": 357068494,
+            "symbol": "std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)"
+          },
+          {
+            "pct": 0.5201926544300102,
+            "period": 353280046,
+            "symbol": "llvm::SmallPtrSetImplBase::insert_imp_big(void const*)"
+          }
+        ],
+        "unknown_leaf_period_pct": {
+          "max": 14.870813666204478,
+          "mean": 13.892243591222412,
+          "median": 13.547933107048948,
+          "min": 13.257984000413808,
+          "n": 3,
+          "p05": 13.286978911077323,
+          "p95": 14.738525610288924
+        }
+      }
+    }
+  },
+  "profiles": [
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.91525719,
+      "invalidation_inclusive_period_pct": 0.7629436578545353,
+      "invalidation_inclusive_samples": 10,
+      "javatype_inclusive_period_pct": 14.024529704587016,
+      "javatype_inclusive_period_sum": 3245010544,
+      "javatype_inclusive_sample_pct": 13.762154076290201,
+      "javatype_inclusive_samples": 184,
+      "lifecycle_inclusive_samples": 36,
+      "mode": "full",
+      "perf_data_bytes": 11705408,
+      "perf_data_sha256": "ca228709504c2202b6b9354653df4c829202005b99cdd5a972b8c23ca62cdd66",
+      "record_stderr": "[ perf record: Woken up 46 times to write data ]\n[ perf record: Captured and wrote 11.126 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/full/run-00/perf.data (1337 samples) ]\n",
+      "run": 0,
+      "sample_period_sum": 23138105964,
+      "samples": 1337,
+      "stacks_sha256": "9a503ef2cab9e550f924d09ea0763bd53d69440d46f798080a83ae985085cd11",
+      "unknown_leaf_pct": 12.415856394913986,
+      "unknown_leaf_period_pct": 12.298219653014637,
+      "unknown_leaf_samples": 166
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.959252056,
+      "invalidation_inclusive_period_pct": 0.8403437340395488,
+      "invalidation_inclusive_samples": 11,
+      "javatype_inclusive_period_pct": 14.180449982521703,
+      "javatype_inclusive_period_sum": 3321517126,
+      "javatype_inclusive_sample_pct": 13.82899628252788,
+      "javatype_inclusive_samples": 186,
+      "lifecycle_inclusive_samples": 38,
+      "mode": "full",
+      "perf_data_bytes": 11772872,
+      "perf_data_sha256": "19a56f88e9169987004b6120d336a1278311c1dd8eb704a817a6c1606dff104b",
+      "record_stderr": "[ perf record: Woken up 46 times to write data ]\n[ perf record: Captured and wrote 11.191 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/full/run-01/perf.data (1345 samples) ]\n",
+      "run": 1,
+      "sample_period_sum": 23423213862,
+      "samples": 1345,
+      "stacks_sha256": "19aa87634e9aff76e21c54ed37387b67ea90c5288b0441869e6cb7c02bf17483",
+      "unknown_leaf_pct": 15.464684014869889,
+      "unknown_leaf_period_pct": 15.447909045778749,
+      "unknown_leaf_samples": 208
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.892948197,
+      "invalidation_inclusive_period_pct": 0.9326839045944871,
+      "invalidation_inclusive_samples": 12,
+      "javatype_inclusive_period_pct": 14.802313528597338,
+      "javatype_inclusive_period_sum": 3414675481,
+      "javatype_inclusive_sample_pct": 14.415094339622641,
+      "javatype_inclusive_samples": 191,
+      "lifecycle_inclusive_samples": 36,
+      "mode": "full",
+      "perf_data_bytes": 11604280,
+      "perf_data_sha256": "98d11d792232f81bf3c09e1c462b63453371bdb135bae06f647fdf2b741dcc99",
+      "record_stderr": "[ perf record: Woken up 45 times to write data ]\n[ perf record: Captured and wrote 11.030 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/full/run-02/perf.data (1325 samples) ]\n",
+      "run": 2,
+      "sample_period_sum": 23068525568,
+      "samples": 1325,
+      "stacks_sha256": "d76152843a5e699839e4137512d2ecb74800ef47639bc59036040d79a7ca79c9",
+      "unknown_leaf_pct": 14.264150943396226,
+      "unknown_leaf_period_pct": 14.193578988602312,
+      "unknown_leaf_samples": 189
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.874421409,
+      "invalidation_inclusive_period_pct": 0.0,
+      "invalidation_inclusive_samples": 0,
+      "javatype_inclusive_period_pct": 14.864749842588472,
+      "javatype_inclusive_period_sum": 3436904590,
+      "javatype_inclusive_sample_pct": 14.522197140707299,
+      "javatype_inclusive_samples": 193,
+      "lifecycle_inclusive_samples": 36,
+      "mode": "origin",
+      "perf_data_bytes": 11637944,
+      "perf_data_sha256": "f5a03d6e3dbefde91c1a7872d93871c5ae2611653ce38959aec8f1ced4b81295",
+      "record_stderr": "[ perf record: Woken up 45 times to write data ]\n[ perf record: Captured and wrote 11.062 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/origin/run-00/perf.data (1329 samples) ]\n",
+      "run": 0,
+      "sample_period_sum": 23121173423,
+      "samples": 1329,
+      "stacks_sha256": "10d71cad418bd51fddb38401029a1423a2091288d8ba2ecf8e9fc41aa2dbd90e",
+      "unknown_leaf_pct": 12.791572610985703,
+      "unknown_leaf_period_pct": 12.770480762290331,
+      "unknown_leaf_samples": 170
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.879005893,
+      "invalidation_inclusive_period_pct": 0.0,
+      "invalidation_inclusive_samples": 0,
+      "javatype_inclusive_period_pct": 15.531868372497154,
+      "javatype_inclusive_period_sum": 3591850251,
+      "javatype_inclusive_sample_pct": 15.135542168674698,
+      "javatype_inclusive_samples": 201,
+      "lifecycle_inclusive_samples": 33,
+      "mode": "origin",
+      "perf_data_bytes": 11632328,
+      "perf_data_sha256": "2e39bbb5be3d7c7b6afa16ac3ebcc187a18c205fbd555cd9b4ef37aecd9199c3",
+      "record_stderr": "[ perf record: Woken up 45 times to write data ]\n[ perf record: Captured and wrote 11.057 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/origin/run-01/perf.data (1328 samples) ]\n",
+      "run": 1,
+      "sample_period_sum": 23125680471,
+      "samples": 1328,
+      "stacks_sha256": "5122ea1a7b80e712c40027ae2f39ab420a702f1ab281864aebf80fe5f7c5e2d1",
+      "unknown_leaf_pct": 15.210843373493976,
+      "unknown_leaf_period_pct": 15.157429864153206,
+      "unknown_leaf_samples": 202
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 7.007170693,
+      "invalidation_inclusive_period_pct": 0.15242182351038597,
+      "invalidation_inclusive_samples": 2,
+      "javatype_inclusive_period_pct": 16.526184044088527,
+      "javatype_inclusive_period_sum": 3884399259,
+      "javatype_inclusive_sample_pct": 16.088560885608857,
+      "javatype_inclusive_samples": 218,
+      "lifecycle_inclusive_samples": 35,
+      "mode": "origin",
+      "perf_data_bytes": 11859976,
+      "perf_data_sha256": "575c4df442dfdb96bb3de00fed58ea6396f0014045648a96ecb152a561ddce8f",
+      "record_stderr": "[ perf record: Woken up 46 times to write data ]\n[ perf record: Captured and wrote 11.274 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/origin/run-02/perf.data (1355 samples) ]\n",
+      "run": 2,
+      "sample_period_sum": 23504514101,
+      "samples": 1355,
+      "stacks_sha256": "4ccdcee53cc2d0fb25824359bf1a2a2c418d3186d31ea2a8647a6ee41a725758",
+      "unknown_leaf_pct": 13.948339483394834,
+      "unknown_leaf_period_pct": 13.965993191326342,
+      "unknown_leaf_samples": 189
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.755487125,
+      "invalidation_inclusive_period_pct": 1.8174959105944846,
+      "invalidation_inclusive_samples": 23,
+      "javatype_inclusive_period_pct": 13.285487920525464,
+      "javatype_inclusive_period_sum": 3014660077,
+      "javatype_inclusive_sample_pct": 12.950191570881225,
+      "javatype_inclusive_samples": 169,
+      "lifecycle_inclusive_samples": 36,
+      "mode": "s0",
+      "perf_data_bytes": 11433360,
+      "perf_data_sha256": "77cbb730d7c167e0d44158221f4562ef618ed0141d24a0dcab9e14d0b13d153e",
+      "record_stderr": "[ perf record: Woken up 44 times to write data ]\n[ perf record: Captured and wrote 10.867 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/s0/run-00/perf.data (1305 samples) ]\n",
+      "run": 0,
+      "sample_period_sum": 22691376448,
+      "samples": 1305,
+      "stacks_sha256": "14d6af82295635765f08dd0d0374e3c2994b3b7c7b7da15e174a6c9cb2719a64",
+      "unknown_leaf_pct": 13.71647509578544,
+      "unknown_leaf_period_pct": 13.648287626346113,
+      "unknown_leaf_samples": 179
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.840583358,
+      "invalidation_inclusive_period_pct": 1.1590309774952692,
+      "invalidation_inclusive_samples": 15,
+      "javatype_inclusive_period_pct": 12.58740632170281,
+      "javatype_inclusive_period_sum": 2887781452,
+      "javatype_inclusive_sample_pct": 12.244897959183673,
+      "javatype_inclusive_samples": 162,
+      "lifecycle_inclusive_samples": 37,
+      "mode": "s0",
+      "perf_data_bytes": 11585112,
+      "perf_data_sha256": "216d2bcce41fe36998e3c12e8e86cc0334bb089a3bf1a552518da2b689e4ef5c",
+      "record_stderr": "[ perf record: Woken up 45 times to write data ]\n[ perf record: Captured and wrote 11.012 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/s0/run-01/perf.data (1323 samples) ]\n",
+      "run": 1,
+      "sample_period_sum": 22941830733,
+      "samples": 1323,
+      "stacks_sha256": "931c86ea13a955a50426637221f5573d25a60c78dd5a3dc51e58caa82f49f8ff",
+      "unknown_leaf_pct": 13.303099017384731,
+      "unknown_leaf_period_pct": 13.291057206755305,
+      "unknown_leaf_samples": 176
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.787557498,
+      "invalidation_inclusive_period_pct": 1.2609047951744787,
+      "invalidation_inclusive_samples": 16,
+      "javatype_inclusive_period_pct": 14.140553552193328,
+      "javatype_inclusive_period_sum": 3225757567,
+      "javatype_inclusive_sample_pct": 13.795731707317072,
+      "javatype_inclusive_samples": 181,
+      "lifecycle_inclusive_samples": 36,
+      "mode": "s0",
+      "perf_data_bytes": 11494672,
+      "perf_data_sha256": "c4a2d61e5a6a67ba44bcadce67ad7321deb2860e1a6180115c0d1186b8474799",
+      "record_stderr": "[ perf record: Woken up 44 times to write data ]\n[ perf record: Captured and wrote 10.925 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/s0/run-02/perf.data (1312 samples) ]\n",
+      "run": 2,
+      "sample_period_sum": 22812102476,
+      "samples": 1312,
+      "stacks_sha256": "b4ec1bd0989bf53145b6ed04419f40d11ca569eb67edd3f3f7fde3b6d91416b9",
+      "unknown_leaf_pct": 13.490853658536585,
+      "unknown_leaf_period_pct": 13.386150554130976,
+      "unknown_leaf_samples": 177
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.796443259,
+      "invalidation_inclusive_period_pct": 0.6333963424056648,
+      "invalidation_inclusive_samples": 8,
+      "javatype_inclusive_period_pct": 12.443069929182537,
+      "javatype_inclusive_period_sum": 2818040183,
+      "javatype_inclusive_sample_pct": 12.08875286916603,
+      "javatype_inclusive_samples": 158,
+      "lifecycle_inclusive_samples": 36,
+      "mode": "s1",
+      "perf_data_bytes": 11450200,
+      "perf_data_sha256": "c90d671dde55b04f737599ddde2e806b899286d3034131679527b0882d9bcd29",
+      "record_stderr": "[ perf record: Woken up 44 times to write data ]\n[ perf record: Captured and wrote 10.883 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/s1/run-00/perf.data (1307 samples) ]\n",
+      "run": 0,
+      "sample_period_sum": 22647467217,
+      "samples": 1307,
+      "stacks_sha256": "2d8b92a3dd1edd37a14348e07cfa2426d53abf0c3a08390edb4d003f20cd7b28",
+      "unknown_leaf_pct": 13.465952563121652,
+      "unknown_leaf_period_pct": 13.547933107048948,
+      "unknown_leaf_samples": 176
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.80072946,
+      "invalidation_inclusive_period_pct": 0.78433515078695,
+      "invalidation_inclusive_samples": 10,
+      "javatype_inclusive_period_pct": 12.613356327854582,
+      "javatype_inclusive_period_sum": 2874458296,
+      "javatype_inclusive_sample_pct": 12.243346007604563,
+      "javatype_inclusive_samples": 161,
+      "lifecycle_inclusive_samples": 37,
+      "mode": "s1",
+      "perf_data_bytes": 11517616,
+      "perf_data_sha256": "bbaf5cfbf1ec0e2fd60b0666c16dd0184de08910e6659c7705ca04e29ef8fe90",
+      "record_stderr": "[ perf record: Woken up 44 times to write data ]\n[ perf record: Captured and wrote 10.947 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/s1/run-01/perf.data (1315 samples) ]\n",
+      "run": 1,
+      "sample_period_sum": 22789004142,
+      "samples": 1315,
+      "stacks_sha256": "42a12da0feb0d94fea1d365feaab5621ff37015a75db971d9acacb2ec1457747",
+      "unknown_leaf_pct": 13.384030418250951,
+      "unknown_leaf_period_pct": 13.257984000413808,
+      "unknown_leaf_samples": 176
+    },
+    {
+      "case": "cff-cache-reuse",
+      "elapsed_s": 6.720860766,
+      "invalidation_inclusive_period_pct": 1.3569578636323583,
+      "invalidation_inclusive_samples": 17,
+      "javatype_inclusive_period_pct": 12.224053355043926,
+      "javatype_inclusive_period_sum": 2747580654,
+      "javatype_inclusive_sample_pct": 11.882716049382717,
+      "javatype_inclusive_samples": 154,
+      "lifecycle_inclusive_samples": 37,
+      "mode": "s1",
+      "perf_data_bytes": 11357464,
+      "perf_data_sha256": "d794db83fc1eee68b087551428b635a75c30075989efca17e415a6224792153c",
+      "record_stderr": "[ perf record: Woken up 45 times to write data ]\n[ perf record: Captured and wrote 10.795 MB /home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/l2/profiles/cff-cache-reuse/s1/run-02/perf.data (1296 samples) ]\n",
+      "run": 2,
+      "sample_period_sum": 22476837872,
+      "samples": 1296,
+      "stacks_sha256": "5ad5f8db01edd892fa14898fb0b2ea29a5886e88cb263cf93882435364c94ee3",
+      "unknown_leaf_pct": 14.969135802469136,
+      "unknown_leaf_period_pct": 14.870813666204478,
+      "unknown_leaf_samples": 194
+    }
+  ],
+  "quality": {
+    "minimum_samples_in_one_profile": 1296,
+    "profiles_with_lost_warning": [],
+    "quality_note": "Unknown percentages use leaf IP periods. Invalidation and JavaType percentages are inclusive and must not be added."
+  }
+}

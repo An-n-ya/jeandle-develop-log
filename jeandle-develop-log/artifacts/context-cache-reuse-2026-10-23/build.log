@@ -1,0 +1,56 @@
+ninja: Entering directory `build/build-ninja-profiling'
+[0/1] Re-running CMake...
+-- LLVM host triple: x86_64-unknown-linux-gnu
+-- Native target architecture is X86
+-- Threads enabled.
+-- Doxygen disabled.
+-- Ninja version: 1.13.2
+-- Could NOT find OCaml (missing: OCAMLFIND OCAML_VERSION OCAML_STDLIB_PATH) 
+-- Could NOT find OCaml (missing: OCAMLFIND OCAML_VERSION OCAML_STDLIB_PATH) 
+-- OCaml bindings disabled.
+-- LLVM default target triple: x86_64-unknown-linux-gnu
+-- Building with -fPIC
+CMake Warning (policy) at cmake/modules/HandleLLVMOptions.cmake:944 (CHECK_C_SOURCE_COMPILES):
+  Policy CMP0219 is not set: Macro invocations preserve backslashes in
+  arguments.  Run "cmake --help-policy CMP0219" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Command "CHECK_C_SOURCE_COMPILES" called with arguments containing
+  backslashes.
+
+  Since the policy is not set, backslashes in the arguments:
+
+   "// \\\n//\nint main(void) {return 0;}"
+
+  will be interpreted as escape sequences for compatibility.
+
+  Set the policy to NEW to instead pass
+
+   "// \\\\\\n//\\nint main(void) {return 0;}"
+
+  so that argument parsing will preserve the original values.
+Call Stack (most recent call first):
+  CMakeLists.txt:1083 (include)
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+-- Targeting X86
+-- Registering ExampleIRTransforms as a pass plugin (static build: OFF)
+-- Registering Bye as a pass plugin (static build: OFF)
+-- Failed to find LLVM FileCheck
+-- Google Benchmark version: v0.0.0, normalized to 0.0.0
+-- Performing Test HAVE_GNU_POSIX_REGEX -- failed to compile
+-- Performing Test HAVE_POSIX_REGEX -- success
+-- Performing Test HAVE_STEADY_CLOCK -- success
+-- Performing Test HAVE_PTHREAD_AFFINITY -- success
+-- Configuring done (2.2s)
+-- Generating done (1.2s)
+-- Build files have been written to: /home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling
+[1/13] Generating VCSRevision.h
+[2/9] Building CXX object unittests/IR/CMakeFiles/JavaTypeCacheReuseReplay.dir/JavaTypeCacheReuseReplay.cpp.o
+[3/9] Building CXX object unittests/IR/CMakeFiles/JavaTypeQueryTests.dir/JavaTypeCacheReuseTest.cpp.o
+[4/9] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/LazyValueInfo.cpp.o
+[5/9] Linking CXX static library lib/libLLVMAnalysis.a
+[6/9] Linking CXX executable bin/JavaTypeCacheReuseReplay
+[7/9] Linking CXX executable unittests/IR/JavaTypeQueryTests
+[8/9] Linking CXX executable bin/opt

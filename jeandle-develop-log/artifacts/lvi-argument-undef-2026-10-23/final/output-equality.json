@@ -1,0 +1,26 @@
+{
+  "deep-static": {
+    "baseline": "d4a667ca94e7316885d9d57bf33c88028e0e62ea53401cdc0305cdc62d1a87cd",
+    "candidate": "d4a667ca94e7316885d9d57bf33c88028e0e62ea53401cdc0305cdc62d1a87cd"
+  },
+  "leaf-static": {
+    "baseline": "7fffa34c2991017c35ec933529fccb52566383b95ea54ceb66924a57b67d899a",
+    "candidate": "7fffa34c2991017c35ec933529fccb52566383b95ea54ceb66924a57b67d899a"
+  },
+  "tce-cha": {
+    "baseline": "063843185c3e9358a3330b28c56f6c75536483ccdc64709abf39df81281a23d8",
+    "candidate": "063843185c3e9358a3330b28c56f6c75536483ccdc64709abf39df81281a23d8"
+  },
+  "virtual-cfg": {
+    "baseline": "9b048bfec1d65a5978e80079835b916333178486d14c2d3a7b41bead1f7a15ef",
+    "candidate": "9b048bfec1d65a5978e80079835b916333178486d14c2d3a7b41bead1f7a15ef"
+  },
+  "wide-static": {
+    "baseline": "535061499299c448d1227e553bc4ac43749e6644a93b492238a00ac16e1249a6",
+    "candidate": "535061499299c448d1227e553bc4ac43749e6644a93b492238a00ac16e1249a6"
+  },
+  "cff-cache-reuse": {
+    "baseline": "f8c41e426d8709cb9b4bd85968a5f6d88d161f2c46d21136a87085997f04cabf",
+    "candidate": "f8c41e426d8709cb9b4bd85968a5f6d88d161f2c46d21136a87085997f04cabf"
+  }
+}

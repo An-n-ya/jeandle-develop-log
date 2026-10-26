@@ -1,0 +1,62 @@
+{
+  "cff-cache-reuse": {
+    "cblog": {
+      "actual": "f240fceac2155dad3cb1e31d6c0f2c971ca438335b30c94524f29fa2e5fa8323",
+      "expected": "f240fceac2155dad3cb1e31d6c0f2c971ca438335b30c94524f29fa2e5fa8323"
+    },
+    "ir": {
+      "actual": "0ba19c035bcd704885e370b3e3a827af3826c8aaa2f7d113f5f0741dec4b529a",
+      "expected": "0ba19c035bcd704885e370b3e3a827af3826c8aaa2f7d113f5f0741dec4b529a"
+    }
+  },
+  "deep-static": {
+    "cblog": {
+      "actual": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856",
+      "expected": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856"
+    },
+    "ir": {
+      "actual": "1aafe408883d00eac6b3e42135ed93eeb4ce6656feeded11c34b955ef1f0770c",
+      "expected": "1aafe408883d00eac6b3e42135ed93eeb4ce6656feeded11c34b955ef1f0770c"
+    }
+  },
+  "leaf-static": {
+    "cblog": {
+      "actual": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8",
+      "expected": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8"
+    },
+    "ir": {
+      "actual": "72ea16d10fef45b33aa373fcdb45b5d00e6175b0a36419dff0c17b487808a60c",
+      "expected": "72ea16d10fef45b33aa373fcdb45b5d00e6175b0a36419dff0c17b487808a60c"
+    }
+  },
+  "tce-cha": {
+    "cblog": {
+      "actual": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856",
+      "expected": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856"
+    },
+    "ir": {
+      "actual": "6b254e809ec4d8420248cbe8ef44d47dacaa034acf7f510bcdb7e57d3cd3e7fd",
+      "expected": "6b254e809ec4d8420248cbe8ef44d47dacaa034acf7f510bcdb7e57d3cd3e7fd"
+    }
+  },
+  "virtual-cfg": {
+    "cblog": {
+      "actual": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8",
+      "expected": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8"
+    },
+    "ir": {
+      "actual": "b6e97d7bf328ba84daf5abc347edc97de6516e8470583b4c5e511a0d4e97faa9",
+      "expected": "b6e97d7bf328ba84daf5abc347edc97de6516e8470583b4c5e511a0d4e97faa9"
+    }
+  },
+  "wide-static": {
+    "cblog": {
+      "actual": "8e5ed8df4e803f740139667536fc956ea2ac19d01f0fe4a3edb0d3d4a6da6be5",
+      "expected": "8e5ed8df4e803f740139667536fc956ea2ac19d01f0fe4a3edb0d3d4a6da6be5"
+    },
+    "ir": {
+      "actual": "6d1b5ca5340e21d9e3471e5dc2911d6f516735d852d70cde760f75b93b76291e",
+      "expected": "6d1b5ca5340e21d9e3471e5dc2911d6f516735d852d70cde760f75b93b76291e"
+    }
+  }
+}

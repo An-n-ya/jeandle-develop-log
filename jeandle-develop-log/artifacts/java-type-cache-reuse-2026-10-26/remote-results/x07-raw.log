@@ -1,0 +1,5 @@
+JavaTypeQuery function: x07_pipeline ordinal: 1 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeQuery function: x07_pipeline ordinal: 2 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 1 final_misses: 0 base_insertions: 0
+JavaTypeQuery function: x07_pipeline ordinal: 3 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeQuery function: x07_pipeline ordinal: 4 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 1 final_misses: 0 base_insertions: 0
+JavaTypeQuery function: x07_pipeline ordinal: 5 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 1 final_misses: 0 base_insertions: 0

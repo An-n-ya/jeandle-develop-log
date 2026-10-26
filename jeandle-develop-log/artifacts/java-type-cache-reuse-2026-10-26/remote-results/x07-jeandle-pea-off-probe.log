@@ -1,0 +1,28 @@
+LLVM ERROR: VMCallbackLog missing entry for IsObjectKlass(9)
+PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace and instructions to reproduce the bug.
+Stack dump:
+0.	Program arguments: build/build-ninja-profiling/bin/opt -disable-output --jeandle --jeandle-pea-iterations=0 -jeandle-java-type-stats -jeandle-java-type-query-trace -jeandle-vm-callback-log=llvm/test/Jeandle/Inputs/pre-pea-high-tier-e2e.cblog llvm/test/Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll
+1.	Running pass "function(recover-type-info,instsimplify,type-check-elimination,repeated-constant-field-folding,early-cse<>,instcombine<max-iterations=1;no-verify-fixpoint>,simplifycfg<bonus-inst-threshold=1;no-forward-switch-cond;no-switch-range-to-icmp;no-switch-to-arithmetic;no-switch-to-lookup;keep-loops;no-hoist-common-insts;no-hoist-loads-stores-with-cond-faulting;no-sink-common-insts;speculate-blocks;simplify-cond-branch;no-speculate-unpredictables>,adce)" on module "llvm/test/Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll"
+2.	Running pass "type-check-elimination" on function "tce_cff"
+Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):
+0  opt       0x0000559b4dd53d39 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) + 57
+1  opt       0x0000559b4dd50be7
+2  libc.so.6 0x00007f3c1a63e270
+3  libc.so.6 0x00007f3c1a69981c
+4  libc.so.6 0x00007f3c1a63e150 gsignal + 32
+5  libc.so.6 0x00007f3c1a62567d abort + 38
+6  opt       0x0000559b4ab788c3
+7  opt       0x0000559b4d8d3369
+8  opt       0x0000559b4d8d6016
+9  opt       0x0000559b4c82c4f9 llvm::TypeCheckElimination::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&) + 1209
+10 opt       0x0000559b4b1fc48f
+11 opt       0x0000559b4db03a30 llvm::PassManager<llvm::Function, llvm::AnalysisManager<llvm::Function>>::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&) + 1008
+12 opt       0x0000559b4ad2c35f
+13 opt       0x0000559b4db07752 llvm::ModuleToFunctionPassAdaptor::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) + 1170
+14 opt       0x0000559b4ac7dbbf
+15 opt       0x0000559b4dafe270 llvm::PassManager<llvm::Module, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) + 1008
+16 opt       0x0000559b4ac89280 llvm::runPassPipeline(llvm::StringRef, llvm::Module&, llvm::TargetMachine*, llvm::TargetLibraryInfoImpl*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::StringRef, llvm::ArrayRef<llvm::PassPlugin>, llvm::ArrayRef<std::function<void (llvm::PassBuilder&)>>, llvm::opt_tool::OutputKind, llvm::opt_tool::VerifierKind, bool, bool, bool, bool, bool, bool, bool, bool) + 9568
+17 opt       0x0000559b4ac7b166 optMain + 16774
+18 libc.so.6 0x00007f3c1a627741
+19 libc.so.6 0x00007f3c1a627879 __libc_start_main + 137
+20 opt       0x0000559b4ac70f35 _start + 37

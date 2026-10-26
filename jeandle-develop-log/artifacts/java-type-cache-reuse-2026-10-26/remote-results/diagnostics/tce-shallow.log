@@ -1,0 +1,75 @@
+JavaTypeAnalysis for function: shallow
+  queries: 4
+  path facts hits: 0
+  path facts misses: 4
+  path facts hit rate: 0.00%
+  final type hits: 0
+  final type misses: 4
+  final type hit rate: 0.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 1
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 4
+  peak path facts entries: 4
+  current final type entries: 4
+  peak final type entries: 4
+  clears: 0
+  invalidation requests: 0
+  selective invalidations: 0
+  CFG invalidations: 0
+  invalidation values visited: 0
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 0
+  base entries invalidated: 0
+  path facts entries invalidated: 0
+  final type entries invalidated: 0
+  base entries retained: 0
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 0
+  bypasses: 0
+  verifications: 0
+  verification skips: 0
+  total query time (ns): 104768
+; ModuleID = '/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/tce-shallow.ll'
+source_filename = "/home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/test/Jeandle/java-type-cache-reuse/tce-shallow.ll"
+
+declare i1 @jeandle.check_instanceof(ptr, ptr addrspace(1) nonnull)
+
+define void @shallow(ptr addrspace(1) nonnull %obj, i32 %sel) #0 gc "hotspotgc" {
+entry:
+  switch i32 %sel, label %join [
+    i32 0, label %b0
+    i32 1, label %b1
+    i32 2, label %b2
+    i32 3, label %b3
+  ]
+
+b0:                                               ; preds = %entry
+  %c0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %obj)
+  br label %join
+
+b1:                                               ; preds = %entry
+  %c1 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %obj)
+  br label %join
+
+b2:                                               ; preds = %entry
+  %c2 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %obj)
+  br label %join
+
+b3:                                               ; preds = %entry
+  %c3 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %obj)
+  br label %join
+
+join:                                             ; preds = %b3, %b2, %b1, %b0, %entry
+  ret void
+}
+
+attributes #0 = { "java-method"="0" }
+
+!java-method-compilation = !{}

@@ -1,0 +1,14 @@
+{
+  "reason": "User requested using six rounds and stopping further measurement",
+  "included_rounds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "included_rows": 72,
+  "all_observed_rows": 108,
+  "final_profile_run": false
+}

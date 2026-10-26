@@ -1,0 +1,57 @@
+{
+  "base": "8df28fa046fd59251be09a065a468c08628dd397",
+  "branch": "perf/lvi-select-demand-undef",
+  "binaries": {
+    "baseline": {
+      "path": "/home/annya/playground/jeandle/perf-results/2026-10-23-lvi-argument-undef/baseline-opt",
+      "sha256": "df5ddb526d546b1f1b9be09d5586eac0d4bc8a66d80d250b5860d684e01b0aaa"
+    },
+    "candidate": {
+      "path": "/home/annya/playground/jeandle/perf-results/2026-10-23-lvi-argument-undef/candidate-opt",
+      "sha256": "77fad0a15b26e046bd448c8ed49bef18741fa4be3542335715c4af627d629f54"
+    }
+  },
+  "inputs": {
+    "deep-static": {
+      "ir": "/home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/inputs/deep-static/deep-static.ll",
+      "ir_sha256": "1aafe408883d00eac6b3e42135ed93eeb4ce6656feeded11c34b955ef1f0770c",
+      "cblog_sha256": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856",
+      "passes": "cha-devirtualization"
+    },
+    "leaf-static": {
+      "ir": "/home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/inputs/leaf-static/leaf-static.ll",
+      "ir_sha256": "72ea16d10fef45b33aa373fcdb45b5d00e6175b0a36419dff0c17b487808a60c",
+      "cblog_sha256": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8",
+      "passes": "cha-devirtualization"
+    },
+    "tce-cha": {
+      "ir": "/home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/inputs/tce-cha/tce-cha.ll",
+      "ir_sha256": "6b254e809ec4d8420248cbe8ef44d47dacaa034acf7f510bcdb7e57d3cd3e7fd",
+      "cblog_sha256": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856",
+      "passes": "type-check-elimination,cha-devirtualization"
+    },
+    "virtual-cfg": {
+      "ir": "/home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/inputs/virtual-cfg/virtual-cfg.ll",
+      "ir_sha256": "b6e97d7bf328ba84daf5abc347edc97de6516e8470583b4c5e511a0d4e97faa9",
+      "cblog_sha256": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8",
+      "passes": "cha-devirtualization"
+    },
+    "wide-static": {
+      "ir": "/home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/inputs/wide-static/wide-static.ll",
+      "ir_sha256": "6d1b5ca5340e21d9e3471e5dc2911d6f516735d852d70cde760f75b93b76291e",
+      "cblog_sha256": "8e5ed8df4e803f740139667536fc956ea2ac19d01f0fe4a3edb0d3d4a6da6be5",
+      "passes": "cha-devirtualization"
+    },
+    "cff-cache-reuse": {
+      "ir": "/home/annya/playground/jeandle/perf-results/2026-10-23-javatype-perf/run/inputs/l2/cff-cache-reuse.ll",
+      "ir_sha256": "0ba19c035bcd704885e370b3e3a827af3826c8aaa2f7d113f5f0741dec4b529a",
+      "cblog_sha256": "f240fceac2155dad3cb1e31d6c0f2c971ca438335b30c94524f29fa2e5fa8323",
+      "passes": "constant-field-folding"
+    }
+  },
+  "cpu": 16,
+  "rounds": 10,
+  "warmups": 1,
+  "seed": 20261023,
+  "timing_verify_each": false
+}

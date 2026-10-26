@@ -1,0 +1,39 @@
+JavaTypeCacheBoundary function: tce_recover existing_analysis=1 action=clear
+JavaTypeAnalysis for function: tce_recover
+  queries: 4
+  path facts hits: 0
+  path facts misses: 0
+  path facts hit rate: n/a
+  final type hits: 2
+  final type misses: 2
+  final type hit rate: 50.00%
+  base-only query hits: 0
+  base-only query misses: 0
+  base-only query hit rate: n/a
+  base insertions: 2
+  current base entries: 1
+  peak base entries: 1
+  current path facts entries: 0
+  peak path facts entries: 0
+  current final type entries: 1
+  peak final type entries: 1
+  clears: 1
+  invalidation requests: 1
+  selective invalidations: 0
+  CFG invalidations: 0
+  invalidation values visited: 0
+  invalidation uses visited: 0
+  invalidation base slots scanned: 0
+  invalidation path-facts slots scanned: 0
+  invalidation final-type slots scanned: 0
+  base entries invalidated: 1
+  path facts entries invalidated: 0
+  final type entries invalidated: 1
+  base entries retained: 0
+  path facts entries retained: 0
+  final type entries retained: 0
+  total invalidation time (ns): 1157
+  bypasses: 0
+  verifications: 4
+  verification skips: 0
+  total query time (ns): 73666

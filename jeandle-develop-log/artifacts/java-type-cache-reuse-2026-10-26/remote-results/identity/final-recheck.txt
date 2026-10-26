@@ -1,0 +1,13 @@
+captured_at=2026-10-26T13:15:40+08:00 (final read-only recheck)
+branch=test/javatype-cache-design
+head=7857d0e33777bcaea8012d3e4bf17c93eccafca3
+diff_sha256=b457f239ae6cc53736561196afdc7174f05b28017445f1257e8e87b96abc8556
+opt_sha256=960d2e2c3dc499035bad0d77a43d02ea9307514c27c070e59fbbc87f82f2f10e
+status:
+## test/javatype-cache-design
+ M llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+ M llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+ M llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+ M llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+ M llvm/lib/Passes/PassRegistry.def
+?? llvm/test/Jeandle/java-type-cache-reuse/

@@ -1,0 +1,642 @@
+[
+  {
+    "round": 0,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.848355102003552,
+    "user": 1.755065,
+    "system": 0.087714
+  },
+  {
+    "round": 0,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8405021159996977,
+    "user": 1.751621,
+    "system": 0.083781
+  },
+  {
+    "round": 0,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3700953670049785,
+    "user": 1.330433,
+    "system": 0.035877
+  },
+  {
+    "round": 0,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.3693016049946891,
+    "user": 1.321235,
+    "system": 0.043864
+  },
+  {
+    "round": 0,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3691425879951566,
+    "user": 1.332068,
+    "system": 0.032882999999999996
+  },
+  {
+    "round": 0,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3682288290001452,
+    "user": 1.3245879999999999,
+    "system": 0.039885
+  },
+  {
+    "round": 0,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9623645859974204,
+    "user": 0.913272,
+    "system": 0.045896
+  },
+  {
+    "round": 0,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9588823469966883,
+    "user": 0.906042,
+    "system": 0.049824
+  },
+  {
+    "round": 1,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.850098638999043,
+    "user": 1.761909,
+    "system": 0.08274
+  },
+  {
+    "round": 1,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8681542660051491,
+    "user": 1.7637619999999998,
+    "system": 0.098645
+  },
+  {
+    "round": 1,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3772022409975762,
+    "user": 1.329532,
+    "system": 0.043858
+  },
+  {
+    "round": 1,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3725645639933646,
+    "user": 1.327742,
+    "system": 0.040889999999999996
+  },
+  {
+    "round": 1,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.952377877998515,
+    "user": 0.9106339999999999,
+    "system": 0.038847
+  },
+  {
+    "round": 1,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9556650360027561,
+    "user": 0.914948,
+    "system": 0.037895
+  },
+  {
+    "round": 1,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.3655447859928245,
+    "user": 1.324011,
+    "system": 0.03789
+  },
+  {
+    "round": 1,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3702182230044855,
+    "user": 1.33147,
+    "system": 0.034891
+  },
+  {
+    "round": 2,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.3691487350006355,
+    "user": 1.317343,
+    "system": 0.047896999999999995
+  },
+  {
+    "round": 2,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3706526399910217,
+    "user": 1.327007,
+    "system": 0.039876999999999996
+  },
+  {
+    "round": 2,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3729376250121277,
+    "user": 1.328106,
+    "system": 0.040833999999999995
+  },
+  {
+    "round": 2,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3735924539942062,
+    "user": 1.332712,
+    "system": 0.036854
+  },
+  {
+    "round": 2,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9565768410102464,
+    "user": 0.917682,
+    "system": 0.035939
+  },
+  {
+    "round": 2,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.955374949000543,
+    "user": 0.9064129999999999,
+    "system": 0.045853
+  },
+  {
+    "round": 2,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.887230714011821,
+    "user": 1.810057,
+    "system": 0.071786
+  },
+  {
+    "round": 2,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8470260400063125,
+    "user": 1.779142,
+    "system": 0.06280999999999999
+  },
+  {
+    "round": 3,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3690277230052743,
+    "user": 1.32644,
+    "system": 0.038869999999999995
+  },
+  {
+    "round": 3,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3686039970052661,
+    "user": 1.311057,
+    "system": 0.053803
+  },
+  {
+    "round": 3,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9606009970011655,
+    "user": 0.9226679999999999,
+    "system": 0.03489
+  },
+  {
+    "round": 3,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9632559889869299,
+    "user": 0.899458,
+    "system": 0.060773
+  },
+  {
+    "round": 3,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.8621993840060895,
+    "user": 1.780208,
+    "system": 0.07678
+  },
+  {
+    "round": 3,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8539660920068854,
+    "user": 1.767966,
+    "system": 0.080733
+  },
+  {
+    "round": 3,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3726554439926986,
+    "user": 1.3248,
+    "system": 0.043879
+  },
+  {
+    "round": 3,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.368341869005235,
+    "user": 1.3198590000000001,
+    "system": 0.044862
+  },
+  {
+    "round": 4,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.397330724998028,
+    "user": 1.348513,
+    "system": 0.044818
+  },
+  {
+    "round": 4,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3768240250064991,
+    "user": 1.332025,
+    "system": 0.040881
+  },
+  {
+    "round": 4,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3729435169952922,
+    "user": 1.3272789999999999,
+    "system": 0.041865
+  },
+  {
+    "round": 4,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.3689996610046364,
+    "user": 1.319185,
+    "system": 0.045846
+  },
+  {
+    "round": 4,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8424651009991067,
+    "user": 1.7597589999999999,
+    "system": 0.07778199999999999
+  },
+  {
+    "round": 4,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.8562800409999909,
+    "user": 1.770997,
+    "system": 0.07978199999999999
+  },
+  {
+    "round": 4,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9568037540011574,
+    "user": 0.9051929999999999,
+    "system": 0.048778999999999996
+  },
+  {
+    "round": 4,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9574565520015312,
+    "user": 0.912794,
+    "system": 0.041892
+  },
+  {
+    "round": 5,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8579689439939102,
+    "user": 1.7772459999999999,
+    "system": 0.075792
+  },
+  {
+    "round": 5,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.856655811003293,
+    "user": 1.768705,
+    "system": 0.08274999999999999
+  },
+  {
+    "round": 5,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.387311751008383,
+    "user": 1.335534,
+    "system": 0.047826999999999995
+  },
+  {
+    "round": 5,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3852470959973289,
+    "user": 1.339423,
+    "system": 0.041873
+  },
+  {
+    "round": 5,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9483893279975746,
+    "user": 0.8955069999999999,
+    "system": 0.049833999999999996
+  },
+  {
+    "round": 5,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9554410339915194,
+    "user": 0.8996919999999999,
+    "system": 0.052861
+  },
+  {
+    "round": 5,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.367282024002634,
+    "user": 1.321714,
+    "system": 0.041888999999999996
+  },
+  {
+    "round": 5,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3701459010044346,
+    "user": 1.323326,
+    "system": 0.042867999999999996
+  },
+  {
+    "round": 6,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3697878579987446,
+    "user": 1.311046,
+    "system": 0.054813999999999995
+  },
+  {
+    "round": 6,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3675217190029798,
+    "user": 1.317912,
+    "system": 0.045836999999999996
+  },
+  {
+    "round": 6,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.3751749640068738,
+    "user": 1.324467,
+    "system": 0.046834999999999995
+  },
+  {
+    "round": 6,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3616125300031854,
+    "user": 1.310784,
+    "system": 0.046881
+  },
+  {
+    "round": 6,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9619014400086598,
+    "user": 0.9067999999999999,
+    "system": 0.051843
+  },
+  {
+    "round": 6,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9553041679901071,
+    "user": 0.9104169999999999,
+    "system": 0.041872
+  },
+  {
+    "round": 6,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.8501973319944227,
+    "user": 1.766157,
+    "system": 0.078763
+  },
+  {
+    "round": 6,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8677571159932995,
+    "user": 1.7733889999999999,
+    "system": 0.088751
+  },
+  {
+    "round": 7,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8356969370070146,
+    "user": 1.7546659999999998,
+    "system": 0.075741
+  },
+  {
+    "round": 7,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.84988190101285,
+    "user": 1.771722,
+    "system": 0.072791
+  },
+  {
+    "round": 7,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.368087958995602,
+    "user": 1.323418,
+    "system": 0.040901
+  },
+  {
+    "round": 7,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3748398390016519,
+    "user": 1.326009,
+    "system": 0.044863
+  },
+  {
+    "round": 7,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3687845279928297,
+    "user": 1.327007,
+    "system": 0.037878999999999996
+  },
+  {
+    "round": 7,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.368010221995064,
+    "user": 1.330616,
+    "system": 0.033879
+  },
+  {
+    "round": 7,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9603957500075921,
+    "user": 0.909621,
+    "system": 0.047792999999999995
+  },
+  {
+    "round": 7,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9546604490024038,
+    "user": 0.914963,
+    "system": 0.036896
+  },
+  {
+    "round": 8,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.8626541280100355,
+    "user": 1.784594,
+    "system": 0.072766
+  },
+  {
+    "round": 8,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8769036140001845,
+    "user": 1.791754,
+    "system": 0.07972699999999999
+  },
+  {
+    "round": 8,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3693755959975533,
+    "user": 1.327596,
+    "system": 0.037841
+  },
+  {
+    "round": 8,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3671789159998298,
+    "user": 1.314528,
+    "system": 0.04886
+  },
+  {
+    "round": 8,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.363904445010121,
+    "user": 1.324087,
+    "system": 0.035932
+  },
+  {
+    "round": 8,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.3584006970049813,
+    "user": 1.30279,
+    "system": 0.051834
+  },
+  {
+    "round": 8,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9843393839983037,
+    "user": 0.92757,
+    "system": 0.053834
+  },
+  {
+    "round": 8,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9528691019950202,
+    "user": 0.9089269999999999,
+    "system": 0.040868
+  },
+  {
+    "round": 9,
+    "case": "related-noundef",
+    "variant": "baseline",
+    "wall": 0.9613553020026302,
+    "user": 0.918669,
+    "system": 0.039858
+  },
+  {
+    "round": 9,
+    "case": "related-noundef",
+    "variant": "candidate",
+    "wall": 0.9519986539962701,
+    "user": 0.9183089999999999,
+    "system": 0.030905
+  },
+  {
+    "round": 9,
+    "case": "shared-boolean-may-undef",
+    "variant": "candidate",
+    "wall": 1.8510700199985877,
+    "user": 1.767042,
+    "system": 0.078748
+  },
+  {
+    "round": 9,
+    "case": "shared-boolean-may-undef",
+    "variant": "baseline",
+    "wall": 1.8517831869976362,
+    "user": 1.7666979999999999,
+    "system": 0.079758
+  },
+  {
+    "round": 9,
+    "case": "unrelated-may-undef",
+    "variant": "candidate",
+    "wall": 1.3887704020016827,
+    "user": 1.346768,
+    "system": 0.037873
+  },
+  {
+    "round": 9,
+    "case": "unrelated-may-undef",
+    "variant": "baseline",
+    "wall": 1.3769841699977405,
+    "user": 1.333237,
+    "system": 0.039871
+  },
+  {
+    "round": 9,
+    "case": "related-may-undef",
+    "variant": "candidate",
+    "wall": 1.365066004000255,
+    "user": 1.313235,
+    "system": 0.047834999999999996
+  },
+  {
+    "round": 9,
+    "case": "related-may-undef",
+    "variant": "baseline",
+    "wall": 1.372079967011814,
+    "user": 1.3205719999999999,
+    "system": 0.047816
+  }
+]

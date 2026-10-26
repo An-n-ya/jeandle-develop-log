@@ -1,0 +1,27 @@
+{
+  "CMakeCache.release.txt": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CXX_COMPILER": "/home/annya/playground/jeandle/jeandle/tools/bin/g++",
+    "CMAKE_C_COMPILER": "/home/annya/playground/jeandle/jeandle/tools/bin/gcc",
+    "CMAKE_CXX_FLAGS": "",
+    "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+    "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
+    "LLVM_ENABLE_LTO": "OFF",
+    "LLVM_ENABLE_RTTI": "OFF",
+    "LLVM_ENABLE_EH": "OFF",
+    "LLVM_TARGETS_TO_BUILD": "X86"
+  },
+  "CMakeCache.profiling.txt": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CXX_COMPILER": "/home/annya/playground/jeandle/jeandle/tools/bin/g++",
+    "CMAKE_C_COMPILER": "/home/annya/playground/jeandle/jeandle/tools/bin/gcc",
+    "CMAKE_CXX_FLAGS": "",
+    "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG -g",
+    "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG -g",
+    "LLVM_ENABLE_LTO": "OFF",
+    "LLVM_ENABLE_RTTI": "OFF",
+    "LLVM_ENABLE_EH": "OFF",
+    "LLVM_TARGETS_TO_BUILD": "X86"
+  },
+  "note": "Paths differ by build directory; optimization/configuration knobs agree except added -g. All four measured modes use one profiling binary."
+}

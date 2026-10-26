@@ -1,0 +1,31 @@
+JavaTypeQuery function: tce_cff ordinal: 1 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 0 final_misses: 1 base_insertions: 1
+JavaTypeQuery function: tce_cff ordinal: 2 value: %obj context: %entry base_hits: 0 base_misses: 0 facts_hits: 0 facts_misses: 0 final_hits: 1 final_misses: 0 base_insertions: 0
+LLVM ERROR: VMCallbackLog missing entry for RequiresStrictLockOrder()
+PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace and instructions to reproduce the bug.
+Stack dump:
+0.	Program arguments: build/build-ninja-profiling/bin/opt -disable-output -jeandle-java-type-stats -jeandle-java-type-query-trace -passes=jeandle<O2;method> -jeandle-vm-callback-log=llvm/test/Jeandle/java-type-cache-reuse/Inputs/tce.cblog llvm/test/Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll
+1.	Running pass "function(partial-escape-iterative)" on module "llvm/test/Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll"
+Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):
+0  opt       0x000055826cd29d39 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) + 57
+1  opt       0x000055826cd26be7
+2  libc.so.6 0x00007eff9043e270
+3  libc.so.6 0x00007eff9049981c
+4  libc.so.6 0x00007eff9043e150 gsignal + 32
+5  libc.so.6 0x00007eff9042567d abort + 38
+6  opt       0x0000558269b4e8c3
+7  opt       0x000055826c8a9369
+8  opt       0x000055826c8a9422
+9  opt       0x000055826c38c29b llvm::PartialEscapeAnalysis::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&) + 13627
+10 opt       0x000055826a29f4d1
+11 opt       0x000055826cad8819 llvm::AnalysisManager<llvm::Function>::getResultImpl(llvm::AnalysisKey*, llvm::Function&) + 1177
+12 opt       0x000055826b7c25a5 llvm::PartialEscapeTransform::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&) + 101
+13 opt       0x000055826b7b2a05 llvm::PartialEscapeIterative::run(llvm::Function&, llvm::AnalysisManager<llvm::Function>&) + 757
+14 opt       0x000055826a1d314f
+15 opt       0x000055826cadd752 llvm::ModuleToFunctionPassAdaptor::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) + 1170
+16 opt       0x0000558269c53bbf
+17 opt       0x000055826cad4270 llvm::PassManager<llvm::Module, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) + 1008
+18 opt       0x0000558269c5f280 llvm::runPassPipeline(llvm::StringRef, llvm::Module&, llvm::TargetMachine*, llvm::TargetLibraryInfoImpl*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::StringRef, llvm::ArrayRef<llvm::PassPlugin>, llvm::ArrayRef<std::function<void (llvm::PassBuilder&)>>, llvm::opt_tool::OutputKind, llvm::opt_tool::VerifierKind, bool, bool, bool, bool, bool, bool, bool, bool) + 9568
+19 opt       0x0000558269c51166 optMain + 16774
+20 libc.so.6 0x00007eff90427741
+21 libc.so.6 0x00007eff90427879 __libc_start_main + 137
+22 opt       0x0000558269c46f35 _start + 37

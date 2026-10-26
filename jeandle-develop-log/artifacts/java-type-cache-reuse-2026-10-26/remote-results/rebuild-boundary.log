@@ -1,0 +1,8 @@
+ninja: Entering directory `build/build-ninja-profiling'
+[1/6] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/Jeandle/JavaTypeAnalysisStats.cpp.o
+[2/6] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/Jeandle/JavaTypeAnalysis.cpp.o
+[3/6] Linking CXX static library lib/libLLVMAnalysis.a
+[4/6] Building CXX object lib/Passes/CMakeFiles/LLVMPasses.dir/PassBuilder.cpp.o
+[5/6] Linking CXX static library lib/libLLVMPasses.a
+[6/6] Linking CXX executable bin/opt
+build_boundary_rc=0

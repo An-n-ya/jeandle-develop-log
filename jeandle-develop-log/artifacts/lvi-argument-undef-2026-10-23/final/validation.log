@@ -1,0 +1,76 @@
+OUTPUT_EQUAL deep-static
+OUTPUT_EQUAL leaf-static
+OUTPUT_EQUAL tce-cha
+OUTPUT_EQUAL virtual-cfg
+OUTPUT_EQUAL wide-static
+OUTPUT_EQUAL cff-cache-reuse
+NEW_TEST_OUTPUT_EQUAL
+WARMED deep-static
+WARMED leaf-static
+WARMED tce-cha
+WARMED virtual-cfg
+WARMED wide-static
+WARMED cff-cache-reuse
+PAIR 0 deep-static {'candidate': 4.308705, 'baseline': 5.7154679999999995}
+PAIR 0 virtual-cfg {'baseline': 11.076934, 'candidate': 11.015164}
+PAIR 0 wide-static {'candidate': 14.633807000000001, 'baseline': 16.087514}
+PAIR 0 leaf-static {'baseline': 4.9827259999999995, 'candidate': 4.93913}
+PAIR 0 cff-cache-reuse {'candidate': 6.2863489999999995, 'baseline': 6.433248}
+PAIR 0 tce-cha {'baseline': 5.720223, 'candidate': 4.443668}
+ROUND_DONE 0
+PAIR 1 deep-static {'baseline': 5.729197, 'candidate': 4.287418}
+PAIR 1 virtual-cfg {'candidate': 10.980858, 'baseline': 11.026963}
+PAIR 1 cff-cache-reuse {'baseline': 6.331293, 'candidate': 6.343503}
+PAIR 1 wide-static {'candidate': 14.669882, 'baseline': 16.092402}
+PAIR 1 tce-cha {'candidate': 4.335237, 'baseline': 5.783742}
+PAIR 1 leaf-static {'baseline': 5.018296, 'candidate': 4.959272}
+ROUND_DONE 1
+PAIR 2 tce-cha {'baseline': 5.764354, 'candidate': 4.340693}
+PAIR 2 deep-static {'candidate': 4.347099, 'baseline': 5.716021}
+PAIR 2 cff-cache-reuse {'baseline': 6.270582, 'candidate': 6.351961}
+PAIR 2 leaf-static {'baseline': 4.970599, 'candidate': 4.941085}
+PAIR 2 virtual-cfg {'baseline': 11.029445, 'candidate': 11.021362}
+PAIR 2 wide-static {'baseline': 16.038668, 'candidate': 14.679543}
+ROUND_DONE 2
+PAIR 3 virtual-cfg {'baseline': 11.098625, 'candidate': 10.995438}
+PAIR 3 leaf-static {'candidate': 4.9704239999999995, 'baseline': 4.957647}
+PAIR 3 tce-cha {'candidate': 4.351221, 'baseline': 5.780417}
+PAIR 3 cff-cache-reuse {'baseline': 6.267304, 'candidate': 6.303429}
+PAIR 3 wide-static {'baseline': 16.117034, 'candidate': 14.565324}
+PAIR 3 deep-static {'baseline': 5.710291, 'candidate': 4.29618}
+ROUND_DONE 3
+PAIR 4 wide-static {'baseline': 16.072429, 'candidate': 14.649463}
+PAIR 4 virtual-cfg {'candidate': 10.980279, 'baseline': 10.998699}
+PAIR 4 leaf-static {'candidate': 4.946599, 'baseline': 4.973312}
+PAIR 4 deep-static {'candidate': 4.330534, 'baseline': 5.700949}
+PAIR 4 tce-cha {'candidate': 4.332534, 'baseline': 5.7822890000000005}
+PAIR 4 cff-cache-reuse {'baseline': 6.308748, 'candidate': 6.35308}
+ROUND_DONE 4
+PAIR 5 virtual-cfg {'candidate': 10.904435, 'baseline': 11.055269}
+PAIR 5 deep-static {'candidate': 4.362547, 'baseline': 5.758193}
+PAIR 5 tce-cha {'candidate': 4.318568, 'baseline': 5.755217}
+PAIR 5 leaf-static {'candidate': 4.933578, 'baseline': 4.969162}
+PAIR 5 cff-cache-reuse {'candidate': 6.3532589999999995, 'baseline': 6.273182}
+PAIR 5 wide-static {'baseline': 16.055539, 'candidate': 14.670652}
+ROUND_DONE 5
+PAIR 6 virtual-cfg {'baseline': 11.06243, 'candidate': 11.009708}
+PAIR 6 wide-static {'baseline': 16.040354, 'candidate': 14.604987}
+PAIR 6 leaf-static {'baseline': 4.969546, 'candidate': 4.955616}
+PAIR 6 deep-static {'candidate': 4.289482, 'baseline': 5.711017}
+PAIR 6 cff-cache-reuse {'candidate': 6.315112, 'baseline': 6.349855}
+PAIR 6 tce-cha {'baseline': 5.743983, 'candidate': 4.330982}
+ROUND_DONE 6
+PAIR 7 deep-static {'baseline': 5.739048, 'candidate': 4.31817}
+PAIR 7 tce-cha {'candidate': 4.352936, 'baseline': 5.8027239999999995}
+PAIR 7 wide-static {'candidate': 14.635613, 'baseline': 16.102075}
+PAIR 7 virtual-cfg {'candidate': 11.007935, 'baseline': 11.034058}
+PAIR 7 cff-cache-reuse {'baseline': 6.336691, 'candidate': 6.307132}
+PAIR 7 leaf-static {'candidate': 4.922201, 'baseline': 5.003184}
+ROUND_DONE 7
+PAIR 8 virtual-cfg {'baseline': 11.001192, 'candidate': 10.97327}
+PAIR 8 wide-static {'baseline': 16.069064, 'candidate': 14.651496999999999}
+PAIR 8 cff-cache-reuse {'candidate': 6.32056, 'baseline': 6.384496}
+PAIR 8 leaf-static {'baseline': 4.995997, 'candidate': 4.953958}
+PAIR 8 deep-static {'baseline': 5.700128, 'candidate': 4.323318}
+PAIR 8 tce-cha {'candidate': 4.339744, 'baseline': 5.756545}
+ROUND_DONE 8

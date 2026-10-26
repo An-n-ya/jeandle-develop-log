@@ -1,0 +1,36 @@
+opt_path=/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt
+opt_sha256=960d2e2c3dc499035bad0d77a43d02ea9307514c27c070e59fbbc87f82f2f10e
+opt_size=1913761408
+unit_path=/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/unittests/IR/JavaTypeQueryTests
+unit_sha256=9f78105c03284c3da3a8bbe27a8fd7238ba8fcf8492475c4cc40ad8507cce6e3
+unit_size=1517410520
+bin_file=/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/bin/opt: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=148092aee24ba791559009913b61468309fa4b99, for GNU/Linux 4.4.0, with debug_info, not stripped
+opt_version_begin
+LLVM (http://llvm.org/):
+  LLVM version 22.0.0git
+  Optimized build.
+  Default target: x86_64-unknown-linux-gnu
+  Host CPU: raptorlake
+opt_version_end
+cmake_cache_selected_begin
+CMAKE_BUILD_TYPE:STRING=Release
+CMAKE_CXX_COMPILER:STRING=/home/annya/playground/jeandle/jeandle/tools/bin/g++
+CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/sbin/gcc-ar-15
+CMAKE_CXX_FLAGS:STRING=
+CMAKE_C_COMPILER:STRING=/home/annya/playground/jeandle/jeandle/tools/bin/gcc
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/sbin/gcc-ar-15
+CMAKE_C_FLAGS:STRING=
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/ninja
+LLVM_ENABLE_ASSERTIONS:BOOL=OFF
+LLVM_ENABLE_PROJECTS:STRING=
+LLVM_TARGETS_TO_BUILD:STRING=X86
+CMAKE_GENERATOR:INTERNAL=Ninja
+cmake_cache_selected_end
+compiler_versions_begin
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/CMakeFiles/4.4.0/CMakeCXXCompiler.cmake:set(CMAKE_CXX_COMPILER_ID "GNU")
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/CMakeFiles/4.4.0/CMakeCXXCompiler.cmake:set(CMAKE_CXX_COMPILER_VERSION "15.3.0")
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/CMakeFiles/4.4.0/CMakeCXXCompiler.cmake:set(CMAKE_CXX_COMPILER_VERSION_INTERNAL "")
+/home/annya/playground/jeandle/jeandle/jeandle-llvm/build/build-ninja-profiling/CMakeFiles/4.4.0/CMakeCXXCompiler.cmake:set(CMAKE_CXX_COMPILER_ID_RUN 1)
+compiler_versions_end
+build_ninja_sha256=4715bb89155d206d8eb1df223ec8a8158af537abf276058c55bd582eaff8250d
+cmake_cache_sha256=f1df9405db11afc73c57e4a90c9b5dfe52e618d79fcfce23fc4c777a9888320f

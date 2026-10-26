@@ -1,0 +1,10 @@
+cpu_model=Genuine Intel(R) 0000
+cpu_logical=32
+memory_total=65568784 kB
+kernel=7.1.3-arch2-2
+gcc_path=/usr/bin/gcc
+gcc_version=gcc (GCC) 16.1.1 20260625
+gxx_path=/usr/bin/g++
+gxx_version=g++ (GCC) 16.1.1 20260625
+clang_path=/usr/bin/clang
+clang_version=clang version 22.1.8
