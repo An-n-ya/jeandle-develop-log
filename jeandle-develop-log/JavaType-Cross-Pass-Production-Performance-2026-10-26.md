@@ -1,5 +1,7 @@
 # JavaType 跨 pass 缓存：生产流水线性能测试报告
 
+> 阅读入口（2026-10-27 整理）：[跨 pass 缓存测试总结](../汇报/跨pass缓存测试总结.md)。本文保留执行原始记录。部分口径和因果解释已在[核对说明](JavaType-Cross-Pass-Report-Notes-2026-10-27.md)中修正，包括时间基线、采样分类、JVM 三模式覆盖，以及“失效断点”等同于“性能瓶颈”的推断；汇报时请以整理版及核对说明为准。
+
 - 执行日期：2026-10-26 ~ 2026-10-27（Asia/Shanghai）
 - 执行依据：《JavaType 跨 pass 缓存：生产流水线、jtreg 与 profiling 测试方案》（2026-10-26，Mac 原件 `JavaType-Cross-Pass-Production-Performance-Plan-2026-10-26.md`）
 - 工作根目录：`/home/annya/playground/jeandle/perf-results/2026-10-26-javatype-cross-pass-prod/`
