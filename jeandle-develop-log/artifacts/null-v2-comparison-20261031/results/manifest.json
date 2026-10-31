@@ -1,0 +1,84 @@
+{
+  "versions": {
+    "base": {
+      "head": "ac545bb21e8931152ad9149e01f8304b214dbd91",
+      "opt_sha256": "9178f7ecec31eb734f573d2e0144b908e5525f700673c9623672ac0e091db86f",
+      "replay_sha256": "636aa9eb9f106b7700f575dfb38da192527ef8965ee680f7682c1b456e1fa20a"
+    },
+    "null": {
+      "head": "e5475bb0df4671302665c6986e762bf892c3c98a",
+      "opt_sha256": "b3b274b3075e6b9d3123d328f4315bd49cff3cea10ac4ab2585a20407e8a4412",
+      "replay_sha256": "93f13dfecad655b44d7d757aaeeddf008628c5c24f6ca741e91b68d019df55d6"
+    },
+    "v2": {
+      "head": "ad38f632672c881708d0894acf56b72414c095f2",
+      "opt_sha256": "c6687f37c47b538e0f2c3e5b1378d6480e5cef28a608d946252aa2e79de56182",
+      "replay_sha256": "3715f10f3793d329b36c83798af2df9195faa09e705de107e18e56f5dd19cdf1"
+    }
+  },
+  "affinity": [
+    8
+  ],
+  "siblings": "8-9",
+  "governor": "powersave",
+  "aa_repeats": 15,
+  "repeats": 31,
+  "warmups": 3,
+  "seed": 20261031,
+  "input_hashes": {
+    "same": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "cross-unique": "6d15965a06ab0b9dcbb10c28bf62cd661bf098db6f68e420b4fae39531d91675",
+    "cross": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "same-edit": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "other-edit": "3b688a5ccf352513feb43606ad9dc5703d4f39366b9b46cb56a8dc81a51c16d7",
+    "deep-static": {
+      "ir": "261564c793c6aaf1c364e08a536ad90d59b34ae98acdddf8f28cb2032e6f6b01",
+      "callback": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856"
+    },
+    "wide-static": {
+      "ir": "f2e04508d4c8b6d663c1cf54dac52d4a168290d9d926f0487d1eefb0cdaaa8b5",
+      "callback": "8e5ed8df4e803f740139667536fc956ea2ac19d01f0fe4a3edb0d3d4a6da6be5"
+    },
+    "leaf-static": {
+      "ir": "17e669737549501999616a933125cdb6936eb2adeb77fbed6a4b8bdaaa677012",
+      "callback": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8"
+    },
+    "tce-cha": {
+      "ir": "68a618f5fcf6985577bcad2b301e0b5c29579ff1a0c8f0fd6b38cce18bcb2e39",
+      "callback": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856"
+    },
+    "virtual-cfg": {
+      "ir": "c861ee249482d69689221594a4962e698ca0fe4ee5e125d5643fdb134b0ceb87",
+      "callback": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8"
+    }
+  },
+  "batches": {
+    "same": {
+      "base": 41369,
+      "null": 85086,
+      "v2": 21023
+    },
+    "cross-unique": {
+      "base": 16384,
+      "null": 17228,
+      "v2": 1539
+    },
+    "cross": {
+      "base": 22625,
+      "null": 29390,
+      "v2": 4096
+    },
+    "same-edit": {
+      "base": 25653,
+      "null": 38947,
+      "v2": 1024
+    },
+    "other-edit": {
+      "base": 26025,
+      "null": 39103,
+      "v2": 1669
+    }
+  },
+  "driver_sha256": "119e023537cf514bb0436b3da3c3032de7c207230484ce3ddd53ed711d3781ab",
+  "runner_sha256": "6eb95434edd509636bb3108af878e2f3b267fdcf1a8efa5a6a9b12265468f8c8"
+}

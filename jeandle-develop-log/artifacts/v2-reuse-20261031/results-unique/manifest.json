@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-31",
+  "cpu": 8,
+  "affinity": [
+    8
+  ],
+  "siblings": "8-9",
+  "source": "ad38f632672c881708d0894acf56b72414c095f2",
+  "replay_sha256": "6842e77b2d90df9e855d220ae5c36d3724a770b9154348912835484d03a41fe1",
+  "driver_sha256": "aeede294cc9f8899e9b13012c3aea42292945059a8f9900289f946b273bf1b3a",
+  "runner_sha256": "11121851ca625415e369006d7fb744881af2b61f84f82f0bcedc16ff9664a845",
+  "support_sha256": "6b7c3751caf3d7dad8d6a544197a2ea343a941c138ad185e2ff67e1e55e3219e",
+  "rounds": 31,
+  "warmups": 3,
+  "interval": "native process user+system CPU; excludes IR creation/parsing, includes cache reset and edits",
+  "normalization": "mode-specific batches; each batch identical 32-query sequence; compare CPU per batch",
+  "target_cpu_s": 0.3,
+  "comparisons": [
+    "cached A/A",
+    "reference -> cached",
+    "nofinal -> cached",
+    "full -> cached"
+  ],
+  "batches": {
+    "cross-unique:cached": 1552,
+    "cross-unique:reference": 1373,
+    "cross-unique:nofinal": 2353,
+    "cross-unique:full": 1441
+  },
+  "input_sha256": {
+    "cross-unique": "6d15965a06ab0b9dcbb10c28bf62cd661bf098db6f68e420b4fae39531d91675"
+  }
+}

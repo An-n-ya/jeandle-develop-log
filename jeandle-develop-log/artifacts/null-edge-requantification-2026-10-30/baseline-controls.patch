@@ -1,0 +1,219 @@
+From ac545bb21e8931152ad9149e01f8304b214dbd91 Mon Sep 17 00:00:00 2001
+From: Annya <annya.host@gmail.com>
+Date: Fri, 30 Oct 2026 09:41:11 +0800
+Subject: [PATCH] Align non-NullEdge controls for isolated performance baseline
+
+---
+ .../llvm/Analysis/Jeandle/JavaTypeAnalysis.h  | 19 +++++
+ .../lib/Analysis/Jeandle/JavaTypeAnalysis.cpp | 69 +++++++++++++++++--
+ .../Jeandle/CHADevirtualization.cpp           |  3 +
+ .../Jeandle/ConstantFieldFolding.cpp          |  4 ++
+ .../Transforms/Jeandle/RecoverTypeInfo.cpp    |  3 +
+ .../Jeandle/TypeCheckElimination.cpp          |  3 +
+ 6 files changed, 97 insertions(+), 4 deletions(-)
+
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+index f4ffffc1209a..cff7448cce2a 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+@@ -10,6 +10,7 @@
+ #define LLVM_ANALYSIS_JEANDLE_JAVATYPEANALYSIS_H
+ 
+ #include "llvm/Analysis/Jeandle/CachedJavaType.h"
++#include "llvm/ADT/StringRef.h"
+ #include "llvm/IR/PassManager.h"
+ 
+ #include <cstddef>
+@@ -122,6 +123,24 @@ public:
+   LLVM_ABI Result run(Function &F, FunctionAnalysisManager &FAM);
+ };
+ 
++/// True when the pass-local cache ablation is enabled. In that mode every
++/// real consumer pass starts with an empty Java type cache, so only reuse
++/// inside one pass invocation remains.
++bool javaTypePassLocalEnabled();
++
++/// Clears the Java type caches of an already existing analysis at the entry of
++/// a consumer pass. It never creates an analysis, never changes the IR and
++/// never touches the DT/LVI lifetime; it only removes the cached entries. It
++/// is a no-op unless the pass-local ablation is enabled.
++void clearJavaTypeCacheIfPassLocal(Function &F, FunctionAnalysisManager &FAM,
++                                   StringRef Consumer = "");
++
++/// Number of pass-local cache clears performed so far in this process.
++uint64_t javaTypePassLocalClearCount();
++
++/// Number of consumer pass invocations observed for the given consumer name.
++uint64_t javaTypeConsumerInvocationCount(StringRef Consumer);
++
+ } // namespace jeandle
+ } // namespace llvm
+ 
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+index 8a79e346606b..4e77e6de995d 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+@@ -9,6 +9,7 @@
+ #include "llvm/Analysis/Jeandle/JavaTypeAnalysis.h"
+ #include "llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h"
+ #include "llvm/Analysis/Jeandle/LVINullEdgeOracle.h"
++#include "llvm/ADT/StringMap.h"
+ #include "llvm/ADT/StringRef.h"
+ #include "llvm/Analysis/LazyValueInfo.h"
+ #include "llvm/IR/Dominators.h"
+@@ -49,6 +50,12 @@ cl::opt<bool> ForceBaseScanJavaTypeInvalidation(
+     cl::desc("Scan all base cache entries instead of deleting affected keys"),
+     cl::Hidden, cl::init(false));
+ 
++cl::opt<bool> JavaTypePassLocal(
++    "jeandle-java-type-pass-local",
++    cl::desc("Clear the Java type caches at the entry of every real consumer "
++             "pass, keeping only pass-internal reuse"),
++    cl::Hidden, cl::init(false));
++
+ using QueryClock = std::chrono::steady_clock;
+ 
+ /// Converts the time elapsed since Start into nanoseconds; only called when
+@@ -106,6 +113,42 @@ void printJavaType(raw_ostream &OS, const JavaType &Type) {
+ 
+ AnalysisKey JavaTypeAnalysis::Key;
+ 
++/// Number of pass-local cache clears performed in this process.
++static uint64_t PassLocalClearCount = 0;
++
++/// Number of consumer pass invocations, per consumer name.
++static StringMap<uint64_t> ConsumerInvocations;
++
++bool jeandle::javaTypePassLocalEnabled() { return JavaTypePassLocal; }
++
++uint64_t jeandle::javaTypePassLocalClearCount() { return PassLocalClearCount; }
++
++uint64_t jeandle::javaTypeConsumerInvocationCount(StringRef Consumer) {
++  auto It = ConsumerInvocations.find(Consumer);
++  return It == ConsumerInvocations.end() ? 0 : It->second;
++}
++
++/// Clears the caches of an already existing analysis. The analysis itself is
++/// left in place, so the consumer still gets the same DT/LVI references; only
++/// the memoized type facts are dropped.
++void jeandle::clearJavaTypeCacheIfPassLocal(Function &F,
++                                             FunctionAnalysisManager &FAM,
++                                             StringRef Consumer) {
++  // The invocation counter is diagnostic only, so it is kept out of the
++  // production path (plan: trace/stats are off for the measured runs).
++  if (javaTypeStatsEnabled())
++    ++ConsumerInvocations[Consumer];
++  if (!JavaTypePassLocal)
++    return;
++  // getCachedResult never creates an analysis, so a pass that runs before the
++  // first Java type query does not pay for an analysis it does not need.
++  JavaTypeAnalysisResult *Result = FAM.getCachedResult<JavaTypeAnalysis>(F);
++  if (!Result)
++    return;
++  Result->clear();
++  ++PassLocalClearCount;
++}
++
+ /// Public query entry: selects the cache mode and, when statistics are enabled,
+ /// reports one optional observation event.
+ /// With verification enabled it also runs a query that shares no cache and
+@@ -144,6 +187,12 @@ JavaType JavaTypeAnalysisResult::getJavaType(Value *V, Instruction *Context) {
+   if (VerifyJavaTypeCache && !DisableJavaTypeCache) {
+     Verified = true;
+     // The reference result always comes from the untouched original engine.
++    // The null-edge oracle budget truncates a query by refusing further
++    // oracle calls, and the two engines spend that budget on different
++    // traversals (the cached engine reuses path facts). A truncated query
++    // therefore answers a different question than an untruncated one, so the
++    // exhaustion counter is sampled around both evaluations: if either side
++    // was truncated, strict equality is not required.
+     JavaType Fresh = jeandle::getJavaType(V, &DT, Context, IsNullEdge);
+     // The original API does not expose truncation/cycle diagnostics. A separate
+     // cold evaluation supplies only those flags, never the reference result.
+@@ -235,10 +284,22 @@ bool JavaTypeAnalysisResult::invalidate( Function &F,
+                                          FunctionAnalysisManager::Invalidator &Inv)
+ {
+   auto PAC = PA.getChecker<JavaTypeAnalysis>();
+-  return !(PAC.preserved() ||
+-           PAC.preservedSet<AllAnalysesOn<Function>>()) ||
+-         Inv.invalidate<DominatorTreeAnalysis>(F, PA) ||
+-         Inv.invalidate<LazyValueAnalysis>(F, PA);
++  bool SelfPreserved =
++      PAC.preserved() || PAC.preservedSet<AllAnalysesOn<Function>>();
++  bool DTInvalidated = Inv.invalidate<DominatorTreeAnalysis>(F, PA);
++  bool LVIInvalidated = Inv.invalidate<LazyValueAnalysis>(F, PA);
++  bool Dropped = !SelfPreserved || DTInvalidated || LVIInvalidated;
++  // 诊断：记录分析被丢弃的原因和当时缓存中残留的条目数，用于定位生命周期断点。
++  if (javaTypeStatsEnabled())
++    errs() << "JavaTypeAnalysisInvalidated function: " << F.getName()
++           << " dropped=" << (Dropped ? 1 : 0)
++           << " self_preserved=" << (SelfPreserved ? 1 : 0)
++           << " dt_invalidated=" << (DTInvalidated ? 1 : 0)
++           << " lvi_invalidated=" << (LVIInvalidated ? 1 : 0)
++           << " base_entries=" << Cache.baseSize()
++           << " path_facts_entries=" << Cache.pathFactsSize()
++           << " final_entries=" << Cache.finalTypesSize() << '\n';
++  return Dropped;
+ }
+ 
+ /// Obtains DT and LVI from the analysis manager and creates the Function-level
+diff --git a/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp b/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
+index 3470618d4c7e..813f87ff25cb 100644
+--- a/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
++++ b/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
+@@ -593,6 +593,9 @@ bool optimizeCallSite(InvokeInst &CB, DomTreeUpdater &DTU,
+ 
+ PreservedAnalyses CHADevirtualization::run(Function &F,
+                                            FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "cha-devirtualization");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp b/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
+index f608dd164e9e..3bacc61e3a02 100644
+--- a/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
++++ b/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
+@@ -729,6 +729,10 @@ bool foldFieldLoad(Module &M, const jeandle::VMCallbacks &CB,
+ 
+ PreservedAnalyses ConstantFieldFolding::run(Function &F,
+                                             FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains. RepeatedConstantFolding
++  // calls this pass directly, so every one of its rounds is covered too.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "constant-field-folding");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp b/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
+index c48282404d83..0632c9706ecf 100644
+--- a/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
++++ b/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
+@@ -171,6 +171,9 @@ bool isForwarder(Instruction &I) {
+ 
+ PreservedAnalyses RecoverTypeInfo::run(Function &F,
+                                        FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "recover-type-info");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp b/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
+index 0b6120840c0c..54c85748b92b 100644
+--- a/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
++++ b/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
+@@ -52,6 +52,9 @@ namespace {
+ 
+ PreservedAnalyses TypeCheckElimination::run(Function &F,
+                                             FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "type-check-elimination");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+-- 
+2.55.0
+

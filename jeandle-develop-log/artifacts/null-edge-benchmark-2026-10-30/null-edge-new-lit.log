@@ -1,0 +1,111 @@
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find dsymutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli-child-target in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ar in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-addr2line in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bcanalyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cas in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cgdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cov in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ctxprof-util in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cvtres in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfod-find in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfo-analyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-diff in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwp in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dlltool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-exegesis in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ir2vec in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-isel-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ifs in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-jitlink in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-opt-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lib in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto2 in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mca in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-modextract in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-nm in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-otool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-pdbutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profgen in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ranlib in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readelf in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rtdyld in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-sim in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-size in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-split in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-stress in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strings in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readtapi in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-undname in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-windres in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-c-test in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxfilt in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-xray in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml2obj in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find obj2yaml in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml-bench in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find verify-uselistorder in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find bugpoint in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-symbolizer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sancov in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sanstats in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-remarkutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/utils/lit/lit/main.py:74: note: The test suite configuration requested an individual test timeout of 0 seconds but a timeout of 300 seconds was requested on the command line. Forcing timeout to be 300 seconds.
+-- Testing: 810 tests, 4 workers --
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll (1 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll (2 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll (3 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/null-arm-type.ll (4 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll (5 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/context-phi-select.ll (6 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll (7 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll (8 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/deep-condition.ll (10 of 810)
+Testing:  0.. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90..
+********************
+Failed Tests (9):
+  LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll
+  LLVM :: Jeandle/type-check-elimination/context-phi-select.ll
+  LLVM :: Jeandle/type-check-elimination/deep-condition.ll
+  LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+  LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll
+  LLVM :: Jeandle/type-check-elimination/null-arm-type.ll
+  LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+  LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll
+  LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll
+
+
+Testing Time: 5.46s
+
+Total Discovered Tests: 810
+  Unsupported      :  25 (3.09%)
+  Passed           : 775 (95.68%)
+  Expectedly Failed:   1 (0.12%)
+  Failed           :   9 (1.11%)

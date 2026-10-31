@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-31",
+  "cpu": 8,
+  "affinity": [
+    8
+  ],
+  "siblings": "8-9",
+  "source": "ad38f632672c881708d0894acf56b72414c095f2",
+  "replay_sha256": "f25a3e99c6e680437d079840c4789c0614b63a8cfc28edcebe40f497e9f2578f",
+  "driver_sha256": "acd67bf6e17b1e526b109c48df322a98476ce671e35da8b4cd2dfeae6abe9b26",
+  "runner_sha256": "70ac1242399be47d6668b5826493be825141dd635091c60cc512b4a47addad46",
+  "support_sha256": "6b7c3751caf3d7dad8d6a544197a2ea343a941c138ad185e2ff67e1e55e3219e",
+  "rounds": 31,
+  "warmups": 3,
+  "interval": "native process user+system CPU; excludes IR creation/parsing, includes cache reset and edits",
+  "normalization": "mode-specific batches; each batch identical 32-query sequence; compare CPU per batch",
+  "target_cpu_s": 0.3,
+  "comparisons": [
+    "cached A/A",
+    "reference -> cached",
+    "nofinal -> cached",
+    "full -> cached"
+  ],
+  "batches": {
+    "same:cached": 21140,
+    "same:reference": 2340,
+    "same:nofinal": 4096,
+    "same:full": 20944,
+    "cross:cached": 4096,
+    "cross:reference": 1784,
+    "cross:nofinal": 4096,
+    "cross:full": 4096,
+    "same-edit:cached": 1024,
+    "same-edit:reference": 1269,
+    "same-edit:nofinal": 1062,
+    "same-edit:full": 1024,
+    "other-edit:cached": 1669,
+    "other-edit:reference": 1245,
+    "other-edit:nofinal": 1070,
+    "other-edit:full": 1024
+  },
+  "input_sha256": {
+    "same": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "cross": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "same-edit": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "other-edit": "3b688a5ccf352513feb43606ad9dc5703d4f39366b9b46cb56a8dc81a51c16d7"
+  }
+}

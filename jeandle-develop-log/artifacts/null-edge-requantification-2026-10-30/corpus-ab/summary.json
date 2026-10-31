@@ -1,0 +1,218 @@
+{
+  "recover-null-arm-vacuous": {
+    "wall_ns": {
+      "a_median": 410999484,
+      "b_median": 407982047,
+      "paired_change_pct": -0.7969056650882544,
+      "bootstrap_95pct": [
+        -1.3350310256242115,
+        -0.0202154901611018
+      ],
+      "absolute_pair_change_p95": 5.646268720184255,
+      "noise_floor_pct": 2.4013379769741494,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 409538000,
+      "b_median": 406438999,
+      "paired_change_pct": -0.7755616939790988,
+      "bootstrap_95pct": [
+        -1.3179914812469606,
+        -0.021591879512461443
+      ],
+      "absolute_pair_change_p95": 5.357470650621776,
+      "noise_floor_pct": 2.135751461607116,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "checkcast-expanded-phi": {
+    "wall_ns": {
+      "a_median": 432587872,
+      "b_median": 436318321,
+      "paired_change_pct": 0.8474212165406225,
+      "bootstrap_95pct": [
+        0.5016218951018336,
+        1.0511624763686944
+      ],
+      "absolute_pair_change_p95": 6.548578272153316,
+      "noise_floor_pct": 7.947766230432906,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 430987000,
+      "b_median": 434597999,
+      "paired_change_pct": 0.8891082485199098,
+      "bootstrap_95pct": [
+        0.5378591417298351,
+        1.0674310317185576
+      ],
+      "absolute_pair_change_p95": 6.536684275348681,
+      "noise_floor_pct": 7.808552169369909,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "frozen-null-edge": {
+    "wall_ns": {
+      "a_median": 424905485,
+      "b_median": 414784797,
+      "paired_change_pct": -2.300519032029169,
+      "bootstrap_95pct": [
+        -2.7455922450765446,
+        -2.019543248958311
+      ],
+      "absolute_pair_change_p95": 4.725173144651162,
+      "noise_floor_pct": 8.104201089314111,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 423300000,
+      "b_median": 413242000,
+      "paired_change_pct": -2.344853413710468,
+      "bootstrap_95pct": [
+        -2.7063550673281367,
+        -2.019390378171948
+      ],
+      "absolute_pair_change_p95": 4.737221692296956,
+      "noise_floor_pct": 8.056246193416893,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "null-both-edges": {
+    "wall_ns": {
+      "a_median": 309891994,
+      "b_median": 317533623,
+      "paired_change_pct": 2.795953194517753,
+      "bootstrap_95pct": [
+        1.8252766856772018,
+        2.989969622477928
+      ],
+      "absolute_pair_change_p95": 6.299673869302181,
+      "noise_floor_pct": 6.230965934906885,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 308564000,
+      "b_median": 316227999,
+      "paired_change_pct": 2.7698607522460117,
+      "bootstrap_95pct": [
+        1.7792103199974596,
+        2.9604956766653867
+      ],
+      "absolute_pair_change_p95": 6.662993154312158,
+      "noise_floor_pct": 6.254529106148032,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "null-threaded-edge": {
+    "wall_ns": {
+      "a_median": 388756001,
+      "b_median": 357806577,
+      "paired_change_pct": -7.891229288576717,
+      "bootstrap_95pct": [
+        -8.266837631486467,
+        -7.247978315077363
+      ],
+      "absolute_pair_change_p95": 9.158746058398059,
+      "noise_floor_pct": 10.422645854048962,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 387271000,
+      "b_median": 356228999,
+      "paired_change_pct": -7.908753096614374,
+      "bootstrap_95pct": [
+        -8.26959007618191,
+        -7.261545590378892
+      ],
+      "absolute_pair_change_p95": 9.154406443599218,
+      "noise_floor_pct": 10.489101135421908,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "checkcast-dissolved": {
+    "wall_ns": {
+      "a_median": 459230504,
+      "b_median": 425587652,
+      "paired_change_pct": -7.258215810687818,
+      "bootstrap_95pct": [
+        -7.889456646183657,
+        -6.639666950347012
+      ],
+      "absolute_pair_change_p95": 11.642775001674632,
+      "noise_floor_pct": 8.668317877285592,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 457432000,
+      "b_median": 423773999,
+      "paired_change_pct": -7.272699595578347,
+      "bootstrap_95pct": [
+        -7.661087509509057,
+        -6.639869866038772
+      ],
+      "absolute_pair_change_p95": 11.911285794615722,
+      "noise_floor_pct": 8.694208525342884,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "recover-osr-checkcast-edge": {
+    "wall_ns": {
+      "a_median": 367151910,
+      "b_median": 356078708,
+      "paired_change_pct": -3.280549163963964,
+      "bootstrap_95pct": [
+        -3.571826339376516,
+        -2.8822050330604254
+      ],
+      "absolute_pair_change_p95": 7.736577947030598,
+      "noise_floor_pct": 10.057386625848096,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 365837999,
+      "b_median": 354291999,
+      "paired_change_pct": -3.2529258385174176,
+      "bootstrap_95pct": [
+        -3.5727715802906235,
+        -2.8728279955952507
+      ],
+      "absolute_pair_change_p95": 7.431654165432988,
+      "noise_floor_pct": 10.079790938872058,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "method-handle-link-to-virtual": {
+    "wall_ns": {
+      "a_median": 402450786,
+      "b_median": 406758003,
+      "paired_change_pct": 1.4287623423499873,
+      "bootstrap_95pct": [
+        1.1182121204893258,
+        2.0290403204116014
+      ],
+      "absolute_pair_change_p95": 7.803966142847085,
+      "noise_floor_pct": 7.987550026513679,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 400356000,
+      "b_median": 405246000,
+      "paired_change_pct": 1.4848027714780665,
+      "bootstrap_95pct": [
+        1.104450302497506,
+        2.0211212921647403
+      ],
+      "absolute_pair_change_p95": 7.862959386551971,
+      "noise_floor_pct": 7.945208591244235,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  }
+}

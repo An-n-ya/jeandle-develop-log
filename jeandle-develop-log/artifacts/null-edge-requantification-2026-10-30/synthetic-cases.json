@@ -1,0 +1,32 @@
+[
+  {
+    "name": "deep-static",
+    "input": "/tmp/null-edge-workloads-20261030/deep-static/deep-static.ll",
+    "callback": "/tmp/null-edge-workloads-20261030/deep-static/deep-static.cblog",
+    "passes": "function(cha-devirtualization)"
+  },
+  {
+    "name": "wide-static",
+    "input": "/tmp/null-edge-workloads-20261030/wide-static/wide-static.ll",
+    "callback": "/tmp/null-edge-workloads-20261030/wide-static/wide-static.cblog",
+    "passes": "function(cha-devirtualization)"
+  },
+  {
+    "name": "leaf-static",
+    "input": "/tmp/null-edge-workloads-20261030/leaf-static/leaf-static.ll",
+    "callback": "/tmp/null-edge-workloads-20261030/leaf-static/leaf-static.cblog",
+    "passes": "function(cha-devirtualization)"
+  },
+  {
+    "name": "tce-cha",
+    "input": "/tmp/null-edge-workloads-20261030/tce-cha/tce-cha.ll",
+    "callback": "/tmp/null-edge-workloads-20261030/tce-cha/tce-cha.cblog",
+    "passes": "function(type-check-elimination,cha-devirtualization)"
+  },
+  {
+    "name": "virtual-cfg",
+    "input": "/tmp/null-edge-workloads-20261030/virtual-cfg/virtual-cfg.ll",
+    "callback": "/tmp/null-edge-workloads-20261030/virtual-cfg/virtual-cfg.cblog",
+    "passes": "function(cha-devirtualization)"
+  }
+]

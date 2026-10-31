@@ -1,0 +1,46 @@
+{
+  "cross-unique:cached": {
+    "checksum": 1408,
+    "cpu_s": 0.002306,
+    "facts_hits": 6076,
+    "final_hits": 0,
+    "mode": "cached",
+    "oracle_calls": 130,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.002316525
+  },
+  "cross-unique:reference": {
+    "checksum": 1408,
+    "cpu_s": 0.0018599999999999999,
+    "facts_hits": 0,
+    "final_hits": 0,
+    "mode": "reference",
+    "oracle_calls": 3168,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.001861826
+  },
+  "cross-unique:nofinal": {
+    "checksum": 1408,
+    "cpu_s": 0.001707,
+    "facts_hits": 6076,
+    "final_hits": 0,
+    "mode": "nofinal",
+    "oracle_calls": 130,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.001715724
+  },
+  "cross-unique:full": {
+    "checksum": 1408,
+    "cpu_s": 0.001988,
+    "facts_hits": 6076,
+    "final_hits": 0,
+    "mode": "full",
+    "oracle_calls": 130,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.001992266
+  }
+}

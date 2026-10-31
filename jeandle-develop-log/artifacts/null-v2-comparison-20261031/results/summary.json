@@ -1,0 +1,382 @@
+[
+  {
+    "kind": "native",
+    "case": "same",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 2.434443687049437,
+    "min_cpu_s": 0.351901,
+    "cost_ms": {
+      "base": 0.00868459474485726,
+      "null": 0.00422362080718332,
+      "v2": 0.017129334538362746
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -51.29000091467289,
+        "ci95": [
+          -51.48912247320445,
+          -51.12561937061878
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 97.37727605465965,
+        "ci95": [
+          96.4261805682924,
+          98.49854534375619
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 306.26828987648736,
+        "ci95": [
+          302.7188502791113,
+          308.1377551445194
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "cross-unique",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 5.36147533376643,
+    "min_cpu_s": 0.346768,
+    "cost_ms": {
+      "base": 0.022878051757812497,
+      "null": 0.02073380543301602,
+      "v2": 0.2329779077322937
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -9.693660147825023,
+        "ci95": [
+          -10.193389472551196,
+          -8.859040319567956
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 916.9845121869148,
+        "ci95": [
+          909.6505078687104,
+          923.4186249004866
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 1026.6717961043294,
+        "ci95": [
+          1019.8568864214722,
+          1034.7394397864869
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "cross",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 2.1664836692342426,
+    "min_cpu_s": 0.340639,
+    "cost_ms": {
+      "base": 0.015788994475138124,
+      "null": 0.01212548485879551,
+      "v2": 0.10418676757812499
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -23.16166457413602,
+        "ci95": [
+          -23.48772878661126,
+          -22.68508686686418
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 559.11961359458,
+        "ci95": [
+          554.8576445070271,
+          565.6462443831232
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 765.9640174612289,
+        "ci95": [
+          751.6974157650815,
+          768.0943262529973
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "same-edit",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 4.832806169404746,
+    "min_cpu_s": 0.339421,
+    "cost_ms": {
+      "base": 0.014027794020192571,
+      "null": 0.009083754846329627,
+      "v2": 0.46216894531249997
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -34.90733408891854,
+        "ci95": [
+          -35.81353449824587,
+          -33.59528851665049
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 3203.783039456991,
+        "ci95": [
+          3176.4021259846786,
+          3241.9441312900603
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 4962.317914488905,
+        "ci95": [
+          4899.434116796817,
+          5039.293213896816
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "other-edit",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 2.53987792173882,
+    "min_cpu_s": 0.3423,
+    "cost_ms": {
+      "base": 0.013998117195004803,
+      "null": 0.009202260696110272,
+      "v2": 0.21905811863391253
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -34.65887931488244,
+        "ci95": [
+          -35.082484685650996,
+          -33.94450124635028
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 1467.9917395703217,
+        "ci95": [
+          1451.5544213504998,
+          1474.192607214159
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 2286.595541181025,
+        "ci95": [
+          2259.1403969885846,
+          2303.4907208792324
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "opt",
+    "case": "deep-static",
+    "metric": "opt process CPU ms",
+    "aa_noise_p95": 2.2518777325398087,
+    "min_cpu_s": 0.24211900000001396,
+    "cost_ms": {
+      "base": 436.97200000002215,
+      "null": 246.05800000002986,
+      "v2": 849.7099999999658
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -43.55720988971073,
+        "ci95": [
+          -43.85993704370591,
+          -43.38337113387095
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 94.65727118492084,
+        "ci95": [
+          93.90497836241778,
+          95.61676585907371
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 245.7307117584699,
+        "ci95": [
+          244.3160446188446,
+          246.22211160252948
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "opt",
+    "case": "wide-static",
+    "metric": "opt process CPU ms",
+    "aa_noise_p95": 2.6021405779468543,
+    "min_cpu_s": 0.8255870000000236,
+    "cost_ms": {
+      "base": 1220.3070000000428,
+      "null": 840.9629999998698,
+      "v2": 2073.9200000000224
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -31.294398222263954,
+        "ci95": [
+          -31.515475636678435,
+          -30.99458247742509
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 70.06813053820757,
+        "ci95": [
+          69.49127716552556,
+          70.77276319000376
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 146.8278339946355,
+        "ci95": [
+          146.30136365101478,
+          148.11795518663234
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "opt",
+    "case": "leaf-static",
+    "metric": "opt process CPU ms",
+    "aa_noise_p95": 3.3119561772795847,
+    "min_cpu_s": 0.31295999999992574,
+    "cost_ms": {
+      "base": 377.42199999999923,
+      "null": 322.09600000009607,
+      "v2": 486.0919999999824
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -14.903143830042964,
+        "ci95": [
+          -15.049552918983021,
+          -14.21740215068632
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 28.851753018577963,
+        "ci95": [
+          28.177892941935223,
+          29.624197342145987
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 50.80534995769008,
+        "ci95": [
+          50.01108613308061,
+          52.0791162308466
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "opt",
+    "case": "tce-cha",
+    "metric": "opt process CPU ms",
+    "aa_noise_p95": 2.272000222545678,
+    "min_cpu_s": 0.24108699999995764,
+    "cost_ms": {
+      "base": 438.79500000000604,
+      "null": 248.151,
+      "v2": 872.9109999999239
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -43.37931712805606,
+        "ci95": [
+          -43.774801192944814,
+          -42.98242616047572
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 98.87461399048179,
+        "ci95": [
+          98.27803954505146,
+          100.01053866313651
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 251.09348743308658,
+        "ci95": [
+          249.69577852663406,
+          253.16080345154995
+        ],
+        "verdict": "regression"
+      }
+    }
+  },
+  {
+    "kind": "opt",
+    "case": "virtual-cfg",
+    "metric": "opt process CPU ms",
+    "aa_noise_p95": 2.088862964090532,
+    "min_cpu_s": 0.6935179999999512,
+    "cost_ms": {
+      "base": 840.8169999999551,
+      "null": 703.5179999999315,
+      "v2": 1130.3690000000515
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -16.34993014476175,
+        "ci95": [
+          -16.541941301753603,
+          -16.061838196077506
+        ],
+        "verdict": "improvement"
+      },
+      "base->v2": {
+        "change_pct": 34.616926156352655,
+        "ci95": [
+          33.993154008633674,
+          35.08301507009379
+        ],
+        "verdict": "regression"
+      },
+      "null->v2": {
+        "change_pct": 60.644520191137865,
+        "ci95": [
+          60.29812426843046,
+          61.45000414523179
+        ],
+        "verdict": "regression"
+      }
+    }
+  }
+]

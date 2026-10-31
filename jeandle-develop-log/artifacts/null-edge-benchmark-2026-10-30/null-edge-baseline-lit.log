@@ -1,0 +1,41 @@
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm/llvm/utils/lit/lit/main.py:74: note: The test suite configuration requested an individual test timeout of 0 seconds but a timeout of 300 seconds was requested on the command line. Forcing timeout to be 300 seconds.
+-- Testing: 810 tests, 4 workers --
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll (1 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll (2 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll (3 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll (4 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll (5 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll (6 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/null-arm-type.ll (7 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/context-phi-select.ll (8 of 810)
+Testing: 
+FAIL: LLVM :: Jeandle/type-check-elimination/deep-condition.ll (9 of 810)
+Testing:  0.. 10.. 20.. 30.. 40.. 50.. 60.. 70.. 80.. 90.. 
+********************
+Failed Tests (9):
+  LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll
+  LLVM :: Jeandle/type-check-elimination/context-phi-select.ll
+  LLVM :: Jeandle/type-check-elimination/deep-condition.ll
+  LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll
+  LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll
+  LLVM :: Jeandle/type-check-elimination/null-arm-type.ll
+  LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll
+  LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll
+  LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll
+
+
+Testing Time: 2.67s
+
+Total Discovered Tests: 810
+  Unsupported      :  25 (3.09%)
+  Passed           : 775 (95.68%)
+  Expectedly Failed:   1 (0.12%)
+  Failed           :   9 (1.11%)

@@ -1,0 +1,92 @@
+{
+  "arguments": {
+    "cases": "/tmp/null-edge-workloads-20261030/cases.json",
+    "a": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-baseline/build/bin/opt",
+    "b": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt",
+    "a_flag": [],
+    "b_flag": [],
+    "cpu": 8,
+    "out": "/tmp/null-edge-requant-results/synthetic-ab",
+    "repeats": 31,
+    "warmups": 3,
+    "seed": 20261102,
+    "min_cpu_ms": 200,
+    "calibration": "/tmp/null-edge-requant-results/synthetic-calibration.json",
+    "timeout": 120,
+    "noise_floor_pct": 0
+  },
+  "modes": {
+    "a": [
+      "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-baseline/build/bin/opt",
+      []
+    ],
+    "b": [
+      "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt",
+      []
+    ]
+  },
+  "binary_sha256": {
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-baseline/build/bin/opt": "9178f7ecec31eb734f573d2e0144b908e5525f700673c9623672ac0e091db86f",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt": "b3b274b3075e6b9d3123d328f4315bd49cff3cea10ac4ab2585a20407e8a4412"
+  },
+  "input_sha256": {
+    "/tmp/null-edge-workloads-20261030/deep-static/deep-static.ll": "261564c793c6aaf1c364e08a536ad90d59b34ae98acdddf8f28cb2032e6f6b01",
+    "/tmp/null-edge-workloads-20261030/deep-static/deep-static.cblog": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856",
+    "/tmp/null-edge-workloads-20261030/wide-static/wide-static.ll": "f2e04508d4c8b6d663c1cf54dac52d4a168290d9d926f0487d1eefb0cdaaa8b5",
+    "/tmp/null-edge-workloads-20261030/wide-static/wide-static.cblog": "8e5ed8df4e803f740139667536fc956ea2ac19d01f0fe4a3edb0d3d4a6da6be5",
+    "/tmp/null-edge-workloads-20261030/leaf-static/leaf-static.ll": "17e669737549501999616a933125cdb6936eb2adeb77fbed6a4b8bdaaa677012",
+    "/tmp/null-edge-workloads-20261030/leaf-static/leaf-static.cblog": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8",
+    "/tmp/null-edge-workloads-20261030/tce-cha/tce-cha.ll": "68a618f5fcf6985577bcad2b301e0b5c29579ff1a0c8f0fd6b38cce18bcb2e39",
+    "/tmp/null-edge-workloads-20261030/tce-cha/tce-cha.cblog": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856",
+    "/tmp/null-edge-workloads-20261030/virtual-cfg/virtual-cfg.ll": "c861ee249482d69689221594a4962e698ca0fe4ee5e125d5643fdb134b0ceb87",
+    "/tmp/null-edge-workloads-20261030/virtual-cfg/virtual-cfg.cblog": "6740a72b6f9b74cde67762f6ded8905a154a923be8f191bab0231066f3d279f8"
+  },
+  "affinity": [
+    8
+  ],
+  "platform": {
+    "sysname": "Linux",
+    "nodename": "archlinux",
+    "release": "7.1.3-arch2-2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu, 16 Jul 2026 17:41:28 +0000",
+    "machine": "x86_64"
+  },
+  "cases": [
+    {
+      "name": "deep-static",
+      "input": "/tmp/null-edge-workloads-20261030/deep-static/deep-static.ll",
+      "callback": "/tmp/null-edge-workloads-20261030/deep-static/deep-static.cblog",
+      "passes": "function(cha-devirtualization)"
+    },
+    {
+      "name": "wide-static",
+      "input": "/tmp/null-edge-workloads-20261030/wide-static/wide-static.ll",
+      "callback": "/tmp/null-edge-workloads-20261030/wide-static/wide-static.cblog",
+      "passes": "function(cha-devirtualization)"
+    },
+    {
+      "name": "leaf-static",
+      "input": "/tmp/null-edge-workloads-20261030/leaf-static/leaf-static.ll",
+      "callback": "/tmp/null-edge-workloads-20261030/leaf-static/leaf-static.cblog",
+      "passes": "function(cha-devirtualization)"
+    },
+    {
+      "name": "tce-cha",
+      "input": "/tmp/null-edge-workloads-20261030/tce-cha/tce-cha.ll",
+      "callback": "/tmp/null-edge-workloads-20261030/tce-cha/tce-cha.cblog",
+      "passes": "function(type-check-elimination,cha-devirtualization)"
+    },
+    {
+      "name": "virtual-cfg",
+      "input": "/tmp/null-edge-workloads-20261030/virtual-cfg/virtual-cfg.ll",
+      "callback": "/tmp/null-edge-workloads-20261030/virtual-cfg/virtual-cfg.cblog",
+      "passes": "function(cha-devirtualization)"
+    }
+  ],
+  "seed": 20261102,
+  "source_head": "e5475bb0df4671302665c6986e762bf892c3c98a",
+  "source_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "harness_sha256": "1fec545e3c23940bf79c2c9904a87d6f9f9055013e51c5231bc7ef3582de3065",
+  "topology/thread_siblings_list": "8-9",
+  "cpufreq/scaling_governor": "powersave"
+}

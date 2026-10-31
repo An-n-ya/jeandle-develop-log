@@ -1,0 +1,135 @@
+[==========] Running 48 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 45 tests from JavaTypeQueryTest
+[ RUN      ] JavaTypeQueryTest.SharedBaseTypes
+[       OK ] JavaTypeQueryTest.SharedBaseTypes (0 ms)
+[ RUN      ] JavaTypeQueryTest.CachedEntryNormalizesFreeze
+/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/unittests/IR/JavaTypeQueryTest.cpp:157: Failure
+Expected equality of these values:
+  Expected.Klass
+    Which is: 0
+  22U
+    Which is: 22
+
+/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/unittests/IR/JavaTypeQueryTest.cpp:158: Failure
+Expected equality of these values:
+  jeandle::getCachedJavaType(Wrapped, &DT, Context, nullptr, Cache, Info)
+    Which is: 64-byte object <16-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF 00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF>
+  Expected
+    Which is: 64-byte object <00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF 00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF>
+
+/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/unittests/IR/JavaTypeQueryTest.cpp:160: Failure
+Expected equality of these values:
+  jeandle::getCachedJavaType(F->getArg(0), &DT, Context, nullptr, Cache, Info)
+    Which is: 64-byte object <16-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF 00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF>
+  Expected
+    Which is: 64-byte object <00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF 00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00 FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF FF-FF>
+
+[  FAILED  ] JavaTypeQueryTest.CachedEntryNormalizesFreeze (0 ms)
+[ RUN      ] JavaTypeQueryTest.SharedFactsAcrossContexts
+[       OK ] JavaTypeQueryTest.SharedFactsAcrossContexts (0 ms)
+[ RUN      ] JavaTypeQueryTest.CompleteUnknownIsShared
+[       OK ] JavaTypeQueryTest.CompleteUnknownIsShared (0 ms)
+[ RUN      ] JavaTypeQueryTest.BudgetCutDoesNotPublishParent
+[       OK ] JavaTypeQueryTest.BudgetCutDoesNotPublishParent (0 ms)
+[ RUN      ] JavaTypeQueryTest.IrreducibleCycleStaysLocal
+[       OK ] JavaTypeQueryTest.IrreducibleCycleStaysLocal (0 ms)
+[ RUN      ] JavaTypeQueryTest.ResultInvalidationAfterConditionAndAttributeChange
+[       OK ] JavaTypeQueryTest.ResultInvalidationAfterConditionAndAttributeChange (0 ms)
+[ RUN      ] JavaTypeQueryTest.FinalTypesAreKeyedByContextBlock
+[       OK ] JavaTypeQueryTest.FinalTypesAreKeyedByContextBlock (0 ms)
+[ RUN      ] JavaTypeQueryTest.RecursiveFinalHitStillAppliesIncomingGuard
+[       OK ] JavaTypeQueryTest.RecursiveFinalHitStillAppliesIncomingGuard (0 ms)
+[ RUN      ] JavaTypeQueryTest.RecursiveFinalHitSavesPhiBudgetAndIsReadOnly
+[       OK ] JavaTypeQueryTest.RecursiveFinalHitSavesPhiBudgetAndIsReadOnly (0 ms)
+[ RUN      ] JavaTypeQueryTest.PhiCycleIntermediateIsNotPublished
+[       OK ] JavaTypeQueryTest.PhiCycleIntermediateIsNotPublished (0 ms)
+[ RUN      ] JavaTypeQueryTest.CompletePhiCacheCanImproveCyclePrecision
+[       OK ] JavaTypeQueryTest.CompletePhiCacheCanImproveCyclePrecision (0 ms)
+[ RUN      ] JavaTypeQueryTest.PhiWarmupOrderHonorsFiniteClassModel
+[       OK ] JavaTypeQueryTest.PhiWarmupOrderHonorsFiniteClassModel (0 ms)
+[ RUN      ] JavaTypeQueryTest.FactsBudgetCutDoesNotPublishFinalType
+[       OK ] JavaTypeQueryTest.FactsBudgetCutDoesNotPublishFinalType (0 ms)
+[ RUN      ] JavaTypeQueryTest.PhiBudgetCutDoesNotPublishFinalType
+[       OK ] JavaTypeQueryTest.PhiBudgetCutDoesNotPublishFinalType (0 ms)
+[ RUN      ] JavaTypeQueryTest.DisabledCacheBypassesFinalTypes
+[       OK ] JavaTypeQueryTest.DisabledCacheBypassesFinalTypes (0 ms)
+[ RUN      ] JavaTypeQueryTest.DisabledCacheUsesOriginalAfterAttributeChange
+[       OK ] JavaTypeQueryTest.DisabledCacheUsesOriginalAfterAttributeChange (0 ms)
+[ RUN      ] JavaTypeQueryTest.CachedAndOriginalQueriesAgreeAcrossBudgets
+[       OK ] JavaTypeQueryTest.CachedAndOriginalQueriesAgreeAcrossBudgets (0 ms)
+[ RUN      ] JavaTypeQueryTest.ValueInvalidationRetainsIndependentQueries
+[       OK ] JavaTypeQueryTest.ValueInvalidationRetainsIndependentQueries (0 ms)
+[ RUN      ] JavaTypeQueryTest.SelectiveBaseDeletionMatchesScanBaseline
+[       OK ] JavaTypeQueryTest.SelectiveBaseDeletionMatchesScanBaseline (0 ms)
+[ RUN      ] JavaTypeQueryTest.TypeFactCanBecomeKnownAndWeakensAfterRepeatedEdits
+[       OK ] JavaTypeQueryTest.TypeFactCanBecomeKnownAndWeakensAfterRepeatedEdits (0 ms)
+[ RUN      ] JavaTypeQueryTest.RepeatedTypeFactMutationRoundTripsThroughAValue
+[       OK ] JavaTypeQueryTest.RepeatedTypeFactMutationRoundTripsThroughAValue (0 ms)
+[ RUN      ] JavaTypeQueryTest.CallAndLoadTypeFactsAreInvalidatedBeforeEdits
+[       OK ] JavaTypeQueryTest.CallAndLoadTypeFactsAreInvalidatedBeforeEdits (0 ms)
+[ RUN      ] JavaTypeQueryTest.ParentQueryReusesAndInvalidatesCachedChild
+[       OK ] JavaTypeQueryTest.ParentQueryReusesAndInvalidatesCachedChild (0 ms)
+[ RUN      ] JavaTypeQueryTest.CacheHoleInUseGraphIsTraversedBeforeMutation
+[       OK ] JavaTypeQueryTest.CacheHoleInUseGraphIsTraversedBeforeMutation (0 ms)
+[ RUN      ] JavaTypeQueryTest.DeleteBlockDropsCachedLeavesAndRetainsIndependentValue
+[       OK ] JavaTypeQueryTest.DeleteBlockDropsCachedLeavesAndRetainsIndependentValue (0 ms)
+[ RUN      ] JavaTypeQueryTest.BatchedDiamondInvalidationMatchesSequential
+[       OK ] JavaTypeQueryTest.BatchedDiamondInvalidationMatchesSequential (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationAtValueLimitDoesNotClear
+[       OK ] JavaTypeQueryTest.InvalidationAtValueLimitDoesNotClear (5 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationJustBelowValueLimitDoesNotClear
+[       OK ] JavaTypeQueryTest.InvalidationJustBelowValueLimitDoesNotClear (5 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationUseThresholdUsesInclusiveBoundary
+[       OK ] JavaTypeQueryTest.InvalidationUseThresholdUsesInclusiveBoundary (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationUseLimitFallsBackToClear
+[       OK ] JavaTypeQueryTest.InvalidationUseLimitFallsBackToClear (1 ms)
+[ RUN      ] JavaTypeQueryTest.ActualLVIObservesDereferenceMutationAfterClear
+[       OK ] JavaTypeQueryTest.ActualLVIObservesDereferenceMutationAfterClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.DeadNarrowCFFLoadIsInvalidatedBeforeDeletion
+[       OK ] JavaTypeQueryTest.DeadNarrowCFFLoadIsInvalidatedBeforeDeletion (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidateBeforeRAUWAndDeletion
+[       OK ] JavaTypeQueryTest.InvalidateBeforeRAUWAndDeletion (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidateBeforeDeletionPreventsKeyReuse
+[       OK ] JavaTypeQueryTest.InvalidateBeforeDeletionPreventsKeyReuse (0 ms)
+[ RUN      ] JavaTypeQueryTest.CFGInvalidationRecomputesPhiAndRetainsLeafTypes
+[       OK ] JavaTypeQueryTest.CFGInvalidationRecomputesPhiAndRetainsLeafTypes (0 ms)
+[ RUN      ] JavaTypeQueryTest.GuardOperandChangeInvalidatesNonKeyDependencies
+[       OK ] JavaTypeQueryTest.GuardOperandChangeInvalidatesNonKeyDependencies (0 ms)
+[ RUN      ] JavaTypeQueryTest.FullInvalidationSwitchDropsAllEntries
+[       OK ] JavaTypeQueryTest.FullInvalidationSwitchDropsAllEntries (0 ms)
+[ RUN      ] JavaTypeQueryTest.UnsupportedInvalidationFallsBackToClear
+[       OK ] JavaTypeQueryTest.UnsupportedInvalidationFallsBackToClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.SelectiveResultStillDependsOnLVIInvalidation
+JavaTypeAnalysisInvalidated function: test dropped=1 self_preserved=1 dt_invalidated=0 lvi_invalidated=1 base_entries=1 path_facts_entries=3 final_entries=1
+[       OK ] JavaTypeQueryTest.SelectiveResultStillDependsOnLVIInvalidation (0 ms)
+[ RUN      ] JavaTypeQueryTest.JavaTypeResultPreserveAndReuseBoundary
+JavaTypeAnalysisInvalidated function: test dropped=0 self_preserved=1 dt_invalidated=0 lvi_invalidated=0 base_entries=1 path_facts_entries=3 final_entries=1
+JavaTypeAnalysisInvalidated function: test dropped=1 self_preserved=1 dt_invalidated=1 lvi_invalidated=0 base_entries=1 path_facts_entries=3 final_entries=1
+[       OK ] JavaTypeQueryTest.JavaTypeResultPreserveAndReuseBoundary (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationWorkLimitFallsBackToClear
+[       OK ] JavaTypeQueryTest.InvalidationWorkLimitFallsBackToClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.DereferenceChangeDropsContextualResults
+[       OK ] JavaTypeQueryTest.DereferenceChangeDropsContextualResults (0 ms)
+[ RUN      ] JavaTypeQueryTest.StatisticsAreOptIn
+[       OK ] JavaTypeQueryTest.StatisticsAreOptIn (0 ms)
+[ RUN      ] JavaTypeQueryTest.NullEdgeOracleBudgetLimitsTheOracle
+[       OK ] JavaTypeQueryTest.NullEdgeOracleBudgetLimitsTheOracle (0 ms)
+[----------] 45 tests from JavaTypeQueryTest (15 ms total)
+
+[----------] 3 tests from JavaTypeCacheReuseTest
+[ RUN      ] JavaTypeCacheReuseTest.DeepSameBlockFinalHitsAvoidOracle
+[       OK ] JavaTypeCacheReuseTest.DeepSameBlockFinalHitsAvoidOracle (0 ms)
+[ RUN      ] JavaTypeCacheReuseTest.DifferentBlocksReuseExpensiveFactsPrefix
+[       OK ] JavaTypeCacheReuseTest.DifferentBlocksReuseExpensiveFactsPrefix (0 ms)
+[ RUN      ] JavaTypeCacheReuseTest.BatchMutationRetainsOrDropsContextCorrectly
+[       OK ] JavaTypeCacheReuseTest.BatchMutationRetainsOrDropsContextCorrectly (0 ms)
+[----------] 3 tests from JavaTypeCacheReuseTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 48 tests from 2 test suites ran. (16 ms total)
+[  PASSED  ] 47 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] JavaTypeQueryTest.CachedEntryNormalizesFreeze
+
+ 1 FAILED TEST

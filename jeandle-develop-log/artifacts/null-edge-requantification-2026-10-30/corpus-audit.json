@@ -1,0 +1,106 @@
+[
+  {
+    "name": "recover-null-arm-vacuous",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 8192,
+    "pilot_cpu_seconds": 0.20057299999999997
+  },
+  {
+    "name": "checkcast-expanded-phi",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 16384,
+    "pilot_cpu_seconds": 0.111855
+  },
+  {
+    "name": "frozen-null-edge",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 8192,
+    "pilot_cpu_seconds": 0.209523
+  },
+  {
+    "name": "null-arm-type",
+    "a_exit": 0,
+    "a_verification_exit": -6,
+    "b_exit": 0,
+    "b_verification_exit": -6,
+    "same_ir": true
+  },
+  {
+    "name": "null-both-edges",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 16384,
+    "pilot_cpu_seconds": 0.09281800000000001
+  },
+  {
+    "name": "null-guard-forms",
+    "a_exit": 0,
+    "a_verification_exit": -6,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": false
+  },
+  {
+    "name": "null-threaded-edge",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 16384,
+    "pilot_cpu_seconds": 0.08854399999999996
+  },
+  {
+    "name": "checkcast-dissolved",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 20480,
+    "pilot_cpu_seconds": 0.08314399999999997
+  },
+  {
+    "name": "condition-value-domain",
+    "a_exit": 0,
+    "a_verification_exit": -6,
+    "b_exit": 0,
+    "b_verification_exit": -6,
+    "same_ir": true
+  },
+  {
+    "name": "recover-osr-checkcast-edge",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 20480,
+    "pilot_cpu_seconds": 0.075793
+  },
+  {
+    "name": "method-handle-link-to-virtual",
+    "a_exit": 0,
+    "a_verification_exit": 0,
+    "b_exit": 0,
+    "b_verification_exit": 0,
+    "same_ir": true,
+    "replicas": 12288,
+    "pilot_cpu_seconds": 0.13867400000000002
+  }
+]

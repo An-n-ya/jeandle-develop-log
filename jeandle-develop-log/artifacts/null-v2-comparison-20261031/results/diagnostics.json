@@ -1,0 +1,167 @@
+{
+  "same:base": {
+    "checksum": 1408,
+    "cpu_s": 0.0008789999999999998,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 68,
+    "queries": 64,
+    "scenario": "same",
+    "wall_s": 0.000880356
+  },
+  "same:null": {
+    "checksum": 1408,
+    "cpu_s": 0.0004460000000000002,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 0,
+    "queries": 64,
+    "scenario": "same",
+    "wall_s": 0.000443849
+  },
+  "same:v2": {
+    "checksum": 1408,
+    "cpu_s": 0.0009519999999999999,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 68,
+    "queries": 64,
+    "scenario": "same",
+    "wall_s": 0.000958216
+  },
+  "cross-unique:base": {
+    "checksum": 1408,
+    "cpu_s": 0.0014289999999999997,
+    "facts_hits": 62,
+    "final_hits": 0,
+    "mode": "cached",
+    "oracle_calls": 130,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.001433391
+  },
+  "cross-unique:null": {
+    "checksum": 1408,
+    "cpu_s": 0.000729,
+    "facts_hits": 62,
+    "final_hits": 0,
+    "mode": "cached",
+    "oracle_calls": 0,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.000726775
+  },
+  "cross-unique:v2": {
+    "checksum": 1408,
+    "cpu_s": 0.0019630000000000003,
+    "facts_hits": 6076,
+    "final_hits": 0,
+    "mode": "cached",
+    "oracle_calls": 130,
+    "queries": 64,
+    "scenario": "cross-unique",
+    "wall_s": 0.001968725
+  },
+  "cross:base": {
+    "checksum": 1408,
+    "cpu_s": 0.0011090000000000002,
+    "facts_hits": 30,
+    "final_hits": 32,
+    "mode": "cached",
+    "oracle_calls": 98,
+    "queries": 64,
+    "scenario": "cross",
+    "wall_s": 0.00110902
+  },
+  "cross:null": {
+    "checksum": 1408,
+    "cpu_s": 0.0005579999999999999,
+    "facts_hits": 30,
+    "final_hits": 32,
+    "mode": "cached",
+    "oracle_calls": 0,
+    "queries": 64,
+    "scenario": "cross",
+    "wall_s": 0.000560874
+  },
+  "cross:v2": {
+    "checksum": 1408,
+    "cpu_s": 0.0013920000000000002,
+    "facts_hits": 2460,
+    "final_hits": 32,
+    "mode": "cached",
+    "oracle_calls": 98,
+    "queries": 64,
+    "scenario": "cross",
+    "wall_s": 0.001395692
+  },
+  "same-edit:base": {
+    "checksum": 1408,
+    "cpu_s": 0.0008850000000000002,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 68,
+    "queries": 64,
+    "scenario": "same-edit",
+    "wall_s": 0.000888026
+  },
+  "same-edit:null": {
+    "checksum": 1408,
+    "cpu_s": 0.000492,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 0,
+    "queries": 64,
+    "scenario": "same-edit",
+    "wall_s": 0.000495585
+  },
+  "same-edit:v2": {
+    "checksum": 1408,
+    "cpu_s": 0.0019500000000000001,
+    "facts_hits": 0,
+    "final_hits": 0,
+    "mode": "cached",
+    "oracle_calls": 2176,
+    "queries": 64,
+    "scenario": "same-edit",
+    "wall_s": 0.001953218
+  },
+  "other-edit:base": {
+    "checksum": 1408,
+    "cpu_s": 0.001026,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 68,
+    "queries": 64,
+    "scenario": "other-edit",
+    "wall_s": 0.00102654
+  },
+  "other-edit:null": {
+    "checksum": 1408,
+    "cpu_s": 0.0004450000000000001,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 0,
+    "queries": 64,
+    "scenario": "other-edit",
+    "wall_s": 0.000445326
+  },
+  "other-edit:v2": {
+    "checksum": 1408,
+    "cpu_s": 0.001396,
+    "facts_hits": 0,
+    "final_hits": 62,
+    "mode": "cached",
+    "oracle_calls": 2176,
+    "queries": 64,
+    "scenario": "other-edit",
+    "wall_s": 0.001398828
+  }
+}

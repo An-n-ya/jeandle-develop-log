@@ -1,0 +1,137 @@
+{
+  "deep-static": {
+    "wall_ns": {
+      "a_median": 246356575,
+      "b_median": 247196288,
+      "paired_change_pct": 0.8817687909946414,
+      "bootstrap_95pct": [
+        -0.6091346942093567,
+        1.3571637541759163
+      ],
+      "absolute_pair_change_p95": 1.3571637541759163,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 245526000,
+      "b_median": 246232999,
+      "paired_change_pct": 0.8487363259147562,
+      "bootstrap_95pct": [
+        -0.5760625462109092,
+        1.010780302055303
+      ],
+      "absolute_pair_change_p95": 1.010780302055303,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "wide-static": {
+    "wall_ns": {
+      "a_median": 843398676,
+      "b_median": 838423861,
+      "paired_change_pct": -0.00917513925365876,
+      "bootstrap_95pct": [
+        -1.9477725312752825,
+        3.2897472796127536
+      ],
+      "absolute_pair_change_p95": 3.2897472796127536,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 841098000,
+      "b_median": 836150000,
+      "paired_change_pct": -0.009710848082256085,
+      "bootstrap_95pct": [
+        -1.9311176814049924,
+        3.2908173601649215
+      ],
+      "absolute_pair_change_p95": 3.2908173601649215,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "leaf-static": {
+    "wall_ns": {
+      "a_median": 323139123,
+      "b_median": 325379146,
+      "paired_change_pct": 0.6932069936947949,
+      "bootstrap_95pct": [
+        -0.9672564565860853,
+        1.8817764593567654
+      ],
+      "absolute_pair_change_p95": 1.8817764593567654,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 321069000,
+      "b_median": 324020999,
+      "paired_change_pct": 0.9935555908543003,
+      "bootstrap_95pct": [
+        -0.9734158457107012,
+        1.8944878036336155
+      ],
+      "absolute_pair_change_p95": 1.8944878036336155,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "tce-cha": {
+    "wall_ns": {
+      "a_median": 251112712,
+      "b_median": 252173729,
+      "paired_change_pct": -0.054521846028887655,
+      "bootstrap_95pct": [
+        -1.7402951993968574,
+        1.0648921889327312
+      ],
+      "absolute_pair_change_p95": 1.7402951993968574,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 250214000,
+      "b_median": 251141000,
+      "paired_change_pct": 0.37048286666614416,
+      "bootstrap_95pct": [
+        -1.7369711547863487,
+        1.0561062717418856
+      ],
+      "absolute_pair_change_p95": 1.7369711547863487,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  },
+  "virtual-cfg": {
+    "wall_ns": {
+      "a_median": 710276676,
+      "b_median": 709986165,
+      "paired_change_pct": -0.04090110372707567,
+      "bootstrap_95pct": [
+        -1.4997436753367066,
+        3.8153684884909556
+      ],
+      "absolute_pair_change_p95": 3.8153684884909556,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "cpu_ns": {
+      "a_median": 707500000,
+      "b_median": 706817000,
+      "paired_change_pct": -0.18682746349591994,
+      "bootstrap_95pct": [
+        -1.4724141356171616,
+        3.6499759954093047
+      ],
+      "absolute_pair_change_p95": 3.6499759954093047,
+      "noise_floor_pct": 0,
+      "verdict": "inconclusive"
+    },
+    "sample_duration_ok": true
+  }
+}

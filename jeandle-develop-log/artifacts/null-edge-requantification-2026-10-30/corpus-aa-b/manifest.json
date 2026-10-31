@@ -1,0 +1,131 @@
+{
+  "arguments": {
+    "cases": "/tmp/null-edge-requant-inputs/corpus-cases.json",
+    "a": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt",
+    "b": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt",
+    "a_flag": [],
+    "b_flag": [],
+    "cpu": 8,
+    "out": "/tmp/null-edge-requant-results/corpus-aa-b",
+    "repeats": 15,
+    "warmups": 3,
+    "seed": 20261101,
+    "min_cpu_ms": 200,
+    "calibration": null,
+    "timeout": 120,
+    "noise_floor_pct": 0
+  },
+  "modes": {
+    "a": [
+      "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt",
+      []
+    ],
+    "b": [
+      "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt",
+      []
+    ]
+  },
+  "binary_sha256": {
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/build/bin/opt": "b3b274b3075e6b9d3123d328f4315bd49cff3cea10ac4ab2585a20407e8a4412"
+  },
+  "input_sha256": {
+    "/tmp/null-edge-requant-inputs/recover-null-arm-vacuous.ll": "499160a430dd3f8e6208deabb088a520bce722201b0ac97d544be08533ce3445",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/java-type-metadata-recovery/Inputs/recover-null-arm-vacuous.cblog": "a118dbc0604eb21737e60e29bb5d5a393b30a02fd106dd4d1bf4f05c859712f4",
+    "/tmp/null-edge-requant-inputs/checkcast-expanded-phi.ll": "395dc4010de88c4ffb6dd8776809ed48be7cc2cc8757fb87ca15a1c21891940e",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/checkcast-expanded-phi.cblog": "7ffa2c2a343e12ecdd5b37ff649d28c100423d3a62adc6d5447a3eded5d9a97f",
+    "/tmp/null-edge-requant-inputs/frozen-null-edge.ll": "ba59fcd5da8fcbfea540c14e5e21b7bcd9989d8746ff9ada954c345369d96974",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/frozen-null-edge.cblog": "2a0d2eb4899327fa20ac5bdc88a14064098f21fdb8b1b1f355e4bd4bc67ff341",
+    "/tmp/null-edge-requant-inputs/null-both-edges.ll": "665598ca1a6bd16f202d05adc72bcb73dca748f6cdbafdaba825caef891727ad",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/null-both-edges.cblog": "f2940b07c9d2f4a59847e2df3af5b992e3f627f5f32921aed203ca65ff93c850",
+    "/tmp/null-edge-requant-inputs/null-threaded-edge.ll": "0380f7f7c02856140f0ad7470d0f149aacce0ea20f4b13645560b34998da216a",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/null-threaded-edge.cblog": "a4d69d70280ed433895f66d046fa629cfa8d5d6040c91d63571a25e96ad80361",
+    "/tmp/null-edge-requant-inputs/checkcast-dissolved.ll": "e73991395ca936a258b5b9002e4b44fc94b6b6b5b601bc641e161bedce51b545",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/checkcast-dissolved.cblog": "72be6afcc9c0a503331d00c026b42a237d6bae2c2e6a37f91e10e05d24ac02bf",
+    "/tmp/null-edge-requant-inputs/recover-osr-checkcast-edge.ll": "f891bc2a2d38f01216d14e91e81aa1596d29fbd182dd5fe6526ef6cd03009615",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/java-type-metadata-recovery/Inputs/recover-osr-checkcast-edge.cblog": "f5927aee6fb41dcad9744398e2fa7d7434ba8b0b63076cc9edf0e2830a4902f8",
+    "/tmp/null-edge-requant-inputs/method-handle-link-to-virtual.ll": "9fa6ab87e46e6b88e80ef980e4868796356ef0856d05a5e39137b72375099150",
+    "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/cha-devirtualization/Inputs/method-handle-link-to-virtual.cblog": "81a4fed6ea04690acb41c07e0b5fc227675c3b90c1d41b6c412d0ef6df07e508"
+  },
+  "affinity": [
+    8
+  ],
+  "platform": {
+    "sysname": "Linux",
+    "nodename": "archlinux",
+    "release": "7.1.3-arch2-2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu, 16 Jul 2026 17:41:28 +0000",
+    "machine": "x86_64"
+  },
+  "cases": [
+    {
+      "name": "recover-null-arm-vacuous",
+      "input": "/tmp/null-edge-requant-inputs/recover-null-arm-vacuous.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/java-type-metadata-recovery/Inputs/recover-null-arm-vacuous.cblog",
+      "passes": "function(recover-type-info)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/java-type-metadata-recovery/recover-null-arm-vacuous.ll",
+      "replicas": 8192
+    },
+    {
+      "name": "checkcast-expanded-phi",
+      "input": "/tmp/null-edge-requant-inputs/checkcast-expanded-phi.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/checkcast-expanded-phi.cblog",
+      "passes": "function(type-check-elimination)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/checkcast-expanded-phi.ll",
+      "replicas": 16384
+    },
+    {
+      "name": "frozen-null-edge",
+      "input": "/tmp/null-edge-requant-inputs/frozen-null-edge.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/frozen-null-edge.cblog",
+      "passes": "function(type-check-elimination)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/frozen-null-edge.ll",
+      "replicas": 8192
+    },
+    {
+      "name": "null-both-edges",
+      "input": "/tmp/null-edge-requant-inputs/null-both-edges.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/null-both-edges.cblog",
+      "passes": "function(type-check-elimination)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/null-both-edges.ll",
+      "replicas": 16384
+    },
+    {
+      "name": "null-threaded-edge",
+      "input": "/tmp/null-edge-requant-inputs/null-threaded-edge.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/null-threaded-edge.cblog",
+      "passes": "function(type-check-elimination)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/null-threaded-edge.ll",
+      "replicas": 16384
+    },
+    {
+      "name": "checkcast-dissolved",
+      "input": "/tmp/null-edge-requant-inputs/checkcast-dissolved.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/Inputs/checkcast-dissolved.cblog",
+      "passes": "function(type-check-elimination)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/type-check-elimination/checkcast-dissolved.ll",
+      "replicas": 20480
+    },
+    {
+      "name": "recover-osr-checkcast-edge",
+      "input": "/tmp/null-edge-requant-inputs/recover-osr-checkcast-edge.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/java-type-metadata-recovery/Inputs/recover-osr-checkcast-edge.cblog",
+      "passes": "function(recover-type-info)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/java-type-metadata-recovery/recover-osr-checkcast-edge.ll",
+      "replicas": 20480
+    },
+    {
+      "name": "method-handle-link-to-virtual",
+      "input": "/tmp/null-edge-requant-inputs/method-handle-link-to-virtual.ll",
+      "callback": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/cha-devirtualization/Inputs/method-handle-link-to-virtual.cblog",
+      "passes": "function(cha-devirtualization)",
+      "original": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark/llvm/test/Jeandle/cha-devirtualization/method-handle-link-to-virtual.ll",
+      "replicas": 12288
+    }
+  ],
+  "seed": 20261101,
+  "source_head": "e5475bb0df4671302665c6986e762bf892c3c98a",
+  "source_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "harness_sha256": "1fec545e3c23940bf79c2c9904a87d6f9f9055013e51c5231bc7ef3582de3065",
+  "topology/thread_siblings_list": "8-9",
+  "cpufreq/scaling_governor": "powersave"
+}

@@ -1,0 +1,2628 @@
+From 2754b2fbfa12a6c19b13844ba4f45b32c8065221 Mon Sep 17 00:00:00 2001
+From: Annya <annya.host@gmail.com>
+Date: Fri, 30 Oct 2026 09:17:58 +0800
+Subject: [PATCH] Optimize JavaType null-edge queries with structural filtering
+ and budgets
+
+---
+ javatype-null-edge-environment.json           |  89 +++
+ javatype-null-edge-report.md                  | 479 ++++++++++++++
+ .../llvm/Analysis/Jeandle/JavaTypeAnalysis.h  |  19 +
+ .../Analysis/Jeandle/JavaTypeAnalysisStats.h  |  13 +
+ .../llvm/Analysis/Jeandle/LVINullEdgeOracle.h |  41 ++
+ llvm/include/llvm/IR/Jeandle/JavaType.h       | 207 +++++++
+ llvm/lib/Analysis/Jeandle/CachedJavaType.cpp  | 138 +++--
+ .../lib/Analysis/Jeandle/JavaTypeAnalysis.cpp |  75 ++-
+ .../Jeandle/JavaTypeAnalysisStats.cpp         |  77 +++
+ .../Analysis/Jeandle/LVINullEdgeOracle.cpp    |  98 ++-
+ llvm/lib/IR/Jeandle/JavaType.cpp              | 584 ++++++++++++++++--
+ .../Jeandle/CHADevirtualization.cpp           |   3 +
+ .../Jeandle/ConstantFieldFolding.cpp          |   4 +
+ .../Transforms/Jeandle/RecoverTypeInfo.cpp    |   3 +
+ .../Jeandle/TypeCheckElimination.cpp          |   3 +
+ .../pass-local-production-hook.ll             |  61 ++
+ .../Inputs/null-edge-shapes.cblog             |   8 +
+ .../null-edge-phi-null-arm.ll                 |  37 ++
+ .../null-edge-shapes.ll                       |  94 +++
+ .../IR/JavaTypeCacheReuseTestSupport.h        |  17 +-
+ llvm/unittests/IR/JavaTypeQueryTest.cpp       |  88 +++
+ 21 files changed, 2029 insertions(+), 109 deletions(-)
+ create mode 100644 javatype-null-edge-environment.json
+ create mode 100644 javatype-null-edge-report.md
+ create mode 100644 llvm/test/Jeandle/java-type-cache-reuse/pass-local-production-hook.ll
+ create mode 100644 llvm/test/Jeandle/type-check-elimination/Inputs/null-edge-shapes.cblog
+ create mode 100644 llvm/test/Jeandle/type-check-elimination/null-edge-phi-null-arm.ll
+ create mode 100644 llvm/test/Jeandle/type-check-elimination/null-edge-shapes.ll
+
+diff --git a/javatype-null-edge-environment.json b/javatype-null-edge-environment.json
+new file mode 100644
+index 000000000000..160c96d670a3
+--- /dev/null
++++ b/javatype-null-edge-environment.json
+@@ -0,0 +1,89 @@
++{
++  "report": "JavaType null-edge (isNullEdge) optimization S1-S5 execution report",
++  "date": "2026-10-28",
++  "repository": {
++    "root": "/home/annya/playground/jeandle/jeandle/jeandle-llvm",
++    "branch": "test/javatype-cache-design",
++    "head": "b121fa56710a0265d66ae5fa5c0b1cc0aa10ced6",
++    "head_date": "2026-10-26T13:50:15+08:00",
++    "head_subject": "test(jeandle): add JavaType cache reuse mechanism tests",
++    "worktree": "15 modified tracked files + 4 new untracked test files (all changes uncommitted)"
++  },
++  "machine": {
++    "cpu_model": "Genuine Intel(R) 0000",
++    "cpu_cores": 32,
++    "memory_total_kb": 65568784,
++    "os": "Arch Linux",
++    "kernel": "Linux 7.1.3-arch2-2 x86_64",
++    "note": "shared machine; wall-clock measurements carry visible noise (see the noise calibration section)"
++  },
++  "build": {
++    "dir": "build/build-ninja-release",
++    "cmake_build_type": "Release",
++    "cxx_flags": "-O3 -DNDEBUG",
++    "llvm_enable_assertions": "OFF",
++    "llvm_targets_to_build": "X86",
++    "cxx_compiler": "/home/annya/playground/jeandle/jeandle/tools/bin/g++ (GCC 16.1.1)",
++    "llvm_version": "22.0.0git",
++    "tool_under_test": "build/build-ninja-release/bin/opt"
++  },
++  "harness": {
++    "dir": "/tmp/jt-measure",
++    "scripts": [
++      "measure.py (interleaved A/B, median/min, IR equality check)",
++      "verify.sh (cached engine vs reference engine differential)",
++      "litcmp.sh (lit failure list snapshot)",
++      "oraclecorpus.py (null-edge counters aggregated over llvm/test/Jeandle)",
++      "oraclefocus.py (focused A/B over the 11 oracle-touching corpus files)",
++      "budgetdist.sh (budget distribution; known coverage gap)",
++      "mkbig.py / calib.py (workload generation and calibration)"
++    ],
++    "env_note": "every command must run with `env -u LD_LIBRARY_PATH`; the agent runtime injects an incompatible libstdc++ into LD_LIBRARY_PATH",
++    "synthetic_workloads": "/tmp/jt-e0/try2 (deep-static, wide-static, leaf-static, tce-cha, virtual-cfg)"
++  },
++  "options_introduced": {
++    "jeandle-disable-null-edge-oracle": "E0 experiment: answer every oracle query negatively (keep every edge). Default false.",
++    "jeandle-max-null-edge-oracle-calls": "S5 per-query budget for oracle calls. Default 128.",
++    "jeandle-null-edge-block-lvi": "S4 level 2 (LVI.getConstant block-level null proof). Default false (measured, not enabled)."
++  },
++  "baseline_pristine_head": {
++    "lit": {
++      "total": 808,
++      "failed": 10,
++      "failed_list": [
++        "Jeandle/type-check-elimination/condition-value-domain.ll",
++        "Jeandle/type-check-elimination/context-phi-select.ll",
++        "Jeandle/type-check-elimination/deep-condition.ll",
++        "Jeandle/type-check-elimination/freeze-and-identity-patterns.ll",
++        "Jeandle/type-check-elimination/frozen-obj-check.ll",
++        "Jeandle/type-check-elimination/null-arm-type.ll",
++        "Jeandle/type-check-elimination/null-guard-forms.ll",
++        "Jeandle/type-check-elimination/switch-and-frozen-guards.ll",
++        "Jeandle/type-check-elimination/trunc-value-domain.ll",
++        "Jeandle/type-check-elimination/xor-both-traced.ll"
++      ]
++    },
++    "unit_tests": {
++      "total": 47,
++      "passed": 46,
++      "failed": 1,
++      "failed_test": "JavaTypeQueryTest.CachedEntryNormalizesFreeze"
++    }
++  },
++  "final_state": {
++    "lit": {
++      "total": 808,
++      "passed": 775,
++      "xfail": 1,
++      "failed": 9,
++      "note": "the 9 failures are the pristine 10 minus null-guard-forms.ll (fixed by S3); the XFAIL is the new phi-null-arm gap pin"
++    },
++    "unit_tests": {
++      "total": 48,
++      "passed": 47,
++      "failed": 1,
++      "failed_test": "JavaTypeQueryTest.CachedEntryNormalizesFreeze",
++      "note": "the added NullEdgeOracleBudgetLimitsTheOracle test passes"
++    }
++  }
++}
+diff --git a/javatype-null-edge-report.md b/javatype-null-edge-report.md
+new file mode 100644
+index 000000000000..787068a52b7c
+--- /dev/null
++++ b/javatype-null-edge-report.md
+@@ -0,0 +1,479 @@
++# JavaType null 边判定（isNullEdge）优化执行报告 —— 方案 S1~S5
++
++日期：2026-10-28
++对象：分支 `test/javatype-cache-design`，HEAD `b121fa56710a`（工作树未提交，15 个已改文件 + 4 个新测试文件）
++依据：《JavaType null 边判定（isNullEdge）的必要性与优化计划》附件（§4 方案、§5 落地顺序、§6 不变量、§7 交付物、§8 未覆盖项）
++
++> 本报告中每一条数字都标注了来源：
++> **【测】** = 本次实测（数据文件见 §11）；
++> **【推】** = 由实测数据推算；
++> **【猜】** = 计划或源码阅读给出的假设，本次未验证或被实测推翻。
++
++---
++
++## 0. 结论摘要
++
++| 方案 | 状态 | 净效果【测】 | 结论 |
++|---|---|---|---|
++| 阶段0（4 个 stat + E0） | 完成 | 4 个计数器落地；E0 在合成 workload 上省掉 50–85% 的查询时间，在分支自带语料上只省 5.4% | 方向成立，但收益高度依赖语料 |
++| S1 join unknown 短路 | 完成，保留 | 输出严格等价；耗时在噪声量级 | 零风险，保留 |
++| S2 否定性预过滤 | 完成，保留 | 5 个合成 workload 的 oracle 调用 **960/16128/3968/960/7936 → 全部 0** | **本次最大收益**，保留 |
++| S3 对称化支配链 + reference 兜底 | 完成，保留 | lit 失败 **10 → 9**（修好 `null-guard-forms.ll`）；差分 5/5；单测 47/48 | 修好了一个既有的精度不一致，保留 |
++| S5 预算 + 开关 | 完成，保留 | 默认 128；5 个 workload 上预算均未触发（exhausted=0） | 提供编译时间上界，保留 |
++| S4 第 1 级（块级三值状态） | 完成，保留 | 结构扫描与预过滤合并为一次支配链遍历；wide −38%~−56%、leaf −32%~−34%、virtual-cfg −13%~−30%、deep −5%、tce-cha ± | 保留，但收益幅度受噪声影响很大 |
++| S4 第 2 级（LVI.getConstant） | **实现完成但默认关闭（等价回退）** | 成本比 ≈ 1:1；语料 LVI 时间 −7%~−22%，占总查询时间 <5% | **不启用**：收益不显著 + 会改变 oracle 的 true 答案集合，与 §4 总原则/§6 方向约束冲突 |
++| S4a（V,From) 记忆化 | **已回退（代码已删）** | 5 个 workload 一致变慢（leaf +204%、wide +46%、virtual-cfg +49%） | 回退 |
++| S6 / S7 | 未做 | — | 计划标注为可选，且需先有命中率数据；本次不做 |
++
++**总计**：分支自带 lit 语料从 **10 条失败降到 9 条**，单测从 46/47 提升到 47/48（新增 1 个预算单测），没有引入任何新失败；合成 workload 上 null 边 oracle 的调用次数与 LVI 时间都归零。
++
++---
++
++## 1. 环境
++
++见同目录 [javatype-null-edge-environment.json](file:///home/annya/playground/jeandle/jeandle/jeandle-llvm/javatype-null-edge-environment.json)。要点：
++
++- 机器：32 核 Intel(R) 0000 / 64 GB / Arch Linux（**共享机器**，墙钟时间有明显噪声，见 §10）
++- 构建：`build/build-ninja-release`，Release `-O3 -DNDEBUG`，assertions OFF，LLVM 22.0.0git
++- 被测工具：`build/build-ninja-release/bin/opt`
++- 所有命令必须 `env -u LD_LIBRARY_PATH`（agent 运行时注入的 libstdc++ 与系统不兼容；**上一版报告里的 "oracle 0 calls" 就是这个 harness bug 造成的误报，本次已更正**）
++
++---
++
++## 2. 基线（原始 HEAD，stash 后重建实测）
++
++**【测】** `git stash` → 重编译 → 跑 lit/单测：
++
++- lit：808 个用例，**10 条失败**：
++  `condition-value-domain` / `context-phi-select` / `deep-condition` / `freeze-and-identity-patterns` / `frozen-obj-check` / `null-arm-type` / `null-guard-forms` / `switch-and-frozen-guards` / `trunc-value-domain` / `xor-both-traced`（全部在 `type-check-elimination/`）
++- 单测：47 个用例，46 通过，1 失败：`JavaTypeQueryTest.CachedEntryNormalizesFreeze`（**既有失败**，与本次改动无关：本次对该文件的 diff 只在文件末尾追加了一个测试）
++
++计划 §5 的判定标准写的是“lit 全绿”，但分支 HEAD 本身就不是全绿的（10 条既有失败）。因此本报告的判定标准改为 **“不新增失败，且失败集合是既有集合的子集”**。这一条在最终状态达成：9 = 10 − `null-guard-forms.ll`（S3 修好）。
++
++---
++
++## 3. 阶段 0：4 个 stat + E0（恒 false oracle）
++
++### 3.1 落地的 4 个 stat【测】
++
++`llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp` 新增（均为 `ALWAYS_ENABLED_STATISTIC`，热路径只累加线程局部计数器，每个顶层查询刷新一次，**不引入 atomic**）：
++
++| stat | 含义 |
++|---|---|
++| `null-edge oracle calls` | oracle 调用总次数 |
++| `null-edge oracle structural hits` | L0 结构快路解决的数量 |
++| `null-edge oracle true answers` | 答“是”的次数（唯一能移除一条 join 臂的答案） |
++| `null-edge oracle lvi time (ns)` | 累计 LVI 耗时 |
++
++另有两个派生计数（`null-edge prefilter hits`、`null-edge oracle budget …`），分别在 S2、S5 引入。
++
++### 3.2 四个 stat 的实际计数【测】
++
++在 5 个合成 workload 上（**阶段 0 代码，即 S1 之前**；`e0.json` 的 `normal` 行）：
++
++| workload | calls | structural | true | LVI ns | total query ns | LVI 占查询时间 |
++|---|---|---|---|---|---|---|
++| deep-static | 960 | 0 | 0 | 6,576,597 | 7,563,106 | **86.9%** |
++| wide-static | 16,128 | 0 | 0 | 7,604,899 | 11,168,077 | **68.1%** |
++| leaf-static | 3,968 | 0 | 0 | 3,204,708 | 5,916,114 | **54.2%** |
++| tce-cha | 960 | 0 | 0 | 5,024,930 | 5,780,492 | **86.9%** |
++| virtual-cfg | 7,936 | 0 | 0 | 7,349,679 | 16,289,454 | **45.1%** |
++
++在分支自带 lit 语料上（**当前实现**，`oraclecorpus.py`，635/815 个 `.ll` 可运行，5 次重复取中位数）：
++
++| 指标 | 值 |
++|---|---|
++| oracle calls | 20（分布在 11 个文件） |
++| structural hits | 13（65%） |
++| true answers | 10（50%） |
++| LVI 时间 | 137,922 ns |
++| prefilter hits | 289 |
++| total query time | 6,424,407 ns |
++
++**重要更正**：上一版报告曾称“真实语料 oracle 调用为 0”，那是 `budgetdist.sh` 覆盖不足 + `LD_LIBRARY_PATH` 导致的 harness bug。**分支自带测试确实会触发 oracle**：11 个文件、20 次调用。
++
++### 3.3 E0（恒 false oracle）A/B 数据【测】
++
++开关：`-jeandle-disable-null-edge-oracle`（等价于预算 = 0，保留全部边，恒 sound）。
++
++**（a）阶段 0 代码 + 5 个合成 workload**（`e0.json`）：
++
++| workload | normal query ns | E0 query ns | 变化 | E0 的 LVI ns |
++|---|---|---|---|---|
++| deep-static | 7,563,106 | 1,120,939 | **−85.2%** | 0 |
++| wide-static | 11,168,077 | 5,529,087 | **−50.5%** | 0 |
++| leaf-static | 5,916,114 | 1,762,060 | **−70.2%** | 0 |
++| tce-cha | 5,780,492 | 1,128,212 | **−80.5%** | 0 |
++| virtual-cfg | 16,289,454 | 8,138,193 | **−50.0%** | 0 |
++
++**（b）当前实现 + 分支自带 lit 语料**（`oraclecorpus.py`，同样 5 次重复中位数）：
++
++| 指标 | 正常 | E0 |
++|---|---|---|
++| oracle calls | 20 | 22 |
++| structural hits | 13 | 0 |
++| true answers | 10 | 0 |
++| LVI ns | 137,922 | 0 |
++| prefilter hits | 289 | 284 |
++| total query ns | 6,424,407 | 6,075,355（**−5.4%**） |
++
++**（c）E0 的精度代价【测】**：把 E0 开关注入 lit 全部用例（用 wrapper 脚本替换 `build/bin/opt`），lit 失败从 9 条增加到 **13 条**，新增 4 条：
++`copy-specialization/osr-char-arraycopy-e2e.ll`、`java-type-metadata-recovery/recover-osr-checkcast-edge.ll`、`type-check-elimination/checkcast-dissolved.ll`、`type-check-elimination/frozen-null-edge.ll`。
++即：**null 边判定是这 4 个用例折叠的前提**，判 null 边 = 精度问题，判错 = 正确性问题（与计划 §3.1 的判断一致）。
++
++**结论**：E0 证明了“oracle 是主要成本”这一前提**在合成 workload 上成立**（省 50–85%），**在分支自带语料上不成立**（只省 5.4%）。收益取决于输入，**不能外推到生产**（计划 §8 的第一条未覆盖项）。
++
++---
++
++## 4. S1 —— `factsAt` join unknown 短路
++
++**改动**（`llvm/lib/Analysis/Jeandle/CachedJavaType.cpp` `factsAt` 的前驱循环末尾）：
++
++```cpp
++    // Unknown is absorbing (typeUnion({}, X) == {}): once the accumulator is
++    // unknown the remaining arms cannot change it. ...
++    if (Joined.isUnknown())
++      break;
++```
++
++参考引擎 `llvm/lib/IR/Jeandle/JavaType.cpp` 的 `factsAt` 施加同样的截断，保证两引擎一致。
++
++**正确性**：累加器变成 unknown 后，`typeUnion` 的两条分支都只能产出空结果，输出与不短路严格相等；只依赖累计结果，不引入遍历顺序依赖（符合 §6 确定性约定）。
++
++**测量**（`s1.json`，同会话交错 A/B，15 次重复取中位数）【测】：
++
++| workload | s0 query ms | s1 query ms | 变化 | oracle calls | IR 是否一致 |
++|---|---|---|---|---|---|
++| deep-static | 9.104 | 9.490 | +4.2% | 960 → 960 | 是 |
++| wide-static | 13.036 | 12.254 | −6.0% | 16128 → 16128 | 是 |
++| leaf-static | 5.814 | 3.831 | **−34.1%** | 3968 → 3968 | 是 |
++| tce-cha | 9.531 | 7.507 | −21.2% | 960 → 960 | 是 |
++| virtual-cfg | 9.829 | 7.172 | −27.0% | 7936 → 7936 | 是 |
++
++**评价**：零语义风险，输出严格等价；耗时收益在 leaf/virtual-cfg 上明显，其余在噪声量级。**保留**。
++
++---
++
++## 5. S2 —— 否定性预过滤（不碰 LVI 的反证式过滤）
++
++**改动**：新增 `NullEdgePreFilter`（`llvm/include/llvm/IR/Jeandle/JavaType.h` + `llvm/lib/IR/Jeandle/JavaType.cpp` + `CachedJavaType.cpp`）。对每个被查询的值 V 懒构建 `UsedBlocks = { 存在 V 的 user 的块 }`；`isNullEdge(V, From, To)` 沿 From 的 idom 链上行，若链上没有块 ∈ UsedBlocks，则不可能存在支配该边的 null 证明 → **不问 oracle**（答 false、保留边）。
++
++**正确性**：反证式过滤，只决定“不去问”，永不产生错误答案；最坏只损失精度（§6 “{} 是中性元，兜底必须是 keep edge”）。
++
++**测量**（`s2.json`）【测】：
++
++| workload | stage0 query ms | s2 query ms | 变化 | oracle calls | LVI ns | prefilter hits | IR |
++|---|---|---|---|---|---|---|---|
++| deep-static | 9.496 | 1.259 | **−86.7%** | 960 → **0** | 8,269,686 → **0** | 960 | 一致 |
++| wide-static | 19.094 | 9.838 | **−48.5%** | 16128 → **0** | 13,007,753 → **0** | 16128 | 一致 |
++| leaf-static | 5.084 | 3.928 | −22.8% | 3968 → **0** | 2,790,470 → **0** | 3968 | 一致 |
++| tce-cha | 7.349 | 1.747 | **−76.2%** | 960 → **0** | 6,312,015 → **0** | 960 | 一致 |
++| virtual-cfg | 10.758 | 9.730 | −9.6% | 7936 → **0** | 4,865,532 → **0** | 7936 | 一致 |
++
++**评价**：**本次收益最大的一项**，而且收益是**确定性计数器**给出的（oracle 调用 100% 归零，不受墙钟噪声影响）。**保留**。
++注意：**S2 的收益机制是“少问”，不是“答得更快”**——这正是 §4 总原则允许的方向。
++
++---
++
++## 6. S3 —— 对称化支配链扫描 + reference 兜底补齐
++
++**改动**：
++1. 新增 `jeandle::scanNullChain`（`llvm/lib/IR/Jeandle/JavaType.cpp`）：沿 idom 链扫描 V 的 null 测试，**返回三值** `Nullness::{Unknown, Null, NonNull}`，并保留 §6 要求的细节：
++   - 两个后继相同 ⇒ 该分支不区分两种结果 ⇒ **无结论**（`NullBB != OtherBB` 判定）；
++   - 同时被 null 侧与非 null 侧支配 ⇒ 矛盾 ⇒ Unknown；
++   - 扫到 V 的定义块即停止；
++   - 结论方向只依赖“V 是 SSA 值，nullness 不在边上改变”。
++2. cached 引擎的 `isNullEdge` 改为：先问结构扫描（三值），Unknown 才问 oracle（`CachedJavaType.cpp`）。
++3. reference 引擎补齐同一层兜底：`JavaType.cpp` 的 `isNullEdge` 与 `phiValueType` 改用 `nullnessAtBlockEnd`，与 cached 引擎对称。
++
++**精度收益【测】**：lit 失败 **10 → 9**：`null-guard-forms.ll` 由失败转为通过（该用例的 threaded null 形状此前依赖 LVI，现在由支配链直接证明）。这正是计划 §5 阶段 3 的判定标准“差分验证不再出现 cached/reference 差异”。
++
++**差分验证【测】**：`verify.sh`（`-jeandle-verify-java-type-cache`，cached vs reference，5 个 workload）→ 5/5 通过，stderr 0 字节。
++
++**耗时【测】**（两次独立会话，`s3.json` / `s3b.json`）：
++
++| workload | s2→s3（会话 A） | s2→s3（会话 B） |
++|---|---|---|
++| deep-static | +3.9% | +5.3% |
++| wide-static | +4.9% | −47.6% |
++| leaf-static | +114% | −6.4% |
++| tce-cha | −9.5% | +6.1% |
++| virtual-cfg | +1.0% | +35.4% |
++
++**评价**：**同一份代码、两次会话的符号相反**，说明在当前机器上这 5 个合成 workload 的耗时噪声（±30%~50%）大于 S3 的真实效应。**能确认的是**：语义层（lit −1 条失败、差分 5/5、单测无新增失败）与确定性计数器（oracle 调用在 S2 之后已是 0，S3 不改变）。**保留**——它的价值是修精度一致性，不是提速。
++
++---
++
++## 7. S5 —— oracle 预算 + 开关
++
++**改动**：
++- 新选项 `-jeandle-max-null-edge-oracle-calls`（默认 128），语义与既有 `FactsBudget`/`PhiBudget` 同构；
++- 预算耗尽 ⇒ 一律答 false（保留边，sound），并累加独立 stat（exhausted queries / skipped calls / max calls per query）；
++- 预算 = 0 即 E0 形状，天然提供开关；
++- **预算耗尽按“截断”处理**：`Info.SkipVerification` 置位、结果不发布为该上下文的最终答案（`CachedJavaType.cpp`），注释里写明了理由——截断后的查询回答的是另一个问题，严格相等不成立；
++- 参考引擎用同一预算（两引擎从同一 option 取值，截断点可比）。
++
++**测量【测】**（`s5.json`，同会话 s3 / s5（预算 128） / s5-b0（预算 0））：
++
++| workload | s3 (ms) | s5 预算128 (ms) | s5 预算0 (ms) | 预算 exhausted | IR |
++|---|---|---|---|---|---|
++| deep-static | 1.390 | 1.794 | 1.815 | 0 | 一致 |
++| wide-static | 6.219 | 8.707 | 11.171 | 0 | 一致 |
++| leaf-static | 4.295 | 2.482 | 3.602 | 0 | 一致 |
++| tce-cha | 1.829 | 1.812 | 1.760 | 0 | 一致 |
++| virtual-cfg | 13.185 | 11.541 | 7.894 | 0 | 一致 |
++
++**压力输入下的上界【测】**（`s5-worst.json`，关掉预过滤、只靠预算兜底）：
++
++| workload | 无预算：calls / LVI ns | 预算 8：calls / LVI ns | 预算 0：calls / LVI ns |
++|---|---|---|---|
++| deep-static | 960 / 7,644,123 | 736 / 8,285,301 | 0 / 0 |
++| wide-static | 16128 / 16,286,726 | 3808 / 6,224,900 | 0 / 0 |
++| leaf-static | 3968 / 3,169,130 | 1760 / 2,741,189 | 0 / 0 |
++| tce-cha | 960 / 8,014,495 | 736 / 7,577,289 | 0 / 0 |
++| virtual-cfg | 7936 / 4,403,363 | 1888 / 3,572,004 | 0 / 0 |
++
++**评价**：预算在 5 个正常 workload 上**从不触发**（exhausted=0），它的价值是给病态输入封顶；注意预算 8 时 LVI 时间并未显著下降（剩余调用恰是最贵的那批），真正封顶要靠预算 0。**保留**。
++
++---
++
++## 8. S4 —— 块级三值状态
++
++### 8.1 第 1 级：结构扫描 + 预过滤合并为一次支配链遍历（保留）
++
++**改动**：`NullEdgePreFilter::blockState(V, From, DT)` 一次支配链遍历同时回答两件事——结构三值结论（Null/NonNull/Unknown）与“链上是否存在 null 测试”（预过滤需要的那个否证条件）；`isNullEdge` 的顺序变成：
++
++```
++结构结论 Null   → 直接 true（V 是 SSA 值，块末尾为 null ⇒ 该块所有出边都是 null 边）
++结构结论 NonNull→ 直接 false（省一次 oracle）
++Unknown         → 预过滤否证 → 不问 oracle
++                 → 预算检查 → 问 oracle（逐边 LVI）
++```
++
++**测量【测】**（两次会话，`s4.json` / `s4b.json`，均为 s5 → s4）：
++
++| workload | 会话 A（s5→s4） | 会话 B（s5→s4） | oracle calls | IR |
++|---|---|---|---|---|
++| deep-static | 1.800 → 1.706（−5.2%） | 1.799 → 1.717（−4.6%） | 0 → 0 | 一致 |
++| wide-static | 8.605 → 5.360（**−37.7%**） | 9.406 → 4.123（**−56.2%**） | 0 → 0 | 一致 |
++| leaf-static | 3.714 → 2.520（**−32.2%**） | 4.265 → 2.818（**−33.9%**） | 0 → 0 | 一致 |
++| tce-cha | 1.551 → 1.729（+11.5%） | 1.788 → 1.737（−2.9%） | 0 → 0 | 一致 |
++| virtual-cfg | 12.275 → 10.660（−13.2%） | 10.628 → 7.459（**−29.8%**） | 0 → 0 | 一致 |
++
++**profile 佐证【测】**（`perf-s4.data`）：null 边路径在 profile 中的占比由 **约 16.2% 降到约 6.0%**。
++
++**评价**：两次会话方向一致（wide/leaf/virtual-cfg 均改善），幅度差异大；deep/tce-cha 在噪声量级。**保留**。
++
++### 8.2 第 2 级：`LVI.getConstant` 块级查询 —— **默认关闭（等价回退）**
++
++计划 §4 建议：“`LVI.getConstant(V, From->getTerminator())` → 返回 ConstantPointerNull 即 Null（一次 getValueInBlock，比 getValueOnEdge 少一层 getEdgeValueLocal）；……建议先只上 1，2 单独 A/B。”，§8 也把“第 2 级与第 3 级的成本比未测”列为未覆盖项。本次把它实现出来并单独测了。
++
++**实现形态**：零 API 改动，落在 Analysis 层 `LVINullEdgeOracle::operator()` 内（L0 结构快路之后、逐边查询之前），由 `-jeandle-null-edge-block-lvi` 控制，**默认 false**；新增 3 个计数器（block-level queries / true answers / time）。
++
++**聚焦 A/B【测】**（`oraclefocus.py`，11 个确实触达 oracle 的语料文件，25 次重复中位数）：
++
++| 模式 | 边级 LVI ns | 块级 LVI ns | LVI 合计 | true 答案 | 结构命中 |
++|---|---|---|---|---|---|
++| 仅第 3 级（边级） | 215,189 | 0 | 215,189 | 10 | 13 |
++| 第 2+3 级 | 3,285 | 165,116 | **168,401（−21.7%）** | 10 | 13 |
++
++逐文件比值（块级 / 边级）：`frozen-null-edge` 0.84、`null-arm-type` 0.66、`checkcast-expanded-phi` 0.95、`recover-null-arm-vacuous` 0.50。
++
++**全语料 A/B【测】**（635/815 文件，9 次重复中位数）：边级 176,793 → 3,282；块级 0 → 161,473；合计 **176,793 → 164,755（−7%）**；`total query time` 6,022,269 → 6,340,844（**噪声主导**）。
++
++**语义验证【测】**（把默认值临时翻成 true 重建后测，随后恢复）：
++- oracle 的 true 答案集合与关掉时**完全一致**（语料上 10 = 10；块级查询命中 7/20、其中 5 次答 true，全部是边级查询本来就会答 true 的那批）；
++- lit 失败清单与基线**逐条相同**（9 条）；
++- 单测 47/48，与基线相同；
++- 差分验证 5/5 通过。
++
++**技术解释（已对照 `llvm/lib/Analysis/LazyValueInfo.cpp` 源码核实）**：
++`getValueOnEdge` → `getEdgeValue` = `getEdgeValueLocal` ∩ `getBlockValue(From)`；`getEdgeValueLocal` 对无条件终结指令直接返回 Overdefined（很便宜），**成本主体是块值求解（`getBlockValue` → `solveBlockValue` 的前驱递归）**。块级查询 `getConstant` 只省掉 `getEdgeValueLocal` 这一层，而这一层本来就很便宜 ⇒ **成本比必然 ≈ 1:1**，实测（0.5~0.95）验证了这一点。计划里“更便宜的 NonNull 方向”也不可行：`getConstant` 在 overdefined 时返回 nullptr（无法证非 null），而 `getPredicateAt` 在块值无法判定时会沿入边回推，可能更贵。
++
++**处置与理由**：
++1. **实测收益不显著**：LVI 时间 −7%（全语料）~ −21.7%（聚焦 11 文件），而 LVI 只占查询时间的 2–15%，即总查询时间收益 < 5%，且被机器噪声掩盖；
++2. **与 §4 总原则 / §6 方向约束冲突**：块级证明严格强于边级证明——块值为 null 常量、而边局部细化使交为 Unknown 时，第 2 级会答 true 而第 3 级答 false。§4 原文：“任何让 oracle 更容易答 true 的改动都是健全性风险，一律不做”；§6 原文：“任何改动只能让 oracle 少答 true，不能多答 true”。虽然该证明本身是可靠的（skip 一条**已证明**为 null 的边是精确的，不是健全性问题），但它确实改变了 oracle 的 true 答案集合，与计划写死的方向约束冲突；
++3. **默认关闭 = 交付行为与回退一致**，同时保留 `-jeandle-null-edge-block-lvi` 开关与 3 个计数器，任何人可复现上面这张 A/B 表。
++
++**回退记录**：见 §9 表第 2 行。
++
++### 8.3 S4a：(V, From) 块级状态记忆化 —— **已回退**
++
++计划 §6（可选，需先有命中率数据）。实现后测量（`s4a.json`）：
++
++| workload | s5 (ms) | s4a (ms) | 变化 |
++|---|---|---|---|
++| deep-static | 1.694 | 1.906 | +12.5% |
++| wide-static | 7.119 | 10.383 | **+45.8%** |
++| leaf-static | 1.521 | 4.620 | **+203.9%** |
++| tce-cha | 1.535 | 1.921 | +25.1% |
++| virtual-cfg | 7.088 | 10.538 | **+48.7%** |
++
++5 个 workload 一致变慢（缓存维护成本 > 命中收益，且这些 workload 的 oracle 命中率为 0）⇒ **代码已删除，完全回退**。
++
++---
++
++## 9. 回退记录汇总
++
++| # | 改动 | 回退方式 | 数据 | 理由 |
++|---|---|---|---|---|
++| 1 | S4a：(V, From) 块级状态记忆化 | **代码删除** | leaf +204%、wide +46%、virtual-cfg +49%、tce-cha +25%、deep +13%（§8.3） | 命中率 0，维护成本纯亏 |
++| 2 | S4 第 2 级：LVI 块级查询 | **保留代码但默认关闭**（`-jeandle-null-edge-block-lvi` 默认 false） | 成本比 ≈1:1；LVI 时间 −7%~−21.7%，总查询时间收益 <5% 且被噪声掩盖（§8.2） | 收益不显著；会改变 oracle 的 true 答案集合，与 §4 总原则/§6 方向约束冲突 |
++
++---
++
++## 10. 测量方法与噪声（重要）
++
++**【测】噪声标定**：同一份二进制、同一配置、两次独立测量（`noise.json`）：
++
++| workload | 第一次 (ms) | 第二次 (ms) | 偏差 |
++|---|---|---|---|
++| deep-static | 7.295 | 7.780 | +6.6% |
++| wide-static | 8.175 | 8.209 | +0.4% |
++| leaf-static | 5.832 | 5.858 | +0.4% |
++| tce-cha | 6.748 | 9.792 | **+45%** |
++| virtual-cfg | 13.462 | 5.850 | **−57%** |
++
++→ **结论**：5 个合成 workload 的墙钟/查询时间噪声可达 ±50%，**只有确定性计数器（oracle 调用数、structural/true 计数、prefilter 命中数、lit/单测结果、IR 是否一致）可以当作硬证据**；所有百分比仅作方向参考。
++
++**方法**：
++- `measure.py` 对 A/B 两臂**交错**执行（每轮随机顺序），报告 median 与 min，并逐轮比较优化后 IR 是否一致；
++- 语料计数用 `oraclecorpus.py` 遍历 `llvm/test/Jeandle` 全部 `.ll`，从 RUN 行抽 `-passes=` 与 `-jeandle-vm-callback-log=`，加 `-jeandle-java-type-stats` 与 `print<java-type-analysis-summary>`，**多次重复取中位数**；
++- 逐条改动之间的时间不可直接相减（跨会话漂移），因此每条改动的“前后表”都是**同会话内**的 A/B。
++
++---
++
++## 11. lit 覆盖
++
++### 11.1 本次新增【测】
++
++| 文件 | 内容 | 结果 |
++|---|---|---|
++| `llvm/test/Jeandle/type-check-elimination/null-edge-shapes.ll` | 菱形 null 检查，null 臂在**前**（`icmp eq` + 第 0 后继）与在**后**（`icmp ne` + 第 1 后继）各一例，验证与顺序无关；外加一个**不可达块**（不得污染 merge，且 live 折叠仍发生） | PASS |
++| `llvm/test/Jeandle/type-check-elimination/null-edge-phi-null-arm.ll` | `phi [null, entry], [typed, latch]` | **XFAIL**（已知缺口，见下） |
++| `llvm/test/Jeandle/type-check-elimination/Inputs/null-edge-shapes.cblog` | VM 回调日志 | — |
++
++配套：`llvm/test/Jeandle/java-type-cache-reuse/pass-local-production-hook.ll`（前序会话新增，本次保留）。
++
++### 11.2 覆盖矩阵（计划 §7 清单 vs 现状）
++
++| 计划建议的形状 | 现状 | 备注 |
++|---|---|---|
++| 菱形 null 检查（null 臂在前 / 在后各一例） | ✅ 本次新增 | 顺序无关性已验证：两种写法都折叠 |
++| threaded null 检查（条件与边不在同一块） | ✅ 已有 `null-threaded-edge.ll`、`null-guard-forms.ll` | `null-guard-forms.ll` 由 S3 修好 |
++| 重复边（两个后继相同） | ✅ 已有 `instanceof-phi-duplicate-edge.ll` | 扫描代码里保留 “NullBB == OtherBB ⇒ 无结论” |
++| `phi [null, entry], [obj, loop]` | ⚠️ **已知缺口**，新增 XFAIL 固定 | 见 §12 |
++| 不可达块 / irreducible CFG | ✅ 不可达块：本次新增；irreducible：已有 `irreducible-smoke.ll` | |
++| 预算耗尽路径 | ✅ 已有 `budget-exceeded.ll`（join 预算）+ 新增单测 `NullEdgeOracleBudgetLimitsTheOracle`（oracle 预算 = 1 / 0，并验证 reference 引擎行为一致） | 计划建议“单测最好能直接调 nullnessAtBlockEnd / isNullEdge”——本次是通过选项驱动，未直接暴露内部函数 |
++
++### 11.3 已知缺口的定性【测】
++
++`phi [null, entry], [obj, loop]` 目前仍被 null 臂污染成 unknown，查询不折叠。JavaType 尚无“已知 null”的表示（MaybeNull 未实现），所以 phi 无法像 CFG 边那样丢掉 null 臂。计划 §3.2 正是把这一形态列为“最典型的 oop PHI 形态”。分支上已有的 `null-arm-type.ll`（非循环版 lazy-init phi）**同样处于失败状态**（属既有 9 条失败之一），两者是同一个缺口。
++
++新测试用 `XFAIL` 固定当前行为：缺口被修好时该用例会“意外通过”并提示更新。
++
++---
++
++## 12. 猜测 vs 实测
++
++### 12.1 计划中的假设，本次被实测推翻或修正
++
++| 计划假设 | 实测结果 | 结论 |
++|---|---|---|
++| 【猜】§3.3：“绝大多数 oracle 调用的产出是什么都没证明” | 合成 workload：**0/960 ~ 0/16128** 答 true，完全白干；分支语料：**10/20 答 true、13/20 命中结构快路** | **依语料而变**：在纯静态类型 workload 上成立，在分支语料上**不成立**（命中率 50%） |
++| 【猜】§4：“L0 结构快路解决比例低”（进入方案的前提） | 分支语料上 L0 解决 **13/20 = 65%** | **被推翻**（至少在本分支语料上） |
++| 【猜】§5 阶段 0 的进入条件：“NullOracleTrue 比例低且 Nanoseconds 占比高” | True 比例：合成 0%，语料 50%；Nanoseconds 占比：合成 45–87%，语料 2.1% | 合成 workload 满足，**分支语料不满足**（这正是 §3.4 的“先量化值不值”存在的意义） |
++| 【猜】§4/S4：“块级查询比逐边查询便宜”（`getValueInBlock` 少一层 `getEdgeValueLocal`） | 成本比实测 ≈ **1:1**（逐文件 0.50–0.95） | **被推翻**：`getEdgeValueLocal` 很便宜，成本主体是块值求解 |
++| 【猜】§5/S4：“NonNull 是最常见的答案” | 分支语料上 **true=10 / unknown=7**，即 Null 才是更常见的结论；NonNull 在本次语料上 **0 次** | **被推翻**（至少在本分支语料上） |
++| 【猜】§4/S2：“S2 收益预期最大” | oracle 调用在 5 个 workload 上 **100% 归零** | **被证实**（本次唯一“确定性计数归零”的改动） |
++
++### 12.2 本报告未能证实/证伪的（计划 §8 未覆盖项）
++
++| 计划 §8 的未覆盖项 | 本次状态 |
++|---|---|
++| 用户 profiling 的输入与采样方式未知 | 仍未确认。**本次所有数字都来自合成 workload + 分支自带 lit 语料，不能外推到生产** |
++| NullOracleTrue 的真实比例 | **已测**：合成 0%（0/28,952 次调用），分支语料 50%（10/20） |
++| S4 第 2 级 vs 第 3 级成本比 | **已测**：≈ 1:1（§8.2） |
++| “oracle 结果影响 pass 决策从而改变 IR”的反馈路径 | **已确认存在**：E0 打开后 4 个 lit 用例的折叠消失（§3.3c），即 oracle 的答案确实改变 pass 决策与最终 IR |
++
++### 12.3 本次引入的新风险（未量化）
++
++- S3 让 cached 引擎与 reference 引擎的 null 边判定对称化，**改变了部分 IR 的折叠结果**（`null-guard-forms.ll` 由不折叠变为折叠）。这是计划 §5 阶段 3 明确要求的“修精度一致性”，但它确实是一次行为变化，**没有在 JVM 真实编译上验证过收益/风险**。
++- S5 的预算默认 128 是**拍的**（计划 §4 原文“默认值由 E0 的分布决定”）：实测 5 个 workload 上预算从未触发，因此 128 这个值既未被数据支持也未被数据否证；建议后续用病态输入扫描出触发点再定。
++- S4 第 1 级把结构三值与预过滤合并成一次支配链遍历，**支配链长度变长时成本上升**（链上每块都要查一次 `Tested` 集合）。本次 workload 上没有出现回退，但这是 §5 “S2/S3/S4 都属于每条边多做一点结构判断的改动，正是最容易被压力输入反噬的形态”警告的风险点。
++
++---
++
++## 13. 交付物清单
++
++| 计划 §7 交付物 | 位置 / 状态 |
++|---|---|
++| environment.json | [javatype-null-edge-environment.json](file:///home/annya/playground/jeandle/jeandle/jeandle-llvm/javatype-null-edge-environment.json) |
++| 四个 stat 的实际计数 | §3.2 |
++| 恒 false oracle 的 A/B 数据 | §3.3（合成 workload + 分支语料 + lit 精度代价） |
++| 每条改动独立的 patch | 见下方说明 |
++| 每条改动的前后测量表 | §4 / §5 / §6 / §7 / §8 |
++| 回退记录 | §9（S4a 删除、S4-L2 默认关闭） |
++| lit 覆盖建议 | §11（本次已落地 2 个新用例 + 覆盖矩阵） |
++| 猜测 / 实测分离 | §12 |
++
++**关于“独立的 patch”**：本次改动以**一个工作树**形式存在（未提交），`git diff` 即为完整改动；按改动归属拆分如下（每个 hunk 集合互相独立，可单独回退）：
++
++| 方案 | 文件 | 位置 |
++|---|---|---|
++| 阶段0 | `llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp`、`llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h` | 4 个 `ALWAYS_ENABLED_STATISTIC` + summary printer |
++| 阶段0 | `llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp`、`llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h` | 线程局部计数器 + `isNullEdgeOracleDisabled()` |
++| S1 | `llvm/lib/Analysis/Jeandle/CachedJavaType.cpp`、`llvm/lib/IR/Jeandle/JavaType.cpp` | `factsAt` 前驱循环末尾的 `if (Joined.isUnknown()) break;`（两引擎各一处） |
++| S2 | `llvm/include/llvm/IR/Jeandle/JavaType.h`、`llvm/lib/IR/Jeandle/JavaType.cpp`、`llvm/lib/Analysis/Jeandle/CachedJavaType.cpp` | `NullEdgePreFilter`（UsedBlocks + 否证）+ `isNullEdge` 中的预过滤分支 + `null-edge prefilter hits` 计数 |
++| S3 | `llvm/lib/IR/Jeandle/JavaType.cpp`、`llvm/lib/Analysis/Jeandle/CachedJavaType.cpp` | `scanNullChain`（三值扫描）、`nullnessAtBlockEnd`、cached 引擎的 `isNullEdge` 改为先问结构扫描、reference 引擎补齐兜底 |
++| S5 | `llvm/include/llvm/IR/Jeandle/JavaType.h`、`llvm/lib/IR/Jeandle/JavaType.cpp`、`llvm/lib/Analysis/Jeandle/CachedJavaType.cpp`、`llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp` | `NullEdgeOracleBudget`、`-jeandle-max-null-edge-oracle-calls`、exhausted/skipped/max 计数、`SkipVerification` 置位 |
++| S4-L2（默认关闭） | `llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp`、`llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h`、`llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp` | `-jeandle-null-edge-block-lvi`（默认 false）+ 3 个块级计数器 |
++| 统计刷新 | `llvm/lib/Transforms/Jeandle/{TypeCheckElimination,CHADevirtualization,ConstantFieldFolding,RecoverTypeInfo}.cpp` | 每个 pass 查询前刷新线程局部计数器 |
++| 测试 | `llvm/unittests/IR/JavaTypeQueryTest.cpp`、`llvm/unittests/IR/JavaTypeCacheReuseTestSupport.h` | 新增 `NullEdgeOracleBudgetLimitsTheOracle`（预算 = 1 / 0，校验 cached 与 reference 一致） |
++
++---
++
++## 14. 复现方法
++
++```bash
++cd /home/annya/playground/jeandle/jeandle/jeandle-llvm
++export PATH=/home/annya/playground/jeandle/jeandle/tools/bin:$PATH   # g++ 16.1.1
++
++# 构建
++cd build/build-ninja-release && env -u LD_LIBRARY_PATH ninja opt JavaTypeQueryTests
++
++# lit
++env -u LD_LIBRARY_PATH build/build-ninja-release/bin/llvm-lit -s --timeout=300 \
++    build/build-ninja-release/test/Jeandle
++
++# 单测
++env -u LD_LIBRARY_PATH build/build-ninja-release/unittests/IR/JavaTypeQueryTests
++
++# 差分验证（cached vs reference）
++env -u LD_LIBRARY_PATH bash /tmp/jt-measure/verify.sh build/build-ninja-release/bin/opt /tmp/jt-e0/try2
++
++# 语料 oracle 计数（5 次重复取中位数）
++env -u LD_LIBRARY_PATH python3 /tmp/jt-measure/oraclecorpus.py \
++    --binary build/build-ninja-release/bin/opt --repeats 5
++
++# 聚焦 A/B（S4 第 2 级）
++env -u LD_LIBRARY_PATH python3 /tmp/jt-measure/oraclefocus.py 25
++
++# E0 开关
++env -u LD_LIBRARY_PATH build/build-ninja-release/bin/opt -S \
++    -passes="function(type-check-elimination),print<java-type-analysis-summary>" \
++    -jeandle-disable-null-edge-oracle=true \
++    -jeandle-vm-callback-log=llvm/test/Jeandle/type-check-elimination/Inputs/null-threaded-edge.cblog \
++    llvm/test/Jeandle/type-check-elimination/null-threaded-edge.ll
++```
++
++**注意**：所有命令必须 `env -u LD_LIBRARY_PATH`（agent 运行时注入的 libstdc++ 与系统 glibc 不兼容，会让 `opt` 无法启动，进而让计数器读成 0 —— 上一版报告的 “oracle 0 calls” 误报即源于此）。
++
++---
++
++## 15. 下一步建议（按性价比）
++
++1. **补一条能触发 null 臂 vacuous 的 phi 语义**（JavaType 的 MaybeNull 能力），把 `null-arm-type.ll` 与本次新增的 XFAIL 用例一起转绿 —— 这是计划 §3.2 认定的“最典型的 oop PHI 形态”，且当前是分支上 9 条既有失败中的 1 条的根因。
++2. **在 JVM 真实编译输入上重跑一遍 oracle 分布**：本报告的所有结论都建立在合成 workload 与 lit 语料上；§12.1 显示 oracle 的命中率在两类语料之间相差极大，真实输入上的分布才是方案取舍的依据。
++3. **给 S5 的预算默认值找数据**：用病态输入扫描出预算触发点，再决定 128 是否合适（当前值是拍的）。
++4. **S6/S7 暂不动**：S6 需要 (V, From) 命中率数据（目前为 0，S4a 已证伪）；S7 需要先测 `typeUnion` 触发 VM 回调 `GetCommonSuperKlass` 的成本是否低于 LVI。
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+index f4ffffc1209a..cff7448cce2a 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+@@ -10,6 +10,7 @@
+ #define LLVM_ANALYSIS_JEANDLE_JAVATYPEANALYSIS_H
+ 
+ #include "llvm/Analysis/Jeandle/CachedJavaType.h"
++#include "llvm/ADT/StringRef.h"
+ #include "llvm/IR/PassManager.h"
+ 
+ #include <cstddef>
+@@ -122,6 +123,24 @@ public:
+   LLVM_ABI Result run(Function &F, FunctionAnalysisManager &FAM);
+ };
+ 
++/// True when the pass-local cache ablation is enabled. In that mode every
++/// real consumer pass starts with an empty Java type cache, so only reuse
++/// inside one pass invocation remains.
++bool javaTypePassLocalEnabled();
++
++/// Clears the Java type caches of an already existing analysis at the entry of
++/// a consumer pass. It never creates an analysis, never changes the IR and
++/// never touches the DT/LVI lifetime; it only removes the cached entries. It
++/// is a no-op unless the pass-local ablation is enabled.
++void clearJavaTypeCacheIfPassLocal(Function &F, FunctionAnalysisManager &FAM,
++                                   StringRef Consumer = "");
++
++/// Number of pass-local cache clears performed so far in this process.
++uint64_t javaTypePassLocalClearCount();
++
++/// Number of consumer pass invocations observed for the given consumer name.
++uint64_t javaTypeConsumerInvocationCount(StringRef Consumer);
++
+ } // namespace jeandle
+ } // namespace llvm
+ 
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+index 58b67e37e501..4571a0147184 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+@@ -18,6 +18,7 @@
+ #define LLVM_ANALYSIS_JEANDLE_JAVATYPEANALYSISSTATS_H
+ 
+ #include "llvm/Analysis/Jeandle/JavaTypeAnalysis.h"
++#include "llvm/Analysis/Jeandle/LVINullEdgeOracle.h"
+ #include "llvm/IR/PassManager.h"
+ 
+ #include <cstddef>
+@@ -81,6 +82,18 @@ struct JavaTypeQueryStats {
+   size_t PeakBaseEntries = 0;
+ };
+ 
++/// Process-wide counters for the null-edge oracle (jeandle::IsNullEdgeOracle)
++/// are declared with the oracle itself; see NullEdgeOracleStats in
++/// LVINullEdgeOracle.h.
++
++/// Adds freshly observed oracle counters to the process-wide totals. The
++/// oracle accumulates into thread-local counters and flushes the delta here
++/// once per top-level query, so the hot path never touches an atomic.
++LLVM_ABI void addNullEdgeOracleStats(const NullEdgeOracleStats &Delta);
++
++/// Returns the process-wide null-edge oracle totals.
++LLVM_ABI NullEdgeOracleStats getNullEdgeOracleStats();
++
+ /// Function-level statistics leaf analysis: it only holds counters and has no
+ /// IR dependencies. Its result never invalidates (invalidate() always returns
+ /// false), so a JavaTypeAnalysisResult may safely hold a JavaTypeQueryObserver
+diff --git a/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h b/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h
+index bb38b9e0b531..0eda4310e89a 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h
++++ b/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h
+@@ -11,6 +11,8 @@
+ 
+ #include "llvm/Support/Compiler.h"
+ 
++#include <cstdint>
++
+ namespace llvm {
+ class Value;
+ class BasicBlock;
+@@ -26,6 +28,45 @@ struct LVINullEdgeOracle {
+   LLVM_ABI bool operator()(Value *V, BasicBlock *FromBB, BasicBlock *ToBB) const;
+ };
+ 
++/// Process-wide counters for the null-edge oracle. The oracle is the dominant
++/// cost of the path-facts join, so its call volume and answer distribution
++/// decide which null-edge optimization is worth implementing.
++///   Calls      - oracle invocations
++///   Structural - calls resolved by the structural fast path (a direct
++///                `icmp eq/ne V, null` test on the edge's own terminator)
++///   True       - calls answered "this edge is a null edge" (the only answer
++///                that removes an edge from the join)
++///   Nanoseconds - time spent inside the LVI-backed part of the oracle; the
++///                structural fast path is a handful of instructions and is not
++///                timed, because two clock reads would cost more than it does.
++///   BlockCalls  - calls that ran the block-level (level 2) LVI query
++///   BlockTrue   - calls the block-level query answered "this edge is a null
++///                 edge"
++///   BlockNanoseconds - time spent inside the block-level LVI query
++struct NullEdgeOracleStats {
++  uint64_t Calls = 0;
++  uint64_t Structural = 0;
++  uint64_t True = 0;
++  uint64_t Nanoseconds = 0;
++  uint64_t BlockCalls = 0;
++  uint64_t BlockTrue = 0;
++  uint64_t BlockNanoseconds = 0;
++};
++
++/// Returns the null-edge oracle counters this thread accumulated since the
++/// last flush.
++LLVM_ABI NullEdgeOracleStats getLocalNullEdgeOracleStats();
++
++/// Flushes the thread-local null-edge oracle counters into the process-wide
++/// totals and resets them. Called once per top-level Java type query, so the
++/// oracle's hot path never touches a shared atomic.
++LLVM_ABI void flushLocalNullEdgeOracleStats();
++
++/// Returns whether the null-edge oracle is disabled, i.e. whether every
++/// query is answered negatively (every edge is kept). This is the E0
++/// experiment of the null-edge optimization plan: it keeps the whole
++/// optimization sound and measures how much the oracle actually costs.
++LLVM_ABI bool isNullEdgeOracleDisabled();
+ 
+ } // namespace llvm
+ 
+diff --git a/llvm/include/llvm/IR/Jeandle/JavaType.h b/llvm/include/llvm/IR/Jeandle/JavaType.h
+index d41ebed6e27a..069f7251e1db 100644
+--- a/llvm/include/llvm/IR/Jeandle/JavaType.h
++++ b/llvm/include/llvm/IR/Jeandle/JavaType.h
+@@ -18,8 +18,11 @@
+ #ifndef JEANDLE_JAVA_TYPE_H
+ #define JEANDLE_JAVA_TYPE_H
+ 
++#include "llvm/ADT/DenseMap.h"
+ #include "llvm/ADT/DenseSet.h"
++#include "llvm/ADT/SmallPtrSet.h"
+ #include "llvm/ADT/STLFunctionalExtras.h"
++#include "llvm/Support/Compiler.h"
+ 
+ #include <cstdint>
+ 
+@@ -84,6 +87,210 @@ struct JavaType {
+ using IsNullEdgeOracle =
+     function_ref<bool(Value *V, BasicBlock *FromBB, BasicBlock *ToBB)>;
+ 
++/// Nullness of a value at the top of a block.
++enum class Nullness {
++  /// No conclusion: nothing proves the value null or non-null there.
++  Unknown,
++  /// Proven non-null there.
++  NonNull,
++  /// Proven null there.
++  Null,
++};
++
++/// Structural nullness of V at the top of From, derived from dominance only.
++///
++/// The scan walks the dominator chain of From up to (and including) the block
++/// that defines V, looking for a conditional branch on `icmp eq/ne V, null`:
++/// when the null side of that branch dominates From, V is null at From; when
++/// the non-null side dominates From, V is not null there.  A branch whose two
++/// successors are the same block proves nothing (the edge is a duplicate), and
++/// two tests that contradict each other prove nothing either.
++///
++/// The conclusion is a proof and therefore holds on every edge out of From: V
++/// is an SSA value, so its null-ness cannot change inside the block.  Sharing
++/// one implementation between the cached and the reference engine keeps the
++/// two engines on the same null-edge semantics.
++LLVM_ABI Nullness nullnessAtBlockEnd(Value *V, BasicBlock *From,
++                                     DominatorTree &DT);
++
++/// Negative pre-filter for the null-edge oracle.
++///
++/// The oracle answers "is V provably null on the edge From->To?".  It can only
++/// answer "yes" in two situations:
++///
++///  (1) The lattice folds V itself to the constant null.  LazyValueInfo folds
++///      a pointer to null only through a `select` whose arms are both null, a
++///      `phi` all of whose incoming arms are null on their edge, or a null
++///      constant; every other pointer definition is overdefined (or provably
++///      non-null) and can never become a null constant.
++///
++///  (2) A condition that dominates the edge tests V against null: an
++///      `icmp eq/ne V, null` on the edge's own terminator, on a dominating
++///      block's terminator, or an assume/guard constraining V.
++///
++/// The filter answers "no proof is possible" when neither can hold.  It is a
++/// refutation, not a proof: it never skips an edge the oracle would have
++/// skipped, so it can cost precision but never soundness.  Keeping an edge is
++/// always sound (JavaType is conditioned on a non-null oop); skipping an edge
++/// that is not proven null is not.
++///
++/// One instance per top-level query: the per-value data (canonical value,
++/// null-test blocks, fold conclusion) is memoized, so a value is analysed once
++/// per query no matter how many edges are examined.
++class NullEdgePreFilter {
++public:
++  /// Block-level state of a value at the top of a block.
++  ///
++  /// Both answers come out of a single walk of the dominator chain, so the
++  /// chain is traversed once per (value, block) pair instead of once per
++  /// question.
++  struct BlockState {
++    /// Three-valued conclusion derived from dominance only: Null when the
++    /// null side of a dominating null test reaches the block, NonNull when
++    /// the non-null side does, Unknown otherwise.
++    Nullness Structural = Nullness::Unknown;
++    /// Whether the dominator chain contains a block in which the value is
++    /// compared against null. This is the question the negative filter asks:
++    /// without such a test no lattice query can prove the value null.
++    bool HasNullTest = false;
++  };
++
++  /// Computes the block-level state of V at the top of From.
++  ///
++  /// The walk stops at the block that defines V: above its definition the
++  /// value does not exist yet, so no test can mention it.
++  BlockState blockState(Value *V, BasicBlock *From, DominatorTree &DT);
++
++  /// Returns true when a null proof for V on an edge out of From is possible.
++  /// When it returns false the caller must not ask the oracle.
++  /// \p State must be the block state of the same (V, From) pair.
++  bool mayProveNull(Value *V, const BlockState &State, DominatorTree &DT);
++
++private:
++  /// The value the oracle reasons about: pointer casts and aliases stripped,
++  /// and a freeze stripped only when its operand is proven defined.  Mirrors
++  /// the normalization done by LVINullEdgeOracle.
++  Value *canonicalize(Value *V);
++
++  /// Blocks in which V is compared against null, memoized per value.
++  const SmallPtrSet<BasicBlock *, 8> &getNullTestBlocks(Value *V);
++
++  /// Can the lattice fold V to the constant null?  Conservative: an answer of
++  /// false means V provably cannot become a null constant.
++  bool mayFoldToNull(Value *V, unsigned Depth);
++
++  /// Can the incoming value X be null on the edge out of PhiBB?
++  bool mayBeNullOnEdge(Value *X, BasicBlock *PhiBB, unsigned Depth);
++
++  /// Is V compared against null in block B (directly, through pointer casts or
++  /// under a not/and/or condition)?
++  bool isNullTestedInBlock(Value *V, BasicBlock *B);
++
++  /// Does a block dominating B (up to V's definition block) test V against
++  /// null?
++  bool hasDominatingNullTest(Value *V, BasicBlock *B);
++
++  /// Blocks in which V is compared against null, memoized per value.
++  DenseMap<Value *, SmallPtrSet<BasicBlock *, 8>> NullTestBlocks;
++  /// Whether the lattice may fold the value to the constant null, memoized.
++  DenseMap<Value *, bool> MayFoldNull;
++  /// The canonical value the oracle reasons about, memoized per value.
++  DenseMap<Value *, Value *> CanonicalValues;
++  /// The dominator tree of the running query (the filter is per-query).
++  DominatorTree *DT = nullptr;
++};
++
++/// Counters of the null-edge pre-filter.
++///   Hits - queries answered "no proof possible" (the oracle was not asked)
++///   Uses - V users scanned while building the mentioning-block sets
++struct NullEdgePreFilterStats {
++  uint64_t Hits = 0;
++  uint64_t Uses = 0;
++};
++
++/// Per-query budget for null-edge oracle calls.
++///
++/// The oracle asks LazyValueInfo whether a value is provably null on an edge.
++/// That query is the dominant cost of the path-facts join, so one top-level
++/// query may only ask it a bounded number of times. Exceeding the budget is
++/// always sound: the oracle is not asked and the answer is "not proven null",
++/// i.e. the edge is kept — keeping an edge never removes a type constraint.
++///
++/// The budget is deliberately *not* a precision knob: it trades precision for
++/// a compile-time bound, and it is reported so that the differential
++/// verification does not require two evaluations to agree when they were
++/// truncated at different points.
++class NullEdgeOracleBudget {
++public:
++  explicit NullEdgeOracleBudget(unsigned Limit) : Remaining(Limit) {}
++
++  /// Reserves one oracle call. Returns false when the budget is spent, in
++  /// which case the caller must not ask the oracle.
++  LLVM_ABI bool consume();
++
++  /// Whether the budget was spent during this query.
++  bool exhausted() const { return Spent; }
++
++  /// Number of oracle calls this budget refused.
++  uint64_t skippedCalls() const { return Skipped; }
++
++  /// Number of oracle calls this budget granted.
++  uint64_t grantedCalls() const { return Granted; }
++
++private:
++  unsigned Remaining;
++  bool Spent = false;
++  uint64_t Skipped = 0;
++  uint64_t Granted = 0;
++};
++
++/// Counters of the null-edge oracle budget.
++///   ExhaustedQueries - top-level queries that hit the budget
++///   SkippedCalls - oracle calls that were not made because the budget was
++///                  already spent
++///   MaxCallsPerQuery - the largest number of oracle calls one query made;
++///                  this is the distribution the default budget is derived from
++struct NullEdgeOracleBudgetStats {
++  uint64_t ExhaustedQueries = 0;
++  uint64_t SkippedCalls = 0;
++  uint64_t MaxCallsPerQuery = 0;
++};
++
++/// Returns the process-wide null-edge oracle budget counters.
++LLVM_ABI NullEdgeOracleBudgetStats getNullEdgeOracleBudgetStats();
++
++/// Records the outcome of one top-level query: `Granted` oracle calls were
++/// made, `Skipped` calls were refused because the budget was already spent,
++/// and the budget was exhausted when `Exhausted` is set.
++///
++/// The per-thread exhaustion counter is monotonic on purpose: the
++/// differential verification compares it before and after a fresh evaluation
++/// to detect that the two evaluations were truncated at different points, in
++/// which case their results need not be equal.
++LLVM_ABI void noteNullEdgeOracleBudgetQuery(uint64_t Granted, uint64_t Skipped,
++                                            bool Exhausted);
++
++/// Returns the number of top-level queries on this thread that hit the
++/// null-edge oracle budget.
++LLVM_ABI uint64_t getNullEdgeOracleBudgetExhaustionCount();
++
++/// Returns the configured per-query null-edge oracle call budget.
++///
++/// The option is owned by the reference engine (the IR layer); the cached
++/// engine reads it through this accessor so that both engines spend the same
++/// budget. That equality is what makes a differential comparison meaningful:
++/// the two engines must truncate at comparable points, otherwise they answer
++/// different questions.
++LLVM_ABI unsigned getNullEdgeOracleCallBudget();
++
++/// Flushes this thread's null-edge pre-filter counters into the process-wide
++/// totals and resets them. Called once per top-level Java type query, so the
++/// filter's hot path never touches a shared atomic.
++LLVM_ABI void flushNullEdgePreFilterStats();
++
++/// Returns the process-wide null-edge pre-filter counters.
++LLVM_ABI NullEdgePreFilterStats getNullEdgePreFilterStats();
++
+ /// Get the Java type of a value.
+ ///
+ /// When Context is null, performs a context-insensitive query using only
+diff --git a/llvm/lib/Analysis/Jeandle/CachedJavaType.cpp b/llvm/lib/Analysis/Jeandle/CachedJavaType.cpp
+index 2d01a8f9c54b..29055d4a601b 100644
+--- a/llvm/lib/Analysis/Jeandle/CachedJavaType.cpp
++++ b/llvm/lib/Analysis/Jeandle/CachedJavaType.cpp
+@@ -9,6 +9,7 @@
+ //===----------------------------------------------------------------------===//
+ 
+ #include "llvm/Analysis/Jeandle/CachedJavaType.h"
++#include "llvm/Analysis/Jeandle/LVINullEdgeOracle.h"
+ #include "llvm/ADT/DenseMap.h"
+ #include "llvm/ADT/STLExtras.h"
+ #include "llvm/ADT/ScopeExit.h"
+@@ -619,51 +620,6 @@ static Value *stripCastsAndFreeze(Value *V) {
+   }
+ }
+ 
+-/// Check if IncomingBB is reached only when Obj is null.
+-/// Walks up the dominator tree from IncomingBB looking for a conditional branch
+-/// on `icmp eq/ne Obj, null` where IncomingBB is dominated by the "Obj is null"
+-/// successor. Using the dominator tree handles all CFG shapes (diamonds, etc.),
+-/// not just single-predecessor chains. Only branches are recognized: switch
+-/// case values must be constant integers, so a switch can never test a
+-/// pointer against null.
+-static bool isNullCheckPath(BasicBlock *IncomingBB, Value *Obj,
+-                            DominatorTree &DT) {
+-  Obj = Obj->stripPointerCastsAndAliases();
+-  for (auto *Node = DT.getNode(IncomingBB); Node; Node = Node->getIDom()) {
+-    BasicBlock *BB = Node->getBlock();
+-
+-    if (auto *BI = dyn_cast<BranchInst>(BB->getTerminator())) {
+-      if (!BI->isConditional())
+-        continue;
+-      auto *Cmp = dyn_cast<ICmpInst>(BI->getCondition());
+-      if (!Cmp)
+-        continue;
+-      ICmpInst::Predicate Pred = Cmp->getPredicate();
+-      if (Pred != ICmpInst::ICMP_EQ && Pred != ICmpInst::ICMP_NE)
+-        continue;
+-      Value *Op0 = Cmp->getOperand(0);
+-      Value *Op1 = Cmp->getOperand(1);
+-      Value *Tested = isa<ConstantPointerNull>(Op0)   ? Op1
+-                      : isa<ConstantPointerNull>(Op1) ? Op0
+-                                                      : nullptr;
+-      if (!Tested || Tested->stripPointerCastsAndAliases() != Obj)
+-        continue;
+-      // icmp eq Obj, null -> true successor is the null path;
+-      // icmp ne Obj, null -> false successor is the null path.
+-      BasicBlock *NullBB =
+-          Pred == ICmpInst::ICMP_EQ ? BI->getSuccessor(0) : BI->getSuccessor(1);
+-      BasicBlock *OtherBB =
+-          Pred == ICmpInst::ICMP_EQ ? BI->getSuccessor(1) : BI->getSuccessor(0);
+-      if (NullBB == OtherBB)
+-        continue;
+-      // IncomingBB must be dominated by the null-path edge.
+-      if (DT.dominates(BasicBlockEdge(BB, NullBB), IncomingBB))
+-        return true;
+-    }
+-  }
+-  return false;
+-}
+-
+ /// Recursively trace a branch condition back to a jeandle.check_instanceof
+ /// call on QueryObj. Returns a matched TraceResult if successful, or an
+ /// unmatched TraceResult ({Klass=0}) if the condition cannot be linked to a
+@@ -989,7 +945,8 @@ static TraceResult traceToCheckInstanceof(Value *Cond, Value *QueryObj,
+       // there), the arm is only live for the null execution, where type
+       // facts conditioned on non-null are meaningless — skip it regardless
+       // of whether the incoming is a constant.
+-      if (isNullCheckPath(PN->getIncomingBlock(I), QueryObj, DT))
++      if (jeandle::nullnessAtBlockEnd(QueryObj, PN->getIncomingBlock(I), DT) ==
++          Nullness::Null)
+         continue;
+ 
+       if (auto *CI = dyn_cast<ConstantInt>(Inc)) {
+@@ -1159,6 +1116,17 @@ struct CachedJavaTypeQueryContext {
+   uint64_t FinalHits = 0;
+   uint64_t FinalMisses = 0;
+ 
++  /// Negative pre-filter for the null-edge oracle, one instance per query.
++  /// Mutable so that the (const) edge queries can memoize its per-value
++  /// block sets.
++  mutable NullEdgePreFilter NullEdgeFilter;
++
++  /// Per-query budget for null-edge oracle calls, one instance per query.
++  /// Mutable so that the (const) edge queries can spend it. The limit comes
++  /// from the reference engine's option, so both engines spend the same
++  /// budget and truncate at comparable points.
++  mutable NullEdgeOracleBudget OracleBudget;
++
+   CachedJavaTypeQueryContext(
+       DominatorTree &DT, IsNullEdgeOracle NullOracle, BaseMemo &BaseTypes,
+       DenseMap<std::pair<Value *, BasicBlock *>, JavaType> *PathFacts = nullptr,
+@@ -1172,7 +1140,8 @@ CachedJavaTypeQueryContext::CachedJavaTypeQueryContext(
+     const DenseMap<std::pair<Value *, BasicBlock *>, JavaType> *FinalTypes)
+     : DT(DT), NullOracle(NullOracle), BaseTypes(BaseTypes),
+       PathFacts(PathFacts), FinalTypes(FinalTypes),
+-      FactsBudget(getFactsJoinBudget()), PhiBudget(getFactsJoinBudget()) {}
++      FactsBudget(getFactsJoinBudget()), PhiBudget(getFactsJoinBudget()),
++      OracleBudget(jeandle::getNullEdgeOracleCallBudget()) {}
+ 
+ } // namespace
+ 
+@@ -1269,16 +1238,53 @@ static JavaType edgeGuard(BasicBlock *From, BasicBlock *To, Value *V,
+                           TR.FalseExclusions);
+ }
+ 
+-/// Positive proof that V is null on edge From -> To, answered by the query's
+-/// null-edge oracle (the LazyValueInfo-backed implementation recognizes null
+-/// tests directly on the edge's branch as well as threaded/indirect forms).
+-/// When in doubt the oracle answers false — keeping an edge is always sound.
++/// Positive proof that V is null on edge From -> To.
++///
++/// The structural scan answers first: it proves nullness at the top of From
++/// (hence on every edge out of From, V being an SSA value) and proves
++/// non-nullness as well, which spares the oracle a query.  Only an unknown
++/// structural answer falls through to the query's null-edge oracle (the
++/// LazyValueInfo-backed implementation recognizes null tests directly on the
++/// edge's branch as well as threaded/indirect forms).
++///
++/// When in doubt the answer is false — keeping an edge is always sound.
+ static bool isNullEdge(Value *V, BasicBlock *From, BasicBlock *To,
+                        const CachedJavaTypeQueryContext &Q) {
+   if (!Q.DT.isReachableFromEntry(From))
+     return false; // Lattice reasoning is undefined for unreachable blocks;
+                   // keep the edge (the conservative answer).
+-  return Q.NullOracle && Q.NullOracle(V, From, To);
++  // One walk of the dominator chain answers both the structural question and
++  // the negative filter's question. The structural scan is the same one the
++  // reference engine uses, so both engines agree on which edges carry a null
++  // value. The conclusion is a property of the pair (V, From) and covers every
++  // edge out of From.
++  NullEdgePreFilter::BlockState State =
++      Q.NullEdgeFilter.blockState(V, From, Q.DT);
++  switch (State.Structural) {
++  case Nullness::Null:
++    return true; // Null at the top of From means null on every edge out of
++                 // From: V is an SSA value, so its null-ness cannot change
++                 // inside the block.
++  case Nullness::NonNull:
++    return false; // Proven non-null: the edge carries a live value.
++  case Nullness::Unknown:
++    break;
++  }
++  // Negative pre-filter: a null proof needs a dominating condition that
++  // mentions V. When no block on the dominator chain mentions V, no such
++  // condition exists and the oracle is not asked. The filter only ever
++  // suppresses a query, so it can cost precision but never soundness.
++  if (!Q.NullEdgeFilter.mayProveNull(V, State, Q.DT))
++    return false;
++  if (!Q.NullOracle)
++    return false;
++  // Budget: the oracle call is the expensive part of this function. Once the
++  // per-query budget is spent the oracle is not asked and the edge is kept.
++  // Keeping an edge never removes a type constraint, so running out of
++  // budget costs precision, never soundness.
++  if (!Q.OracleBudget.consume())
++    return false;
++  return Q.NullOracle(V, From, To);
+ }
+ 
+ /// Facts holding about V at the top of BB: the join over non-skipped incoming
+@@ -1339,6 +1345,13 @@ static JavaType factsAt(Value *V, BasicBlock *BB,
+     JavaType E = factsAt(V, P, Q);
+     mergePathFacts(E, edgeGuard(P, BB, V, Q.DT));
+     joinArm(Joined, First, std::move(E));
++    // Unknown is absorbing (typeUnion({}, X) == {}): once the accumulator is
++    // unknown the remaining arms cannot change it. Stopping here skips their
++    // oracle queries and their recursion. The join result is unchanged; only
++    // the budget left for later blocks changes, so the reference engine
++    // applies the same cut to keep both engines in step.
++    if (Joined.isUnknown())
++      break;
+   }
+ 
+   // The join loop above recursed through factsAt, which may have rehashed
+@@ -1483,12 +1496,29 @@ JavaType jeandle::getCachedJavaType(Value *V, DominatorTree *DT,
+ 
+   // Only a completed top-level result may be published. Recursive PHI frames
+   // can depend on the outer PHI stack and must not publish their local results.
+-  if (!Q.FactsTruncated && !Q.PhiTruncated)
++  // A query that exhausted the null-edge oracle budget is truncated as well:
++  // its answer is sound but less precise, so it must not be published as the
++  // final answer of this context.
++  if (!Q.FactsTruncated && !Q.PhiTruncated && !Q.OracleBudget.exhausted())
+     Cache.FinalTypes.try_emplace(Key, Result);
+-  Info.SkipVerification = Q.FactsTruncated || Q.PhiTruncated || Q.PhiCycleHit;
++  // Budget exhaustion counts as a truncation: the query then answered a
++  // different question than an untruncated one, so a strict comparison with a
++  // cold query is not required (and would not hold in general).
++  Info.SkipVerification = Q.FactsTruncated || Q.PhiTruncated || Q.PhiCycleHit ||
++                          Q.OracleBudget.exhausted();
+   Info.FactsHits = Q.FactsHits;
+   Info.FactsMisses = Q.FactsMisses;
+   Info.FinalHits += Q.FinalHits;
+   Info.FinalMisses += Q.FinalMisses;
++  // Top-level query boundary: publish this thread's null-edge oracle counters
++  // into the process-wide totals. The oracle itself only touches thread-local
++  // counters, so its hot path never pays for an atomic.
++  flushLocalNullEdgeOracleStats();
++  flushNullEdgePreFilterStats();
++  // Top-level query boundary: report how the null-edge oracle budget was
++  // spent, in the same process-wide counters the reference engine uses.
++  noteNullEdgeOracleBudgetQuery(Q.OracleBudget.grantedCalls(),
++                                Q.OracleBudget.skippedCalls(),
++                                Q.OracleBudget.exhausted());
+   return Result;
+ }
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+index 8a79e346606b..57ccca9fbfbf 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+@@ -9,6 +9,7 @@
+ #include "llvm/Analysis/Jeandle/JavaTypeAnalysis.h"
+ #include "llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h"
+ #include "llvm/Analysis/Jeandle/LVINullEdgeOracle.h"
++#include "llvm/ADT/StringMap.h"
+ #include "llvm/ADT/StringRef.h"
+ #include "llvm/Analysis/LazyValueInfo.h"
+ #include "llvm/IR/Dominators.h"
+@@ -49,6 +50,12 @@ cl::opt<bool> ForceBaseScanJavaTypeInvalidation(
+     cl::desc("Scan all base cache entries instead of deleting affected keys"),
+     cl::Hidden, cl::init(false));
+ 
++cl::opt<bool> JavaTypePassLocal(
++    "jeandle-java-type-pass-local",
++    cl::desc("Clear the Java type caches at the entry of every real consumer "
++             "pass, keeping only pass-internal reuse"),
++    cl::Hidden, cl::init(false));
++
+ using QueryClock = std::chrono::steady_clock;
+ 
+ /// Converts the time elapsed since Start into nanoseconds; only called when
+@@ -106,6 +113,42 @@ void printJavaType(raw_ostream &OS, const JavaType &Type) {
+ 
+ AnalysisKey JavaTypeAnalysis::Key;
+ 
++/// Number of pass-local cache clears performed in this process.
++static uint64_t PassLocalClearCount = 0;
++
++/// Number of consumer pass invocations, per consumer name.
++static StringMap<uint64_t> ConsumerInvocations;
++
++bool jeandle::javaTypePassLocalEnabled() { return JavaTypePassLocal; }
++
++uint64_t jeandle::javaTypePassLocalClearCount() { return PassLocalClearCount; }
++
++uint64_t jeandle::javaTypeConsumerInvocationCount(StringRef Consumer) {
++  auto It = ConsumerInvocations.find(Consumer);
++  return It == ConsumerInvocations.end() ? 0 : It->second;
++}
++
++/// Clears the caches of an already existing analysis. The analysis itself is
++/// left in place, so the consumer still gets the same DT/LVI references; only
++/// the memoized type facts are dropped.
++void jeandle::clearJavaTypeCacheIfPassLocal(Function &F,
++                                             FunctionAnalysisManager &FAM,
++                                             StringRef Consumer) {
++  // The invocation counter is diagnostic only, so it is kept out of the
++  // production path (plan: trace/stats are off for the measured runs).
++  if (javaTypeStatsEnabled())
++    ++ConsumerInvocations[Consumer];
++  if (!JavaTypePassLocal)
++    return;
++  // getCachedResult never creates an analysis, so a pass that runs before the
++  // first Java type query does not pay for an analysis it does not need.
++  JavaTypeAnalysisResult *Result = FAM.getCachedResult<JavaTypeAnalysis>(F);
++  if (!Result)
++    return;
++  Result->clear();
++  ++PassLocalClearCount;
++}
++
+ /// Public query entry: selects the cache mode and, when statistics are enabled,
+ /// reports one optional observation event.
+ /// With verification enabled it also runs a query that shares no cache and
+@@ -144,16 +187,28 @@ JavaType JavaTypeAnalysisResult::getJavaType(Value *V, Instruction *Context) {
+   if (VerifyJavaTypeCache && !DisableJavaTypeCache) {
+     Verified = true;
+     // The reference result always comes from the untouched original engine.
++    // The null-edge oracle budget truncates a query by refusing further
++    // oracle calls, and the two engines spend that budget on different
++    // traversals (the cached engine reuses path facts). A truncated query
++    // therefore answers a different question than an untruncated one, so the
++    // exhaustion counter is sampled around both evaluations: if either side
++    // was truncated, strict equality is not required.
++    uint64_t BudgetBefore = getNullEdgeOracleBudgetExhaustionCount();
+     JavaType Fresh = jeandle::getJavaType(V, &DT, Context, IsNullEdge);
++    uint64_t BudgetAfterReference = getNullEdgeOracleBudgetExhaustionCount();
+     // The original API does not expose truncation/cycle diagnostics. A separate
+     // cold evaluation supplies only those flags, never the reference result.
+     JavaTypeCache DiagnosticCache;
+     CachedJavaTypeQueryInfo FreshInfo;
+     getCachedJavaType(V, &DT, Context, IsNullEdge, DiagnosticCache, FreshInfo);
++    uint64_t BudgetAfterFresh = getNullEdgeOracleBudgetExhaustionCount();
+     // 缓存节省预算；PHI 环中完整缓存与局部贡献也可能精度不同。
+     // 跳过严格相等不代表验证通过，单独记录，后续需补语义包含关系校验。
+     if (Info.SkipVerification || FreshInfo.SkipVerification)
+       VerificationSkipped = true;
++    else if (BudgetBefore != BudgetAfterReference ||
++             BudgetAfterReference != BudgetAfterFresh)
++      VerificationSkipped = true;
+     else if (Result != Fresh)
+       reportVerificationFailure(F, V, ContextBB, Result, Fresh);
+   }
+@@ -235,10 +290,22 @@ bool JavaTypeAnalysisResult::invalidate( Function &F,
+                                          FunctionAnalysisManager::Invalidator &Inv)
+ {
+   auto PAC = PA.getChecker<JavaTypeAnalysis>();
+-  return !(PAC.preserved() ||
+-           PAC.preservedSet<AllAnalysesOn<Function>>()) ||
+-         Inv.invalidate<DominatorTreeAnalysis>(F, PA) ||
+-         Inv.invalidate<LazyValueAnalysis>(F, PA);
++  bool SelfPreserved =
++      PAC.preserved() || PAC.preservedSet<AllAnalysesOn<Function>>();
++  bool DTInvalidated = Inv.invalidate<DominatorTreeAnalysis>(F, PA);
++  bool LVIInvalidated = Inv.invalidate<LazyValueAnalysis>(F, PA);
++  bool Dropped = !SelfPreserved || DTInvalidated || LVIInvalidated;
++  // 诊断：记录分析被丢弃的原因和当时缓存中残留的条目数，用于定位生命周期断点。
++  if (javaTypeStatsEnabled())
++    errs() << "JavaTypeAnalysisInvalidated function: " << F.getName()
++           << " dropped=" << (Dropped ? 1 : 0)
++           << " self_preserved=" << (SelfPreserved ? 1 : 0)
++           << " dt_invalidated=" << (DTInvalidated ? 1 : 0)
++           << " lvi_invalidated=" << (LVIInvalidated ? 1 : 0)
++           << " base_entries=" << Cache.baseSize()
++           << " path_facts_entries=" << Cache.pathFactsSize()
++           << " final_entries=" << Cache.finalTypesSize() << '\n';
++  return Dropped;
+ }
+ 
+ /// Obtains DT and LVI from the analysis manager and creates the Function-level
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+index 8d1f31241e8d..53df39d86ad1 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+@@ -7,8 +7,10 @@
+ //===----------------------------------------------------------------------===//
+ 
+ #include "llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h"
++#include "llvm/Analysis/Jeandle/JavaTypeAnalysis.h"
+ #include "llvm/ADT/Statistic.h"
+ #include "llvm/IR/Function.h"
++#include "llvm/IR/Jeandle/JavaType.h"
+ #include "llvm/IR/Module.h"
+ #include "llvm/Support/CommandLine.h"
+ #include "llvm/Support/Format.h"
+@@ -75,6 +77,27 @@ ALWAYS_ENABLED_STATISTIC(TotalVerifications,
+ ALWAYS_ENABLED_STATISTIC(TotalVerificationSkips,
+                         "Java type truncated or PHI-cycle comparisons skipped");
+ 
++// Null-edge oracle counters. The oracle is asked "is V provably null on this
++// edge?" for every non-back predecessor of every joined block, so its call
++// volume and answer distribution decide which null-edge optimization pays
++// off. They are always enabled: the oracle accumulates into thread-local
++// counters and flushes the delta here once per top-level query, so the hot
++// path never touches an atomic.
++ALWAYS_ENABLED_STATISTIC(NullOracleCalls,
++                        "Java type null-edge oracle calls");
++ALWAYS_ENABLED_STATISTIC(NullOracleStructural,
++                        "Java type null-edge oracle calls resolved structurally");
++ALWAYS_ENABLED_STATISTIC(NullOracleTrue,
++                        "Java type null-edge oracle calls answered true");
++ALWAYS_ENABLED_STATISTIC(NullOracleNanoseconds,
++                        "Java type null-edge oracle LVI time (ns)");
++ALWAYS_ENABLED_STATISTIC(NullOracleBlockCalls,
++                        "Java type null-edge oracle block-level LVI queries");
++ALWAYS_ENABLED_STATISTIC(NullOracleBlockTrue,
++                        "Java type null-edge oracle block-level LVI answers true");
++ALWAYS_ENABLED_STATISTIC(NullOracleBlockNanoseconds,
++                        "Java type null-edge oracle block-level LVI time (ns)");
++
+ /// Prints a cache hit rate; prints n/a when there is no sample yet so that we
+ /// never divide by zero.
+ void printRate(raw_ostream &OS, uint64_t Hits, uint64_t Misses) {
+@@ -91,6 +114,28 @@ AnalysisKey JavaTypeStatsAnalysis::Key;
+ 
+ bool jeandle::javaTypeStatsEnabled() { return CollectJavaTypeStats; }
+ 
++void jeandle::addNullEdgeOracleStats(const NullEdgeOracleStats &Delta) {
++  NullOracleCalls += Delta.Calls;
++  NullOracleStructural += Delta.Structural;
++  NullOracleTrue += Delta.True;
++  NullOracleNanoseconds += Delta.Nanoseconds;
++  NullOracleBlockCalls += Delta.BlockCalls;
++  NullOracleBlockTrue += Delta.BlockTrue;
++  NullOracleBlockNanoseconds += Delta.BlockNanoseconds;
++}
++
++NullEdgeOracleStats jeandle::getNullEdgeOracleStats() {
++  NullEdgeOracleStats Stats;
++  Stats.Calls = NullOracleCalls.getValue();
++  Stats.Structural = NullOracleStructural.getValue();
++  Stats.True = NullOracleTrue.getValue();
++  Stats.Nanoseconds = NullOracleNanoseconds.getValue();
++  Stats.BlockCalls = NullOracleBlockCalls.getValue();
++  Stats.BlockTrue = NullOracleBlockTrue.getValue();
++  Stats.BlockNanoseconds = NullOracleBlockNanoseconds.getValue();
++  return Stats;
++}
++
+ /// The only place counters are accumulated, including the process-wide `-stats`
+ /// numbers, so the default query path never touches an atomic.
+ /// @brief accumulate one query
+@@ -308,6 +353,16 @@ JavaTypeAnalysisSummaryPrinterPass::run(Module &M, ModuleAnalysisManager &) {
+   OS << "  base-only query misses: " << TotalBaseMisses.getValue() << '\n';
+   OS << "  base insertions: " << TotalBaseInsertions.getValue() << '\n';
+   OS << "  clears: " << TotalClears.getValue() << '\n';
++  OS << "  pass-local cache clears: " << javaTypePassLocalClearCount() << '\n';
++  OS << "  consumer invocations: "
++     << "type-check-elimination="
++     << javaTypeConsumerInvocationCount("type-check-elimination")
++     << " recover-type-info="
++     << javaTypeConsumerInvocationCount("recover-type-info")
++     << " constant-field-folding="
++     << javaTypeConsumerInvocationCount("constant-field-folding")
++     << " cha-devirtualization="
++     << javaTypeConsumerInvocationCount("cha-devirtualization") << '\n';
+   OS << "  invalidation requests: " << TotalInvalidations.getValue() << '\n';
+   OS << "  selective invalidations: " << TotalSelectiveInvalidations.getValue() << '\n';
+   OS << "  CFG invalidations: " << TotalCFGInvalidations.getValue() << '\n';
+@@ -330,5 +385,27 @@ JavaTypeAnalysisSummaryPrinterPass::run(Module &M, ModuleAnalysisManager &) {
+   OS << "  bypasses: " << TotalBypasses.getValue() << '\n';
+   OS << "  verifications: " << TotalVerifications.getValue() << '\n';
+   OS << "  verification skips: " << TotalVerificationSkips.getValue() << '\n';
++  OS << "  null-edge oracle calls: " << NullOracleCalls.getValue() << '\n';
++  OS << "  null-edge oracle structural hits: "
++     << NullOracleStructural.getValue() << '\n';
++  OS << "  null-edge oracle true answers: " << NullOracleTrue.getValue() << '\n';
++  OS << "  null-edge oracle lvi time (ns): "
++     << NullOracleNanoseconds.getValue() << '\n';
++  OS << "  null-edge oracle block-level lvi queries: "
++     << NullOracleBlockCalls.getValue() << '\n';
++  OS << "  null-edge oracle block-level lvi true answers: "
++     << NullOracleBlockTrue.getValue() << '\n';
++  OS << "  null-edge oracle block-level lvi time (ns): "
++     << NullOracleBlockNanoseconds.getValue() << '\n';
++  NullEdgePreFilterStats FilterStats = getNullEdgePreFilterStats();
++  OS << "  null-edge prefilter hits: " << FilterStats.Hits << '\n';
++  OS << "  null-edge prefilter uses scanned: " << FilterStats.Uses << '\n';
++  NullEdgeOracleBudgetStats BudgetStats = getNullEdgeOracleBudgetStats();
++  OS << "  null-edge oracle budget exhausted queries: "
++     << BudgetStats.ExhaustedQueries << '\n';
++  OS << "  null-edge oracle budget skipped calls: " << BudgetStats.SkippedCalls
++     << '\n';
++  OS << "  null-edge oracle budget max calls per query: "
++     << BudgetStats.MaxCallsPerQuery << '\n';
+   return PreservedAnalyses::all();
+ }
+diff --git a/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp b/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
+index 2c623e5488b4..09ad3743c51e 100644
+--- a/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
++++ b/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
+@@ -7,13 +7,74 @@
+ //===----------------------------------------------------------------------===//
+ 
+ #include "llvm/Analysis/Jeandle/LVINullEdgeOracle.h"
++#include "llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h"
+ #include "llvm/Analysis/LazyValueInfo.h"
+ #include "llvm/IR/Constants.h"
+ #include "llvm/IR/Instructions.h"
+ #include "llvm/IR/Jeandle/JavaType.h"
++#include "llvm/Support/CommandLine.h"
++
++#include <chrono>
+ 
+ using namespace llvm;
+ 
++namespace {
++
++/// E0 experiment: answer every null-edge query negatively, i.e. keep every
++/// edge. The optimization stays sound (keeping an edge is always sound) and
++/// the run measures how much the oracle actually costs. It is also the
++/// "budget = 0" shape of the oracle-call budget.
++cl::opt<bool> DisableNullEdgeOracle(
++    "jeandle-disable-null-edge-oracle",
++    cl::desc("Answer every null-edge oracle query negatively (keep every edge)"),
++    cl::Hidden, cl::init(false));
++
++/// S4 level 2: block-level null proof.
++///
++/// The edge-level query (level 3) asks LVI for the value of V on the edge
++/// FromBB -> ToBB. V is an SSA value, so a null constant at the *end* of
++/// FromBB already proves V null on every edge out of FromBB; the block-level
++/// query (getConstant) needs one getValueInBlock instead of the
++/// getEdgeValueLocal + getBlockValue pair the edge query performs.
++///
++/// The switch is off by default: the block-level proof is strictly stronger
++/// than the edge-level one (it can answer "null" where the edge query answers
++/// "unknown"), and the plan only allows changes that make the oracle answer
++/// false more often, never true more often. It stays available for the A/B
++/// measurement of the two levels' cost ratio.
++cl::opt<bool> EnableBlockLevelNullCheck(
++    "jeandle-null-edge-block-lvi",
++    cl::desc("Prove nullness per (value, block) with a block-level LVI "
++             "constant query before the per-edge predicate query"),
++    cl::Hidden, cl::init(false));
++
++/// The oracle is asked once per non-back predecessor of every joined block,
++/// so its counters must not cost an atomic each. They accumulate into
++/// thread-local plain counters and are flushed into the process-wide totals
++/// once per top-level query.
++thread_local NullEdgeOracleStats LocalStats;
++
++/// Elapsed nanoseconds between two steady_clock reads.
++uint64_t elapsedNanoseconds(std::chrono::steady_clock::time_point Start) {
++  return static_cast<uint64_t>(
++      std::chrono::duration_cast<std::chrono::nanoseconds>(
++          std::chrono::steady_clock::now() - Start)
++          .count());
++}
++
++} // namespace
++
++bool llvm::isNullEdgeOracleDisabled() { return DisableNullEdgeOracle; }
++
++NullEdgeOracleStats llvm::getLocalNullEdgeOracleStats() { return LocalStats; }
++
++void llvm::flushLocalNullEdgeOracleStats() {
++  if (LocalStats.Calls == 0 && LocalStats.Nanoseconds == 0)
++    return;
++  jeandle::addNullEdgeOracleStats(LocalStats);
++  LocalStats = NullEdgeOracleStats();
++}
++
+ /// LazyValueInfo-backed null-edge oracle. This fork's getPredicateOnEdge
+ /// returns a Constant*: the constant result of the comparison, or nullptr when
+ /// unknown. Unknown answers false (the edge is kept) — only positive proof may
+@@ -22,6 +83,10 @@ using namespace llvm;
+ /// queried value even when it is produced by freezing poison.
+ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+                                    BasicBlock *ToBB) const {
++  ++LocalStats.Calls;
++  if (DisableNullEdgeOracle)
++    return false;
++
+   while (true) {
+     V = V->stripPointerCastsAndAliases();
+     if (auto *FI = dyn_cast<FreezeInst>(V)) {
+@@ -61,11 +126,40 @@ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+             BasicBlock *NullBB = Cmp->getPredicate() == ICmpInst::ICMP_EQ
+                                      ? BI->getSuccessor(0)
+                                      : BI->getSuccessor(1);
+-            return NullBB == ToBB;
++            ++LocalStats.Structural;
++            bool IsNullEdge = NullBB == ToBB;
++            if (IsNullEdge)
++              ++LocalStats.True;
++            return IsNullEdge;
+           }
+         }
+ 
++  // S4 level 2: block-level proof. A null constant for V at the end of FromBB
++  // proves V null on every edge out of FromBB (V is an SSA value, its
++  // null-ness cannot change inside the block). The block value is cached by
++  // LVI, so the repeated queries for the other successors of the same block
++  // are cache hits.
++  if (EnableBlockLevelNullCheck) {
++    auto BlockStart = std::chrono::steady_clock::now();
++    Constant *BlockC = LVI.getConstant(V, FromBB->getTerminator());
++    LocalStats.BlockNanoseconds += elapsedNanoseconds(BlockStart);
++    ++LocalStats.BlockCalls;
++    if (BlockC && isa<ConstantPointerNull>(BlockC)) {
++      ++LocalStats.BlockTrue;
++      ++LocalStats.True;
++      return true;
++    }
++  }
++
++  // Only the LVI-backed part of the oracle is timed: the structural fast path
++  // above is a handful of instructions, and two clock reads would cost more
++  // than the work they measure.
++  auto Start = std::chrono::steady_clock::now();
+   Constant *C = LVI.getPredicateOnEdge(
+       ICmpInst::ICMP_EQ, V, ConstantPointerNull::get(PT), FromBB, ToBB);
+-  return C && C->isOneValue();
++  LocalStats.Nanoseconds += elapsedNanoseconds(Start);
++  bool IsNullEdge = C && C->isOneValue();
++  if (IsNullEdge)
++    ++LocalStats.True;
++  return IsNullEdge;
+ }
+diff --git a/llvm/lib/IR/Jeandle/JavaType.cpp b/llvm/lib/IR/Jeandle/JavaType.cpp
+index e7f5f4945095..9028b2e064ac 100644
+--- a/llvm/lib/IR/Jeandle/JavaType.cpp
++++ b/llvm/lib/IR/Jeandle/JavaType.cpp
+@@ -13,6 +13,7 @@
+ #include "llvm/ADT/DenseMap.h"
+ #include "llvm/ADT/ScopeExit.h"
+ #include "llvm/ADT/SmallPtrSet.h"
++#include "llvm/ADT/SmallVector.h"
+ #include "llvm/ADT/Statistic.h"
+ #include "llvm/IR/CFG.h"
+ #include "llvm/IR/Constants.h"
+@@ -29,6 +30,7 @@
+ #include "llvm/Support/CommandLine.h"
+ #include "llvm/Support/Debug.h"
+ #include <algorithm>
++#include <atomic>
+ #include <cstdint>
+ #include <memory>
+ 
+@@ -934,6 +936,33 @@ static cl::opt<unsigned> MaxFactsJoinBlocks(
+     "jeandle-max-facts-join-blocks", cl::init(128), cl::Hidden,
+     cl::desc("Maximum joined blocks per JavaType query dimension"));
+ 
++/// Maximum number of null-edge oracle calls per top-level query.
++///
++/// The oracle asks LazyValueInfo whether a value is provably null on an edge;
++/// that query dominates the cost of the path-facts join. This option bounds
++/// it: once the budget is spent the oracle is not asked again and the edge is
++/// kept (the conservative answer). Keeping an edge never removes a type
++/// constraint, so running out of budget costs precision but never soundness.
++///
++/// The default is derived from the measured per-query distribution of the
++/// oracle call count (see the optimization report): with the cheap filters
++/// disabled — the configuration in which the oracle is actually consulted —
++/// the heaviest top-level query in the test corpus asked the oracle 63 times.
++/// The default is twice that, so no measured query is truncated while the
++/// worst case stays bounded.
++/// A limit of 0 disables the oracle altogether, which is exactly the
++/// "the oracle always answers false" experiment used as the E0 baseline.
++///
++/// Core owns this option; the cached engine reads the configured value through
++/// jeandle::getNullEdgeOracleCallBudget() so that both engines spend the same
++/// budget and stay comparable in a differential verification.
++static cl::opt<unsigned> MaxNullEdgeOracleCalls(
++    "jeandle-max-null-edge-oracle-calls", cl::init(128), cl::Hidden,
++    cl::desc("Maximum null-edge oracle calls per JavaType query (0 disables "
++             "the oracle)"));
++
++unsigned jeandle::getNullEdgeOracleCallBudget() { return MaxNullEdgeOracleCalls; }
++
+ namespace {
+ 
+ /// Per-query evaluation state. Facts depend only on the CFG, branch
+@@ -949,7 +978,8 @@ namespace {
+ /// keys could alias freshly allocated values and return stale facts.
+ struct JavaTypeQueryContext {
+   JavaTypeQueryContext(DominatorTree &DT, IsNullEdgeOracle NullOracle)
+-      : DT(DT), NullOracle(NullOracle) {}
++      : DT(DT), NullOracle(NullOracle),
++        OracleBudget(MaxNullEdgeOracleCalls) {}
+ 
+   DominatorTree &DT;
+   IsNullEdgeOracle NullOracle;
+@@ -975,72 +1005,515 @@ struct JavaTypeQueryContext {
+   unsigned FactsBudget = MaxFactsJoinBlocks;
+   unsigned PhiBudget = MaxFactsJoinBlocks;
+   unsigned ConditionDepth = 0;
++  /// Negative pre-filter for the null-edge oracle, one instance per query.
++  /// Mutable so that the (const) edge queries can memoize its per-value
++  /// block sets.
++  mutable NullEdgePreFilter NullEdgeFilter;
++  /// Per-query budget for null-edge oracle calls, one instance per query.
++  /// Mutable so that the (const) edge queries can spend it.
++  mutable NullEdgeOracleBudget OracleBudget;
+ };
+ 
+ } // namespace
+ 
+-/// Check if IncomingBB is reached only when Obj is null.
+-/// Walks up the dominator tree from IncomingBB looking for a conditional branch
+-/// on `icmp eq/ne Obj, null` where IncomingBB is dominated by the "Obj is null"
+-/// successor. Using the dominator tree handles all CFG shapes (diamonds, etc.),
+-/// not just single-predecessor chains. Only branches are recognized: switch
+-/// case values must be constant integers, so a switch can never test a
+-/// pointer against null.
+-static bool isNullCheckPath(BasicBlock *IncomingBB, Value *Obj,
+-                            DominatorTree &DT) {
+-  Obj = Obj->stripPointerCastsAndAliases();
+-  for (auto *Node = DT.getNode(IncomingBB); Node; Node = Node->getIDom()) {
+-    BasicBlock *BB = Node->getBlock();
++// =============================================================================
++// Null-edge pre-filter
++// =============================================================================
++
++namespace {
++
++/// The filter is asked once per non-back predecessor of every joined block, so
++/// its counters must not cost an atomic each. They accumulate into
++/// thread-local plain counters and are flushed into the process-wide totals
++/// once per top-level query.
++thread_local NullEdgePreFilterStats LocalFilterStats;
++
++/// Process-wide pre-filter totals.
++std::atomic<uint64_t> GlobalFilterHits{0};
++std::atomic<uint64_t> GlobalFilterUses{0};
++
++} // namespace
++
++void jeandle::flushNullEdgePreFilterStats() {
++  if (LocalFilterStats.Hits == 0 && LocalFilterStats.Uses == 0)
++    return;
++  GlobalFilterHits.fetch_add(LocalFilterStats.Hits, std::memory_order_relaxed);
++  GlobalFilterUses.fetch_add(LocalFilterStats.Uses, std::memory_order_relaxed);
++  LocalFilterStats = NullEdgePreFilterStats();
++}
++
++NullEdgePreFilterStats jeandle::getNullEdgePreFilterStats() {
++  NullEdgePreFilterStats Stats;
++  Stats.Hits = GlobalFilterHits.load(std::memory_order_relaxed);
++  Stats.Uses = GlobalFilterUses.load(std::memory_order_relaxed);
++  return Stats;
++}
++
++// =============================================================================
++// Null-edge oracle budget
++// =============================================================================
++
++namespace {
++
++/// Counters of the null-edge oracle budget.
++///
++/// They are accumulated once per top-level query, never inside the oracle's
++/// hot path, so a process-wide atomic per query is cheap enough. The counter
++/// of the heaviest query is a maximum rather than a sum, and is kept apart so
++/// that it can be published with a max update.
++ALWAYS_ENABLED_STATISTIC(NumNullEdgeOracleBudgetExhaustedQueries,
++                          "Java type queries that hit the null-edge oracle "
++                          "budget");
++ALWAYS_ENABLED_STATISTIC(NumNullEdgeOracleBudgetSkippedCalls,
++                          "Java type null-edge oracle calls skipped by the "
++                          "budget");
++ALWAYS_ENABLED_STATISTIC(NumNullEdgeOracleBudgetMaxCallsPerQuery,
++                          "Java type null-edge oracle calls in the heaviest "
++                          "query");
++
++/// Number of top-level queries on this thread that hit the budget. It is
++/// monotonic so that the differential verification can compare it before and
++/// after a fresh evaluation and detect that the two evaluations were truncated
++/// at different points.
++thread_local uint64_t LocalBudgetExhaustionCount = 0;
++
++} // namespace
++
++bool NullEdgeOracleBudget::consume() {
++  if (Remaining == 0) {
++    Spent = true;
++    ++Skipped;
++    return false;
++  }
++  --Remaining;
++  ++Granted;
++  return true;
++}
+ 
+-    if (auto *BI = dyn_cast<BranchInst>(BB->getTerminator())) {
+-      if (!BI->isConditional())
++void jeandle::noteNullEdgeOracleBudgetQuery(uint64_t Granted, uint64_t Skipped,
++                                            bool Exhausted) {
++  if (Exhausted) {
++    NumNullEdgeOracleBudgetExhaustedQueries += 1;
++    ++LocalBudgetExhaustionCount;
++  }
++  NumNullEdgeOracleBudgetSkippedCalls += Skipped;
++  NumNullEdgeOracleBudgetMaxCallsPerQuery.updateMax(Granted);
++}
++
++NullEdgeOracleBudgetStats jeandle::getNullEdgeOracleBudgetStats() {
++  NullEdgeOracleBudgetStats Stats;
++  Stats.ExhaustedQueries = NumNullEdgeOracleBudgetExhaustedQueries.getValue();
++  Stats.SkippedCalls = NumNullEdgeOracleBudgetSkippedCalls.getValue();
++  Stats.MaxCallsPerQuery = NumNullEdgeOracleBudgetMaxCallsPerQuery.getValue();
++  return Stats;
++}
++
++uint64_t jeandle::getNullEdgeOracleBudgetExhaustionCount() {
++  return LocalBudgetExhaustionCount;
++}
++
++/// Maximum recursion depth of the definition-side fold analysis.  Deeper
++/// chains are answered "may fold to null", which only costs an oracle call.
++static const unsigned MaxNullFoldDepth = 16;
++
++/// The value the oracle reasons about: pointer casts and aliases stripped, and
++/// a freeze stripped only when its operand is proven defined (a freeze of
++/// poison may itself be poison, so the oracle keeps it).
++Value *NullEdgePreFilter::canonicalize(Value *V) {
++  auto It = CanonicalValues.find(V);
++  if (It != CanonicalValues.end())
++    return It->second;
++
++  Value *Orig = V;
++  while (true) {
++    V = V->stripPointerCastsAndAliases();
++    if (auto *FI = dyn_cast<FreezeInst>(V)) {
++      if (!jeandle::isProvenDefined(FI->getOperand(0)))
++        break;
++      V = FI->getOperand(0);
++      continue;
++    }
++    break;
++  }
++  CanonicalValues.insert(std::make_pair(Orig, V));
++  return V;
++}
++
++/// Blocks in which V is compared against null.
++///
++/// Only null-relevant uses are collected: a comparison of V (or of a pointer
++/// cast of V) against the null constant.  Other uses — a call argument, a
++/// store, a phi incoming — do not constrain V's nullness by themselves.
++/// A pointer cast forwards the nullness of its operand, so the cast's own
++/// users are followed (the oracle strips such casts before comparing).
++static void collectNullTestBlocks(Value *V,
++                                  SmallPtrSetImpl<BasicBlock *> &Out) {
++  SmallVector<Value *, 8> Worklist;
++  SmallPtrSet<Value *, 8> Visited;
++  Worklist.push_back(V);
++  while (!Worklist.empty()) {
++    Value *Cur = Worklist.pop_back_val();
++    if (!Visited.insert(Cur).second)
++      continue;
++    for (User *U : Cur->users()) {
++      LocalFilterStats.Uses++;
++      // A global alias denotes the same object as its aliasee, and the oracle
++      // strips aliases before comparing: the alias' own users are therefore
++      // users of the value as well.
++      if (auto *GA = dyn_cast<GlobalAlias>(U)) {
++        Worklist.push_back(GA);
+         continue;
+-      auto *Cmp = dyn_cast<ICmpInst>(BI->getCondition());
+-      if (!Cmp)
++      }
++      // A constant expression cast forwards the nullness of its operand and
++      // is stripped by the oracle as well.  Only the forms the oracle strips
++      // are followed, so that the collected set stays a superset of the
++      // blocks whose terminator can prove nullness.
++      if (auto *CE = dyn_cast<ConstantExpr>(U)) {
++        unsigned Op = CE->getOpcode();
++        if (Op == Instruction::BitCast || Op == Instruction::AddrSpaceCast)
++          Worklist.push_back(CE);
++        else if (Op == Instruction::GetElementPtr &&
++                 cast<GEPOperator>(CE)->hasAllZeroIndices())
++          Worklist.push_back(CE);
+         continue;
+-      ICmpInst::Predicate Pred = Cmp->getPredicate();
+-      if (Pred != ICmpInst::ICMP_EQ && Pred != ICmpInst::ICMP_NE)
++      }
++      auto *I = dyn_cast<Instruction>(U);
++      if (!I)
+         continue;
+-      Value *Op0 = Cmp->getOperand(0);
+-      Value *Op1 = Cmp->getOperand(1);
+-      Value *Tested = isa<ConstantPointerNull>(Op0)   ? Op1
+-                      : isa<ConstantPointerNull>(Op1) ? Op0
+-                                                      : nullptr;
+-      if (!Tested || Tested->stripPointerCastsAndAliases() != Obj)
++      if (auto *Cmp = dyn_cast<ICmpInst>(I)) {
++        if (Cmp->getPredicate() != ICmpInst::ICMP_EQ &&
++            Cmp->getPredicate() != ICmpInst::ICMP_NE)
++          continue;
++        Value *Op0 = Cmp->getOperand(0);
++        Value *Op1 = Cmp->getOperand(1);
++        if (isa<ConstantPointerNull>(Op0->stripPointerCastsAndAliases()) ||
++            isa<ConstantPointerNull>(Op1->stripPointerCastsAndAliases()))
++          Out.insert(I->getParent());
+         continue;
+-      // icmp eq Obj, null -> true successor is the null path;
+-      // icmp ne Obj, null -> false successor is the null path.
+-      BasicBlock *NullBB =
+-          Pred == ICmpInst::ICMP_EQ ? BI->getSuccessor(0) : BI->getSuccessor(1);
+-      BasicBlock *OtherBB =
+-          Pred == ICmpInst::ICMP_EQ ? BI->getSuccessor(1) : BI->getSuccessor(0);
+-      if (NullBB == OtherBB)
++      }
++      // A pointer cast forwards the nullness of its operand.
++      if (auto *GEP = dyn_cast<GetElementPtrInst>(I)) {
++        if (GEP->hasAllZeroIndices() && GEP->getType()->isPointerTy())
++          Worklist.push_back(I);
+         continue;
+-      // IncomingBB must be dominated by the null-path edge.
+-      if (DT.dominates(BasicBlockEdge(BB, NullBB), IncomingBB))
+-        return true;
++      }
++      if (isa<BitCastInst>(I) || isa<AddrSpaceCastInst>(I)) {
++        if (I->getType()->isPointerTy())
++          Worklist.push_back(I);
++        continue;
++      }
++      if (auto *CB = dyn_cast<CallBase>(I)) {
++        if (CB->getReturnedArgOperand() == Cur)
++          Worklist.push_back(I);
++        continue;
++      }
+     }
+   }
++}
++
++/// Blocks in which V is compared against null.
++///
++/// The set is built once per value and reused for every block of a dominator
++/// chain, so a chain walk costs one set lookup per block instead of one
++/// hash-map lookup per block.
++const SmallPtrSet<BasicBlock *, 8> &
++NullEdgePreFilter::getNullTestBlocks(Value *V) {
++  auto It = NullTestBlocks.find(V);
++  if (It != NullTestBlocks.end())
++    return It->second;
++  SmallPtrSet<BasicBlock *, 8> Blocks;
++  collectNullTestBlocks(V, Blocks);
++  return NullTestBlocks.insert(std::make_pair(V, std::move(Blocks)))
++      .first->second;
++}
++
++/// Is V compared against null in block B?
++bool NullEdgePreFilter::isNullTestedInBlock(Value *V, BasicBlock *B) {
++  return getNullTestBlocks(V).contains(B);
++}
++
++/// Does a block dominating B (up to V's definition block) test V against null?
++///
++/// A null test in a dominating block only constrains the edges dominated by
++/// the tested side; the filter does not check which side that is, so it may
++/// keep an edge the oracle would have skipped.  That only costs precision.
++bool NullEdgePreFilter::hasDominatingNullTest(Value *V, BasicBlock *B) {
++  // The definition block of V cuts the walk: above it the value does not
++  // exist yet, so no condition there can constrain it.
++  BasicBlock *DefBB =
++      dyn_cast<Instruction>(V) ? cast<Instruction>(V)->getParent() : nullptr;
++
++  // One lookup for the whole chain: the set of null-test blocks is per value.
++  const SmallPtrSet<BasicBlock *, 8> &Tested = getNullTestBlocks(V);
++  for (DomTreeNode *Node = DT->getNode(B); Node; Node = Node->getIDom()) {
++    BasicBlock *Cur = Node->getBlock();
++    if (Tested.contains(Cur))
++      return true;
++    if (Cur == DefBB)
++      break;
++  }
+   return false;
+ }
+ 
+-/// Positive proof that V is null on edge From -> To, answered by the query's
+-/// null-edge oracle (the LazyValueInfo-backed implementation recognizes null
+-/// tests directly on the edge's branch as well as threaded/indirect forms),
+-/// with a structural fallback for threaded shapes the oracle misses: null
+-/// tests on casted pointers and with the null constant on either operand
+-/// side. When in doubt the answer is false — keeping an edge is always sound.
++/// Can the incoming value X be null on the edge out of PhiBB?
++///
++/// The lattice computes the incoming arm on its edge: the arm is null when
++/// the arm itself folds to null, when the block's own terminator tests it
++/// against null, or when a dominating block does.
++bool NullEdgePreFilter::mayBeNullOnEdge(Value *X, BasicBlock *PhiBB,
++                                        unsigned Depth) {
++  X = canonicalize(X);
++  if (mayFoldToNull(X, Depth + 1))
++    return true;
++  if (isNullTestedInBlock(X, PhiBB))
++    return true;
++  if (hasDominatingNullTest(X, PhiBB))
++    return true;
++  return false;
++}
++
++/// Can the lattice fold V to the constant null?
++///
++/// Mirrors LazyValueInfo's folding rules for pointer values: a select folds to
++/// null when both of its arms fold to null, a phi folds to null when all of
++/// its incoming arms are null on their edge.  Every other pointer definition
++/// (call, load, argument, GEP, freeze, ...) is overdefined or provably
++/// non-null and can never become a null constant.
++bool NullEdgePreFilter::mayFoldToNull(Value *V, unsigned Depth) {
++  if (Depth > MaxNullFoldDepth)
++    return true; // Conservative: assume the chain may still fold to null.
++  V = canonicalize(V);
++  auto It = MayFoldNull.find(V);
++  if (It != MayFoldNull.end())
++    return It->second;
++
++  bool Result = false;
++  if (auto *C = dyn_cast<Constant>(V)) {
++    Result = C->isNullValue();
++  } else if (auto *SI = dyn_cast<SelectInst>(V)) {
++    Result = mayFoldToNull(SI->getTrueValue(), Depth + 1) &&
++             mayFoldToNull(SI->getFalseValue(), Depth + 1);
++  } else if (auto *PN = dyn_cast<PHINode>(V)) {
++    Result = true;
++    for (unsigned I = 0, E = PN->getNumIncomingValues();
++         I != E && Result; ++I)
++      Result = mayBeNullOnEdge(PN->getIncomingValue(I),
++                                PN->getIncomingBlock(I), Depth + 1);
++  }
++
++  MayFoldNull.insert(std::make_pair(V, Result));
++  return Result;
++}
++
++/// Shared core of the structural nullness scan and of the negative
++/// pre-filter.
++///
++/// Walks up the dominator tree from \p From looking for a conditional branch
++/// on `icmp eq/ne Obj, null` whose null side (resp. non-null side) dominates
++/// \p From.  Using the dominator tree handles all CFG shapes (diamonds, etc.),
++/// not just single-predecessor chains.  Only branches are recognized: switch
++/// case values must be constant integers, so a switch can never test a
++/// pointer against null.
++///
++/// The walk stops at the block that defines \p Obj: above its definition the
++/// value does not exist yet, so no null test can mention it.
++///
++/// \p Tested is the set of blocks that can contain a null test of the value
++/// (built from its use list).  A block outside that set does not mention the
++/// value at all, so its terminator cannot constrain it: the terminator is
++/// then not even looked at.  This is what makes the merged walk cheap — the
++/// test set of a value holds only the few blocks that mention it, while a
++/// dominator chain can be long.  \p Tested may be null, in which case every
++/// block of the chain is analysed.
++///
++/// \p HasNullTest, when not null, reports whether the chain contains a null
++/// test of the value.  That is the question the negative pre-filter asks:
++/// without such a test no lattice query can prove the value null.
++static Nullness scanNullChain(Value *Obj, BasicBlock *From, DominatorTree &DT,
++                               const SmallPtrSetImpl<BasicBlock *> *Tested,
++                               bool *HasNullTest) {
++  if (!Obj || !From)
++    return Nullness::Unknown;
++
++  BasicBlock *DefBB = nullptr;
++  if (auto *I = dyn_cast<Instruction>(Obj))
++    DefBB = I->getParent();
++
++  Nullness Result = Nullness::Unknown;
++  for (auto *Node = DT.getNode(From); Node; Node = Node->getIDom()) {
++    BasicBlock *BB = Node->getBlock();
++
++    // A block that does not mention the value cannot constrain it.
++    bool MentionsValue = !Tested || Tested->contains(BB);
++    if (MentionsValue && HasNullTest)
++      *HasNullTest = true;
++
++    if (MentionsValue) {
++      if (auto *BI = dyn_cast<BranchInst>(BB->getTerminator())) {
++        if (BI->isConditional()) {
++          if (auto *Cmp = dyn_cast<ICmpInst>(BI->getCondition())) {
++            ICmpInst::Predicate Pred = Cmp->getPredicate();
++            if (Pred == ICmpInst::ICMP_EQ || Pred == ICmpInst::ICMP_NE) {
++              Value *Op0 = Cmp->getOperand(0);
++              Value *Op1 = Cmp->getOperand(1);
++              Value *TestedValue = isa<ConstantPointerNull>(Op0)   ? Op1
++                                   : isa<ConstantPointerNull>(Op1) ? Op0
++                                                                  : nullptr;
++              if (TestedValue &&
++                  TestedValue->stripPointerCastsAndAliases() == Obj) {
++                // icmp eq Obj, null -> true successor is the null path;
++                // icmp ne Obj, null -> false successor is the null path.
++                BasicBlock *NullBB = Pred == ICmpInst::ICMP_EQ
++                                         ? BI->getSuccessor(0)
++                                         : BI->getSuccessor(1);
++                BasicBlock *OtherBB = Pred == ICmpInst::ICMP_EQ
++                                          ? BI->getSuccessor(1)
++                                          : BI->getSuccessor(0);
++                // Two successors are the same block: the branch does not
++                // discriminate between the two outcomes, so it proves nothing.
++                if (NullBB != OtherBB) {
++                  bool NullDom =
++                      DT.dominates(BasicBlockEdge(BB, NullBB), From);
++                  bool NonNullDom =
++                      DT.dominates(BasicBlockEdge(BB, OtherBB), From);
++                  if (NullDom && NonNullDom)
++                    return Nullness::Unknown; // Contradictory tests.
++                  if (NullDom) {
++                    if (Result == Nullness::NonNull)
++                      return Nullness::Unknown; // Contradictory tests.
++                    Result = Nullness::Null;
++                  } else if (NonNullDom) {
++                    if (Result == Nullness::Null)
++                      return Nullness::Unknown; // Contradictory tests.
++                    Result = Nullness::NonNull;
++                  }
++                }
++              }
++            }
++          }
++        }
++      }
++    }
++    if (BB == DefBB)
++      break; // Above the definition the value does not exist yet.
++  }
++  return Result;
++}
++
++/// Block-level state of V at the top of From.
++///
++/// The structural conclusion and the negative filter's question are answered
++/// by one walk of the dominator chain: the chain of the value and the chain
++/// of its definition are the same chain, and a chain walk is the expensive
++/// part of the null-edge path.
++NullEdgePreFilter::BlockState
++NullEdgePreFilter::blockState(Value *V, BasicBlock *From, DominatorTree &DT) {
++  this->DT = &DT;
++  BlockState State;
++  if (!V || !From)
++    return State;
++
++  Value *Canon = canonicalize(V);
++  Value *Obj = V->stripPointerCastsAndAliases();
++
++  if (Canon == Obj) {
++    // The filter and the structural scan reason about the same value, so the
++    // set of blocks that can mention it restricts both: one walk answers both
++    // questions.
++    const SmallPtrSet<BasicBlock *, 8> &Tested = getNullTestBlocks(Canon);
++    State.Structural =
++        scanNullChain(Obj, From, DT, &Tested, &State.HasNullTest);
++  } else {
++    // A freeze whose operand is proven defined: the filter reasons about the
++    // operand, the structural scan about the freeze itself.  The two do not
++    // share a set of blocks, so the chain is walked twice.  This is rare.
++    State.Structural = scanNullChain(Obj, From, DT, nullptr, nullptr);
++    State.HasNullTest = hasDominatingNullTest(Canon, From);
++  }
++  return State;
++}
++
++bool NullEdgePreFilter::mayProveNull(Value *V, const BlockState &State,
++                                     DominatorTree &DT) {
++  this->DT = &DT;
++  Value *Canon = canonicalize(V);
++
++  // Only values with an enumerable use list and a definition point can be
++  // filtered. Constants and globals are rare here and are always asked.
++  if (!isa<Instruction>(Canon) && !isa<Argument>(Canon))
++    return true;
++
++  // The lattice may fold the value itself to the constant null.
++  if (mayFoldToNull(Canon, 0))
++    return true;
++
++  // A dominating condition (or the edge's own terminator) may test the value
++  // against null.
++  if (State.HasNullTest)
++    return true;
++
++  ++LocalFilterStats.Hits;
++  return false;
++}
++
++/// Structural nullness of V at the top of From, derived from dominance only.
++///
++/// See scanNullChain for the details of the scan.
++Nullness jeandle::nullnessAtBlockEnd(Value *V, BasicBlock *From,
++                                     DominatorTree &DT) {
++  if (!V || !From)
++    return Nullness::Unknown;
++  return scanNullChain(V->stripPointerCastsAndAliases(), From, DT, nullptr,
++                       nullptr);
++}
++
++/// Positive proof that V is null on edge From -> To.
++///
++/// The structural scan answers first: it proves nullness at the top of From
++/// (hence on every edge out of From, V being an SSA value) and proves
++/// non-nullness as well, which spares the oracle a query.  Only an unknown
++/// structural answer falls through to the query's null-edge oracle (the
++/// LazyValueInfo-backed implementation recognizes null tests directly on the
++/// edge's branch as well as threaded/indirect forms).
++///
++/// When in doubt the answer is false — keeping an edge is always sound.
+ static bool isNullEdge(Value *V, BasicBlock *From, BasicBlock *To,
+                        const JavaTypeQueryContext &Q) {
+   if (!Q.DT.isReachableFromEntry(From))
+     return false; // Lattice reasoning is undefined for unreachable blocks;
+                   // keep the edge (the conservative answer).
+-  if (Q.NullOracle && Q.NullOracle(V, From, To))
++  // One walk of the dominator chain answers both the structural question and
++  // the negative filter's question: the conclusion is a property of the pair
++  // (V, From) and covers every edge out of From.
++  NullEdgePreFilter::BlockState State =
++      Q.NullEdgeFilter.blockState(V, From, Q.DT);
++  switch (State.Structural) {
++  case Nullness::Null:
++    return true; // Null at the top of From means null on every edge out of
++                 // From: V is an SSA value, so its null-ness cannot change
++                 // inside the block.
++  case Nullness::NonNull:
++    return false; // Proven non-null: the edge carries a live value.
++  case Nullness::Unknown:
++    break;
++  }
++  // Negative pre-filter: a null proof needs a dominating condition that
++  // mentions V. When no block on the dominator chain mentions V, no such
++  // condition exists and the oracle is not asked. The filter only ever
++  // suppresses a query, so it can cost precision but never soundness.
++  if (!Q.NullEdgeFilter.mayProveNull(V, State, Q.DT))
++    return false;
++  if (!Q.NullOracle)
++    return false;
++  // Budget: the oracle call is the expensive part of this function. Once the
++  // per-query budget is spent the oracle is not asked and the edge is kept.
++  // Keeping an edge never removes a type constraint, so running out of
++  // budget costs precision, never soundness.
++  if (!Q.OracleBudget.consume())
++    return false;
++  if (Q.NullOracle(V, From, To))
+     return true;
+-  // Null at the top of From (a dominating null-check edge) means null on
+-  // every edge out of From, including this one: V is an SSA value, so its
+-  // null-ness cannot change inside the block.
+-  return isNullCheckPath(From, V, Q.DT);
++  return false;
+ }
+ 
+ // Condition tracing: trace from a branch condition to a check_instanceof call
+@@ -1735,7 +2208,7 @@ static TraceResult traceToCheckInstanceof(Value *Cond, Value *QueryObj,
+       // be queried with values that dominate the edge, which is not
+       // guaranteed between a traced condition's PHI arms and QueryObj.
+       BasicBlock *IncBB = PN->getIncomingBlock(I);
+-      if (isNullCheckPath(IncBB, QueryObj, Q.DT))
++      if (jeandle::nullnessAtBlockEnd(QueryObj, IncBB, Q.DT) == Nullness::Null)
+         continue;
+ 
+       if (auto *CI = dyn_cast<ConstantInt>(Inc)) {
+@@ -2085,6 +2558,11 @@ static JavaType factsAt(Value *V, BasicBlock *BB, JavaTypeQueryContext &Q) {
+     JavaType E = factsAt(V, P, Q);
+     mergePathFacts(E, edgeGuard(P, BB, V, Q));
+     joinArm(Joined, First, std::move(E));
++    // Unknown is absorbing (typeUnion({}, X) == {}): once the accumulator is
++    // unknown the remaining arms cannot change it. The cached engine applies
++    // the same cut, so both engines consume the join budget alike.
++    if (Joined.isUnknown())
++      break;
+   }
+ 
+   // The join loop above recursed through factsAt, which may have rehashed
+@@ -2232,5 +2710,15 @@ JavaType jeandle::getJavaType(Value *V, DominatorTree *DT, Instruction *Context,
+ 
+   JavaTypeQueryContext Q{*DT, IsNullEdge};
+   JavaType T = valueDimension(V, Q);
+-  return typeIntersect(T, factsAt(V, Context->getParent(), Q));
++  JavaType Result = typeIntersect(T, factsAt(V, Context->getParent(), Q));
++  // Top-level query boundary: publish this thread's null-edge pre-filter
++  // counters into the process-wide totals.
++  flushNullEdgePreFilterStats();
++  // Top-level query boundary: report how the null-edge oracle budget was
++  // spent. A query that exhausted the budget is truncated, so its answer is
++  // sound but less precise than an untruncated one.
++  noteNullEdgeOracleBudgetQuery(Q.OracleBudget.grantedCalls(),
++                                Q.OracleBudget.skippedCalls(),
++                                Q.OracleBudget.exhausted());
++  return Result;
+ }
+diff --git a/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp b/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
+index 3470618d4c7e..813f87ff25cb 100644
+--- a/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
++++ b/llvm/lib/Transforms/Jeandle/CHADevirtualization.cpp
+@@ -593,6 +593,9 @@ bool optimizeCallSite(InvokeInst &CB, DomTreeUpdater &DTU,
+ 
+ PreservedAnalyses CHADevirtualization::run(Function &F,
+                                            FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "cha-devirtualization");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp b/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
+index f608dd164e9e..3bacc61e3a02 100644
+--- a/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
++++ b/llvm/lib/Transforms/Jeandle/ConstantFieldFolding.cpp
+@@ -729,6 +729,10 @@ bool foldFieldLoad(Module &M, const jeandle::VMCallbacks &CB,
+ 
+ PreservedAnalyses ConstantFieldFolding::run(Function &F,
+                                             FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains. RepeatedConstantFolding
++  // calls this pass directly, so every one of its rounds is covered too.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "constant-field-folding");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp b/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
+index c48282404d83..0632c9706ecf 100644
+--- a/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
++++ b/llvm/lib/Transforms/Jeandle/RecoverTypeInfo.cpp
+@@ -171,6 +171,9 @@ bool isForwarder(Instruction &I) {
+ 
+ PreservedAnalyses RecoverTypeInfo::run(Function &F,
+                                        FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "recover-type-info");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp b/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
+index 0b6120840c0c..54c85748b92b 100644
+--- a/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
++++ b/llvm/lib/Transforms/Jeandle/TypeCheckElimination.cpp
+@@ -52,6 +52,9 @@ namespace {
+ 
+ PreservedAnalyses TypeCheckElimination::run(Function &F,
+                                             FunctionAnalysisManager &FAM) {
++  // Pass-local ablation: start every consumer invocation with an empty Java
++  // type cache, so only reuse inside this pass remains.
++  jeandle::clearJavaTypeCacheIfPassLocal(F, FAM, "type-check-elimination");
+   Module *M = F.getParent();
+   if (!M->getNamedMetadata(jeandle::Metadata::JavaMethodCompilation))
+     return PreservedAnalyses::all();
+diff --git a/llvm/test/Jeandle/java-type-cache-reuse/pass-local-production-hook.ll b/llvm/test/Jeandle/java-type-cache-reuse/pass-local-production-hook.ll
+new file mode 100644
+index 000000000000..c486b5975d5a
+--- /dev/null
++++ b/llvm/test/Jeandle/java-type-cache-reuse/pass-local-production-hook.ll
+@@ -0,0 +1,61 @@
++; RUN: opt -disable-output -jeandle-java-type-stats -passes="type-check-elimination,print<java-type-analysis>,recover-type-info,print<java-type-analysis>" -jeandle-vm-callback-log=%S/Inputs/tce-recover.cblog %s 2>&1 | FileCheck %s --check-prefix=CROSS
++; RUN: opt -disable-output -jeandle-java-type-stats -jeandle-java-type-pass-local -passes="type-check-elimination,print<java-type-analysis>,recover-type-info,print<java-type-analysis>" -jeandle-vm-callback-log=%S/Inputs/tce-recover.cblog %s 2>&1 | FileCheck %s --check-prefix=LOCAL
++; RUN: opt -disable-output -jeandle-java-type-stats -jeandle-java-type-pass-local -passes="module(function(type-check-elimination),function(recover-type-info),print<java-type-analysis-summary>)" -jeandle-vm-callback-log=%S/Inputs/tce-recover.cblog %s 2>&1 | FileCheck %s --check-prefix=SUMMARY
++; RUN: opt -S -passes="type-check-elimination,recover-type-info" -jeandle-vm-callback-log=%S/Inputs/tce-recover.cblog %s 2>&1 | FileCheck %s --check-prefix=IR
++;
++; The production pass-local hook clears the Java type cache at the entry of
++; every real consumer pass, so the downstream RecoverTypeInfo pass starts with
++; an empty cache without an explicit boundary pass. The upstream TCE entries
++; are dropped exactly as the manual boundary pass dropped them.
++
++declare i1 @jeandle.check_instanceof(ptr, ptr addrspace(1) nonnull)
++
++define void @tce_recover(ptr addrspace(1) nonnull %obj) #0 gc "hotspotgc" {
++entry:
++  %c0 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %obj)
++  %c1 = call i1 @jeandle.check_instanceof(ptr inttoptr (i64 9 to ptr), ptr addrspace(1) nonnull %obj)
++  %p0 = getelementptr i8, ptr addrspace(1) %obj, i64 16
++  %l0 = load ptr addrspace(1), ptr addrspace(1) %p0, align 8
++  %p1 = getelementptr i8, ptr addrspace(1) %obj, i64 24
++  %l1 = load ptr addrspace(1), ptr addrspace(1) %p1, align 8
++  ret void
++}
++
++; CROSS-LABEL: JavaTypeAnalysis for function: tce_recover
++; CROSS:         queries: 2
++; CROSS:         final type hits: 1
++; CROSS:         final type misses: 1
++; CROSS:         base insertions: 1
++; CROSS-LABEL: JavaTypeAnalysis for function: tce_recover
++; CROSS:         queries: 4
++; CROSS:         final type hits: 3
++; CROSS:         final type misses: 1
++; CROSS:         base insertions: 1
++; CROSS:         clears: 0
++
++; LOCAL-LABEL: JavaTypeAnalysis for function: tce_recover
++; LOCAL:         queries: 2
++; LOCAL:         final type hits: 1
++; LOCAL:         final type misses: 1
++; LOCAL:         base insertions: 1
++; LOCAL-LABEL: JavaTypeAnalysis for function: tce_recover
++; LOCAL:         queries: 4
++; LOCAL:         final type hits: 2
++; LOCAL:         final type misses: 2
++; LOCAL:         base insertions: 2
++; LOCAL:         clears: 1
++
++; The pass-local hook is counted separately from the mutation-driven clears.
++; SUMMARY:       pass-local cache clears: 1
++; SUMMARY:       consumer invocations: type-check-elimination=1 recover-type-info=1
++
++; The receiver has no java-klass attribute, so RecoverTypeInfo can query the
++; loads but cannot emit useful field metadata. Both modes keep the input
++; semantics unchanged.
++; IR:         %l0 = load ptr addrspace(1), ptr addrspace(1) %p0, align 8
++; IR-NEXT:    %p1 = getelementptr
++; IR-NEXT:    %l1 = load
++; IR-NOT:     !java-klass
++
++attributes #0 = { "java-method"="0" }
++!java-method-compilation = !{}
+diff --git a/llvm/test/Jeandle/type-check-elimination/Inputs/null-edge-shapes.cblog b/llvm/test/Jeandle/type-check-elimination/Inputs/null-edge-shapes.cblog
+new file mode 100644
+index 000000000000..47c6cb751b59
+--- /dev/null
++++ b/llvm/test/Jeandle/type-check-elimination/Inputs/null-edge-shapes.cblog
+@@ -0,0 +1,8 @@
++# Klass 22 with no interfaces, not final. The null-edge shapes below must all
++# recognize the null arm and skip it, so the remaining arm's passing check
++# folds the probe to true.
++IsObjectKlass 22 = false
++IsInterface 22 = false
++GetSecondarySupers 22 = []
++IsEffectivelyFinal 22 = false
++IsSubtype 22 22 = true
+diff --git a/llvm/test/Jeandle/type-check-elimination/null-edge-phi-null-arm.ll b/llvm/test/Jeandle/type-check-elimination/null-edge-phi-null-arm.ll
+new file mode 100644
+index 000000000000..55d501161971
+--- /dev/null
++++ b/llvm/test/Jeandle/type-check-elimination/null-edge-phi-null-arm.ll
+@@ -0,0 +1,37 @@
++; RUN: opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=%S/Inputs/null-edge-shapes.cblog %s 2>&1 | FileCheck %s
++; XFAIL: *
++
++; Known gap: a phi with a null incoming (phi [null, entry], [obj, loop]) is
++; still poisoned by the null arm, so the query on the phi stays unknown even
++; though the other incoming value is typed. JavaType has no "known null"
++; representation yet, so the phi cannot drop the null arm the way a CFG edge
++; can. The plan calls this shape out as the typical Java oop-PHI form, and
++; null-arm-type.ll pins the same gap for the non-loop variant.
++;
++; The test is expected to fail: when the null arm of a phi becomes vacuous,
++; the fold below appears and this test must be updated (lit reports an
++; unexpected pass then).
++
++declare i1 @jeandle.check_instanceof(ptr addrspace(0), ptr addrspace(1) nonnull)
++
++define i1 @phi_null_entry_typed_loop() gc "hotspotgc" {
++entry:
++  br label %loop
++
++loop:
++  %p = phi ptr addrspace(1) [ null, %entry ], [ %typed, %latch ]
++  %r = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %p)
++  ret i1 %r
++
++latch:
++  %typed = load ptr addrspace(1), ptr addrspace(1) null, !java-klass !0, !noundef !1
++  br label %loop
++}
++
++; CHECK-LABEL: @phi_null_entry_typed_loop(
++; CHECK: loop:
++; CHECK-NEXT: ret i1 true
++
++!0 = !{!"noundef"}
++!1 = !{!"java-klass", i32 22}
++!java-method-compilation = !{}
+diff --git a/llvm/test/Jeandle/type-check-elimination/null-edge-shapes.ll b/llvm/test/Jeandle/type-check-elimination/null-edge-shapes.ll
+new file mode 100644
+index 000000000000..bf62bcb614af
+--- /dev/null
++++ b/llvm/test/Jeandle/type-check-elimination/null-edge-shapes.ll
+@@ -0,0 +1,94 @@
++; RUN: opt -S -passes="type-check-elimination" -jeandle-vm-callback-log=%S/Inputs/null-edge-shapes.cblog %s 2>&1 | FileCheck %s
++
++; Null-edge shapes that the oracle has to recognize:
++;  - a diamond whose null arm is the FIRST successor of the null test,
++;  - the same diamond with the null arm as the SECOND successor (the answer
++;    must not depend on the successor order),
++;  - an unreachable block (it must stay unreachable and must not contribute
++;    facts to the merge).
++; In every case the null arm is skipped, so the remaining arm's passing
++; check folds the probe to true.
++
++declare i1 @jeandle.check_instanceof(ptr addrspace(0), ptr addrspace(1) nonnull)
++
++; The null arm is the first successor of `br i1 %is_null`.
++define i1 @diamond_null_arm_first(ptr addrspace(1) %obj) gc "hotspotgc" {
++entry:
++  %is_null = icmp eq ptr addrspace(1) %obj, null
++  br i1 %is_null, label %nullbb, label %nonbb
++
++nullbb:
++  br label %merge
++
++nonbb:
++  %is_sub = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  br i1 %is_sub, label %merge, label %fail
++
++merge:
++  %r = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  ret i1 %r
++
++fail:
++  ret i1 false
++}
++
++; The null arm is the second successor of the branch: the same shape with the
++; null test inverted (icmp ne), so the null path is the false successor. The
++; answer must not depend on the successor order.
++define i1 @diamond_null_arm_last(ptr addrspace(1) %obj) gc "hotspotgc" {
++entry:
++  %is_not_null = icmp ne ptr addrspace(1) %obj, null
++  br i1 %is_not_null, label %nonbb, label %nullbb
++
++nullbb:
++  br label %merge
++
++nonbb:
++  %is_sub = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  br i1 %is_sub, label %merge, label %fail
++
++merge:
++  %r = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  ret i1 %r
++
++fail:
++  ret i1 false
++}
++
++; An unreachable block: it has no predecessor, so it must not contribute
++; facts to %merge and the live fold must still happen.
++define i1 @unreachable_block_is_ignored(ptr addrspace(1) %obj) gc "hotspotgc" {
++entry:
++  %is_null = icmp eq ptr addrspace(1) %obj, null
++  br i1 %is_null, label %nullbb, label %nonbb
++
++nullbb:
++  br label %merge
++
++nonbb:
++  %is_sub = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  br i1 %is_sub, label %merge, label %fail
++
++merge:
++  %r = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  ret i1 %r
++
++fail:
++  ret i1 false
++
++dead:
++  %dead_probe = call i1 @jeandle.check_instanceof(ptr addrspace(0) inttoptr (i64 22 to ptr addrspace(0)), ptr addrspace(1) nonnull %obj)
++  ret i1 %dead_probe
++}
++
++; CHECK-LABEL: @diamond_null_arm_first(
++; CHECK: merge:
++; CHECK-NEXT: ret i1 true
++; CHECK-LABEL: @diamond_null_arm_last(
++; CHECK: merge:
++; CHECK-NEXT: ret i1 true
++; CHECK-LABEL: @unreachable_block_is_ignored(
++; CHECK: merge:
++; CHECK-NEXT: ret i1 true
++
++!java-method-compilation = !{}
+diff --git a/llvm/unittests/IR/JavaTypeCacheReuseTestSupport.h b/llvm/unittests/IR/JavaTypeCacheReuseTestSupport.h
+index d8e15d4d67b7..75f06160b155 100644
+--- a/llvm/unittests/IR/JavaTypeCacheReuseTestSupport.h
++++ b/llvm/unittests/IR/JavaTypeCacheReuseTestSupport.h
+@@ -69,12 +69,27 @@ struct Fixture {
+         Function::ExternalLinkage, "jeandle.check_instanceof", *M);
+     Check->addParamAttr(1, Attribute::NonNull);
+     auto *Entry = BasicBlock::Create(C, "entry", F);
++    auto *NullBB = BasicBlock::Create(C, "null", F);
++    auto *NonNullBB = BasicBlock::Create(C, "nonnull", F);
+     auto *GuardBB = BasicBlock::Create(C, "guard", F);
+     auto *Fail = BasicBlock::Create(C, "fail", F);
+     SmallVector<BasicBlock *, 64> Blocks;
+     for (unsigned I = 0; I != Depth + Width; ++I)
+       Blocks.push_back(BasicBlock::Create(C, "path" + std::to_string(I), F));
+-    BranchInst::Create(GuardBB, Entry);
++    // A null check in front of the type check, shaped as a diamond: the null
++    // test dominates the query points, but neither of its successors does, so
++    // the nullness of the oop is undecidable there.  That keeps the null-edge
++    // oracle on the query path -- a value whose nullness the dominating
++    // structure already decides never reaches the oracle, and the oracle-call
++    // assertions of these tests would become vacuous.
++    IRBuilder<> EB(Entry);
++    auto *IsNull =
++        EB.CreateICmpEQ(Obj, ConstantPointerNull::get(Ptr), "isnull");
++    EB.CreateCondBr(IsNull, NullBB, NonNullBB);
++    IRBuilder<> NB(NullBB);
++    NB.CreateBr(GuardBB);
++    IRBuilder<> NNB(NonNullBB);
++    NNB.CreateBr(GuardBB);
+     IRBuilder<> B(GuardBB);
+     Guard = B.CreateCall(Check, {klass(22), Obj}, "check");
+     B.CreateCondBr(Guard, Blocks.front(), Fail);
+diff --git a/llvm/unittests/IR/JavaTypeQueryTest.cpp b/llvm/unittests/IR/JavaTypeQueryTest.cpp
+index 493e09e94f1b..07bc9586b73d 100644
+--- a/llvm/unittests/IR/JavaTypeQueryTest.cpp
++++ b/llvm/unittests/IR/JavaTypeQueryTest.cpp
+@@ -1485,4 +1485,92 @@ TEST_F(JavaTypeQueryTest, StatisticsAreOptIn) {
+     EXPECT_NE(Text.find(Zero.str()), std::string::npos) << Text;
+ }
+ 
++TEST_F(JavaTypeQueryTest, NullEdgeOracleBudgetLimitsTheOracle) {
++  // A null check in front of the query point, shaped as a diamond: the null
++  // test dominates the query point but neither of its successors does, so the
++  // nullness of the oop stays undecidable there and the null-edge oracle is
++  // on the query path. Three incoming edges reach the query point, so one
++  // query asks the oracle three times.
++  Function *F = parse(R"(
++    define void @test(ptr %obj, i1 %c) {
++    entry:
++      %isnull = icmp eq ptr %obj, null
++      br i1 %isnull, label %null, label %nonnull
++    null:
++      br label %join
++    nonnull:
++      br label %join
++    join:
++      br i1 %c, label %use1, label %use2
++    use1:
++      br label %mid
++    mid:
++      br label %use3
++    use2:
++      br label %use3
++    use3:
++      ret void
++    }
++  )");
++  ASSERT_NE(F, nullptr);
++  DominatorTree DT(*F);
++  Value *V = F->getArg(0);
++  Instruction *Context = block(*F, "use3")->getTerminator();
++
++  int Calls = 0;
++  auto Oracle = [&](Value *, BasicBlock *, BasicBlock *) {
++    ++Calls;
++    return false; // The oracle cannot prove null on any edge.
++  };
++
++  // Without a budget the oracle is consulted on every candidate edge.
++  JavaTypeCache UntruncatedCache;
++  CachedJavaTypeQueryInfo UntruncatedInfo;
++  JavaType Untruncated =
++      getCachedJavaType(V, &DT, Context, Oracle, UntruncatedCache,
++                        UntruncatedInfo);
++  EXPECT_EQ(Calls, 3);
++  EXPECT_FALSE(UntruncatedInfo.SkipVerification);
++
++  // A budget of one grants the first call and refuses the other two. The
++  // refused edges are kept, so no type constraint is lost; the query is
++  // truncated, so it must not claim equality with a cold query.
++  {
++    ScopedQueryOption<unsigned> Budget("jeandle-max-null-edge-oracle-calls", 1);
++    JavaTypeCache Cache;
++    CachedJavaTypeQueryInfo Info;
++    Calls = 0;
++    JavaType Truncated = getCachedJavaType(V, &DT, Context, Oracle, Cache, Info);
++    EXPECT_EQ(Calls, 1);
++    EXPECT_TRUE(Info.SkipVerification);
++    // The oracle answered false on every edge, so refusing a call cannot
++    // change the answer: the truncated result is still the same.
++    EXPECT_EQ(Truncated, Untruncated);
++    // A truncated result must not be published as the final answer.
++    EXPECT_EQ(Cache.finalTypesSize(), 0U);
++  }
++
++  // A budget of zero never asks the oracle: that is the "the oracle always
++  // answers false" switch of the E0 experiment.
++  {
++    ScopedQueryOption<unsigned> Budget("jeandle-max-null-edge-oracle-calls", 0);
++    JavaTypeCache Cache;
++    CachedJavaTypeQueryInfo Info;
++    Calls = 0;
++    JavaType Disabled = getCachedJavaType(V, &DT, Context, Oracle, Cache, Info);
++    EXPECT_EQ(Calls, 0);
++    EXPECT_TRUE(Info.SkipVerification);
++    EXPECT_EQ(Disabled, Untruncated);
++  }
++
++  // The reference engine spends the same budget and keeps the same answer.
++  {
++    ScopedQueryOption<unsigned> Budget("jeandle-max-null-edge-oracle-calls", 0);
++    Calls = 0;
++    JavaType Reference = jeandle::getJavaType(V, &DT, Context, Oracle);
++    EXPECT_EQ(Calls, 0);
++    EXPECT_EQ(Reference, Untruncated);
++  }
++}
++
+ } // namespace
+-- 
+2.55.0
+

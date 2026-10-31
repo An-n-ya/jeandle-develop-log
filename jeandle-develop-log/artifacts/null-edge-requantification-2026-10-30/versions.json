@@ -1,0 +1,30 @@
+{
+  "a": {
+    "root": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-baseline",
+    "head": "ac545bb21e8931152ad9149e01f8304b214dbd91",
+    "status": "",
+    "binary_sha256": "9178f7ecec31eb734f573d2e0144b908e5525f700673c9623672ac0e091db86f",
+    "build_config": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:STRING=/home/annya/playground/jeandle/jeandle/tools/bin/g++",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_COMPILER:STRING=/home/annya/playground/jeandle/jeandle/tools/bin/gcc",
+      "LLVM_ENABLE_ASSERTIONS:BOOL=OFF",
+      "LLVM_TARGETS_TO_BUILD:STRING=X86"
+    ]
+  },
+  "b": {
+    "root": "/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark",
+    "head": "e5475bb0df4671302665c6986e762bf892c3c98a",
+    "status": "",
+    "binary_sha256": "b3b274b3075e6b9d3123d328f4315bd49cff3cea10ac4ab2585a20407e8a4412",
+    "build_config": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:STRING=/home/annya/playground/jeandle/jeandle/tools/bin/g++",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_COMPILER:STRING=/home/annya/playground/jeandle/jeandle/tools/bin/gcc",
+      "LLVM_ENABLE_ASSERTIONS:BOOL=OFF",
+      "LLVM_TARGETS_TO_BUILD:STRING=X86"
+    ]
+  }
+}

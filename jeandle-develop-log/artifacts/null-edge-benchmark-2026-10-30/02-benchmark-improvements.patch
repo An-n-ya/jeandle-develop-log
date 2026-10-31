@@ -1,0 +1,669 @@
+From e5475bb0df4671302665c6986e762bf892c3c98a Mon Sep 17 00:00:00 2001
+From: Annya <annya.host@gmail.com>
+Date: Fri, 30 Oct 2026 09:35:25 +0800
+Subject: [PATCH] Add pinned paired NullEdge benchmarks with noise calibration
+
+---
+ .../Analysis/Jeandle/LVINullEdgeOracle.cpp    |  32 ++--
+ .../EXECUTION-2026-10-30.md                   |  65 +++++++
+ llvm/utils/jeandle-null-edge-bench/README.md  | 124 ++++++++++++
+ .../jeandle-null-edge-bench/benchmark.py      | 181 ++++++++++++++++++
+ .../utils/jeandle-null-edge-bench/generate.py | 115 +++++++++++
+ .../jeandle-null-edge-bench/test_benchmark.py |  62 ++++++
+ 6 files changed, 568 insertions(+), 11 deletions(-)
+ create mode 100644 llvm/utils/jeandle-null-edge-bench/EXECUTION-2026-10-30.md
+ create mode 100644 llvm/utils/jeandle-null-edge-bench/README.md
+ create mode 100644 llvm/utils/jeandle-null-edge-bench/benchmark.py
+ create mode 100644 llvm/utils/jeandle-null-edge-bench/generate.py
+ create mode 100644 llvm/utils/jeandle-null-edge-bench/test_benchmark.py
+
+diff --git a/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp b/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
+index 09ad3743c51e..35d2097563d1 100644
+--- a/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
++++ b/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
+@@ -83,7 +83,9 @@ void llvm::flushLocalNullEdgeOracleStats() {
+ /// queried value even when it is produced by freezing poison.
+ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+                                    BasicBlock *ToBB) const {
+-  ++LocalStats.Calls;
++  const bool Measure = jeandle::javaTypeStatsEnabled();
++  if (Measure)
++    ++LocalStats.Calls;
+   if (DisableNullEdgeOracle)
+     return false;
+ 
+@@ -126,9 +128,10 @@ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+             BasicBlock *NullBB = Cmp->getPredicate() == ICmpInst::ICMP_EQ
+                                      ? BI->getSuccessor(0)
+                                      : BI->getSuccessor(1);
+-            ++LocalStats.Structural;
++            if (Measure)
++              ++LocalStats.Structural;
+             bool IsNullEdge = NullBB == ToBB;
+-            if (IsNullEdge)
++            if (Measure && IsNullEdge)
+               ++LocalStats.True;
+             return IsNullEdge;
+           }
+@@ -140,13 +143,18 @@ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+   // LVI, so the repeated queries for the other successors of the same block
+   // are cache hits.
+   if (EnableBlockLevelNullCheck) {
+-    auto BlockStart = std::chrono::steady_clock::now();
++    auto BlockStart = Measure ? std::chrono::steady_clock::now()
++                              : std::chrono::steady_clock::time_point{};
+     Constant *BlockC = LVI.getConstant(V, FromBB->getTerminator());
+-    LocalStats.BlockNanoseconds += elapsedNanoseconds(BlockStart);
+-    ++LocalStats.BlockCalls;
++    if (Measure) {
++      LocalStats.BlockNanoseconds += elapsedNanoseconds(BlockStart);
++      ++LocalStats.BlockCalls;
++    }
+     if (BlockC && isa<ConstantPointerNull>(BlockC)) {
+-      ++LocalStats.BlockTrue;
+-      ++LocalStats.True;
++      if (Measure) {
++        ++LocalStats.BlockTrue;
++        ++LocalStats.True;
++      }
+       return true;
+     }
+   }
+@@ -154,12 +162,14 @@ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+   // Only the LVI-backed part of the oracle is timed: the structural fast path
+   // above is a handful of instructions, and two clock reads would cost more
+   // than the work they measure.
+-  auto Start = std::chrono::steady_clock::now();
++  auto Start = Measure ? std::chrono::steady_clock::now()
++                       : std::chrono::steady_clock::time_point{};
+   Constant *C = LVI.getPredicateOnEdge(
+       ICmpInst::ICMP_EQ, V, ConstantPointerNull::get(PT), FromBB, ToBB);
+-  LocalStats.Nanoseconds += elapsedNanoseconds(Start);
++  if (Measure)
++    LocalStats.Nanoseconds += elapsedNanoseconds(Start);
+   bool IsNullEdge = C && C->isOneValue();
+-  if (IsNullEdge)
++  if (Measure && IsNullEdge)
+     ++LocalStats.True;
+   return IsNullEdge;
+ }
+diff --git a/llvm/utils/jeandle-null-edge-bench/EXECUTION-2026-10-30.md b/llvm/utils/jeandle-null-edge-bench/EXECUTION-2026-10-30.md
+new file mode 100644
+index 000000000000..f24638b17b70
+--- /dev/null
++++ b/llvm/utils/jeandle-null-edge-bench/EXECUTION-2026-10-30.md
+@@ -0,0 +1,65 @@
++# NullEdge 测试改进执行记录（2026-10-30）
++
++## 改动位置
++
++测试机：`annya@100.122.220.40`。
++
++原有 15 个跟踪文件改动、4 个新测试文件，以及环境/执行报告，合并为单个提交 `2754b2fbfa12`（21 文件）。原分支 `test/javatype-cache-design` 工作树清洁。
++
++从该提交新建 worktree：`/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark`，分支 `codex/null-edge-benchmark`。独立 CMake Release、assertions OFF、GCC 16.1.1、X86 构建，未复用旧构建目录的对象文件。
++
++新实现位于 `llvm/utils/jeandle-null-edge-bench/`，同时修复 `LVINullEdgeOracle.cpp`：统计关闭时不读时钟、不增加本地 oracle 统计；预算控制不受影响。
++
++## 五项建议的落实
++
++1. `--cpu` 必填，启动即设置单核 affinity；先做相同二进制/flags 的 A/A，并记录 SMT 兄弟和 governor。没有修改共享机器的全局设置。
++2. 分为 correctness、diagnostic、timed 三阶段。正确性检查的 reference 重算不污染诊断计数。正式计时关闭 stats、验证和输出；oracle 内部插桩也通过统计开关关闭。
++3. 保留单函数结构，扩为 1024 个独立函数；全新 opt 进程重新解析输入和构建分析。样本 CPU 时间不足 200ms 时不判定性能收益。
++4. 每个输入每轮随机排列 A/B，串行执行，保存逐轮命令、顺序、wall/CPU 时间、退出码、上下文切换计数。错误、缺摘要、IR 不一致、超时等立即失败。
++5. 报告配对变化、bootstrap 95% 区间，使用 A/A 的逐轮绝对差异 P95 作为保守门槛。无标定、样本过短或区间未越过门槛均为 inconclusive。
++
++进程 CPU 时间来自 getrusage，并非查询内部 CPU 时间。正式流程衡量 opt 端到端成本，诊断摘要辅助解释查询成本；两者不能混用。
++
++## 正确性与脚本验证
++
++基线和新目录均重新运行：
++
++- JavaTypeQueryTests：48 个，47 通过；唯一失败同为 `CachedEntryNormalizesFreeze`。
++- Jeandle lit：发现 810 个，25 unsupported、775 通过、1 XFAIL、9 失败；通过程序比较，失败集合逐条相同。
++- 脚本四个回归测试通过：进程失败、缺摘要、IR 差异必须失败；过短样本必须 inconclusive，同时检查正式命令没有验证/统计插桩并且每轮包含 A/B。
++- 五种生成输入的正确性、IR 等价、诊断和计时流程均执行。测试/构建结束后才开始计时。
++
++首次 lit 因新构建缺少工具产生额外失败；补建 llvm-as/link/dis/extract、count、not、split-file、llvm-config/readobj、llc 后重新运行，上述为最终结果。这些工具均来自新目录构建。
++
++## A/A 实测
++
++固定 CPU 8（SMT 兄弟为 CPU 9）；每种输入 1024 函数。初次标定 3 个预热轮、15 个正式配对轮：
++
++| 输入 | A 进程 CPU 中位数 ms | 配对 CPU 变化中位数 | 逐轮绝对变化 P95 |
++|---|---:|---:|---:|
++| deep-static | 245.9 | +0.16% | 1.29% |
++| wide-static | 837.8 | +0.14% | 5.11% |
++| leaf-static | 323.1 | −0.65% | 6.96% |
++| tce-cha | 248.2 | +0.28% | 9.78% |
++| virtual-cfg | 704.5 | +0.02% | 4.02% |
++
++全部样本超过 200ms，所有 A/A 结果均为 inconclusive。中位配对偏差小于 1%，但尾部仍有接近 10% 的波动，不能认为共享机器上 1% 的改善已可可靠识别。
++
++原报告使用查询内部墙钟时间，此处为更长输入的进程 CPU 时间，不能直接计算二者之间的“降噪倍数”。
++
++初次标定的诊断阶段当时还合并了 cached/reference 检查，因此其诊断 counters 不作为生产路径计数；计时阶段已关闭观察者，不受此项影响。保存该轮原始 harness.py 供复现。最终版把两阶段拆开后，再完成 1 个预热轮、5 个正式轮的五输入 A/A 验证；全部满足时长门槛。精确数据见 `aa-final/summary.json`。
++
++## A/B 流程验证
++
++使用同一二进制，B 打开 `-jeandle-null-edge-block-lvi=true`，1 个预热轮、5 个正式配对轮，读取 15 轮 A/A 标定作为门槛。五种输入均完成三阶段检查、IR 等价和计时，全部满足 200ms 门槛；CPU 与墙钟两项均判为 inconclusive。
++
++这五种输入经过预过滤后没有 oracle 调用，因此这次 A/B 只验证开关、标定文件和配对判断流程，不作为块级 LVI 或整体 NullEdge 优化的收益证据。要重新量化 NullEdge 本身，需要为基线应用相同的插桩开关后构建，并使用生产输入重新做 A/A 与 A/B。
++
++## 产物
++
++- 使用说明：`JavaType-NullEdge-Benchmark-Usage-2026-10-30.md`。
++- 本地脚本、两轮 A/A、A/B 流程验证和测试日志：`artifacts/null-edge-benchmark-2026-10-30/`。
++- `aa-pilot/` 保留 15 轮初次标定及当时脚本；`aa-final/` 为最终实现的 5 轮 A/A。
++- 测试机的原始诊断 IR、日志和 SUCCESS 保存在 `/tmp/null-edge-aa-20261030/`、`/tmp/null-edge-aa-final-20261030/`、`/tmp/null-edge-ab-20261030/`。输入由 `/tmp/null-edge-workloads-20261030/cases.json` 指定，可用 generate.py 重建。
++
++当前验证覆盖测试流程与合成输入，不替代生产 JVM 编译性能评估。
+diff --git a/llvm/utils/jeandle-null-edge-bench/README.md b/llvm/utils/jeandle-null-edge-bench/README.md
+new file mode 100644
+index 000000000000..cf7b00442a92
+--- /dev/null
++++ b/llvm/utils/jeandle-null-edge-bench/README.md
+@@ -0,0 +1,124 @@
++# JavaType / NullEdge 性能测试
++
++本目录提供固定 CPU、逐文件配对交错、诊断与计时分离的测试流程。它测量 `opt` 编译成本，不测 Java 程序运行速度。Linux、Python 3.9+，不需要第三方 Python 包。
++
++## 目录和版本
++
++2026-10-30 的整理：原有 NullEdge 工作树已合并到提交 `2754b2fbfa12`。改进测试位于分支 `codex/null-edge-benchmark`，干净 worktree 为：
++
++```
++/home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-benchmark
++```
++
++原始工作树保留在 `../jeandle-llvm`。新目录单独配置构建，没有使用旧工作树的对象文件。
++
++## 构建与正确性
++
++从仓库根目录运行：
++
++```bash
++cmake -G Ninja -S llvm -B build -DCMAKE_BUILD_TYPE=Release \
++  -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD=X86
++env -u LD_LIBRARY_PATH ninja -C build opt JavaTypeQueryTests FileCheck \
++  llvm-as llvm-link llvm-dis count not split-file llvm-config llvm-readobj llvm-extract llc
++env -u LD_LIBRARY_PATH build/unittests/IR/JavaTypeQueryTests
++env -u LD_LIBRARY_PATH build/bin/llvm-lit -s --timeout=300 build/test/Jeandle
++python3 llvm/utils/jeandle-null-edge-bench/test_benchmark.py
++```
++
++测试机使用的编译器是 `/home/annya/playground/jeandle/jeandle/tools/bin/gcc` 与 `g++`；若默认编译器不支持该分支，请通过 `CMAKE_C_COMPILER` / `CMAKE_CXX_COMPILER` 指定。完整 lit 还需要相应测试工具（例如 llvm-link、llvm-as）；先构建缺失工具再判断失败原因。该分支已有语义测试失败，新增失败必须与基线逐条比较，不能只看总数。
++
++## 1. 选择核心，先 A/A
++
++```bash
++lscpu -e=CPU,CORE,SOCKET,MAXMHZ
++cat /sys/devices/cpu_core/cpus
++cat /sys/devices/cpu_atom/cpus
++cat /sys/devices/system/cpu/cpu8/topology/thread_siblings_list
++```
++
++本机 CPU 0–15 属于 cpu_core，16–31 属于 cpu_atom；8 和 9 是同一物理核心的线程。下面用 CPU 8 举例，执行前应确认 8 和 9 都空闲。脚本设置自身 affinity，全部子进程继承；绑核不等于独占。不要在构建、lit 或其他 benchmark 同时进行时测量。脚本不修改共享机器的 governor、Turbo 或系统服务。需要进一步降低噪声时，在独占测试环境中固定频率策略，并把策略与结果一起记录。
++
++## 2. 生成足够长的输入
++
++```bash
++python3 llvm/utils/jeandle-null-edge-bench/generate.py \
++  --out /tmp/null-edge-inputs --functions 1024
++```
++
++五个 workload 保留每个函数的调用点和 select 深度，仅增加独立函数数量：deep-static（16/64）、wide-static（64/16）、leaf-static（32/0）、tce-cha（16/64）、virtual-cfg（32/0），括号为每函数调用点数/select 深度。每次 `opt` 都从原始输入构建新的 IR 和分析状态。没有反复运行已经被优化过的模块，也没有跨进程预热 JavaType/LVI 缓存。
++
++正式样本要求每臂进程 CPU 时间至少 200ms；任何一个有效样本不足，`sample_duration_ok=false`，不判定收益。若不足，用新目录提高 `--functions`，重新做 A/A。时间门槛是操作性默认值，不是统计保证；该时间包含解析等成本，也应结合诊断中的 query time 检查查询工作量是否足够。输入扩大后也要留意内存压力。
++
++## 3. A/A 标定
++
++```bash
++python3 llvm/utils/jeandle-null-edge-bench/benchmark.py \
++  --cases /tmp/null-edge-inputs/cases.json \
++  --a build/bin/opt --b build/bin/opt --cpu 8 \
++  --repeats 31 --warmups 3 --out /tmp/null-edge-aa
++```
++
++每轮对 A、B 的顺序随机化，但串行执行；预热轮也记录，统计时排除。seed 默认固定并写入 manifest。A/A 的两臂必须相同二进制、相同 flags，不能人为制造区别。`summary.json` 的 `absolute_pair_change_p95` 是逐轮绝对百分比差异的经验 95 分位，用于下一步的保守噪声门槛。A/A 自身始终标为 inconclusive，不会宣称同一程序变快。
++
++A/A 应重复若干独立会话。若仍有明显漂移，先处理核心争用、负载和样本长度；不要用增加重复次数掩盖系统性偏差。
++
++## 4. A/B 配对测试
++
++例如比较块级 LVI 开关：
++
++```bash
++python3 llvm/utils/jeandle-null-edge-bench/benchmark.py \
++  --cases /tmp/null-edge-inputs/cases.json \
++  --a build/bin/opt --b build/bin/opt \
++  --b-flag=-jeandle-null-edge-block-lvi=true --cpu 8 \
++  --calibration /tmp/null-edge-aa/summary.json \
++  --repeats 31 --warmups 3 --out /tmp/null-edge-ab
++```
++
++`--a-flag` / `--b-flag` 可重复；以 `-` 开头的值使用等号语法。比较两个实现时，将 `--a` / `--b` 分别指向同配置构建的不可变二进制。基线也应关闭相同的插桩。不要在测量中重建二进制。
++
++注意：当前五个合成输入在预过滤后 oracle 调用为零，因此上面的开关示例用于验证测试流程，不足以评价块级 LVI 的收益。真正评价该开关应使用触达 oracle 的语料。E0 可能改变优化后的 IR；脚本遇到差异会停止，此时应单独进行精度/行为分析，不能绕过门禁宣称等价提速。
++
++对每个输入，先单独执行 cached/reference 正确性检查，再执行开启 stats、verify-each 的诊断，保存 IR 和摘要；正确性重算不会污染诊断计数。输出 IR 必须一致，进程必须成功且摘要必须存在。预算/循环导致的 verification skips 应人工检查；通过差分不代表所有查询均被比较。
++
++正式计时只执行 `-disable-output`，不加 stats、verify 或 summary。oracle 的内部计时现在也受 stats 开关保护。外部同时记录：
++
++- `wall_ns`：整个 opt 的墙钟时间，包括启动、解析、优化与退出。
++- `cpu_ns`：串行子进程的高分辨率 user+system CPU 时间，来自 `getrusage(RUSAGE_CHILDREN)` 差值；不是线程查询时间。
++- 自愿/非自愿上下文切换次数，辅助发现调度干扰。
++
++不要把诊断中的 LVI 时间再加到 query time 上；前者已包含在后者中。进程 CPU 时间可减少抢占等待影响，但不能消除缓存、频率和核心争用。
++
++## 5. 结果判断和文件
++
++每轮计算 `100 * (B/A - 1)`，负值表示 B 更快。对配对变化的中位数做 4000 次 bootstrap，报告 95% 区间。区间必须整体超出 A/A 噪声门槛，且全部样本足够长，才标为 improvement/regression；否则 inconclusive。没有提供 calibration 或显式 `--noise-floor-pct`，也不自动判定收益。
++
++`--calibration` 必须来自相同输入规模、核心、指标和相近环境；脚本不会替你证明环境相同。若不同日期的 A/A 噪声范围更大，采用较大范围。bootstrap 区间假设轮次近似独立，不能消除持续漂移或代表生产输入分布。
++
++输出目录必须是新目录，包含：
++
++- `manifest.json`：完整输入配置、参数、CPU affinity、SMT 兄弟、governor、二进制和输入 SHA256。
++- `samples.jsonl`：逐轮命令、模式、顺序、时间、退出码、调度计数；预热/诊断/正式阶段分开标注。
++- `*-a.ll` / `*-b.ll`、`*.stderr`：诊断 IR 和摘要。
++- `summary.json`：中位时间、配对变化、置信区间、噪声门槛、样本长度和判定。
++- `SUCCESS`：流程完成；不表示获得显著收益。失败和超时不会生成此标记。
++
++缺统计、非零退出、超时、非预期 IR 差异、正式阶段输出、二进制/输入在运行中变化，都使实验失败。不要把缺失值补零。
++
++## 使用真实语料
++
++`--cases` 接收显式 JSON 数组，每个文件单独配对交错，不先跑完整个 A 再跑 B：
++
++```json
++[
++  {
++    "name": "frozen-null-edge",
++    "input": "/absolute/path/frozen-null-edge.ll",
++    "callback": "/absolute/path/Inputs/frozen-null-edge.cblog",
++    "passes": "function(type-check-elimination)"
++  }
++]
++```
++
++应从实际 RUN 命令人工核实 passes 与 callback，保留真正需要的额外参数；不能把只解析第一个 RUN 的扫描当成完整 lit 覆盖。name 应唯一，使用普通文件名字符。小文件可作为成本分布诊断，通常不足 200ms，脚本会如实标记 inconclusive。要测微小查询成本，需要另外构造保留 null 形状的独立函数批次，而不是重复已经命中的同一查询。测试语料文件的中位时间之和也不等于完整语料端到端时间的中位数。
+diff --git a/llvm/utils/jeandle-null-edge-bench/benchmark.py b/llvm/utils/jeandle-null-edge-bench/benchmark.py
+new file mode 100644
+index 000000000000..e39a20391f1b
+--- /dev/null
++++ b/llvm/utils/jeandle-null-edge-bench/benchmark.py
+@@ -0,0 +1,181 @@
++#!/usr/bin/env python3
++"""Pinned, paired JavaType benchmark. See README.md for the JSON schema."""
++import argparse
++import hashlib
++import json
++import math
++import os
++from pathlib import Path
++import random
++import re
++import resource
++import statistics as st
++import subprocess
++import time
++
++
++def sha(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def counters(text):
++    data = {k: int(v) for k, v in re.findall(r'^  ([^:\n]+): (\d+)$', text, re.M)}
++    if 'total query time (ns)' not in data:
++        raise RuntimeError('missing JavaType summary (never interpret missing as zero)')
++    return data
++
++
++def interval(values, seed):
++    rng = random.Random(seed)
++    estimates = sorted(st.median(rng.choices(values, k=len(values))) for _ in range(4000))
++    return [estimates[100], estimates[3899]]
++
++
++def main():
++    p = argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--cases', type=Path, required=True)
++    p.add_argument('--a', type=Path, required=True)
++    p.add_argument('--b', type=Path, required=True)
++    p.add_argument('--a-flag', action='append', default=[])
++    p.add_argument('--b-flag', action='append', default=[])
++    p.add_argument('--cpu', type=int, required=True)
++    p.add_argument('--out', type=Path, required=True)
++    p.add_argument('--repeats', type=int, default=31)
++    p.add_argument('--warmups', type=int, default=3)
++    p.add_argument('--seed', type=int, default=20261030)
++    p.add_argument('--min-cpu-ms', type=float, default=200)
++    p.add_argument('--calibration', type=Path, help='A/A summary.json from the same environment and workloads')
++    p.add_argument('--timeout', type=float, default=120)
++    p.add_argument('--noise-floor-pct', type=float, default=0,
++                   help='measured A/A noise envelope, in percent')
++    args = p.parse_args()
++    for flag in args.a_flag + args.b_flag:
++        if any(token in flag for token in ('stats', 'verify', 'print<', 'debug', 'time-passes')):
++            p.error('observer/verification flags are not allowed in timed modes')
++    if args.repeats < 5 or args.warmups < 0 or args.min_cpu_ms <= 0:
++        p.error('require repeats >= 5, warmups >= 0 and positive sample duration')
++    if args.cpu not in os.sched_getaffinity(0):
++        p.error('requested CPU is outside allowed affinity')
++    os.sched_setaffinity(0, {args.cpu})
++    args.out.mkdir(parents=True, exist_ok=False)
++    cases = json.loads(args.cases.read_text())
++    if not cases or len({c['name'] for c in cases}) != len(cases):
++        p.error('cases must be nonempty and names must be unique')
++    if any(not re.fullmatch(r'[A-Za-z0-9_.-]+', c['name']) or c['name'] in ('.', '..') for c in cases):
++        p.error('case names must be plain file-name components')
++    modes = {'a': (str(args.a.resolve()), args.a_flag), 'b': (str(args.b.resolve()), args.b_flag)}
++    env = dict(os.environ)
++    env.pop('LD_LIBRARY_PATH', None)
++    hashes = {b: sha(b) for b, _ in modes.values()}
++    source_head = subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
++    source_diff = subprocess.run(['git', 'diff', 'HEAD'], capture_output=True).stdout
++    inputs = {str(Path(c[k]).resolve()): sha(c[k]) for c in cases for k in ('input', 'callback')}
++    manifest = dict(arguments=vars(args) | {'cases': str(args.cases), 'a': str(args.a), 'b': str(args.b), 'out': str(args.out), 'calibration': str(args.calibration) if args.calibration else None},
++                    modes=modes, binary_sha256=hashes, input_sha256=inputs,
++                    affinity=sorted(os.sched_getaffinity(0)), platform=dict(zip(("sysname", "nodename", "release", "version", "machine"), os.uname())),
++                    cases=cases, seed=args.seed, source_head=source_head,
++                    source_diff_sha256=hashlib.sha256(source_diff).hexdigest(), harness_sha256=sha(__file__))
++    for name in ('topology/thread_siblings_list', 'cpufreq/scaling_governor'):
++        f = Path(f'/sys/devices/system/cpu/cpu{args.cpu}') / name
++        manifest[name] = f.read_text().strip() if f.exists() else None
++    (args.out / 'manifest.json').write_text(json.dumps(manifest, indent=2))
++    calibration = json.loads(args.calibration.read_text()) if args.calibration else {}
++    if args.calibration:
++        for case in cases:
++            entry = calibration.get(case['name'], {})
++            if not entry.get('sample_duration_ok') or any(metric not in entry for metric in ('wall_ns', 'cpu_ns')):
++                p.error('calibration is missing a case or contains short samples')
++    same_configuration = hashes[modes['a'][0]] == hashes[modes['b'][0]] and args.a_flag == args.b_flag
++    rng = random.Random(args.seed)
++    raw = (args.out / 'samples.jsonl').open('w', buffering=1)
++
++    def run(case, mode, diagnostic=False, verification=False):
++        binary, flags = modes[mode]
++        pipeline = case['passes']
++        cmd = [binary, '-S' if diagnostic or verification else '-disable-output',
++               '-passes=' + pipeline + (',print<java-type-analysis-summary>' if diagnostic else ''),
++               '-jeandle-vm-callback-log=' + str(Path(case['callback']).resolve()), str(Path(case['input']).resolve()), *flags]
++        if diagnostic:
++            cmd += ['-verify-each', '-jeandle-java-type-stats']
++        if verification:
++            cmd += ['-verify-each', '-jeandle-verify-java-type-cache']
++        start_cpu = resource.getrusage(resource.RUSAGE_CHILDREN)
++        start = time.perf_counter_ns()
++        try:
++            result = subprocess.run(cmd, capture_output=True, env=env, timeout=args.timeout)
++        except subprocess.TimeoutExpired:
++            raw.write(json.dumps(dict(case=case['name'], mode=mode, command=cmd, error='timeout'))+'\n')
++            raise
++        wall = time.perf_counter_ns() - start
++        end_cpu = resource.getrusage(resource.RUSAGE_CHILDREN)
++        cpu = int(((end_cpu.ru_utime-start_cpu.ru_utime)+(end_cpu.ru_stime-start_cpu.ru_stime))*1e9)
++        row = dict(case=case['name'], mode=mode, command=cmd, wall_ns=wall, cpu_ns=cpu,
++                   returncode=result.returncode,
++                   voluntary_switches=end_cpu.ru_nvcsw-start_cpu.ru_nvcsw,
++                   involuntary_switches=end_cpu.ru_nivcsw-start_cpu.ru_nivcsw)
++        if result.returncode:
++            raw.write(json.dumps(row | {'stderr': result.stderr.decode(errors='replace')})+'\n')
++            raise RuntimeError(f"opt exited {result.returncode}: {cmd}")
++        return row, result
++
++    summary = {}
++    for case in cases:
++        outputs = []
++        for mode in modes:
++            check_row, checked = run(case, mode, verification=True)
++            raw.write(json.dumps(check_row | {'phase': 'correctness'})+'\n')
++            (args.out / f"{case['name']}-{mode}-verification.stderr").write_bytes(checked.stderr)
++            row, result = run(case, mode, True)
++            if checked.stdout != result.stdout:
++                raise RuntimeError('verification changed optimized IR')
++            outputs.append(result.stdout)
++            (args.out / f"{case['name']}-{mode}.ll").write_bytes(result.stdout)
++            (args.out / f"{case['name']}-{mode}.stderr").write_bytes(result.stderr)
++            raw.write(json.dumps(row | {'phase':'diagnostic', 'counters':counters(result.stderr.decode())})+'\n')
++        if outputs[0] != outputs[1]:
++            raise RuntimeError('optimized IR differs; inspect diagnostic outputs before timing')
++        pairs = []
++        for index in range(-args.warmups, args.repeats):
++            order = list(modes)
++            rng.shuffle(order)
++            pair = {}
++            for position, mode in enumerate(order):
++                row, result = run(case, mode)
++                if result.stdout or result.stderr:
++                    raise RuntimeError('timed run emitted output; inspect flags')
++                row |= {'phase': 'warmup' if index < 0 else 'timed', 'round':index, 'position':position}
++                raw.write(json.dumps(row)+'\n')
++                pair[mode] = row
++            if index >= 0:
++                pairs.append(pair)
++        entry = {}
++        sufficiently_long = all(x[m]['cpu_ns'] >= args.min_cpu_ms*1e6 for x in pairs for m in modes)
++        for metric in ('wall_ns', 'cpu_ns'):
++            changes = [100*(x['b'][metric]/x['a'][metric]-1) for x in pairs]
++            ci = interval(changes, args.seed)
++            envelope = max(args.noise_floor_pct, calibration.get(case['name'], {}).get(metric, {}).get('absolute_pair_change_p95', 0))
++            calibrated = args.calibration is not None or args.noise_floor_pct > 0
++            status = 'inconclusive'
++            if sufficiently_long and calibrated and not same_configuration and ci[1] < -envelope:
++                status = 'improvement'
++            elif sufficiently_long and calibrated and not same_configuration and ci[0] > envelope:
++                status = 'regression'
++            entry[metric] = dict(a_median=st.median(x['a'][metric] for x in pairs),
++                                 b_median=st.median(x['b'][metric] for x in pairs),
++                                 paired_change_pct=st.median(changes), bootstrap_95pct=ci,
++                                 absolute_pair_change_p95=sorted(abs(v) for v in changes)[math.ceil(.95*len(changes))-1],
++                                 noise_floor_pct=envelope, verdict=status)
++        entry['sample_duration_ok'] = sufficiently_long
++        summary[case['name']] = entry
++        (args.out/'summary.json').write_text(json.dumps(summary, indent=2))
++        print(case['name'], json.dumps(entry), flush=True)
++    if sha(__file__) != manifest['harness_sha256']:
++        raise RuntimeError('harness changed during run')
++    for path, expected in (hashes | inputs).items():
++        if sha(path) != expected:
++            raise RuntimeError('binary or input changed during run: '+path)
++    (args.out/'SUCCESS').write_text('completed; see sample_duration_ok and A/A noise floor before interpreting results\n')
++
++
++if __name__ == '__main__':
++    main()
+diff --git a/llvm/utils/jeandle-null-edge-bench/generate.py b/llvm/utils/jeandle-null-edge-bench/generate.py
+new file mode 100644
+index 000000000000..240faeaac4c3
+--- /dev/null
++++ b/llvm/utils/jeandle-null-edge-bench/generate.py
+@@ -0,0 +1,115 @@
++#!/usr/bin/env python3
++import argparse
++import json
++from pathlib import Path
++def generate(out, name, kind, functions, sites, depth):
++    is_virtual = kind == "virtual"
++    is_tce_cha = kind == "tce-cha"
++    lines = [
++        "@jeandle.personality = global ptr null",
++        "@oop_handle_member_5 = external global ptr addrspace(1)",
++        "declare hotspotcc i1 @jeandle.check_instanceof(ptr, ptr addrspace(1) nonnull)",
++        'declare hotspotcc ptr addrspace(1) @link(ptr addrspace(1), ptr addrspace(1)) #1 gc "hotspotgc"',
++        'declare hotspotcc ptr addrspace(1) @virtual(ptr addrspace(1)) #1 gc "hotspotgc"',
++    ]
++    for function in range(functions):
++        lines += [
++            f'define hotspotcc ptr addrspace(1) @caller{function}(ptr addrspace(1) "java-klass"="22" %a, ptr addrspace(1) "java-klass"="22" %b, i1 %c) #0 gc "hotspotgc" personality ptr @jeandle.personality {{',
++            "entry:",
++            "  %member = load ptr addrspace(1), ptr @oop_handle_member_5",
++        ]
++        value = "%a"
++        for index in range(depth):
++            lines.append(
++                f"  %s{index} = select i1 %c, ptr addrspace(1) {value}, ptr addrspace(1) %b"
++            )
++            value = f"%s{index}"
++        if is_tce_cha:
++            lines.append(
++                f"  %check = call hotspotcc i1 @jeandle.check_instanceof(ptr inttoptr (i64 22 to ptr), ptr addrspace(1) nonnull {value})"
++            )
++        for index in range(sites):
++            if is_virtual:
++                target = f"@virtual(ptr addrspace(1) {value})"
++            else:
++                target = (
++                    f"@link(ptr addrspace(1) {value}, "
++                    "ptr addrspace(1) %member)"
++                )
++            lines += [
++                f'  %r{index} = invoke hotspotcc ptr addrspace(1) {target} #{index + 2} [ "deopt"(i64 0, i32 7, i32 7) ] to label %next{index} unwind label %unwind',
++                f"next{index}:",
++            ]
++        lines += [
++            f"  ret ptr addrspace(1) %r{sites - 1}",
++            "unwind:",
++            "  %lp = landingpad i64 cleanup",
++            "  ret ptr addrspace(1) null",
++            "}",
++        ]
++    lines += [
++        'attributes #0 = { "java-method"="100" }',
++        'attributes #1 = { "java-method"="200" }',
++    ]
++    for index in range(sites):
++        attrs = (
++            '"bytecode"="invokevirtual"'
++            if is_virtual
++            else '"bytecode"="invokehandle" "monomorphic-target" '
++            '"mh-intrinsic-name"="_linkToStatic"'
++        )
++        lines.append(
++            f'attributes #{index + 2} = {{ {attrs} "declared-holder"="300" '
++            f'"statepoint-id"="{42 + index}" '
++            '"statepoint-num-patch-bytes"="5" }'
++        )
++    lines += [
++        "!java-method-compilation = !{}",
++        "!static-call-patch-size = !{!0}",
++        "!0 = !{i32 5}",
++    ]
++    ir = out / f"{name}.ll"
++    ir.write_text("\n".join(lines) + "\n")
++
++    callbacks = [
++        'GetCHAOptInfo 100 200 300 0 false 5 5 = (601, 700, 13, "Optimized_target")',
++        'GetCHAOptInfo 100 200 300 22 false 0 -1 = (22, 700, 48, "Optimized_target")',
++        'GetCHAOptInfo 100 200 300 22 true 0 -1 = (22, 700, 48, "Optimized_target")',
++        "GetSignatureArgType 700 -1 = 12",
++        "GetSignatureArgType 700 0 = 12",
++        "GetSignatureArgTypeKlass 700 0 = 22",
++        "IsSubtype 22 22 = true",
++        "IsInterface 22 = false",
++        "IsObjectKlass 22 = false",
++        "IsEffectivelyFinal 22 = false",
++        "GetSecondarySupers 22 = []",
++        "GetCommonSuperKlass 22 22 = 22",
++    ]
++    for index in range(sites):
++        callbacks += [
++            f"UpdateCallSite {42 + index} 0 true 700 = true",
++            f"UpdateCallSite {42 + index} 2 false 700 = true",
++        ]
++    cblog = out / f"{name}.cblog"
++    cblog.write_text("\n".join(callbacks) + "\n")
++    passes = (
++        "type-check-elimination,cha-devirtualization"
++        if is_tce_cha
++        else "cha-devirtualization"
++    )
++    return ir, cblog, passes
++
++p = argparse.ArgumentParser()
++p.add_argument('--out', type=Path, required=True)
++p.add_argument('--functions', type=int, default=1024)
++a = p.parse_args()
++if a.functions < 1:
++    p.error('functions must be positive')
++a.out.mkdir(parents=True, exist_ok=False)
++cases = []
++for name, kind, sites, depth in [('deep-static','static',16,64),('wide-static','static',64,16),('leaf-static','static',32,0),('tce-cha','tce-cha',16,64),('virtual-cfg','virtual',32,0)]:
++    dest = a.out/name
++    dest.mkdir()
++    ir, callback, passes = generate(dest,name,kind,a.functions,sites,depth)
++    cases.append(dict(name=name,input=str(ir.resolve()),callback=str(callback.resolve()),passes='function('+passes+')'))
++(a.out/'cases.json').write_text(json.dumps(cases,indent=2))
+diff --git a/llvm/utils/jeandle-null-edge-bench/test_benchmark.py b/llvm/utils/jeandle-null-edge-bench/test_benchmark.py
+new file mode 100644
+index 000000000000..11c2da3eee55
+--- /dev/null
++++ b/llvm/utils/jeandle-null-edge-bench/test_benchmark.py
+@@ -0,0 +1,62 @@
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++
++HARNESS = Path(__file__).with_name('benchmark.py')
++
++
++class HarnessTest(unittest.TestCase):
++    def exercise(self, behavior):
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            opt = root/'opt'
++            opt.write_text('''#!/usr/bin/env python3
++import sys
++behavior = '''+repr(behavior)+'''
++if behavior == 'failure':
++    sys.exit(2)
++if '-jeandle-java-type-stats' in sys.argv:
++    if behavior != 'missing':
++        print('  total query time (ns): 1000', file=sys.stderr)
++if '-S' in sys.argv:
++    print('different' if behavior == 'different' and '--candidate' in sys.argv else 'same')
++''')
++            opt.chmod(0o755)
++            (root/'input.ll').write_text('; test')
++            (root/'log').write_text('test')
++            cases = root/'cases.json'
++            cases.write_text(json.dumps([dict(name='test',input=str(root/'input.ll'),callback=str(root/'log'),passes='function(cha-devirtualization)')]))
++            command=[sys.executable,str(HARNESS),'--cases',str(cases),'--a',str(opt),'--b',str(opt),'--cpu',str(min(os.sched_getaffinity(0))),'--out',str(root/'results'),'--repeats','5','--warmups','0','--min-cpu-ms','1000']
++            if behavior == 'different':
++                command += ['--b-flag=--candidate']
++            proc=subprocess.run(command,capture_output=True,text=True)
++            if behavior != 'ok':
++                self.assertNotEqual(proc.returncode,0)
++                self.assertFalse((root/'results/SUCCESS').exists())
++                self.assertIn({'failure':'opt exited 2', 'missing':'missing JavaType summary', 'different':'optimized IR differs'}[behavior], proc.stderr)
++                return
++            self.assertEqual(proc.returncode,0,proc.stderr)
++            summary=json.loads((root/'results/summary.json').read_text())['test']
++            self.assertFalse(summary['sample_duration_ok'])
++            self.assertEqual(summary['cpu_ns']['verdict'],'inconclusive')
++            rows=[json.loads(s) for s in (root/'results/samples.jsonl').read_text().splitlines()]
++            timed=[r for r in rows if r['phase']=='timed']
++            self.assertEqual(len(timed),10)
++            for r in timed:
++                self.assertIn('-disable-output',r['command'])
++                self.assertNotIn('-jeandle-java-type-stats',r['command'])
++                self.assertNotIn('-verify-each',r['command'])
++            for i in range(5):
++                self.assertEqual({r['mode'] for r in timed if r['round']==i},{'a','b'})
++
++    def test_short_samples_are_inconclusive(self): self.exercise('ok')
++    def test_process_failure_is_fatal(self): self.exercise('failure')
++    def test_missing_counters_are_fatal(self): self.exercise('missing')
++    def test_ir_difference_is_fatal(self): self.exercise('different')
++
++
++if __name__=='__main__': unittest.main()
+-- 
+2.55.0
+
