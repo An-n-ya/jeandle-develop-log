@@ -1,0 +1,457 @@
+diff --git a/llvm/docs/JeandleJavaTypePathReuse.md b/llvm/docs/JeandleJavaTypePathReuse.md
+new file mode 100644
+index 000000000000..19f9bdbdab20
+--- /dev/null
++++ b/llvm/docs/JeandleJavaTypePathReuse.md
+@@ -0,0 +1,39 @@
++# Budget-safe JavaType path reuse
++
++The Facts owner additionally retains completed `(Value, BasicBlock)` path
++results during a StableOracleEpoch. This restores V1-style prefix reuse for
++argument queries and entry-block selects, while retaining V2's strict cold/warm
++budget, PHI, definedness and oracle contracts.
++
++Admission is deliberately conservative:
++
++* The root must be an Argument or an entry-block SelectInst. Arguments do not
++  recursively query other value facts. In valid SSA an entry-block select's
++  complete operand graph is in entry or consists of arguments/constants; the
++  shared base solver already computes its value type. No operand definition
++  point contributes CFG facts there, so the value dimension returns Base.
++* The function's block count must fit the initial facts budget. A single-value
++  query can expand at most one frame per block. Reusing completed prefixes
++  cannot hide a budget exhaustion because a cold traversal already fits.
++* Any uncut CFG cycle taints the rest of that query for publication. Previously
++  completed, cycle-free subgraphs remain safe; active/cycle-cut results never
++  become shared path entries. PHI and other forwarder queries retain the
++  original per-query memoization and edge caches.
++* GuardOnly mode never shares path results. IR/CFG invalidation, explicit oracle
++  maintenance and clear() drop Paths together with the other Facts tables.
++  Existing all-context Final invalidation is unchanged: an unrelated edit can
++  change LVI's bounded reasoning, so SSA independence alone does not justify
++  retaining oracle-dependent results.
++
++On an admitted query, cold edge guards/null decisions are computed directly;
++the completed accumulated path is the reusable unit. Avoiding a redundant
++second cache of every constituent edge reduces fills/clears in transformation
++passes which invalidate after each query. Completed path publication removes
++the redundant completed per-query slot, retaining only active recursion frames.
++
++PathHits and PathMisses expose path reuse independently of edge counters.
++EntriesAdded includes paths. Direct cold edge computations remain counted. setPathEnabled(false) isolates edge-cache tests
++and supports ablation. Existing Base/edge tests disable this upper reuse layer,
++just as they already disable Final; dedicated tests exercise path reuse,
++budget changes, irreducible cycles and epoch invalidation. Non-entry selects
++retain operand definition-point refinement.
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeCache.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeCache.h
+index b8ea179921ae..e213cc594b36 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeCache.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeCache.h
+@@ -138,13 +138,16 @@ public:
+                     JavaTypeBaseInvalidationMode Mode, size_t &SlotsScanned);
+ };
+ 
+-/// Complete root edge guards and optional null-edge decisions. This cache has
++/// Complete root edge guards, optional null-edge decisions and budget-safe
++/// acyclic path results for single-value queries. This cache has
+ /// a deliberately separate invalidation policy from Base and Defined.
+ class LLVM_ABI JavaTypeFactsCache {
+ public:
+   enum class Mode { GuardOnly, StableOracleEpoch };
+   using Key = std::pair<Value *, std::pair<BasicBlock *, BasicBlock *>>;
+   struct Stats : JavaTypeCacheStats {
++    uint64_t PathHits = 0;
++    uint64_t PathMisses = 0;
+     uint64_t NullRequests = 0;
+     uint64_t NullHits = 0;
+     uint64_t NullComputed = 0;
+@@ -160,6 +163,7 @@ private:
+   Mode CacheMode;
+   DenseMap<Key, bool> NullEdges;
+   DenseMap<Key, JavaType> Guards;
++  DenseMap<std::pair<Value *, BasicBlock *>, JavaType> Paths;
+   Stats Counters;
+   bool StatsEnabled = false;
+ 
+@@ -176,7 +180,10 @@ public:
+   auto &guardStorage() { return Guards; }
+   size_t nullSize() const { return NullEdges.size(); }
+   size_t guardSize() const { return Guards.size(); }
+-  size_t size() const { return nullSize() + guardSize(); }
++  size_t pathSize() const { return Paths.size(); }
++  size_t size() const { return nullSize() + guardSize() + pathSize(); }
++  JavaType *lookupPath(Value *V, BasicBlock *BB);
++  void insertPath(Value *V, BasicBlock *BB, const JavaType &Type);
+   const Stats &getStats() const { return Counters; }
+   void resetStats() { Counters = {}; }
+   void setStatsEnabled(bool Enabled) { StatsEnabled = Enabled; }
+@@ -242,6 +249,7 @@ public:
+ class LLVM_ABI JavaTypeCache {
+   Function *Owner;
+   bool EnableFinal;
++  bool EnablePaths = true;
+ 
+ public:
+   using Mode = JavaTypeFactsCache::Mode;
+@@ -260,6 +268,10 @@ public:
+   Function *getFunction() const { return Owner; }
+   Mode getMode() const { return Facts.getMode(); }
+   void setFinalEnabled(bool Enabled) { EnableFinal = Enabled; }
++  void setPathEnabled(bool Enabled) { EnablePaths = Enabled; }
++  bool pathsEnabled() const {
++    return EnablePaths && getMode() == Mode::StableOracleEpoch;
++  }
+   bool finalEnabled() const {
+     return EnableFinal && getMode() == Mode::StableOracleEpoch;
+   }
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeCache.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeCache.cpp
+index 3a7da534f4c6..50d6b1abc494 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeCache.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeCache.cpp
+@@ -300,6 +300,24 @@ JavaType JavaTypeFactsCache::getGuard(Value *V, BasicBlock *From, BasicBlock *To
+   return Result;
+ }
+ 
++JavaType *JavaTypeFactsCache::lookupPath(Value *V, BasicBlock *BB) {
++  auto It = Paths.find({V, BB});
++  if (StatsEnabled) {
++    if (It == Paths.end()) {
++      ++Counters.PathMisses;
++    } else {
++      ++Counters.PathHits;
++    }
++  }
++  return It == Paths.end() ? nullptr : &It->second;
++}
++
++void JavaTypeFactsCache::insertPath(Value *V, BasicBlock *BB,
++                                    const JavaType &Type) {
++  if (Paths.try_emplace({V, BB}, Type).second)
++    recordInsertion();
++}
++
+ void JavaTypeFactsCache::clear() {
+   if (StatsEnabled) {
+     ++Counters.Clears;
+@@ -307,6 +325,7 @@ void JavaTypeFactsCache::clear() {
+   }
+   NullEdges.clear();
+   Guards.clear();
++  Paths.clear();
+ }
+ 
+ size_t JavaTypeFactsCache::invalidate() {
+diff --git a/llvm/lib/IR/Jeandle/JavaType.cpp b/llvm/lib/IR/Jeandle/JavaType.cpp
+index 4b042a5d800f..48bc5a8823cd 100644
+--- a/llvm/lib/IR/Jeandle/JavaType.cpp
++++ b/llvm/lib/IR/Jeandle/JavaType.cpp
+@@ -1025,6 +1025,12 @@ struct JavaTypeQueryContext {
+   unsigned FactsBudget = MaxFactsJoinBlocks;
+   unsigned PhiBudget = MaxFactsJoinBlocks;
+   unsigned ConditionDepth = 0;
++  // Shared path reuse is restricted to a single-value block walk whose whole
++  // function fits the initial facts budget. Skipping a cached prefix therefore
++  // cannot change a later budget decision. Cycle-contaminated results never
++  // enter the shared table.
++  bool SharePaths = false;
++  unsigned FactsCycles = 0;
+ };
+ 
+ } // namespace
+@@ -2114,11 +2120,15 @@ static JavaType factsAt(Value *V, BasicBlock *BB, JavaTypeQueryContext &Q) {
+   if (!Q.DT.isReachableFromEntry(BB))
+     return {}; // Dominance is undefined for unreachable blocks.
+ 
++  if (Q.SharePaths)
++    if (auto *Type = Q.Cache->Facts.lookupPath(V, BB))
++      return *Type;
+   auto Key = std::make_pair(V, BB);
+   auto [It, Inserted] = Q.Processed.try_emplace(Key);
+   if (!Inserted) {
+     if (It->second)
+       return *It->second;
++    ++Q.FactsCycles;
+     return {}; // On the evaluation stack: a cycle the back-edge rule cannot
+                // cut (irreducible) — empty contribution to that join arm.
+   }
+@@ -2146,7 +2156,12 @@ static JavaType factsAt(Value *V, BasicBlock *BB, JavaTypeQueryContext &Q) {
+   // The join loop above recursed through factsAt, which may have rehashed
+   // Processed and invalidated It — re-look the slot up by key.
+   JavaType Result = std::move(Joined);
+-  Q.Processed[Key] = Result;
++  if (Q.SharePaths && Q.FactsCycles == 0) {
++    Q.Cache->Facts.insertPath(V, BB, Result);
++    Q.Processed.erase(Key);
++  } else {
++    Q.Processed[Key] = Result;
++  }
+   return Result;
+ }
+ 
+@@ -2218,6 +2233,13 @@ static JavaType valueDimension(Value *V, JavaTypeQueryContext &Q) {
+   SmallVector<Value *, 4> Inputs;
+   if (!getBaseTypeInputs(V, Inputs, /*SkipVacuousArms=*/true) || Base.Exact)
+     return Base;
++  // In valid SSA, every instruction feeding an entry-block select is also
++  // defined in entry (or is an argument/constant). Operand definition-point
++  // facts are empty there. The shared base solver already computes the same
++  // joins and definedness; recursively rebuilding them adds no refinement.
++  if (auto *SI = dyn_cast<SelectInst>(V))
++    if (SI->getParent()->isEntryBlock())
++      return Base;
+   if (auto It = Q.ValueTypes.find(V); It != Q.ValueTypes.end())
+     return It->second;
+   if (Q.ValueVisited.contains(V)) {
+@@ -2302,6 +2324,10 @@ static bool isNullEdge(Value *V, BasicBlock *From, BasicBlock *To,
+                        JavaTypeQueryContext &Q) {
+   if (!Q.Cache)
+     return computeNullEdge(V, From, To, Q);
++  if (Q.SharePaths) {
++    Q.Cache->Facts.recordNull(false);
++    return computeNullEdge(V, From, To, Q);
++  }
+   return Q.Cache->Facts.getNullEdge(
+       V, From, To, [&] { return computeNullEdge(V, From, To, Q); });
+ }
+@@ -2310,6 +2336,10 @@ static JavaType edgeGuard(BasicBlock *From, BasicBlock *To, Value *V,
+                           JavaTypeQueryContext &Q) {
+   if (!Q.Cache)
+     return computeEdgeGuard(From, To, V, Q);
++  if (Q.SharePaths) {
++    Q.Cache->Facts.recordGuard(false, false);
++    return computeEdgeGuard(From, To, V, Q);
++  }
+   return Q.Cache->Facts.getGuard(
+       V, From, To, Q.ConditionDepth,
+       [&] { return computeEdgeGuard(From, To, V, Q); });
+@@ -2326,6 +2356,15 @@ JavaType jeandle::getJavaType(Value *V, DominatorTree *DT, Instruction *Context,
+   }
+ 
+   JavaTypeQueryContext Q{*DT, IsNullEdge, &Cache};
++  // Arguments and entry-block selects do not recursively request other
++  // value/block facts. Each block can consume budget at most once. Other
++  // shapes keep the original per-query memo and edge caches, including PHIs,
++  // nested forwarders, tight budgets and arbitrary changing oracles.
++  bool SingleValue = isa<Argument>(V);
++  if (auto *SI = dyn_cast<SelectInst>(V))
++    SingleValue |= SI->getParent()->isEntryBlock();
++  Q.SharePaths = Cache.pathsEnabled() && SingleValue &&
++                 Context->getFunction()->size() <= MaxFactsJoinBlocks;
+   JavaType T = valueDimension(V, Q);
+   return typeIntersect(T, factsAt(V, Context->getParent(), Q));
+ }
+diff --git a/llvm/test/Jeandle/java-type-cache-reuse/recover-shallow.ll b/llvm/test/Jeandle/java-type-cache-reuse/recover-shallow.ll
+index 4366414ee8c8..6a4aac0e229b 100644
+--- a/llvm/test/Jeandle/java-type-cache-reuse/recover-shallow.ll
++++ b/llvm/test/Jeandle/java-type-cache-reuse/recover-shallow.ll
+@@ -28,7 +28,8 @@ exit:
+ ; CHECK:         final type misses: 2
+ ; CHECK:         base insertions: 1
+ ; CHECK:         current base entries: 1
+-; CHECK:         current edge facts entries: 4
++; One accumulated path entry replaces two constituent edge entries per query.
++; CHECK:         current edge facts entries: 2
+ ; CHECK:         current final type entries: 2
+ ; CHECK:         %l0 = load{{.*}}!java-klass
+ ; CHECK:         %l1 = load{{.*}}!java-klass
+diff --git a/llvm/unittests/IR/CachedJavaTypeTest.cpp b/llvm/unittests/IR/CachedJavaTypeTest.cpp
+index 3cc086c8c193..d3afcfd64f16 100644
+--- a/llvm/unittests/IR/CachedJavaTypeTest.cpp
++++ b/llvm/unittests/IR/CachedJavaTypeTest.cpp
+@@ -84,6 +84,7 @@ protected:
+   static JavaType query(Value *V, DominatorTree *DT, Instruction *At,
+                         IsNullEdgeOracle Oracle, JavaTypeCache &Cache) {
+     Cache.setFinalEnabled(false);
++    Cache.setPathEnabled(false);
+     Cache.setStatsEnabled(true);
+     Cache.Base.resetStats();
+     return getCachedJavaType(V, DT, At, Oracle, Cache);
+@@ -811,13 +812,14 @@ TEST_F(CachedJavaTypeTest, DiagnosticsDistinguishSharedInputsFromRootHits) {
+   EXPECT_EQ(D.EntriesAdded, 1U);
+ 
+   // Contextual queries must expose Base reuse too. Non-exact base forces the
+-  // value dimension to walk the forwarders, but none needs Base evaluation.
++  // value dimension to walk the GEP, but the entry select reuses Base without
++  // querying its argument again. Neither needs Base evaluation.
+   DominatorTree DT(F);
+   EXPECT_EQ(query(Second, &DT, F.back().getTerminator(), noNullEdge, Cache),
+             getJavaType(Second, &DT, F.back().getTerminator(), noNullEdge));
+-  EXPECT_EQ(Cache.Base.getStats().Hits, 3U);
++  EXPECT_EQ(Cache.Base.getStats().Hits, 2U);
+   EXPECT_EQ(Cache.Base.getStats().Misses, 0U);
+-  EXPECT_EQ(D.PriorQueryHits, 3U);
++  EXPECT_EQ(D.PriorQueryHits, 2U);
+   EXPECT_EQ(D.NodesEvaluated, 0U);
+   EXPECT_EQ(D.EntriesAdded, 0U);
+ 
+@@ -827,9 +829,9 @@ TEST_F(CachedJavaTypeTest, DiagnosticsDistinguishSharedInputsFromRootHits) {
+   EXPECT_EQ(query(Second, &DT, F.back().getTerminator(), noNullEdge, Cold),
+             getJavaType(Second, &DT, F.back().getTerminator(), noNullEdge));
+   EXPECT_EQ(Cold.Base.getStats().Misses, 1U);
+-  EXPECT_EQ(Cold.Base.getStats().Hits, 2U);
++  EXPECT_EQ(Cold.Base.getStats().Hits, 1U);
+   EXPECT_EQ(ColdStats.PriorQueryHits, 0U);
+-  EXPECT_EQ(ColdStats.CurrentQueryHits, 2U);
++  EXPECT_EQ(ColdStats.CurrentQueryHits, 1U);
+   EXPECT_EQ(ColdStats.NodesEvaluated, 3U);
+ }
+ 
+@@ -1982,4 +1984,158 @@ TEST_F(CachedJavaTypeTest, FinalCachesDeepIdentityChainsWithoutDependencyLimit)
+   EXPECT_EQ(Cache.Final.getStats().Hits, 2U);
+ }
+ 
++TEST_F(CachedJavaTypeTest, SharedPathsReusePrefixesRespectBudgetsAndEpochs) {
++  auto M = parse(R"IR(
++    declare i1 @jeandle.check_instanceof(ptr, ptr nonnull)
++    define ptr @test(ptr %obj) {
++    entry:
++      %check = call i1 @jeandle.check_instanceof(
++          ptr inttoptr(i64 9 to ptr), ptr %obj)
++      br i1 %check, label %first, label %reject
++    first:
++      br label %second
++    second:
++      br label %exit
++    exit:
++      ret ptr %obj
++    reject:
++      ret ptr null
++    }
++  )IR");
++  ASSERT_NE(M, nullptr);
++  Function &F = *M->getFunction("test");
++  DominatorTree DT(F);
++  auto *Option =
++      cl::getRegisteredOptions().lookup("jeandle-max-facts-join-blocks");
++  ASSERT_NE(Option, nullptr);
++  auto &Budget = *static_cast<cl::opt<unsigned> *>(Option);
++  unsigned Saved = Budget;
++  auto Restore = make_scope_exit([&] { Budget = Saved; });
++  Budget = 128;
++  JavaTypeCache Cache(F, FactsCacheMode::StableOracleEpoch);
++  Cache.setFinalEnabled(false);
++  Cache.setStatsEnabled(true);
++  unsigned Calls = 0;
++  auto Oracle = [&](Value *, BasicBlock *, BasicBlock *) {
++    ++Calls;
++    return false;
++  };
++  auto Query = [&](StringRef Name) {
++    Instruction *At = findFactsTestBlock(F, Name)->getTerminator();
++    JavaType Actual = getCachedJavaType(F.getArg(0), &DT, At, Oracle, Cache);
++    EXPECT_EQ(Actual, getJavaType(F.getArg(0), &DT, At, noNullEdge));
++    return Actual;
++  };
++  EXPECT_EQ(Query("first"), JavaType(9, false));
++  EXPECT_EQ(Query("second"), JavaType(9, false));
++  EXPECT_EQ(Query("exit"), JavaType(9, false));
++  EXPECT_EQ(Calls, 3U);
++  EXPECT_EQ(Cache.Facts.getStats().PathHits, 2U);
++  EXPECT_EQ(Cache.Facts.pathSize(), 3U);
++  Budget = 1;
++  EXPECT_TRUE(Query("exit").isUnknown());
++  EXPECT_EQ(Cache.Facts.getStats().PathHits, 2U);
++  Budget = 128;
++  EXPECT_EQ(Query("exit"), JavaType(9, false));
++  Cache.notifyOracleChanged();
++  EXPECT_EQ(Cache.Facts.pathSize(), 0U);
++  auto *Check = cast<CallInst>(findBaseTestInstruction(F, "check"));
++  Cache.invalidate({Check});
++  Check->setArgOperand(0, ConstantExpr::getIntToPtr(
++                              ConstantInt::get(Type::getInt64Ty(Context), 22),
++                              PointerType::get(Context, 0)));
++  EXPECT_EQ(Query("exit"), JavaType(22, false));
++  Cache.clear();
++  EXPECT_EQ(Cache.Facts.pathSize(), 0U);
++}
++
++TEST_F(CachedJavaTypeTest, SharedPathsDoNotPublishIrreducibleCycleResults) {
++  auto M = parse(R"IR(
++    declare i1 @jeandle.check_instanceof(ptr, ptr nonnull)
++    define ptr @test(ptr %obj, i1 %pick, i1 %again) {
++    entry:
++      br i1 %pick, label %a, label %b
++    a:
++      %check = call i1 @jeandle.check_instanceof(
++          ptr inttoptr(i64 9 to ptr), ptr %obj)
++      br i1 %check, label %b, label %exit
++    b:
++      br i1 %again, label %a, label %exit
++    exit:
++      ret ptr %obj
++    }
++  )IR");
++  ASSERT_NE(M, nullptr);
++  Function &F = *M->getFunction("test");
++  DominatorTree DT(F);
++  JavaTypeCache Cache(F, FactsCacheMode::StableOracleEpoch);
++  Cache.setFinalEnabled(false);
++  for (StringRef Name : {"exit", "a", "b", "b", "a", "exit"}) {
++    Instruction *At = findFactsTestBlock(F, Name)->getTerminator();
++    EXPECT_EQ(getCachedJavaType(F.getArg(0), &DT, At, noNullEdge, Cache),
++              getJavaType(F.getArg(0), &DT, At, noNullEdge));
++  }
++  EXPECT_EQ(Cache.Facts.pathSize(), 0U);
++}
++
++TEST_F(CachedJavaTypeTest, EntrySelectChainReusesBaseWithoutRewalkingInputs) {
++  std::string IR = "define ptr @test(ptr \"java-klass\"=\"9\" %a, ptr "
++                   "\"java-klass\"=\"9\" %b, i1 %c) {\nentry:\n";
++  std::string Previous = "%a";
++  for (unsigned I = 0; I < 64; ++I) {
++    std::string Name = "%s" + std::to_string(I);
++    IR += Name + " = select i1 %c, ptr " + Previous + ", ptr %b\n";
++    Previous = Name;
++  }
++  IR += "br label %exit\nexit:\nret ptr " + Previous + "\n}\n";
++  auto M = parse(IR);
++  ASSERT_NE(M, nullptr);
++  Function &F = *M->getFunction("test");
++  DominatorTree DT(F);
++  Instruction *At = F.back().getTerminator();
++  Value *V = returnedValue(F);
++  JavaTypeCache Cache(F, FactsCacheMode::StableOracleEpoch);
++  Cache.setFinalEnabled(false);
++  Cache.setStatsEnabled(true);
++  EXPECT_EQ(getCachedJavaType(V, &DT, At, noNullEdge, Cache),
++            JavaType(9, false));
++  Cache.Base.resetStats();
++  EXPECT_EQ(getCachedJavaType(V, &DT, At, noNullEdge, Cache),
++            getJavaType(V, &DT, At, noNullEdge));
++  EXPECT_EQ(Cache.Base.getStats().Hits, 1U);
++  EXPECT_EQ(Cache.Base.getStats().NodesEvaluated, 0U);
++}
++
++TEST_F(CachedJavaTypeTest, SelectOutsideEntryKeepsDefinitionPointRefinement) {
++  auto M = parse(R"IR(
++    declare i1 @jeandle.check_instanceof(ptr, ptr nonnull)
++    define ptr @test(ptr %obj, i1 %choose) {
++    entry:
++      %check = call i1 @jeandle.check_instanceof(
++          ptr inttoptr(i64 9 to ptr), ptr %obj)
++      br i1 %check, label %good, label %reject
++    good:
++      %s = select i1 %choose, ptr %obj, ptr %obj
++      br label %exit
++    exit:
++      ret ptr %s
++    reject:
++      ret ptr null
++    }
++  )IR");
++  ASSERT_NE(M, nullptr);
++  Function &F = *M->getFunction("test");
++  DominatorTree DT(F);
++  Value *V = findBaseTestInstruction(F, "s");
++  Instruction *At = findFactsTestBlock(F, "exit")->getTerminator();
++  JavaTypeCache Cache(F, FactsCacheMode::StableOracleEpoch);
++  Cache.setFinalEnabled(false);
++  for (unsigned I = 0; I < 2; ++I) {
++    EXPECT_EQ(getCachedJavaType(V, &DT, At, noNullEdge, Cache),
++              JavaType(9, false));
++    EXPECT_EQ(getCachedJavaType(V, &DT, At, noNullEdge, Cache),
++              getJavaType(V, &DT, At, noNullEdge));
++  }
++}
++
+ } // namespace

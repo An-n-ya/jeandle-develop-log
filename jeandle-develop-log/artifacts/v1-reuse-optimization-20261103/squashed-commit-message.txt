@@ -1,0 +1,16 @@
+perf(jeandle): reuse completed Java type paths
+
+Reuse accumulated (value, block) paths for argument and entry-select
+queries when the oracle is stable and the full function fits the budget.
+Do not publish results affected by cycles; keep existing PHI handling.
+
+Reuse base types for entry-block selects, whose operand definition points
+add no path facts. Cache the block count until the CFG changes, and avoid
+storing both a completed path and its constituent edges. Keep type and
+oracle invalidation conservative.
+
+Add tests for prefix reuse, budgets, cycles, select refinement and CFG
+expansion; update affected statistics checks.
+
+Validation: 84 unit tests, 63 lit tests and 1,540 audited benchmark samples.
+All 10 scenarios improved over 616395cc.

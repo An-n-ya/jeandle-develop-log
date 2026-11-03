@@ -1,0 +1,229 @@
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find dsymutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli-child-target in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ar in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-as in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-addr2line in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bcanalyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cas in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cgdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cov in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ctxprof-util in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cvtres in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfod-find in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfo-analyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-diff in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dis in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwp in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dlltool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-exegesis in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-extract in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ir2vec in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-isel-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ifs in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-jitlink in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-opt-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lib in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-link in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto2 in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mca in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-modextract in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-nm in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-otool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-pdbutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profgen in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ranlib in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readelf in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readobj in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rtdyld in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-sim in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-size in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-split in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-stress in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strings in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readtapi in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-undname in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-windres in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-c-test in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxfilt in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-xray in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml2obj in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find obj2yaml in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml-bench in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find verify-uselistorder in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find bugpoint in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-symbolizer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sancov in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sanstats in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-remarkutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-null-edge-v2-20261103/build/bin
+llvm-readobj not found
+-- Testing: 146 tests, 4 workers --
+PASS: LLVM :: Jeandle/copy-specialization/clone-expansion.ll (1 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/clone-instance.ll (2 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/deep-condition.ll (3 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/cache-reuse.ll (4 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/invalid-copy.ll (5 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-recover-cross-pass.ll (6 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/integer-width.ll (7 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-fold-recover.ll (8 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/osr-char-arraycopy-e2e.ll (9 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/reference-array-scalarize.ll (10 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/clone-missing-helper.ll (11 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/clone-storestore-javaop.ll (12 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/mirror-klass-layout-chain.ll (13 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/uninitialized-destination.ll (14 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/phi-exact-base-guard.ll (15 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/get-class.ll (16 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/mirror-klass-initialized-chain.ll (17 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-same-block.ll (18 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-known-subtype.ll (19 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/load-mirror-klass.ll (20 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/layout-helper-call.ll (21 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/frozen-oop-identity.ll (22 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/null-guard-forms.ll (23 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/frozen-null-edge.ll (24 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-identity-dependencies.ll (25 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/klass-layout-chain.ll (26 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/klass-is-initialized.ll (27 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/load-klass.ll (28 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-sub-int.ll (29 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-shallow.ll (30 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/x07-production-pipeline.ll (31 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/null-threaded-edge.ll (32 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll (33 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-zero-gep.ll (34 of 146)
+PASS: LLVM :: Jeandle/java-type-analysis/selective-invalidation.ll (35 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-sub-int-wrong-width.ll (36 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/or-true-branch-lca.ll (37 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-zero-overlap.ll (38 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll (39 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/cache-reuse.ll (40 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-strip-invariant-group.ll (41 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-incompatible.ll (42 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/phi-dag-shared-incoming.ll (43 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/null-both-edges.ll (44 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/phi-exact-base-guard.ll (45 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll (46 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/frozen-klass-constant.ll (47 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-shared-base-cache.ll (48 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-interfaces.ll (49 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/null-arm-type.ll (50 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/phi-mixed-stack-incoming.ll (51 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/array-allocation-recipe.ll (52 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/exclusions-merge.ll (53 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-nested-opaque.ll (54 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-mutual-cycle.ll (55 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/nondefinitive-klass-global.ll (56 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/preserve-existing-metadata.ll (57 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-argument-mixed.ll (58 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-same.ll (59 of 146)
+PASS: LLVM :: Jeandle/cha-devirtualization/method-handle-link-to-virtual.ll (60 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-object.ll (61 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll (62 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll (63 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-self-cycle.ll (64 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element-const-index.ll (65 of 146)
+PASS: LLVM :: Jeandle/cha-devirtualization/method-handle-invoke-basic.ll (66 of 146)
+PASS: LLVM :: Jeandle/cha-devirtualization/intersect-exact.ll (67 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-mixed.ll (68 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-phi-duplicate-edge.ll (69 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-phi-cycle-conflict.ll (70 of 146)
+PASS: LLVM :: Jeandle/cha-devirtualization/indirect-invoke-skipped.ll (71 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll (72 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element-context-sharpened.ll (73 of 146)
+PASS: LLVM :: Jeandle/copy-specialization/native-width.ll (74 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-object-chain-dedup.ll (75 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/context-phi-select.ll (76 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-phi-edge-fold.ll (77 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-object-chain.ll (78 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/merge-of-merge.ll (79 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-int.ll (80 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/loop-header.ll (81 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element-exact.ll (82 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll (83 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-preserved.ll (84 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/merge-direct-use.ll (85 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-object-chain-3.ll (86 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-no-gep.ll (87 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-non-constant.ll (88 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-null-object.ll (89 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/checkcast-expanded-phi.ll (90 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element-interface-skipped.ll (91 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-narrow-null.ll (92 of 146)
+PASS: LLVM :: Jeandle/cha-devirtualization/virtual-call.ll (93 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-narrow-object.ll (94 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-launder-in-phi.ll (95 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-launder-invariant-group.ll (96 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element-narrow.ll (97 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-select-true-interfaces.ll (98 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/class-interface-intersection.ll (99 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/interface-exclusion-kept.ll (100 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/irreducible-smoke.ll (101 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/recover-cha-boundary.ll (102 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-narrow-object-chain.ll (103 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cha-shallow.ll (104 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/interface-only-facts.ll (105 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-gep-multi-index.ll (106 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-narrow-object-direct-use.ll (107 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element-nested-gep.ll (108 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-phi-incoming-edge-sharpened.ll (109 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-array-element.ll (110 of 146)
+PASS: LLVM :: Jeandle/cha-devirtualization/no-cha-target.ll (111 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-gep-non-i8.ll (112 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-mutual-phi-cycle.ll (113 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/budget-exceeded.ll (114 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-field-chain.ll (115 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-loop-widening.ll (116 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-null-arm-vacuous.ll (117 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-invariant-group-select.ll (118 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-interface-field-skipped.ll (119 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-through-casts.ll (120 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/checkcast-dissolved.ll (121 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-osr-checkcast-edge.ll (122 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/check-instanceof-arity.ll (123 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-field-context-sharpened.ll (124 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-loop-unknown-init.ll (125 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-deep.ll (126 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/array-interface-overlap.ll (127 of 146)
+PASS: LLVM :: Jeandle/constant-field-folding/field-float-double.ll (128 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/recover-shallow.ll (129 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-inherited-field.ll (130 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-freeze-needs-definedness.ll (131 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-then-tce-fold.ll (132 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cff-nonexact.ll (133 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-stale-exact-flag.ll (134 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-narrow-oop.ll (135 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/asymmetric-edges.ll (136 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-loop-latch-sharpened.ll (137 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cff-modify-tce.ll (138 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-local-load-unknown.ll (139 of 146)
+PASS: LLVM :: Jeandle/type-check-elimination/check-klass-subtype-const.ll (140 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-phi-exact-contradiction-edge.ll (141 of 146)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cha-deep.ll (142 of 146)
+UNSUPPORTED: LLVM :: Jeandle/java-type-metadata-recovery/recover-fixpoint-oscillation.ll (143 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-select-merge.ll (144 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-loop-linked-list.ll (145 of 146)
+PASS: LLVM :: Jeandle/java-type-metadata-recovery/recover-instance-field.ll (146 of 146)
+
+Testing Time: 1.09s
+
+Total Discovered Tests: 146
+  Unsupported:   1 (0.68%)
+  Passed     : 145 (99.32%)

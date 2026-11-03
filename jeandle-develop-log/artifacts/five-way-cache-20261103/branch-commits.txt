@@ -1,0 +1,6 @@
+616395cc384863d38fb6bb993b4b10a10f599dce 2026-11-03 00:26:21 +0800 refactor(jeandle): finalize cache naming and wire copy specialization
+68e75bd61a13afcd04b0b27c73c9c7b91d33398e 2026-11-02 23:16:34 +0800 refactor(jeandle): share Java type solver through cache adapters
+6c1d6b8718865a5bec7bff39f979800b87601d26 2026-11-02 23:01:58 +0800 refactor(jeandle): remove legacy V1 Java type cache
+e9d7bdb820f88aad53506683a7c8734ce4f8d6fb 2026-11-02 22:54:06 +0800 refactor(jeandle): simplify final Java type cache storage
+79258fc1ad200c4b89a2fb4caaaa482c736900a6 2026-10-29 11:30:31 +0800 refactor: remove unreachable code in PEA (#129)
+ad38f632672c881708d0894acf56b72414c095f2 2026-10-30 13:45:26 +0800 v2finalcache

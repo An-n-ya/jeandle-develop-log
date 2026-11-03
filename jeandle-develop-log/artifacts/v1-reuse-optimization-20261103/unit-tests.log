@@ -1,0 +1,179 @@
+[==========] Running 84 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 45 tests from CachedJavaTypeTest
+[ RUN      ] CachedJavaTypeTest.BaseMemoReusesCompletedResultAndOwnsCounters
+[       OK ] CachedJavaTypeTest.BaseMemoReusesCompletedResultAndOwnsCounters (0 ms)
+[ RUN      ] CachedJavaTypeTest.ClearRefreshesLoadMetadataAndDerivedResult
+[       OK ] CachedJavaTypeTest.ClearRefreshesLoadMetadataAndDerivedResult (0 ms)
+[ RUN      ] CachedJavaTypeTest.CompletedSCCMembersAreReusableInEitherOrder
+[       OK ] CachedJavaTypeTest.CompletedSCCMembersAreReusableInEitherOrder (0 ms)
+[ RUN      ] CachedJavaTypeTest.FreezeOfPossiblyPoisonOperandRemainsUnknown
+[       OK ] CachedJavaTypeTest.FreezeOfPossiblyPoisonOperandRemainsUnknown (0 ms)
+[ RUN      ] CachedJavaTypeTest.FreezeOfDefinedOperandRetainsType
+[       OK ] CachedJavaTypeTest.FreezeOfDefinedOperandRetainsType (0 ms)
+[ RUN      ] CachedJavaTypeTest.SharedEngineKeepsFreezeProofsWithoutPublishingFinal
+[       OK ] CachedJavaTypeTest.SharedEngineKeepsFreezeProofsWithoutPublishingFinal (0 ms)
+[ RUN      ] CachedJavaTypeTest.SharedEngineLeavesContextFinalsToCachedWrapper
+[       OK ] CachedJavaTypeTest.SharedEngineLeavesContextFinalsToCachedWrapper (0 ms)
+[ RUN      ] CachedJavaTypeTest.UncachedEntryIgnoresExternalMemoAfterMetadataEdit
+[       OK ] CachedJavaTypeTest.UncachedEntryIgnoresExternalMemoAfterMetadataEdit (0 ms)
+[ RUN      ] CachedJavaTypeTest.ReturnedCallKeepsItsIndependentTypeSeed
+[       OK ] CachedJavaTypeTest.ReturnedCallKeepsItsIndependentTypeSeed (0 ms)
+[ RUN      ] CachedJavaTypeTest.ContextFactsDoNotLeakBetweenQueriesOrIntoBase
+[       OK ] CachedJavaTypeTest.ContextFactsDoNotLeakBetweenQueriesOrIntoBase (0 ms)
+[ RUN      ] CachedJavaTypeTest.SharpenKeepsEdgeFactsSeparateFromWarmBaseMemo
+[       OK ] CachedJavaTypeTest.SharpenKeepsEdgeFactsSeparateFromWarmBaseMemo (0 ms)
+[ RUN      ] CachedJavaTypeTest.SharedBudgetChangesRebuildQueryLocalFacts
+[       OK ] CachedJavaTypeTest.SharedBudgetChangesRebuildQueryLocalFacts (0 ms)
+[ RUN      ] CachedJavaTypeTest.InvalidateTraversesUncachedIntegerProofDependencies
+[       OK ] CachedJavaTypeTest.InvalidateTraversesUncachedIntegerProofDependencies (0 ms)
+[ RUN      ] CachedJavaTypeTest.ReturnedCallSeedDoesNotHideItsOperandDependency
+[       OK ] CachedJavaTypeTest.ReturnedCallSeedDoesNotHideItsOperandDependency (0 ms)
+[ RUN      ] CachedJavaTypeTest.InvalidateSCCMemberRecomputesWholeDependentCycle
+[       OK ] CachedJavaTypeTest.InvalidateSCCMemberRecomputesWholeDependentCycle (0 ms)
+[ RUN      ] CachedJavaTypeTest.CFGEdgeRemovalInvalidatesOnlyExplicitPhiClosure
+[       OK ] CachedJavaTypeTest.CFGEdgeRemovalInvalidatesOnlyExplicitPhiClosure (0 ms)
+[ RUN      ] CachedJavaTypeTest.PureBlockSplitKeepsUnchangedBaseResult
+[       OK ] CachedJavaTypeTest.PureBlockSplitKeepsUnchangedBaseResult (0 ms)
+[ RUN      ] CachedJavaTypeTest.NotifyBeforeRAUWAndDeleteKeepsUnrelatedBaseEntries
+[       OK ] CachedJavaTypeTest.NotifyBeforeRAUWAndDeleteKeepsUnrelatedBaseEntries (0 ms)
+[ RUN      ] CachedJavaTypeTest.CalleeAttributeMutationUsesConservativeFallback
+[       OK ] CachedJavaTypeTest.CalleeAttributeMutationUsesConservativeFallback (0 ms)
+[ RUN      ] CachedJavaTypeTest.DiagnosticsDistinguishSharedInputsFromRootHits
+[       OK ] CachedJavaTypeTest.DiagnosticsDistinguishSharedInputsFromRootHits (0 ms)
+[ RUN      ] CachedJavaTypeTest.DiagnosticCycleEdgesAreNotCountedAsCacheMisses
+[       OK ] CachedJavaTypeTest.DiagnosticCycleEdgesAreNotCountedAsCacheMisses (0 ms)
+[ RUN      ] CachedJavaTypeTest.UnknownIsAReusableCompletedResult
+[       OK ] CachedJavaTypeTest.UnknownIsAReusableCompletedResult (0 ms)
+[ RUN      ] CachedJavaTypeTest.OversizedInvalidationFallsBackToClear
+[       OK ] CachedJavaTypeTest.OversizedInvalidationFallsBackToClear (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsEdgeModesReuseSharedEdgesAndSeparateValues
+[       OK ] CachedJavaTypeTest.FactsEdgeModesReuseSharedEdgesAndSeparateValues (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsEdgesPreserveBudgetPhiCyclesAndSwitchResults
+[       OK ] CachedJavaTypeTest.FactsEdgesPreserveBudgetPhiCyclesAndSwitchResults (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsDefaultFollowsOracleChangesAndStableModeClears
+[       OK ] CachedJavaTypeTest.FactsDefaultFollowsOracleChangesAndStableModeClears (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsClearRefreshesGuardsAndAddedCFGEdges
+[       OK ] CachedJavaTypeTest.FactsClearRefreshesGuardsAndAddedCFGEdges (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsClearBeforeRAUWAndDeletionDropsRawKeys
+[       OK ] CachedJavaTypeTest.FactsClearBeforeRAUWAndDeletionDropsRawKeys (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsClearRefreshesMovedDefinitionContext
+[       OK ] CachedJavaTypeTest.FactsClearRefreshesMovedDefinitionContext (0 ms)
+[ RUN      ] CachedJavaTypeTest.FactsNullMemoRetainsRawPhiIncomingIdentity
+[       OK ] CachedJavaTypeTest.FactsNullMemoRetainsRawPhiIncomingIdentity (0 ms)
+[ RUN      ] CachedJavaTypeTest.DefinedProofsInvalidateEvenWhenBaseIsEmpty
+[       OK ] CachedJavaTypeTest.DefinedProofsInvalidateEvenWhenBaseIsEmpty (0 ms)
+[ RUN      ] CachedJavaTypeTest.DefinedNegativeProofRefreshesAfterAttributeEdit
+[       OK ] CachedJavaTypeTest.DefinedNegativeProofRefreshesAfterAttributeEdit (0 ms)
+[ RUN      ] CachedJavaTypeTest.FinalReuseIgnoresBudgetAndOnlyPublishesTopLevelResults
+[       OK ] CachedJavaTypeTest.FinalReuseIgnoresBudgetAndOnlyPublishesTopLevelResults (0 ms)
+[ RUN      ] CachedJavaTypeTest.FinalInvalidationClearsAllContextsWithWarmSubcaches
+[       OK ] CachedJavaTypeTest.FinalInvalidationClearsAllContextsWithWarmSubcaches (0 ms)
+[ RUN      ] CachedJavaTypeTest.FinalClearsForUnrelatedEditsAndCFGChanges
+[       OK ] CachedJavaTypeTest.FinalClearsForUnrelatedEditsAndCFGChanges (0 ms)
+[ RUN      ] CachedJavaTypeTest.FinalClearsAfterExplicitOracleMaintenance
+[       OK ] CachedJavaTypeTest.FinalClearsAfterExplicitOracleMaintenance (0 ms)
+[ RUN      ] CachedJavaTypeTest.AnalysisInvalidationRefreshesNonSSAOracleDependency
+[       OK ] CachedJavaTypeTest.AnalysisInvalidationRefreshesNonSSAOracleDependency (0 ms)
+[ RUN      ] CachedJavaTypeTest.AnalysisMaintainsAllFourCachesBeforeRAUWAndDeletion
+[       OK ] CachedJavaTypeTest.AnalysisMaintainsAllFourCachesBeforeRAUWAndDeletion (0 ms)
+[ RUN      ] CachedJavaTypeTest.FinalClearsAcrossRealLVIColdAndPrewarmedEpochs
+[       OK ] CachedJavaTypeTest.FinalClearsAcrossRealLVIColdAndPrewarmedEpochs (1 ms)
+[ RUN      ] CachedJavaTypeTest.FinalCachesDeepIdentityChainsWithoutDependencyLimit
+[       OK ] CachedJavaTypeTest.FinalCachesDeepIdentityChainsWithoutDependencyLimit (4 ms)
+[ RUN      ] CachedJavaTypeTest.SharedPathsReusePrefixesRespectBudgetsAndEpochs
+[       OK ] CachedJavaTypeTest.SharedPathsReusePrefixesRespectBudgetsAndEpochs (0 ms)
+[ RUN      ] CachedJavaTypeTest.SharedPathsDoNotPublishIrreducibleCycleResults
+[       OK ] CachedJavaTypeTest.SharedPathsDoNotPublishIrreducibleCycleResults (0 ms)
+[ RUN      ] CachedJavaTypeTest.EntrySelectChainReusesBaseWithoutRewalkingInputs
+[       OK ] CachedJavaTypeTest.EntrySelectChainReusesBaseWithoutRewalkingInputs (0 ms)
+[ RUN      ] CachedJavaTypeTest.SelectOutsideEntryKeepsDefinitionPointRefinement
+[       OK ] CachedJavaTypeTest.SelectOutsideEntryKeepsDefinitionPointRefinement (0 ms)
+[ RUN      ] CachedJavaTypeTest.SharedPathBudgetAdmissionRefreshesAfterCFGExpansion
+[       OK ] CachedJavaTypeTest.SharedPathBudgetAdmissionRefreshesAfterCFGExpansion (0 ms)
+[----------] 45 tests from CachedJavaTypeTest (9 ms total)
+
+[----------] 39 tests from JavaTypeQueryTest
+[ RUN      ] JavaTypeQueryTest.IrreducibleCycleCachesCompletedTopLevelResult
+[       OK ] JavaTypeQueryTest.IrreducibleCycleCachesCompletedTopLevelResult (0 ms)
+[ RUN      ] JavaTypeQueryTest.ResultInvalidationAfterConditionAndAttributeChange
+[       OK ] JavaTypeQueryTest.ResultInvalidationAfterConditionAndAttributeChange (0 ms)
+[ RUN      ] JavaTypeQueryTest.FinalTypesAreKeyedByContextBlock
+[       OK ] JavaTypeQueryTest.FinalTypesAreKeyedByContextBlock (0 ms)
+[ RUN      ] JavaTypeQueryTest.FinalCacheDoesNotReplacePhiIncomingEvaluation
+[       OK ] JavaTypeQueryTest.FinalCacheDoesNotReplacePhiIncomingEvaluation (0 ms)
+[ RUN      ] JavaTypeQueryTest.PhiCycleIntermediateIsNotPublished
+[       OK ] JavaTypeQueryTest.PhiCycleIntermediateIsNotPublished (0 ms)
+[ RUN      ] JavaTypeQueryTest.CompletePhiCachePreservesOriginalCyclePrecision
+[       OK ] JavaTypeQueryTest.CompletePhiCachePreservesOriginalCyclePrecision (0 ms)
+[ RUN      ] JavaTypeQueryTest.PhiWarmupOrderHonorsFiniteClassModel
+[       OK ] JavaTypeQueryTest.PhiWarmupOrderHonorsFiniteClassModel (0 ms)
+[ RUN      ] JavaTypeQueryTest.FinalFactsResultsSurviveBudgetChangesUntilCleared
+[       OK ] JavaTypeQueryTest.FinalFactsResultsSurviveBudgetChangesUntilCleared (0 ms)
+[ RUN      ] JavaTypeQueryTest.FinalPhiResultsReuseOneEntryAcrossBudgets
+[       OK ] JavaTypeQueryTest.FinalPhiResultsReuseOneEntryAcrossBudgets (0 ms)
+[ RUN      ] JavaTypeQueryTest.DisabledCacheBypassesFinalTypes
+[       OK ] JavaTypeQueryTest.DisabledCacheBypassesFinalTypes (0 ms)
+[ RUN      ] JavaTypeQueryTest.DisabledCacheUsesOriginalAfterAttributeChange
+[       OK ] JavaTypeQueryTest.DisabledCacheUsesOriginalAfterAttributeChange (0 ms)
+[ RUN      ] JavaTypeQueryTest.CachedAndOriginalQueriesAgreeAcrossBudgets
+[       OK ] JavaTypeQueryTest.CachedAndOriginalQueriesAgreeAcrossBudgets (0 ms)
+[ RUN      ] JavaTypeQueryTest.SelectiveBaseDeletionMatchesScanBaseline
+[       OK ] JavaTypeQueryTest.SelectiveBaseDeletionMatchesScanBaseline (0 ms)
+[ RUN      ] JavaTypeQueryTest.TypeFactCanBecomeKnownAndWeakensAfterRepeatedEdits
+[       OK ] JavaTypeQueryTest.TypeFactCanBecomeKnownAndWeakensAfterRepeatedEdits (0 ms)
+[ RUN      ] JavaTypeQueryTest.RepeatedTypeFactMutationRoundTripsThroughAValue
+[       OK ] JavaTypeQueryTest.RepeatedTypeFactMutationRoundTripsThroughAValue (0 ms)
+[ RUN      ] JavaTypeQueryTest.CallAndLoadTypeFactsAreInvalidatedBeforeEdits
+[       OK ] JavaTypeQueryTest.CallAndLoadTypeFactsAreInvalidatedBeforeEdits (0 ms)
+[ RUN      ] JavaTypeQueryTest.ParentQueryReusesAndInvalidatesCachedChild
+[       OK ] JavaTypeQueryTest.ParentQueryReusesAndInvalidatesCachedChild (0 ms)
+[ RUN      ] JavaTypeQueryTest.DeleteBlockDropsCachedLeavesAndRetainsIndependentValue
+[       OK ] JavaTypeQueryTest.DeleteBlockDropsCachedLeavesAndRetainsIndependentValue (0 ms)
+[ RUN      ] JavaTypeQueryTest.BatchedDiamondInvalidationMatchesSequential
+[       OK ] JavaTypeQueryTest.BatchedDiamondInvalidationMatchesSequential (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationAtValueLimitDoesNotClear
+[       OK ] JavaTypeQueryTest.InvalidationAtValueLimitDoesNotClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationJustBelowValueLimitDoesNotClear
+[       OK ] JavaTypeQueryTest.InvalidationJustBelowValueLimitDoesNotClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationUseThresholdUsesInclusiveBoundary
+[       OK ] JavaTypeQueryTest.InvalidationUseThresholdUsesInclusiveBoundary (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationUseLimitFallsBackToClear
+[       OK ] JavaTypeQueryTest.InvalidationUseLimitFallsBackToClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.ActualLVIObservesDereferenceMutationAfterClear
+[       OK ] JavaTypeQueryTest.ActualLVIObservesDereferenceMutationAfterClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.DeadNarrowCFFLoadIsInvalidatedBeforeDeletion
+[       OK ] JavaTypeQueryTest.DeadNarrowCFFLoadIsInvalidatedBeforeDeletion (0 ms)
+[ RUN      ] JavaTypeQueryTest.CopySpecializationWithoutCopiesPreservesCachedAnalysis
+[       OK ] JavaTypeQueryTest.CopySpecializationWithoutCopiesPreservesCachedAnalysis (0 ms)
+[ RUN      ] JavaTypeQueryTest.CopySpecializationSharesQueriesBeforeBulkCloneExpansion
+[       OK ] JavaTypeQueryTest.CopySpecializationSharesQueriesBeforeBulkCloneExpansion (0 ms)
+[ RUN      ] JavaTypeQueryTest.CopySpecializationInvalidatesAfterCloneScalarization
+[       OK ] JavaTypeQueryTest.CopySpecializationInvalidatesAfterCloneScalarization (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidateBeforeRAUWAndDeletion
+[       OK ] JavaTypeQueryTest.InvalidateBeforeRAUWAndDeletion (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidateBeforeDeletionPreventsKeyReuse
+[       OK ] JavaTypeQueryTest.InvalidateBeforeDeletionPreventsKeyReuse (0 ms)
+[ RUN      ] JavaTypeQueryTest.CFGInvalidationRecomputesPhiAndRetainsLeafTypes
+[       OK ] JavaTypeQueryTest.CFGInvalidationRecomputesPhiAndRetainsLeafTypes (0 ms)
+[ RUN      ] JavaTypeQueryTest.GuardOperandChangeInvalidatesNonKeyDependencies
+[       OK ] JavaTypeQueryTest.GuardOperandChangeInvalidatesNonKeyDependencies (0 ms)
+[ RUN      ] JavaTypeQueryTest.FullInvalidationSwitchDropsAllEntries
+[       OK ] JavaTypeQueryTest.FullInvalidationSwitchDropsAllEntries (0 ms)
+[ RUN      ] JavaTypeQueryTest.UnsupportedInvalidationFallsBackToClear
+[       OK ] JavaTypeQueryTest.UnsupportedInvalidationFallsBackToClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.SelectiveResultStillDependsOnLVIInvalidation
+[       OK ] JavaTypeQueryTest.SelectiveResultStillDependsOnLVIInvalidation (0 ms)
+[ RUN      ] JavaTypeQueryTest.JavaTypeResultPreserveAndReuseBoundary
+[       OK ] JavaTypeQueryTest.JavaTypeResultPreserveAndReuseBoundary (0 ms)
+[ RUN      ] JavaTypeQueryTest.InvalidationWorkLimitFallsBackToClear
+[       OK ] JavaTypeQueryTest.InvalidationWorkLimitFallsBackToClear (0 ms)
+[ RUN      ] JavaTypeQueryTest.DereferenceChangeDropsContextualResults
+[       OK ] JavaTypeQueryTest.DereferenceChangeDropsContextualResults (0 ms)
+[ RUN      ] JavaTypeQueryTest.StatisticsAreOptIn
+[       OK ] JavaTypeQueryTest.StatisticsAreOptIn (0 ms)
+[----------] 39 tests from JavaTypeQueryTest (5 ms total)
+
+[----------] Global test environment tear-down
+[==========] 84 tests from 2 test suites ran. (14 ms total)
+[  PASSED  ] 84 tests.

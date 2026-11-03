@@ -1,0 +1,665 @@
+diff --git a/llvm/docs/JeandleNullEdgePrefilter.md b/llvm/docs/JeandleNullEdgePrefilter.md
+new file mode 100644
+index 000000000000..ce9ef659bc08
+--- /dev/null
++++ b/llvm/docs/JeandleNullEdgePrefilter.md
+@@ -0,0 +1,42 @@
++# Query-local LVI null-edge filtering
++
++The optimization is attached to the typed LVINullEdgeOracle, not the generic
++IsNullEdgeOracle callback. Existing one-argument LVINullEdgeOracle{LVI} calls
++remain unfiltered. JavaTypeAnalysis creates an explicit LVINullEdgeQuery for
++each top-level query, and the native benchmark follows the same API. The state
++must never outlive a query or cross IR/LVI maintenance.
++
++Before asking LVI, the filter establishes that neither uses nor definitions
++can supply a null constant. It scans a bounded use closure, conservatively
++following aliases, casts, zero GEPs, freezes, select/PHI users and returned
++arguments. Any comparison, ptrtoint or unsupported use retains LVI. Ordinary
++non-returned call arguments, memory operands and returns cannot positively
++prove their operand null in LVI.
++
++Arguments without relevant tests cannot acquire a null lattice constant.
++Select/PHI definitions are filtered only when every feasible input also lacks
++a null source. A single possible null arm keeps LVI; constant select conditions
++inspect the selected arm. Constants, returned calls, loads, unknown definitions
++and unproven freezes retain LVI. Cycles, more than 256 scan steps, or definition
++depth above 64 also retain LVI. The existing freeze definedness check is unchanged.
++
++This is deliberately more conservative than the old V1 prefilter: it does not
++rely on absence of dominating direct-null comparisons alone, nor on both arms
++of a select folding null. It can skip fewer queries but does not drop required
++proofs in those cases. No block-level getConstant query or new oracle-call cap
++is introduced. The original LVI predicate remains the fallback.
++
++The shared facts solver also stops joining predecessors once the accumulator
++is fully unknown, the absorbing element of typeUnion. Cache, cycle, budget and
++IR/oracle invalidation policies remain unchanged.
++
++Verification recomputes with the unfiltered oracle. Filter requests, structural
++answers, skipped LVI calls, actual LVI calls and limit fallbacks are collected
++only with an observer (or native diagnostic mode). Native diagnostics compare
++complete JavaTypes using fresh DT/AC/LVI and the unfiltered engine. The switch
++-jeandle-disable-null-edge-prefilter supports an ablation without disabling
++normal null-edge reasoning.
++
++Tests cover negative arguments/select chains, structural and indirect null
++proofs, select/PHI fallbacks, returned aliases/integer comparisons, unsafe
++freeze, scan/depth limits and a new query after IR/LVI changes.
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+index b57b48bbeb41..6cb02a787c02 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysis.h
+@@ -53,6 +53,11 @@ struct JavaTypeQueryEvent {
+   uint64_t GuardMisses = 0;
+   uint64_t NullHits = 0;
+   uint64_t NullMisses = 0;
++  uint64_t OracleCalls = 0;
++  uint64_t OracleStructural = 0;
++  uint64_t OracleFiltered = 0;
++  uint64_t OracleLVICalls = 0;
++  uint64_t OracleFilterFallbacks = 0;
+   uint64_t ElapsedNanoseconds = 0;
+   size_t BaseEntries = 0;
+   size_t DefinedEntries = 0;
+diff --git a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+index 86010f675436..7a6a5481a223 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
++++ b/llvm/include/llvm/Analysis/Jeandle/JavaTypeAnalysisStats.h
+@@ -61,6 +61,11 @@ struct JavaTypeQueryStats {
+   uint64_t GuardMisses = 0;
+   uint64_t NullHits = 0;
+   uint64_t NullMisses = 0;
++  uint64_t OracleCalls = 0;
++  uint64_t OracleStructural = 0;
++  uint64_t OracleFiltered = 0;
++  uint64_t OracleLVICalls = 0;
++  uint64_t OracleFilterFallbacks = 0;
+   uint64_t Bypasses = 0;
+   uint64_t Clears = 0;
+   uint64_t Invalidations = 0;
+diff --git a/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h b/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h
+index bb38b9e0b531..53e6503d5104 100644
+--- a/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h
++++ b/llvm/include/llvm/Analysis/Jeandle/LVINullEdgeOracle.h
+@@ -9,7 +9,9 @@
+ #ifndef LLVM_ANALYSIS_JEANDLE_LVINULLEDGEORACLE_H
+ #define LLVM_ANALYSIS_JEANDLE_LVINULLEDGEORACLE_H
+ 
++#include "llvm/ADT/DenseMap.h"
+ #include "llvm/Support/Compiler.h"
++#include <cstdint>
+ 
+ namespace llvm {
+ class Value;
+@@ -17,12 +19,42 @@ class BasicBlock;
+ 
+ class LazyValueInfo;
+ 
++/// Optional state for exactly one top-level type query. Never reuse it after
++/// IR/LVI maintenance. Omitting it preserves the original unfiltered oracle.
++class LVINullEdgeQuery {
++  friend struct LVINullEdgeOracle;
++
++public:
++  struct Stats {
++    uint64_t Requests = 0;
++    uint64_t Structural = 0;
++    uint64_t Filtered = 0;
++    uint64_t LVICalls = 0;
++    uint64_t FilterFallbacks = 0;
++  };
++  explicit LVINullEdgeQuery(bool CollectStats = false)
++      : CollectStats(CollectStats) {}
++  const Stats &getStats() const { return Counters; }
++
++private:
++  DenseMap<Value *, bool> NeedsLVI;
++  DenseMap<Value *, bool> HasTests;
++  unsigned WorkRemaining = 256;
++  bool LimitHit = false;
++  bool CollectStats;
++  Stats Counters;
++  bool spendWork();
++  bool hasPotentialTest(Value *V);
++  bool mayNeedLVI(Value *V, unsigned Depth = 0);
++};
++
+ /// A jeandle::IsNullEdgeOracle backed by LazyValueInfo: answers "is V provably
+ /// null on edge FromBB -> ToBB?" via LVI's edge-predicate query. The
+ /// referenced LVI must stay valid for the queried CFG state. After changing
+ /// blocks or edges, callers must update or clear LVI before the next query.
+ struct LVINullEdgeOracle {
+   LazyValueInfo &LVI;
++  LVINullEdgeQuery *Query = nullptr;
+   LLVM_ABI bool operator()(Value *V, BasicBlock *FromBB, BasicBlock *ToBB) const;
+ };
+ 
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+index cb2797995b6b..256b7acc1804 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysis.cpp
+@@ -116,7 +116,8 @@ JavaType JavaTypeAnalysisResult::getJavaType(Value *V, Instruction *Context) {
+          "context must belong to the analyzed Function");
+ 
+   BasicBlock *ContextBB = Context ? Context->getParent() : nullptr;
+-  LVINullEdgeOracle IsNullEdge{LVI};
++  LVINullEdgeQuery OracleQuery(Observer != nullptr);
++  LVINullEdgeOracle IsNullEdge{LVI, &OracleQuery};
+   const bool Bypassed = DisableJavaTypeCache;
+   const bool Verified = VerifyJavaTypeCache && !Bypassed;
+   auto Query = [&] {
+@@ -125,7 +126,8 @@ JavaType JavaTypeAnalysisResult::getJavaType(Value *V, Instruction *Context) {
+                           : getCachedJavaType(V, &DT, Context, IsNullEdge,
+                                                 Cache);
+     if (Verified) {
+-      JavaType Fresh = jeandle::getJavaType(V, &DT, Context, IsNullEdge);
++      LVINullEdgeOracle ReferenceOracle{LVI};
++      JavaType Fresh = jeandle::getJavaType(V, &DT, Context, ReferenceOracle);
+       if (Result != Fresh)
+         reportVerificationFailure(F, V, ContextBB, Result, Fresh);
+     }
+@@ -158,6 +160,11 @@ JavaType JavaTypeAnalysisResult::getJavaType(Value *V, Instruction *Context) {
+   Event.GuardMisses = Facts.GuardComputed - OldFacts.GuardComputed;
+   Event.NullHits = Facts.NullHits - OldFacts.NullHits;
+   Event.NullMisses = Facts.NullComputed - OldFacts.NullComputed;
++  Event.OracleCalls = OracleQuery.getStats().Requests;
++  Event.OracleStructural = OracleQuery.getStats().Structural;
++  Event.OracleFiltered = OracleQuery.getStats().Filtered;
++  Event.OracleLVICalls = OracleQuery.getStats().LVICalls;
++  Event.OracleFilterFallbacks = OracleQuery.getStats().FilterFallbacks;
+   Event.QueryValue = V;
+   Event.Context = ContextBB;
+   Event.BaseInsertions = Base.EntriesAdded - OldBase.EntriesAdded;
+diff --git a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+index 4165817698ee..f38bfb75234f 100644
+--- a/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
++++ b/llvm/lib/Analysis/Jeandle/JavaTypeAnalysisStats.cpp
+@@ -51,6 +51,12 @@ ALWAYS_ENABLED_STATISTIC(TotalGuardHits, "Java type guard edge cache hits");
+ ALWAYS_ENABLED_STATISTIC(TotalGuardMisses, "Java type guard edge computations");
+ ALWAYS_ENABLED_STATISTIC(TotalNullHits, "Java type null edge cache hits");
+ ALWAYS_ENABLED_STATISTIC(TotalNullMisses, "Java type null edge computations");
++ALWAYS_ENABLED_STATISTIC(TotalOracleCalls, "Java type OracleCalls");
++ALWAYS_ENABLED_STATISTIC(TotalOracleStructural, "Java type OracleStructural");
++ALWAYS_ENABLED_STATISTIC(TotalOracleFiltered, "Java type OracleFiltered");
++ALWAYS_ENABLED_STATISTIC(TotalOracleLVICalls, "Java type OracleLVICalls");
++ALWAYS_ENABLED_STATISTIC(TotalOracleFilterFallbacks,
++                         "Java type OracleFilterFallbacks");
+ ALWAYS_ENABLED_STATISTIC(TotalBaseRemoved, "Java type base entries invalidated");
+ ALWAYS_ENABLED_STATISTIC(TotalFactsRemoved, "Java type edge facts entries invalidated");
+ ALWAYS_ENABLED_STATISTIC(TotalFinalRemoved, "Java type final type entries invalidated");
+@@ -155,6 +161,16 @@ void JavaTypeStatsAnalysis::Result::onQuery(const JavaTypeQueryEvent &Event) {
+   TotalNullHits += Event.NullHits;
+   Stats.NullMisses += Event.NullMisses;
+   TotalNullMisses += Event.NullMisses;
++  Stats.OracleCalls += Event.OracleCalls;
++  TotalOracleCalls += Event.OracleCalls;
++  Stats.OracleStructural += Event.OracleStructural;
++  TotalOracleStructural += Event.OracleStructural;
++  Stats.OracleFiltered += Event.OracleFiltered;
++  TotalOracleFiltered += Event.OracleFiltered;
++  Stats.OracleLVICalls += Event.OracleLVICalls;
++  TotalOracleLVICalls += Event.OracleLVICalls;
++  Stats.OracleFilterFallbacks += Event.OracleFilterFallbacks;
++  TotalOracleFilterFallbacks += Event.OracleFilterFallbacks;
+ 
+   Stats.BaseInsertions += Event.BaseInsertions;
+   TotalBaseInsertions += Event.BaseInsertions;
+@@ -256,6 +272,12 @@ void JavaTypeStatsAnalysis::Result::print(raw_ostream &OS) const {
+   OS << "  guard edge computations: " << Stats.GuardMisses << '\n';
+   OS << "  null edge hits: " << Stats.NullHits << '\n';
+   OS << "  null edge computations: " << Stats.NullMisses << '\n';
++  OS << "  null oracle requests: " << Stats.OracleCalls << '\n';
++  OS << "  null oracle structural answers: " << Stats.OracleStructural << '\n';
++  OS << "  null oracle filtered: " << Stats.OracleFiltered << '\n';
++  OS << "  null oracle LVI calls: " << Stats.OracleLVICalls << '\n';
++  OS << "  null oracle filter fallbacks: " << Stats.OracleFilterFallbacks
++     << '\n';
+   OS << "  final type hits: " << Stats.FinalHits << '\n';
+   OS << "  final type misses: " << Stats.FinalMisses << '\n';
+   OS << "  final type hit rate: ";
+@@ -349,6 +371,13 @@ JavaTypeAnalysisSummaryPrinterPass::run(Module &M, ModuleAnalysisManager &) {
+   OS << "  guard edge computations: " << TotalGuardMisses.getValue() << '\n';
+   OS << "  null edge hits: " << TotalNullHits.getValue() << '\n';
+   OS << "  null edge computations: " << TotalNullMisses.getValue() << '\n';
++  OS << "  null oracle requests: " << TotalOracleCalls.getValue() << '\n';
++  OS << "  null oracle structural answers: " << TotalOracleStructural.getValue()
++     << '\n';
++  OS << "  null oracle filtered: " << TotalOracleFiltered.getValue() << '\n';
++  OS << "  null oracle LVI calls: " << TotalOracleLVICalls.getValue() << '\n';
++  OS << "  null oracle filter fallbacks: "
++     << TotalOracleFilterFallbacks.getValue() << '\n';
+   OS << "  final type hits: " << TotalFinalHits.getValue() << '\n';
+   OS << "  final type misses: " << TotalFinalMisses.getValue() << '\n';
+   OS << "  base query hits: " << TotalBaseHits.getValue() << '\n';
+diff --git a/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp b/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
+index 2c623e5488b4..80297a501b1a 100644
+--- a/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
++++ b/llvm/lib/Analysis/Jeandle/LVINullEdgeOracle.cpp
+@@ -7,13 +7,145 @@
+ //===----------------------------------------------------------------------===//
+ 
+ #include "llvm/Analysis/Jeandle/LVINullEdgeOracle.h"
++#include "llvm/ADT/SmallPtrSet.h"
++#include "llvm/ADT/SmallVector.h"
+ #include "llvm/Analysis/LazyValueInfo.h"
+ #include "llvm/IR/Constants.h"
++#include "llvm/IR/GlobalAlias.h"
+ #include "llvm/IR/Instructions.h"
+ #include "llvm/IR/Jeandle/JavaType.h"
++#include "llvm/IR/Operator.h"
++#include "llvm/Support/CommandLine.h"
+ 
+ using namespace llvm;
+ 
++namespace {
++cl::opt<bool> DisableNullEdgePrefilter(
++    "jeandle-disable-null-edge-prefilter", cl::Hidden, cl::init(false),
++    cl::desc("Disable the query-local negative filter for LVI null edges"));
++
++Value *canonicalNullValue(Value *V) {
++  while (true) {
++    V = V->stripPointerCastsAndAliases();
++    auto *FI = dyn_cast<FreezeInst>(V);
++    if (!FI || !jeandle::isProvenDefined(FI->getOperand(0)))
++      return V;
++    V = FI->getOperand(0);
++  }
++}
++} // namespace
++
++bool LVINullEdgeQuery::spendWork() {
++  if (WorkRemaining) {
++    --WorkRemaining;
++    return true;
++  }
++  if (!LimitHit && CollectStats)
++    ++Counters.FilterFallbacks;
++  LimitHit = true;
++  return false;
++}
++
++// Absence of tests is established over a bounded use closure, independent of
++// dominance. Any comparison or unsupported operation keeps the LVI fallback.
++// Follow select/PHI and identity users too: a test of a derived value may
++// constrain its input. Calls without a returned argument and memory/return
++// uses cannot positively prove their pointer operand null in LVI.
++bool LVINullEdgeQuery::hasPotentialTest(Value *V) {
++  if (auto It = HasTests.find(V); It != HasTests.end())
++    return It->second;
++  SmallVector<Value *, 16> Pending{V};
++  SmallPtrSet<Value *, 32> Seen;
++  while (!Pending.empty()) {
++    Value *Cur = Pending.pop_back_val();
++    if (!Seen.insert(Cur).second)
++      continue;
++    if (auto It = HasTests.find(Cur); It != HasTests.end()) {
++      if (It->second)
++        return HasTests[V] = true;
++      continue;
++    }
++    for (User *U : Cur->users()) {
++      if (!spendWork())
++        return HasTests[V] = true;
++      if (isa<ICmpInst, PtrToIntInst>(U))
++        return HasTests[V] = true;
++      if (isa<GlobalAlias, BitCastInst, AddrSpaceCastInst, FreezeInst,
++              SelectInst, PHINode>(U)) {
++        Pending.push_back(U);
++        continue;
++      }
++      if (auto *GEP = dyn_cast<GEPOperator>(U)) {
++        if (!GEP->hasAllZeroIndices())
++          return HasTests[V] = true;
++        Pending.push_back(U);
++        continue;
++      }
++      if (auto *CE = dyn_cast<ConstantExpr>(U)) {
++        if (CE->getOpcode() != Instruction::BitCast &&
++            CE->getOpcode() != Instruction::AddrSpaceCast)
++          return HasTests[V] = true;
++        Pending.push_back(U);
++        continue;
++      }
++      if (auto *CB = dyn_cast<CallBase>(U)) {
++        if (CB->getReturnedArgOperand() == Cur)
++          Pending.push_back(U);
++        continue;
++      }
++      if (isa<LoadInst, StoreInst, ReturnInst>(U))
++        continue;
++      return HasTests[V] = true;
++    }
++  }
++  for (Value *Cur : Seen)
++    HasTests[Cur] = false;
++  return false;
++}
++
++// Filter only when neither a use-side condition nor the value's definition
++// can supply a null constant. OR is intentionally conservative for PHI/select:
++// one feasible null arm is enough to retain LVI, even if another arm is
++// unknown.
++bool LVINullEdgeQuery::mayNeedLVI(Value *V, unsigned Depth) {
++  V = canonicalNullValue(V);
++  if (auto It = NeedsLVI.find(V); It != NeedsLVI.end())
++    return It->second;
++  if (Depth > 64) {
++    if (!LimitHit && CollectStats)
++      ++Counters.FilterFallbacks;
++    LimitHit = true;
++    return true;
++  }
++  if (!spendWork())
++    return true;
++  NeedsLVI[V] = true; // Cycles retain LVI; no incomplete negative is published.
++  if (hasPotentialTest(V))
++    return true;
++  bool Needed = true;
++  if (isa<Argument>(V)) {
++    Needed = false;
++  } else if (auto *SI = dyn_cast<SelectInst>(V)) {
++    if (auto *C = dyn_cast<ConstantInt>(SI->getCondition()))
++      Needed = mayNeedLVI(
++          C->isZero() ? SI->getFalseValue() : SI->getTrueValue(), Depth + 1);
++    else
++      Needed = mayNeedLVI(SI->getTrueValue(), Depth + 1) ||
++               mayNeedLVI(SI->getFalseValue(), Depth + 1);
++  } else if (auto *PN = dyn_cast<PHINode>(V)) {
++    Needed = PN->getNumIncomingValues() == 0;
++    for (Value *Input : PN->incoming_values())
++      if (mayNeedLVI(Input, Depth + 1)) {
++        Needed = true;
++        break;
++      }
++  }
++  // Constants, returned calls, loads, inttoptr and unproven freezes fall back.
++  // Their lattice folding is deliberately left to LVI.
++  NeedsLVI[V] = Needed;
++  return Needed;
++}
++
+ /// LazyValueInfo-backed null-edge oracle. This fork's getPredicateOnEdge
+ /// returns a Constant*: the constant result of the comparison, or nullptr when
+ /// unknown. Unknown answers false (the edge is kept) — only positive proof may
+@@ -22,16 +154,9 @@ using namespace llvm;
+ /// queried value even when it is produced by freezing poison.
+ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+                                    BasicBlock *ToBB) const {
+-  while (true) {
+-    V = V->stripPointerCastsAndAliases();
+-    if (auto *FI = dyn_cast<FreezeInst>(V)) {
+-      if (!jeandle::isProvenDefined(FI->getOperand(0)))
+-        break;
+-      V = FI->getOperand(0);
+-      continue;
+-    }
+-    break;
+-  }
++  if (Query && Query->CollectStats)
++    ++Query->Counters.Requests;
++  V = canonicalNullValue(V);
+   auto *PT = dyn_cast<PointerType>(V->getType());
+   if (!PT)
+     return false;
+@@ -61,10 +186,19 @@ bool LVINullEdgeOracle::operator()(Value *V, BasicBlock *FromBB,
+             BasicBlock *NullBB = Cmp->getPredicate() == ICmpInst::ICMP_EQ
+                                      ? BI->getSuccessor(0)
+                                      : BI->getSuccessor(1);
++            if (Query && Query->CollectStats)
++              ++Query->Counters.Structural;
+             return NullBB == ToBB;
+           }
+         }
+ 
++  if (Query && !DisableNullEdgePrefilter && !Query->mayNeedLVI(V)) {
++    if (Query->CollectStats)
++      ++Query->Counters.Filtered;
++    return false;
++  }
++  if (Query && Query->CollectStats)
++    ++Query->Counters.LVICalls;
+   Constant *C = LVI.getPredicateOnEdge(
+       ICmpInst::ICMP_EQ, V, ConstantPointerNull::get(PT), FromBB, ToBB);
+   return C && C->isOneValue();
+diff --git a/llvm/lib/IR/Jeandle/JavaType.cpp b/llvm/lib/IR/Jeandle/JavaType.cpp
+index 4123b755daef..26e1bc065292 100644
+--- a/llvm/lib/IR/Jeandle/JavaType.cpp
++++ b/llvm/lib/IR/Jeandle/JavaType.cpp
+@@ -2151,6 +2151,9 @@ static JavaType factsAt(Value *V, BasicBlock *BB, JavaTypeQueryContext &Q) {
+     JavaType E = factsAt(V, P, Q);
+     mergePathFacts(E, edgeGuard(P, BB, V, Q));
+     joinArm(Joined, First, std::move(E));
++    // Unknown absorbs every remaining arm of the union.
++    if (Joined.isUnknown())
++      break;
+   }
+ 
+   // The join loop above recursed through factsAt, which may have rehashed
+diff --git a/llvm/unittests/IR/JavaTypeQueryTest.cpp b/llvm/unittests/IR/JavaTypeQueryTest.cpp
+index 2cca35b32828..8ef88ee3f279 100644
+--- a/llvm/unittests/IR/JavaTypeQueryTest.cpp
++++ b/llvm/unittests/IR/JavaTypeQueryTest.cpp
+@@ -1432,4 +1432,222 @@ TEST_F(JavaTypeQueryTest, StatisticsAreOptIn) {
+     EXPECT_NE(Text.find(Zero.str()), std::string::npos) << Text;
+ }
+ 
++TEST_F(JavaTypeQueryTest, NullPrefilterSkipsLVIForArgumentsAndEntrySelects) {
++  std::string IR = "declare void @consume(ptr)\ndefine ptr @test(ptr %a, ptr "
++                   "%b, i1 %pick) {\nentry:\n";
++  std::string Previous = "%a";
++  for (unsigned I = 0; I < 64; ++I) {
++    std::string Name = "%s" + std::to_string(I);
++    IR += Name + " = select i1 %pick, ptr " + Previous + ", ptr %b\n";
++    Previous = Name;
++  }
++  IR += "call void @consume(ptr " + Previous +
++        ")\nbr label %next\nnext:\nbr label %exit\nexit:\nret ptr " + Previous +
++        "\n}\n";
++  Function *F = parse(IR);
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  LVINullEdgeQuery Query(true);
++  LVINullEdgeOracle Filtered{LVI, &Query}, Reference{LVI};
++  Value *Root =
++      cast<ReturnInst>(block(*F, "exit")->getTerminator())->getReturnValue();
++  for (Value *V : SmallVector<Value *, 2>{F->getArg(0), Root})
++    for (BasicBlock *From : {&F->getEntryBlock(), block(*F, "next")}) {
++      BasicBlock *To =
++          From == &F->getEntryBlock() ? block(*F, "next") : block(*F, "exit");
++      EXPECT_EQ(Filtered(V, From, To), Reference(V, From, To));
++    }
++  EXPECT_EQ(Query.getStats().Filtered, 4U);
++  EXPECT_EQ(Query.getStats().LVICalls, 0U);
++}
++
++TEST_F(JavaTypeQueryTest, NullPrefilterKeepsSelectAndPhiFallbacks) {
++  Function *F = parse(R"(
++    define ptr @test(ptr %obj) {
++    entry:
++      %check = icmp eq ptr %obj, null
++      br i1 %check, label %nullarm, label %other
++    nullarm:
++      br label %join
++    other:
++      %selected = select i1 true, ptr null, ptr %obj
++      br label %join
++    join:
++      %merged = phi ptr [ %obj, %nullarm ], [ %selected, %other ]
++      br label %exit
++    exit:
++      ret ptr %merged
++    }
++  )");
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  LVINullEdgeQuery Query(true);
++  LVINullEdgeOracle Filtered{LVI, &Query}, Reference{LVI};
++  EXPECT_TRUE(
++      Filtered(F->getArg(0), &F->getEntryBlock(), block(*F, "nullarm")));
++  EXPECT_FALSE(Filtered(F->getArg(0), &F->getEntryBlock(), block(*F, "other")));
++  for (StringRef Name : {"other", "join"}) {
++    BasicBlock *From = block(*F, Name);
++    Value *V = &From->front();
++    BasicBlock *To = Name == "other" ? block(*F, "join") : block(*F, "exit");
++    bool Expected = Reference(V, From, To);
++    EXPECT_EQ(Filtered(V, From, To), Expected);
++  }
++  EXPECT_TRUE(Reference(F->getArg(0), block(*F, "nullarm"), block(*F, "join")));
++  EXPECT_TRUE(Filtered(F->getArg(0), block(*F, "nullarm"), block(*F, "join")));
++  EXPECT_EQ(Query.getStats().Structural, 2U);
++  EXPECT_EQ(Query.getStats().LVICalls, 3U);
++  EXPECT_EQ(Query.getStats().Filtered, 0U);
++}
++
++TEST_F(JavaTypeQueryTest, NullPrefilterKeepsReturnedAliasesAndIntegerTests) {
++  Function *F = parse(R"(
++    declare ptr @identity(ptr returned)
++    define ptr @test(ptr %obj) {
++    entry:
++      %alias = call ptr @identity(ptr %obj)
++      %bits = ptrtoint ptr %alias to i64
++      %check = icmp eq i64 %bits, 0
++      br i1 %check, label %next, label %other
++    next:
++      br label %exit
++    exit:
++      ret ptr %alias
++    other:
++      ret ptr %obj
++    }
++  )");
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  LVINullEdgeQuery Query(true);
++  LVINullEdgeOracle Filtered{LVI, &Query}, Reference{LVI};
++  auto *From = block(*F, "next");
++  auto *To = block(*F, "exit");
++  for (Value *V :
++       SmallVector<Value *, 2>{F->getArg(0), &F->getEntryBlock().front()})
++    EXPECT_EQ(Filtered(V, From, To), Reference(V, From, To));
++  EXPECT_EQ(Query.getStats().Filtered, 0U);
++  EXPECT_EQ(Query.getStats().LVICalls, 2U);
++}
++
++TEST_F(JavaTypeQueryTest, NullPrefilterDoesNotStripUnprovenFreeze) {
++  Function *F = parse(R"(
++    define ptr @test() {
++    entry:
++      %frozen = freeze ptr poison
++      br label %next
++    next:
++      ret ptr %frozen
++    }
++  )");
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  LVINullEdgeQuery Query(true);
++  LVINullEdgeOracle Filtered{LVI, &Query}, Reference{LVI};
++  auto *V = &F->getEntryBlock().front();
++  EXPECT_EQ(Filtered(V, &F->getEntryBlock(), block(*F, "next")),
++            Reference(V, &F->getEntryBlock(), block(*F, "next")));
++  EXPECT_EQ(Query.getStats().Filtered, 0U);
++  EXPECT_EQ(Query.getStats().LVICalls, 1U);
++}
++
++TEST_F(JavaTypeQueryTest, NullPrefilterWorkLimitFallsBackToLVI) {
++  std::string IR =
++      "declare void @consume(ptr)\ndefine ptr @test(ptr %obj) {\nentry:\n";
++  for (unsigned I = 0; I < 300; ++I)
++    IR += "call void @consume(ptr %obj)\n";
++  IR += "br label %next\nnext:\nret ptr %obj\n}\n";
++  Function *F = parse(IR);
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  LVINullEdgeQuery Query(true);
++  LVINullEdgeOracle Filtered{LVI, &Query}, Reference{LVI};
++  EXPECT_EQ(Filtered(F->getArg(0), &F->getEntryBlock(), block(*F, "next")),
++            Reference(F->getArg(0), &F->getEntryBlock(), block(*F, "next")));
++  EXPECT_EQ(Query.getStats().Filtered, 0U);
++  EXPECT_EQ(Query.getStats().LVICalls, 1U);
++  EXPECT_EQ(Query.getStats().FilterFallbacks, 1U);
++}
++
++TEST_F(JavaTypeQueryTest, NullPrefilterNewQueryRefreshesAfterIRMaintenance) {
++  Function *F = parse(R"(
++    define ptr @test(ptr %obj) {
++    entry:
++      br label %next
++    next:
++      br label %exit
++    exit:
++      ret ptr %obj
++    other:
++      ret ptr null
++    }
++  )");
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  LVINullEdgeQuery BeforeQuery(true);
++  LVINullEdgeOracle Before{LVI, &BeforeQuery};
++  EXPECT_FALSE(Before(F->getArg(0), block(*F, "next"), block(*F, "exit")));
++  EXPECT_EQ(BeforeQuery.getStats().Filtered, 1U);
++  Instruction *Old = F->getEntryBlock().getTerminator();
++  auto *Test = new ICmpInst(
++      Old->getIterator(), ICmpInst::ICMP_EQ, F->getArg(0),
++      ConstantPointerNull::get(cast<PointerType>(F->getArg(0)->getType())));
++  BranchInst::Create(block(*F, "next"), block(*F, "other"), Test,
++                     Old->getIterator());
++  Old->eraseFromParent();
++  LVI.clear();
++  LVINullEdgeQuery AfterQuery(true);
++  LVINullEdgeOracle After{LVI, &AfterQuery}, Reference{LVI};
++  bool Expected = Reference(F->getArg(0), block(*F, "next"), block(*F, "exit"));
++  EXPECT_TRUE(Expected);
++  EXPECT_EQ(After(F->getArg(0), block(*F, "next"), block(*F, "exit")),
++            Expected);
++  EXPECT_EQ(AfterQuery.getStats().Filtered, 0U);
++  EXPECT_EQ(AfterQuery.getStats().LVICalls, 1U);
++}
++
++TEST_F(JavaTypeQueryTest, NullPrefilterDepthLimitFallsBackToLVI) {
++  std::string IR = "define ptr @test(ptr %a, ptr %b, i1 %pick) {\nentry:\n";
++  std::string Previous = "%a";
++  for (unsigned I = 0; I < 80; ++I) {
++    std::string Name = "%s" + std::to_string(I);
++    IR += Name + " = select i1 %pick, ptr " + Previous + ", ptr %b\n";
++    Previous = Name;
++  }
++  IR += "br label %next\nnext:\nret ptr " + Previous + "\n}\n";
++  Function *F = parse(IR);
++  ASSERT_NE(F, nullptr);
++  FunctionAnalysisManager FAM;
++  PassBuilder PB;
++  PB.registerFunctionAnalyses(FAM);
++  auto &LVI = FAM.getResult<LazyValueAnalysis>(*F);
++  Value *V =
++      cast<ReturnInst>(block(*F, "next")->getTerminator())->getReturnValue();
++  LVINullEdgeQuery Query(true);
++  LVINullEdgeOracle Filtered{LVI, &Query}, Reference{LVI};
++  EXPECT_EQ(Filtered(V, &F->getEntryBlock(), block(*F, "next")),
++            Reference(V, &F->getEntryBlock(), block(*F, "next")));
++  EXPECT_EQ(Query.getStats().Filtered, 0U);
++  EXPECT_EQ(Query.getStats().LVICalls, 1U);
++  EXPECT_EQ(Query.getStats().FilterFallbacks, 1U);
++}
++
+ } // namespace

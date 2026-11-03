@@ -1,0 +1,12 @@
+perf(jeandle): skip unnecessary LVI null-edge queries
+
+Add an optional query-local filter to LVINullEdgeOracle. Skip LVI only
+when uses and definitions cannot supply a null proof. Keep the original
+fallback for uncertain shapes, cycles and scan/depth limits. Preserve
+custom oracles, freeze checks and IR/oracle invalidation rules.
+
+Stop merging predecessor facts once the result is unknown. Add diagnostic
+counters and verify cached queries with the unfiltered oracle.
+
+Validation: 91 unit tests passed; 145 pass regressions passed and one was
+unsupported by the current test configuration.

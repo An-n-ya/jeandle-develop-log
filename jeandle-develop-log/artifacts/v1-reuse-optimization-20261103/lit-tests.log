@@ -1,0 +1,147 @@
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llc_dwarf in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find dsymutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find lli-child-target in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ar in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-as in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-addr2line in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bcanalyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-bitcode-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cas in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cgdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cov in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ctxprof-util in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cvtres in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfod-find in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-debuginfo-analyzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-diff in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dis in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwarfutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dwp in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-dlltool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-exegesis in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-extract in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ir2vec in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-isel-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ifs in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-install-name-tool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-jitlink in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-opt-fuzzer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lib in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-link in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-lto2 in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-mca in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-modextract in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-nm in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objcopy in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-objdump in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-otool in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-pdbutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profdata in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-profgen in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-ranlib in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readelf in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readobj in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-rtdyld in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-sim in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-size in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-split in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-stress in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strings in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-strip in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-readtapi in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-undname in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-windres in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-c-test in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-cxxfilt in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-xray in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml2obj in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find obj2yaml in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find yaml-bench in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find verify-uselistorder in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find bugpoint in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llc in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-symbolizer in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sancov in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find sanstats in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-lit: /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/llvm/utils/lit/lit/llvm/subst.py:126: note: Did not find llvm-remarkutil in /home/annya/playground/jeandle/jeandle/jeandle-llvm-v1-reuse-20261103/build/bin
+llvm-readobj not found
+-- Testing: 63 tests, 4 workers --
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-phi-edge-fold.ll (1 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/recover-cha-boundary.ll (2 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/xor-both-traced.ll (3 of 63)
+PASS: LLVM :: Jeandle/java-type-analysis/selective-invalidation.ll (4 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-object.ll (5 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-recover-cross-pass.ll (6 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-incompatible.ll (7 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cff-nonexact.ll (8 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cff-modify-tce.ll (9 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cha-shallow.ll (10 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/x07-production-pipeline.ll (11 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-phi-duplicate-edge.ll (12 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-known-subtype.ll (13 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/exclusions-merge.ll (14 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/nondefinitive-klass-global.ll (15 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/null-arm-type.ll (16 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-zero-overlap.ll (17 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-cff-cross-pass.ll (18 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/cha-deep.ll (19 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-fold-recover.ll (20 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/asymmetric-edges.ll (21 of 63)
+PASS: LLVM :: Jeandle/cha-devirtualization/virtual-call.ll (22 of 63)
+PASS: LLVM :: Jeandle/cha-devirtualization/indirect-invoke-skipped.ll (23 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/frozen-null-edge.ll (24 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/interface-only-facts.ll (25 of 63)
+PASS: LLVM :: Jeandle/cha-devirtualization/no-cha-target.ll (26 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-shallow.ll (27 of 63)
+PASS: LLVM :: Jeandle/cha-devirtualization/intersect-exact.ll (28 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/recover-shallow.ll (29 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/phi-mixed-stack-incoming.ll (30 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/phi-exact-base-guard.ll (31 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/deep-condition.ll (32 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-deep.ll (33 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/phi-dag-shared-incoming.ll (34 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/interface-exclusion-kept.ll (35 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/frozen-obj-check.ll (36 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/switch-and-frozen-guards.ll (37 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-interfaces.ll (38 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/trunc-value-domain.ll (39 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/array-interface-overlap.ll (40 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/freeze-and-identity-patterns.ll (41 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/or-true-branch-lca.ll (42 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/null-guard-forms.ll (43 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/null-threaded-edge.ll (44 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/null-both-edges.ll (45 of 63)
+PASS: LLVM :: Jeandle/cha-devirtualization/method-handle-link-to-virtual.ll (46 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/merge-of-merge.ll (47 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/merge-direct-use.ll (48 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/frozen-klass-constant.ll (49 of 63)
+PASS: LLVM :: Jeandle/cha-devirtualization/method-handle-invoke-basic.ll (50 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/loop-header.ll (51 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/check-instanceof-arity.ll (52 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-select-true-interfaces.ll (53 of 63)
+PASS: LLVM :: Jeandle/java-type-cache-reuse/tce-same-block.ll (54 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/checkcast-expanded-phi.ll (55 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/condition-value-domain.ll (56 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/instanceof-preserved.ll (57 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/irreducible-smoke.ll (58 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/checkcast-dissolved.ll (59 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/class-interface-intersection.ll (60 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/check-klass-subtype-const.ll (61 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/context-phi-select.ll (62 of 63)
+PASS: LLVM :: Jeandle/type-check-elimination/budget-exceeded.ll (63 of 63)
+
+Testing Time: 0.39s
+
+Total Discovered Tests: 63
+  Passed: 63 (100.00%)

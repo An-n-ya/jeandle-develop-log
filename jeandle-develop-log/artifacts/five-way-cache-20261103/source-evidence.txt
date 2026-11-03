@@ -1,0 +1,114 @@
+                                     JavaTypeCache &Cache) {
+  if (Context)
+    Cache.bind(*Context->getFunction());
+  else if (auto *I = dyn_cast<Instruction>(V))
+    Cache.bind(*I->getFunction());
+  else if (auto *A = dyn_cast<Argument>(V))
+    Cache.bind(*A->getParent());
+
+  BasicBlock *BB = DT && Context ? Context->getParent() : nullptr;
+  if (BB && Cache.finalEnabled()) {
+    if (auto *Type = Cache.Final.lookup(V, BB)) {
+      Cache.Final.recordHit();
+      return *Type;
+    }
+    Cache.Final.recordMiss();
+  }
+
+  Cache.Base.beginQuery();
+  auto Finish = make_scope_exit([&] { Cache.Base.endQuery(); });
+  JavaType Result = jeandle::getJavaType(V, DT, Context, IsNullEdge, Cache);
+  // Only the completed top-level result is published. Recursive evaluations
+  // stay in the shared solver and never read or write Final.
+  if (BB && Cache.finalEnabled())
+    Cache.Final.insert(V, BB, Result);
+  return Result;
+}
+  Facts.clear();
+  Final.clear();
+}
+
+void JavaTypeCache::notifyOracleChanged() {
+  Facts.invalidate();
+  Final.notifyOracleChanged();
+}
+
+JavaTypeCacheInvalidationInfo
+JavaTypeCache::invalidate(ArrayRef<Value *> Changed, bool CFGChanged,
+                            JavaTypeBaseInvalidationMode Mode) {
+  JavaTypeCacheInvalidationInfo Info;
+  size_t OldBase = Base.size();
+  size_t OldDefined = Defined.size();
+  size_t OldFacts = Facts.size();
+  size_t OldFinal = Final.size();
+  SmallPtrSet<Value *, 32> Seen;
+  SmallVector<Value *, 32> Affected;
+  SmallVector<Value *, 32> Pending(Changed.begin(), Changed.end());
+  while (!Pending.empty()) {
+    Value *V = Pending.pop_back_val();
+    if (!V || !Seen.insert(V).second)
+      continue;
+    if (++Info.ValuesVisited > MaxDependencyValues) {
+      Info.FullClear = true;
+      break;
+    }
+    if (auto *BB = dyn_cast<BasicBlock>(V)) {
+      if (Owner && BB->getParent() != Owner) {
+        Info.FullClear = true;
+        break;
+      }
+      // Block notifications also cover values about to be erased with a
+      // block. For insertion/movement this is conservative but keeps one
+      // notification contract for both block contents and their users.
+      for (Instruction &I : *BB)
+        Pending.push_back(&I);
+      continue;
+    }
+    Function *ValueOwner = nullptr;
+    if (auto *I = dyn_cast<Instruction>(V)) {
+      ValueOwner = I->getFunction();
+    } else if (auto *A = dyn_cast<Argument>(V)) {
+      ValueOwner = A->getParent();
+    } else {
+      Info.FullClear = true;
+      break;
+    }
+    if (Owner && ValueOwner != Owner) {
+      Info.FullClear = true;
+      break;
+    }
+    Affected.push_back(V);
+    for (User *U : V->users()) {
+      if (++Info.UsesVisited > MaxDependencyEdges) {
+        Info.FullClear = true;
+        break;
+      }
+      Pending.push_back(U);
+    }
+    if (Info.FullClear)
+      break;
+  }
+  if (Info.FullClear) {
+    if (Base.StatsEnabled)
+      ++Base.Counters.Invalidations;
+    if (Defined.StatsEnabled)
+      ++Defined.Counters.Invalidations;
+    if (Facts.StatsEnabled)
+      ++Facts.Counters.Invalidations;
+    if (Final.StatsEnabled)
+      ++Final.Counters.Invalidations;
+    clear();
+    Info.BaseRemoved = OldBase;
+    Info.DefinedRemoved = OldDefined;
+    Info.FactsRemoved = OldFacts;
+    Info.FinalRemoved = OldFinal;
+    return Info;
+  }
+  Info.BaseRemoved =
+      Base.invalidate(Affected, CFGChanged, Mode, Info.BaseSlotsScanned);
+  Info.DefinedRemoved = Defined.invalidate(Affected, CFGChanged, Mode,
+                                           Info.DefinedSlotsScanned);
+  Info.FactsRemoved = Facts.invalidate();
+  Info.FinalRemoved = Final.invalidate();
+  return Info;
+}

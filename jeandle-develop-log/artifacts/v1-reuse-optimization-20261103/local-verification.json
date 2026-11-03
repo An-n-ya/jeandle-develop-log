@@ -1,0 +1,8 @@
+{
+  "source_snapshots_checked": 6,
+  "paired_changes_checked": 60,
+  "cost_medians_checked": 10,
+  "formal_samples": 1540,
+  "min_cpu_s": 0.246546999999953,
+  "runner_driver_hashes_match": true
+}

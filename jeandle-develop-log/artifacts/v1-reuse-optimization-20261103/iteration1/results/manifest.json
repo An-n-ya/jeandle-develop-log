@@ -1,0 +1,80 @@
+{
+  "versions": {
+    "base": {
+      "head": "ac545bb21e8931152ad9149e01f8304b214dbd91",
+      "opt_sha256": "9178f7ecec31eb734f573d2e0144b908e5525f700673c9623672ac0e091db86f",
+      "replay_sha256": "3cb3ec14fa225dd0eac8cb0fed2fcc2390a6c72e380782afb3a954f5e01a8dc6"
+    },
+    "null": {
+      "head": "e5475bb0df4671302665c6986e762bf892c3c98a",
+      "opt_sha256": "b3b274b3075e6b9d3123d328f4315bd49cff3cea10ac4ab2585a20407e8a4412",
+      "replay_sha256": "e5134e54ff8e7ab6b0e2d0188a968e688951124ec1ad8055c72361d568c7b651"
+    },
+    "new": {
+      "head": "616395cc384863d38fb6bb993b4b10a10f599dce",
+      "opt_sha256": "1d59d264bc1ce8bfcb481f7feeeb95f3cb9055930146c101b66384572729a9c2",
+      "replay_sha256": "5892a63c720124f6e97078e7fdb596ee43b441268d508fa19ca8402b8d5cd5c5"
+    },
+    "candidate": {
+      "head": "bed0f67043521ce5efadfb9ec050b7fbde8ff984",
+      "opt_sha256": "4b7e45a2e069be3c360118288f7cd2defcf801ae345218597bc3f700f7e977d8",
+      "replay_sha256": "884bab32e129c5aee22d291d7e7bfef29252c89b312636a226082eeea1f72d36"
+    }
+  },
+  "affinity": [
+    8
+  ],
+  "siblings": "8-9",
+  "governor": "powersave",
+  "aa_repeats": 15,
+  "repeats": 31,
+  "warmups": 3,
+  "seed": 20261103,
+  "input_hashes": {
+    "same": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "cross-unique": "6d15965a06ab0b9dcbb10c28bf62cd661bf098db6f68e420b4fae39531d91675",
+    "cross": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "same-edit": "d3dc62de879dd97629c4f6b861c3e9f9371bccfe9aed07849a727894551df0ad",
+    "other-edit": "3b688a5ccf352513feb43606ad9dc5703d4f39366b9b46cb56a8dc81a51c16d7",
+    "deep-static": {
+      "ir": "261564c793c6aaf1c364e08a536ad90d59b34ae98acdddf8f28cb2032e6f6b01",
+      "callback": "d68d00a5577a2077a0a7b8668f3709c5e1aa1b337fbe3bdfd0bca090eac86856"
+    }
+  },
+  "batches": {
+    "same": {
+      "base": 40800,
+      "null": 84526,
+      "new": 32200,
+      "candidate": 33434
+    },
+    "cross-unique": {
+      "base": 16384,
+      "null": 16384,
+      "new": 2309,
+      "candidate": 10781
+    },
+    "cross": {
+      "base": 22579,
+      "null": 29128,
+      "new": 5316,
+      "candidate": 17532
+    },
+    "same-edit": {
+      "base": 26449,
+      "null": 41511,
+      "new": 1100,
+      "candidate": 1147
+    },
+    "other-edit": {
+      "base": 25955,
+      "null": 40324,
+      "new": 1089,
+      "candidate": 1138
+    }
+  },
+  "driver_sha256": "94e949daf3445e58f8ffb1777070cc63f54d59f49e854eb62b69fcc0529aeb1a",
+  "runner_sha256": "156805385f56bf155990f27c742fbf3ba398c2da728753907e3193450e5ceb59",
+  "new_driver_sha256": "7fc4d547cbb75bc97ccf646892bbb1bf62b423998feb628fbea60533980f17d3",
+  "new_fixture_sha256": "c51a26be9360f1ee6968ad55b06578ced91989cf8dbfec81d62b82d1f0ac529a"
+}

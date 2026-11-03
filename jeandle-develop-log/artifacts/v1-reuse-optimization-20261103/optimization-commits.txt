@@ -1,0 +1,2 @@
+7425b6174b7a8436f6ad542172358ced0f9831d5 perf(jeandle): reuse bounded path facts and entry select base types
+bed0f67043521ce5efadfb9ec050b7fbde8ff984 perf(jeandle): reuse bounded path facts and entry select base types

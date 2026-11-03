@@ -1,0 +1,384 @@
+{
+  "checks": [
+    {
+      "scenario": "same",
+      "version": "raw",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0011840000000000002,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.001189113
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0022900000000000004,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.002292644
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0009739999999999996,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.000974155
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "v2",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0016289999999999998,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.001644719
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "new",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0017170000000000002,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.001719719
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "raw",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.002858,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 3168,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.003076494
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0016430000000000001,
+        "facts_hits": 62,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 130,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.00164555
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0009689999999999998,
+        "facts_hits": 62,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.000979459
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "v2",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0030600000000000002,
+        "facts_hits": 6076,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 130,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.00308349
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "new",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0019309999999999996,
+        "facts_hits": 6076,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 130,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.001944306
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "raw",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0015079999999999998,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2656,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.001514445
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0017449999999999998,
+        "facts_hits": 30,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 98,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.001745926
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0008080000000000001,
+        "facts_hits": 30,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.000809108
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "v2",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0014350000000000005,
+        "facts_hits": 2460,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 98,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.001441756
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "new",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0012669999999999997,
+        "facts_hits": 2460,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 98,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.001270941
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "raw",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0014720000000000002,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.001477706
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.001438,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.001436576
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0007199999999999999,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.000725638
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "v2",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0020280000000000003,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.002035599
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "new",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0015819999999999999,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.001586919
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "raw",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.002519,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.002540801
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0015110000000000004,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.001519589
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0007309999999999997,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.00072736
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "v2",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.001494,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.001504184
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "new",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0027289999999999997,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.002741347
+      }
+    }
+  ],
+  "formal_samples": 1850,
+  "min_cpu_s": 0.24450799999997397,
+  "raw_opt_bypass_checked": true,
+  "all_opt_ir_byte_identical": true,
+  "all_native_ir_byte_identical": true
+}

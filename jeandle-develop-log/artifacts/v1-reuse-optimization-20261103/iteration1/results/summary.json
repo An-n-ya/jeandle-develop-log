@@ -1,0 +1,380 @@
+[
+  {
+    "kind": "native",
+    "case": "same",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 1.464023291279637,
+    "min_cpu_s": 0.352975,
+    "cost_ms": {
+      "base": 0.008761053921568627,
+      "null": 0.004277689704942858,
+      "new": 0.01118369565217391,
+      "candidate": 0.010739426930669378
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -51.109448412794855,
+        "ci95": [
+          -51.30574630103244,
+          -50.9238798623331
+        ],
+        "verdict": "improvement"
+      },
+      "base->new": {
+        "change_pct": 27.65152356515128,
+        "ci95": [
+          26.985343647377256,
+          28.198142085152345
+        ],
+        "verdict": "regression"
+      },
+      "base->candidate": {
+        "change_pct": 22.491986949675425,
+        "ci95": [
+          22.191737454070747,
+          23.24883155743307
+        ],
+        "verdict": "regression"
+      },
+      "null->new": {
+        "change_pct": 161.9239321060271,
+        "ci95": [
+          160.64092318349057,
+          162.76682238386567
+        ],
+        "verdict": "regression"
+      },
+      "null->candidate": {
+        "change_pct": 151.25938813490544,
+        "ci95": [
+          150.24258362996483,
+          152.24746631004865
+        ],
+        "verdict": "regression"
+      },
+      "new->candidate": {
+        "change_pct": -3.936722447141938,
+        "ci95": [
+          -4.229183526750346,
+          -3.656288336774638
+        ],
+        "verdict": "improvement"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "cross-unique",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 2.233731032646835,
+    "min_cpu_s": 0.332489,
+    "cost_ms": {
+      "base": 0.02315179443359375,
+      "null": 0.020914306640625005,
+      "new": 0.15540493720225207,
+      "candidate": 0.0324296447453854
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -9.734541240914352,
+        "ci95": [
+          -10.304566527889047,
+          -9.052714001187656
+        ],
+        "verdict": "improvement"
+      },
+      "base->new": {
+        "change_pct": 575.3709757491794,
+        "ci95": [
+          567.6367632647352,
+          577.4684704937238
+        ],
+        "verdict": "regression"
+      },
+      "base->candidate": {
+        "change_pct": 40.34844281764538,
+        "ci95": [
+          39.30539891305707,
+          40.827844893294476
+        ],
+        "verdict": "regression"
+      },
+      "null->new": {
+        "change_pct": 642.7097141405908,
+        "ci95": [
+          640.9720766138457,
+          649.0336968255302
+        ],
+        "verdict": "regression"
+      },
+      "null->candidate": {
+        "change_pct": 55.079849696298425,
+        "ci95": [
+          53.848062381507944,
+          56.12587829597617
+        ],
+        "verdict": "regression"
+      },
+      "new->candidate": {
+        "change_pct": -79.23495401100034,
+        "ci95": [
+          -79.29843361090487,
+          -79.13455241262398
+        ],
+        "verdict": "improvement"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "cross",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 4.1741814278046245,
+    "min_cpu_s": 0.348878,
+    "cost_ms": {
+      "base": 0.015910934939545596,
+      "null": 0.01228518950837682,
+      "new": 0.06813487584650113,
+      "candidate": 0.020335329682865617
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -22.64258739137911,
+        "ci95": [
+          -23.516360109793332,
+          -21.775288012116423
+        ],
+        "verdict": "improvement"
+      },
+      "base->new": {
+        "change_pct": 325.48741324897594,
+        "ci95": [
+          324.35279346476955,
+          329.5438990416801
+        ],
+        "verdict": "regression"
+      },
+      "base->candidate": {
+        "change_pct": 27.644550514226076,
+        "ci95": [
+          27.071188681226445,
+          28.621367802525732
+        ],
+        "verdict": "regression"
+      },
+      "null->new": {
+        "change_pct": 454.944500674166,
+        "ci95": [
+          447.30710270628185,
+          458.97564688000693
+        ],
+        "verdict": "regression"
+      },
+      "null->candidate": {
+        "change_pct": 65.4899244591682,
+        "ci95": [
+          64.80218878688902,
+          66.47103393470297
+        ],
+        "verdict": "regression"
+      },
+      "new->candidate": {
+        "change_pct": -70.12039679887891,
+        "ci95": [
+          -70.44502245824779,
+          -70.02486888786532
+        ],
+        "verdict": "improvement"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "same-edit",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 4.463798573362698,
+    "min_cpu_s": 0.34640899999999997,
+    "cost_ms": {
+      "base": 0.01364149873341147,
+      "null": 0.008875382428753823,
+      "new": 0.33081,
+      "candidate": 0.31394158674803835
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -34.29592356430439,
+        "ci95": [
+          -35.673560592991,
+          -33.532003604702034
+        ],
+        "verdict": "improvement"
+      },
+      "base->new": {
+        "change_pct": 2329.771678352689,
+        "ci95": [
+          2313.8298296876496,
+          2347.9991596161817
+        ],
+        "verdict": "regression"
+      },
+      "base->candidate": {
+        "change_pct": 2214.873522143374,
+        "ci95": [
+          2192.41918694893,
+          2237.005451015039
+        ],
+        "verdict": "regression"
+      },
+      "null->new": {
+        "change_pct": 3619.348112391956,
+        "ci95": [
+          3579.0893010543045,
+          3646.930258356422
+        ],
+        "verdict": "regression"
+      },
+      "null->candidate": {
+        "change_pct": 3435.8521569675113,
+        "ci95": [
+          3383.734662685956,
+          3488.298449352966
+        ],
+        "verdict": "regression"
+      },
+      "new->candidate": {
+        "change_pct": -5.279720948300037,
+        "ci95": [
+          -5.608366520823116,
+          -4.563312378998297
+        ],
+        "verdict": "improvement"
+      }
+    }
+  },
+  {
+    "kind": "native",
+    "case": "other-edit",
+    "metric": "CPU ms / 32-query batch",
+    "aa_noise_p95": 5.322390477755379,
+    "min_cpu_s": 0.340229,
+    "cost_ms": {
+      "base": 0.013757503371219417,
+      "null": 0.00888981747842476,
+      "new": 0.33165013774104685,
+      "candidate": 0.31399209138840073
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -35.659462783494966,
+        "ci95": [
+          -36.69162503367838,
+          -35.138804909487995
+        ],
+        "verdict": "improvement"
+      },
+      "base->new": {
+        "change_pct": 2309.7084450267166,
+        "ci95": [
+          2280.766353284032,
+          2328.8023713123466
+        ],
+        "verdict": "regression"
+      },
+      "base->candidate": {
+        "change_pct": 2181.1926947861416,
+        "ci95": [
+          2155.515928760677,
+          2202.5771355334145
+        ],
+        "verdict": "regression"
+      },
+      "null->new": {
+        "change_pct": 3614.5188506305417,
+        "ci95": [
+          3605.876960756978,
+          3691.264232104224
+        ],
+        "verdict": "regression"
+      },
+      "null->candidate": {
+        "change_pct": 3431.9694223862525,
+        "ci95": [
+          3416.970182145762,
+          3489.922601834718
+        ],
+        "verdict": "regression"
+      },
+      "new->candidate": {
+        "change_pct": -5.263097485336299,
+        "ci95": [
+          -5.57040032689049,
+          -4.9787460633338725
+        ],
+        "verdict": "inconclusive"
+      }
+    }
+  },
+  {
+    "kind": "opt",
+    "case": "deep-static",
+    "metric": "opt process CPU ms",
+    "aa_noise_p95": 1.0872903324892769,
+    "min_cpu_s": 0.24549000000002685,
+    "cost_ms": {
+      "base": 439.6480000000418,
+      "null": 248.58800000003933,
+      "new": 722.2860000000577,
+      "candidate": 459.48400000001664
+    },
+    "comparisons": {
+      "base->null": {
+        "change_pct": -43.504631847060224,
+        "ci95": [
+          -43.64652894302221,
+          -43.352470883907834
+        ],
+        "verdict": "improvement"
+      },
+      "base->new": {
+        "change_pct": 64.14725770097034,
+        "ci95": [
+          63.92132353108817,
+          64.49518190489786
+        ],
+        "verdict": "regression"
+      },
+      "base->candidate": {
+        "change_pct": 4.448646564918279,
+        "ci95": [
+          4.179987809879737,
+          4.556775688694592
+        ],
+        "verdict": "regression"
+      },
+      "null->new": {
+        "change_pct": 190.64133837541743,
+        "ci95": [
+          189.838153356272,
+          191.50412262542636
+        ],
+        "verdict": "regression"
+      },
+      "null->candidate": {
+        "change_pct": 84.89752928594172,
+        "ci95": [
+          84.59039126683703,
+          85.15581373861976
+        ],
+        "verdict": "regression"
+      },
+      "new->candidate": {
+        "change_pct": -36.41365113097711,
+        "ci95": [
+          -36.546831955930514,
+          -36.31010986226133
+        ],
+        "verdict": "improvement"
+      }
+    }
+  }
+]

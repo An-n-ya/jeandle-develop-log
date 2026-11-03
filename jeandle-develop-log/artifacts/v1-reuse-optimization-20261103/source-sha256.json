@@ -1,0 +1,8 @@
+{
+  "llvm/docs/JeandleJavaTypePathReuse.md": "438a3739acc8e9cd36377e55600ddb66c5afb565a9e1b1f66ee37ff0c675cb5d",
+  "llvm/include/llvm/Analysis/Jeandle/JavaTypeCache.h": "73e0f76caecfe2f368a697846c9891942e0641e4172bfe8e8be4b47e09141282",
+  "llvm/lib/Analysis/Jeandle/JavaTypeCache.cpp": "ddd7e91d90c1c0620e766d3ebef20484994304d547861dc10ef24c424dac7d93",
+  "llvm/lib/IR/Jeandle/JavaType.cpp": "5ae95ddc68ac5604e83529fe1d4d2bf7e0e5ef7aab221f9a1e33c77f2c691ac5",
+  "llvm/test/Jeandle/java-type-cache-reuse/recover-shallow.ll": "e4b4513aefd1333cbd34b164d5ed0e83ad6f47f807870318bd01db3dc8865c08",
+  "llvm/unittests/IR/CachedJavaTypeTest.cpp": "cc9e97cfdfa8ef5ded9a1973db69c05086ce5d4b31db8b58cf63b784fb62d8aa"
+}

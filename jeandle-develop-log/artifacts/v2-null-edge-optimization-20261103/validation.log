@@ -1,0 +1,12 @@
+[1/12] Building CXX object lib/CodeGen/MIRParser/CMakeFiles/LLVMMIRParser.dir/MILexer.cpp.o
+[2/12] Building CXX object lib/Analysis/CMakeFiles/LLVMAnalysis.dir/Jeandle/LVINullEdgeOracle.cpp.o
+[3/12] Linking CXX static library lib/libLLVMAnalysis.a
+[4/12] Linking CXX executable bin/opt
+[5/12] Building CXX object tools/llc/CMakeFiles/llc.dir/llc.cpp.o
+[6/12] Building CXX object tools/llc/CMakeFiles/llc.dir/NewPMDriver.cpp.o
+[7/12] Building CXX object lib/CodeGen/MIRParser/CMakeFiles/LLVMMIRParser.dir/MIParser.cpp.o
+[8/12] Building CXX object lib/CodeGen/MIRParser/CMakeFiles/LLVMMIRParser.dir/MIRParser.cpp.o
+[9/12] Linking CXX static library lib/libLLVMMIRParser.a
+[10/12] Building CXX object unittests/IR/CMakeFiles/JavaTypeQueryTests.dir/JavaTypeQueryTest.cpp.o
+[11/12] Linking CXX executable unittests/IR/JavaTypeQueryTests
+[12/12] Linking CXX executable bin/llc

@@ -1,0 +1,343 @@
+{
+  "checks": [
+    {
+      "scenario": "same",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0010240000000000004,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.001027599
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.001172,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.001187643
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "prior",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.004368000000000001,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "path_hits": 0,
+        "path_misses": 68,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.004399959
+      }
+    },
+    {
+      "scenario": "same",
+      "version": "candidate",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0048130000000000004,
+        "facts_hits": 0,
+        "filter_fallbacks": 0,
+        "final_hits": 62,
+        "lvi_calls": 0,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "path_hits": 0,
+        "path_misses": 68,
+        "prefilter_skips": 68,
+        "queries": 64,
+        "scenario": "same",
+        "wall_s": 0.004833137
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.007977999999999999,
+        "facts_hits": 62,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 130,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.008050293
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.004246999999999999,
+        "facts_hits": 62,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.004273747
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "prior",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.007965000000000002,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 130,
+        "path_hits": 62,
+        "path_misses": 130,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.008012416
+      }
+    },
+    {
+      "scenario": "cross-unique",
+      "version": "candidate",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.008036999999999999,
+        "facts_hits": 0,
+        "filter_fallbacks": 0,
+        "final_hits": 0,
+        "lvi_calls": 0,
+        "mode": "cached",
+        "oracle_calls": 130,
+        "path_hits": 62,
+        "path_misses": 130,
+        "prefilter_skips": 130,
+        "queries": 64,
+        "scenario": "cross-unique",
+        "wall_s": 0.008441172
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.006059,
+        "facts_hits": 30,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 98,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.006099218
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.003091,
+        "facts_hits": 30,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.003118929
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "prior",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.006239,
+        "facts_hits": 0,
+        "final_hits": 32,
+        "mode": "cached",
+        "oracle_calls": 98,
+        "path_hits": 30,
+        "path_misses": 98,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.006276235
+      }
+    },
+    {
+      "scenario": "cross",
+      "version": "candidate",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.006296,
+        "facts_hits": 0,
+        "filter_fallbacks": 0,
+        "final_hits": 32,
+        "lvi_calls": 0,
+        "mode": "cached",
+        "oracle_calls": 98,
+        "path_hits": 30,
+        "path_misses": 98,
+        "prefilter_skips": 98,
+        "queries": 64,
+        "scenario": "cross",
+        "wall_s": 0.006445599
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0016820000000000012,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.001686062
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0026720000000000003,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.002742393
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "prior",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.008643,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "path_hits": 0,
+        "path_misses": 2176,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.008716411
+      }
+    },
+    {
+      "scenario": "same-edit",
+      "version": "candidate",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.004331999999999999,
+        "facts_hits": 0,
+        "filter_fallbacks": 0,
+        "final_hits": 0,
+        "lvi_calls": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "path_hits": 0,
+        "path_misses": 2176,
+        "prefilter_skips": 2176,
+        "queries": 64,
+        "scenario": "same-edit",
+        "wall_s": 0.004356736
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "base",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.005208000000000001,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 68,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.00548688
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "null",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.0018980000000000008,
+        "facts_hits": 0,
+        "final_hits": 62,
+        "mode": "cached",
+        "oracle_calls": 0,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.001905425
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "prior",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.010283,
+        "facts_hits": 0,
+        "final_hits": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "path_hits": 0,
+        "path_misses": 2176,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.01055645
+      }
+    },
+    {
+      "scenario": "other-edit",
+      "version": "candidate",
+      "diagnostic": {
+        "checksum": 1408,
+        "cpu_s": 0.006575000000000002,
+        "facts_hits": 0,
+        "filter_fallbacks": 0,
+        "final_hits": 0,
+        "lvi_calls": 0,
+        "mode": "cached",
+        "oracle_calls": 2176,
+        "path_hits": 0,
+        "path_misses": 2176,
+        "prefilter_skips": 2176,
+        "queries": 64,
+        "scenario": "other-edit",
+        "wall_s": 0.006781543
+      }
+    }
+  ],
+  "formal_samples": 1540,
+  "min_cpu_s": 0.24659799999998633,
+  "all_opt_ir_byte_identical": true,
+  "all_native_ir_byte_identical": true
+}

@@ -1,0 +1,9 @@
+{
+  "branch": "feat/javatype-final-cache",
+  "commit": "31bdeb46178c952ff5b471d5f49ee2358e3dd0de",
+  "parent": "616395cc384863d38fb6bb993b4b10a10f599dce",
+  "measured_commit": "7425b6174b7a8436f6ad542172358ced0f9831d5",
+  "tree": "6112fb565001ee0e69ad210369ce7bc21448405b",
+  "identical_tree_verified": true,
+  "remote_tip_verified": true
+}

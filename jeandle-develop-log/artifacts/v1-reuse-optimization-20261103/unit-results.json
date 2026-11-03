@@ -1,0 +1,873 @@
+{
+  "tests": 84,
+  "failures": 0,
+  "disabled": 0,
+  "errors": 0,
+  "timestamp": "2026-11-03T20:06:36Z",
+  "time": "0.014s",
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "CachedJavaTypeTest",
+      "tests": 45,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2026-11-03T20:06:36Z",
+      "time": "0.009s",
+      "testsuite": [
+        {
+          "name": "BaseMemoReusesCompletedResultAndOwnsCounters",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 102,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "ClearRefreshesLoadMetadataAndDerivedResult",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 128,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "CompletedSCCMembersAreReusableInEitherOrder",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 161,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FreezeOfPossiblyPoisonOperandRemainsUnknown",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 197,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FreezeOfDefinedOperandRetainsType",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 219,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharedEngineKeepsFreezeProofsWithoutPublishingFinal",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 239,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharedEngineLeavesContextFinalsToCachedWrapper",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 284,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "UncachedEntryIgnoresExternalMemoAfterMetadataEdit",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 330,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "ReturnedCallKeepsItsIndependentTypeSeed",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 360,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "ContextFactsDoNotLeakBetweenQueriesOrIntoBase",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 383,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharpenKeepsEdgeFactsSeparateFromWarmBaseMemo",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 425,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharedBudgetChangesRebuildQueryLocalFacts",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 481,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "InvalidateTraversesUncachedIntegerProofDependencies",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 534,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "ReturnedCallSeedDoesNotHideItsOperandDependency",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 571,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "InvalidateSCCMemberRecomputesWholeDependentCycle",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 602,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "CFGEdgeRemovalInvalidatesOnlyExplicitPhiClosure",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 641,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "PureBlockSplitKeepsUnchangedBaseResult",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 687,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "NotifyBeforeRAUWAndDeleteKeepsUnrelatedBaseEntries",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 714,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "CalleeAttributeMutationUsesConservativeFallback",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 748,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "DiagnosticsDistinguishSharedInputsFromRootHits",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 775,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "DiagnosticCycleEdgesAreNotCountedAsCacheMisses",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 838,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "UnknownIsAReusableCompletedResult",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 876,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "OversizedInvalidationFallsBackToClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 898,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsEdgeModesReuseSharedEdgesAndSeparateValues",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 933,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsEdgesPreserveBudgetPhiCyclesAndSwitchResults",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1014,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsDefaultFollowsOracleChangesAndStableModeClears",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1120,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsClearRefreshesGuardsAndAddedCFGEdges",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1181,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsClearBeforeRAUWAndDeletionDropsRawKeys",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1236,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsClearRefreshesMovedDefinitionContext",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1281,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FactsNullMemoRetainsRawPhiIncomingIdentity",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1327,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "DefinedProofsInvalidateEvenWhenBaseIsEmpty",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1378,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "DefinedNegativeProofRefreshesAfterAttributeEdit",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1435,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FinalReuseIgnoresBudgetAndOnlyPublishesTopLevelResults",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1466,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FinalInvalidationClearsAllContextsWithWarmSubcaches",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1563,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FinalClearsForUnrelatedEditsAndCFGChanges",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1636,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FinalClearsAfterExplicitOracleMaintenance",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1686,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "AnalysisInvalidationRefreshesNonSSAOracleDependency",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1759,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "AnalysisMaintainsAllFourCachesBeforeRAUWAndDeletion",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1816,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FinalClearsAcrossRealLVIColdAndPrewarmedEpochs",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1878,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0.001s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "FinalCachesDeepIdentityChainsWithoutDependencyLimit",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1951,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0.004s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharedPathsReusePrefixesRespectBudgetsAndEpochs",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 1987,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharedPathsDoNotPublishIrreducibleCycleResults",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 2052,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "EntrySelectChainReusesBaseWithoutRewalkingInputs",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 2081,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SelectOutsideEntryKeepsDefinitionPointRefinement",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 2109,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        },
+        {
+          "name": "SharedPathBudgetAdmissionRefreshesAfterCFGExpansion",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/CachedJavaTypeTest.cpp",
+          "line": 2141,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "CachedJavaTypeTest"
+        }
+      ]
+    },
+    {
+      "name": "JavaTypeQueryTest",
+      "tests": 39,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "timestamp": "2026-11-03T20:06:36Z",
+      "time": "0.005s",
+      "testsuite": [
+        {
+          "name": "IrreducibleCycleCachesCompletedTopLevelResult",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 124,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "ResultInvalidationAfterConditionAndAttributeChange",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 146,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "FinalTypesAreKeyedByContextBlock",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 173,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "FinalCacheDoesNotReplacePhiIncomingEvaluation",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 199,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "PhiCycleIntermediateIsNotPublished",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 230,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CompletePhiCachePreservesOriginalCyclePrecision",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 268,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "PhiWarmupOrderHonorsFiniteClassModel",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 306,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "FinalFactsResultsSurviveBudgetChangesUntilCleared",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 359,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "FinalPhiResultsReuseOneEntryAcrossBudgets",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 391,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "DisabledCacheBypassesFinalTypes",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 424,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "DisabledCacheUsesOriginalAfterAttributeChange",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 444,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CachedAndOriginalQueriesAgreeAcrossBudgets",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 476,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "SelectiveBaseDeletionMatchesScanBaseline",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 494,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "TypeFactCanBecomeKnownAndWeakensAfterRepeatedEdits",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 554,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "RepeatedTypeFactMutationRoundTripsThroughAValue",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 597,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CallAndLoadTypeFactsAreInvalidatedBeforeEdits",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 626,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "ParentQueryReusesAndInvalidatesCachedChild",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 668,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "DeleteBlockDropsCachedLeavesAndRetainsIndependentValue",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 701,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "BatchedDiamondInvalidationMatchesSequential",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 751,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidationAtValueLimitDoesNotClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 803,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidationJustBelowValueLimitDoesNotClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 825,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidationUseThresholdUsesInclusiveBoundary",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 847,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidationUseLimitFallsBackToClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 880,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "ActualLVIObservesDereferenceMutationAfterClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 905,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "DeadNarrowCFFLoadIsInvalidatedBeforeDeletion",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 940,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CopySpecializationWithoutCopiesPreservesCachedAnalysis",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 995,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CopySpecializationSharesQueriesBeforeBulkCloneExpansion",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1019,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CopySpecializationInvalidatesAfterCloneScalarization",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1085,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidateBeforeRAUWAndDeletion",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1145,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidateBeforeDeletionPreventsKeyReuse",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1175,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "CFGInvalidationRecomputesPhiAndRetainsLeafTypes",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1207,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "GuardOperandChangeInvalidatesNonKeyDependencies",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1245,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "FullInvalidationSwitchDropsAllEntries",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1272,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "UnsupportedInvalidationFallsBackToClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1291,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "SelectiveResultStillDependsOnLVIInvalidation",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1307,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "JavaTypeResultPreserveAndReuseBoundary",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1323,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "InvalidationWorkLimitFallsBackToClear",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1355,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "DereferenceChangeDropsContextualResults",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1378,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        },
+        {
+          "name": "StatisticsAreOptIn",
+          "file": "\/home\/annya\/playground\/jeandle\/jeandle\/jeandle-llvm-v1-reuse-20261103\/llvm\/unittests\/IR\/JavaTypeQueryTest.cpp",
+          "line": 1415,
+          "status": "RUN",
+          "result": "COMPLETED",
+          "timestamp": "2026-11-03T20:06:36Z",
+          "time": "0s",
+          "classname": "JavaTypeQueryTest"
+        }
+      ]
+    }
+  ]
+}
